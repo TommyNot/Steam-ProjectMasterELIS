@@ -35,3 +35,4 @@ public static Utente UtenteDeletByEmail(String email,String Password) {
 	return DaoFactory.getDaoFactory().getUtenteDao().deleteByName(email, Password);
 }
 }
+ 
