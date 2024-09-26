@@ -52,6 +52,8 @@ public class UtenteDaoJDBC implements UtenteDao {
                 
                 
                
+                
+               
                 Ruolo[] ruoli = Ruolo.values();
                 if (ruoloInt >= 0 && ruoloInt < ruoli.length) {
                     u.setRuolo(ruoli[ruoloInt]);
