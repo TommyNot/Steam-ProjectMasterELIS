@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 
 import org.elis.dao.DaoFactory;
 import org.elis.dao.GiocoDao;
+import org.elis.dao.LibreriaDao;
 import org.elis.dao.UtenteDao;
 
 
@@ -35,12 +36,21 @@ public class JdbcDaoFactory extends DaoFactory{
 		return UtenteDaoJDBC.getInstance();
 	}
 
-
 	@Override
 	public GiocoDao getGiocoDao() {
 		// TODO Auto-generated method stub
 		return GiocoDaoJDBC.getInstance();
 	}
+
+
+	@Override
+	public LibreriaDao getLibreriaDao() {
+		// TODO Auto-generated method stub
+		return LibreriaDaoJDBC.getInstance();
+				
+	}
+
+
 
 
 	

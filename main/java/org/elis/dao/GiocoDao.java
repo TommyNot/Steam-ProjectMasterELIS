@@ -13,6 +13,6 @@ public interface GiocoDao {
 	List<Gioco> findAll();
 	Gioco findByName(String nome);
 	Gioco updateGioco(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta, Utente utente);
-	Gioco deleteGioco(int id);
+	Gioco deleteGioco(long id);
 
 }

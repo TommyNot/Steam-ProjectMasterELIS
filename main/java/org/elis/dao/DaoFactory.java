@@ -10,6 +10,8 @@ public abstract class DaoFactory {
 	public abstract UtenteDao getUtenteDao();
 	
 	public abstract GiocoDao getGiocoDao();
+	
+	public abstract LibreriaDao getLibreriaDao();
 
 	
 	public static JdbcDaoFactory getDaoFactory() {

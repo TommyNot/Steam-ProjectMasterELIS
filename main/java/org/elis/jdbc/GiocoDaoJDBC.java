@@ -50,7 +50,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	}
 
 	@Override
-	public Gioco deleteGioco(int id) {
+	public Gioco deleteGioco(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
