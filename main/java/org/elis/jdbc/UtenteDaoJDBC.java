@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,10 @@ public class UtenteDaoJDBC implements UtenteDao {
                 String username = rs.getString("Username");
                 String email = rs.getString("Email");
                 String password = rs.getString("Password");
+                Timestamp dataCreazione=rs.getTimestamp("data_creazione");
+                LocalDateTime data_creazione = dataCreazione != null ? dataCreazione.toLocalDateTime() : null;
+                Timestamp dataModifica=rs.getTimestamp("data_ultima_modifica");
+                LocalDateTime data_modifica= dataModifica !=null ? dataModifica.toLocalDateTime():null;
                 
                
                 Ruolo[] ruoli = Ruolo.values();
@@ -53,6 +59,8 @@ public class UtenteDaoJDBC implements UtenteDao {
                 u.setUsername(username);
                 u.setEmail(email);
                 u.setPassword(password);
+                u.setData_creazione(data_creazione);
+                u.setData_modifica(data_modifica);
                 
                 utente.add(u);
             }
