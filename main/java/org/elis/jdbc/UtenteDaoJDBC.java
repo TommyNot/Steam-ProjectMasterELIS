@@ -103,25 +103,36 @@ public class UtenteDaoJDBC implements UtenteDao {
             
             if(aggio > 0) {
             	
-            	System.out.println("Utente Aggiunto Con Successo");
-            	 return u;
-            }else {
-            	
-            	System.out.println("Errore nell' aggiunta");
-            }
-           
-    	
-    		
-    		
-    	} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-    	
-		return null;
+            	 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                     if (generatedKeys.next()) {
+                         long id = generatedKeys.getLong(1);
+                         u.setId(id);
+
+                         String selectQuery = "SELECT data_creazione FROM utente WHERE id = ?";
+                         try (PreparedStatement selectPs = c.prepareStatement(selectQuery)) {
+                             selectPs.setLong(1, id);
+                             try (ResultSet rs = selectPs.executeQuery()) {
+                                 if (rs.next()) {
+                                     Timestamp dataCreazione = rs.getTimestamp("data_creazione");
+                                     u.setData_creazione(dataCreazione != null ? dataCreazione.toLocalDateTime() : null);
+                                 }
+                             }
+                         }
+                         
+                         System.out.println("Utente aggiunto con successo. ID: " + id);
+                         return u;
+                     }
+                 }
+             } else {
+                 System.out.println("Errore nell'aggiunta dell'utente");
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+         return null;
     }
 
 
