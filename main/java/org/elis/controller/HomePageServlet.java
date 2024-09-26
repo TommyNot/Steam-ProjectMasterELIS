@@ -19,12 +19,12 @@ public class HomePageServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-			request.getRequestDispatcher("META-INF/public-jsp/HomePagePrincipale.jsp");
-		
-	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+		request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp");
+	
+}
 	
 
 }
