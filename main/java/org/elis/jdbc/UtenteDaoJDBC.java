@@ -182,11 +182,58 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}
         return null;
     }
+    
+    @Override
+    public Utente selectById(long id) {
+        String query = "SELECT id, ruolo, username, email, password, data_creazione, data_ultima_modifica FROM utente WHERE id = ?";
+        Utente u = null;
+
+        try (
+            Connection c = JdbcDaoFactory.getConnection();
+            PreparedStatement ps = c.prepareStatement(query)
+        ) {
+            ps.setLong(1, id); 
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    u = new Utente();
+                    u.setId(rs.getLong("id"));
+                    u.setUsername(rs.getString("username"));
+                    u.setEmail(rs.getString("email"));
+                    u.setPassword(rs.getString("password"));
+                    
+                    int ruoloInt = rs.getInt("ruolo");
+                    Ruolo[] ruoli = Ruolo.values();
+                    if (ruoloInt >= 0 && ruoloInt < ruoli.length) {
+                        u.setRuolo(ruoli[ruoloInt]);
+                    } else {
+                        System.out.println("Ruolo non valido per l'utente con ID: " + id);
+                        return null;
+                    }
+
+                    Timestamp dataCreazione = rs.getTimestamp("data_creazione");
+                    u.setData_creazione(dataCreazione != null ? dataCreazione.toLocalDateTime() : null);
+                    Timestamp dataModifica = rs.getTimestamp("data_ultima_modifica");
+                    u.setData_modifica(dataModifica != null ? dataModifica.toLocalDateTime() : null);
+
+                    System.out.println("Utente trovato con successo: "+ u.getUsername() + " " + u.getEmail() + " "+ u.getData_creazione() + " " + u.getData_modifica() + " " + u.getRuolo());
+                } else {
+                    System.out.println("Utente non trovato con ID: " + id);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+
+        return u;
+    }
 
 
 
     @Override
-    public Utente update(int id,String username, String email, String password) {
+    public Utente update(long id,String username,String email, String password) {
         
     	String query="UPDATE utente SET username=?, email=?, password=? WHERE id=?";
     	
@@ -199,7 +246,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     			
     		){
     		
-    		ps.setInt(4, id);
+    		ps.setLong(4, id);
     		ps.setString(1, username);
     		ps.setString(2, email);
     		ps.setString(3, password);
