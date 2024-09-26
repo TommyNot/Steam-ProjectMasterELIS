@@ -10,6 +10,14 @@ public class Test {
 
 	public static void main(String[] args) {
 		
+		//Stampa tutti utenti nel database
+		List<Utente> u;
+		u = BusinessLogic.UtenteFindAll();
+		for(Utente u1 : u) {
+			
+			System.out.println(u1.getUsername() + " " + u1.getRuolo() + " " + u1.getId());
+		}
+		
 		
 		//trova utente per username = avvenuto con usccesso
 		try {
@@ -52,16 +60,15 @@ public class Test {
 			e.printStackTrace();
 		}
 		
-
-		
 		//Stampa tutti utenti nel database
-		List<Utente> u;
+		
 		u = BusinessLogic.UtenteFindAll();
 		for(Utente u1 : u) {
 			
 			System.out.println(u1.getUsername() + " " + u1.getRuolo() + " " + u1.getId());
 		}
 		
+
 		
 		
 	
