@@ -8,6 +8,8 @@ public abstract class DaoFactory {
 	
 	
 	public abstract UtenteDao getUtenteDao();
+	
+	public abstract GiocoDao getGiocoDao();
 
 	
 	public static JdbcDaoFactory getDaoFactory() {
