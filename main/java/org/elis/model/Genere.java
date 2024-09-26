@@ -13,7 +13,7 @@ public class Genere {
 	
 	public Genere(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
 			Offerta offerta) {
-		super();
+		
 		this.id = id;
 		this.data_creazione = data_creazione;
 		this.data_ultima_modifica = data_ultima_modifica;
