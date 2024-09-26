@@ -50,6 +50,7 @@ public class UtenteDaoJDBC implements UtenteDao {
                 Timestamp dataModifica=rs.getTimestamp("data_ultima_modifica");
                 LocalDateTime data_modifica= dataModifica !=null ? dataModifica.toLocalDateTime():null;
                 
+                
                
                 Ruolo[] ruoli = Ruolo.values();
                 if (ruoloInt >= 0 && ruoloInt < ruoli.length) {

@@ -2,25 +2,26 @@ package org.elis.model;
 
 import java.time.LocalDateTime;
 
-public class Libreria {
+public class Genere {
 	
 	private long id;
 	private LocalDateTime data_creazione;
 	private LocalDateTime data_ultima_modifica;
 	private String nome;
-	Utente utente;
+	Offerta offerta;
 	
-	public Libreria(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			Utente utente) {
+	
+	public Genere(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
+			Offerta offerta) {
 		super();
 		this.id = id;
 		this.data_creazione = data_creazione;
 		this.data_ultima_modifica = data_ultima_modifica;
 		this.nome = nome;
-		this.utente = utente;
+		this.offerta = offerta;
 	}
 	
-	public Libreria() {
+	public Genere() {
 		
 		
 	}
@@ -57,13 +58,16 @@ public class Libreria {
 		this.nome = nome;
 	}
 
-	public Utente getUtente() {
-		return utente;
+	public Offerta getOfferta() {
+		return offerta;
 	}
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
+	public void setOfferta(Offerta offerta) {
+		this.offerta = offerta;
 	}
+	
+	
+	
 	
 	
 	
