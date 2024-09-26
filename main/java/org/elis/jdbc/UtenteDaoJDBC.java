@@ -104,7 +104,7 @@ public class UtenteDaoJDBC implements UtenteDao {
             
             if(aggio > 0) {
             	
-            	 try (ResultSet generatedKeys = ps.getGeneratedKeys()) { // errore You need to specify Statement.RETURN_GENERATED_KEYS to Statement.executeUpdate(), Statement.executeLargeUpdate() or Connection.prepareStatement().
+            	 try (ResultSet generatedKeys = ps.getGeneratedKeys()) { 
                      if (generatedKeys.next()) {
                          long id = generatedKeys.getLong(1);
                          u.setId(id);
@@ -139,23 +139,51 @@ public class UtenteDaoJDBC implements UtenteDao {
 
     @Override
     public Utente findByName(String username) {
+    	String query = "SELECT id, ruolo, username, email, password, data_creazione, data_ultima_modifica FROM utente WHERE username = ?";
+        Utente u = null;
+        
+        try (
+                Connection c = JdbcDaoFactory.getConnection();
+                PreparedStatement ps = c.prepareStatement(query)
+            ) {
+                ps.setString(1, username);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        u = new Utente();
+                        u.setId(rs.getLong("id"));
+                        u.setUsername(rs.getString("username"));
+                        u.setEmail(rs.getString("email"));
+                        u.setPassword(rs.getString("password"));
+                        
+                        int ruoloInt = rs.getInt("ruolo");
+                        Ruolo[] ruoli = Ruolo.values();
+                        if (ruoloInt >= 0 && ruoloInt < ruoli.length) {
+                            u.setRuolo(ruoli[ruoloInt]);
+                        } else {
+                            System.out.println("Ruolo non valido per l'utente: " + username);
+                            return null;
+                        }
+                        
+                        Timestamp dataCreazione = rs.getTimestamp("data_creazione");
+                        u.setData_creazione(dataCreazione != null ? dataCreazione.toLocalDateTime() : null);
+                        Timestamp dataModifica = rs.getTimestamp("data_ultima_modifica");
+                        u.setData_modifica(dataModifica != null ? dataModifica.toLocalDateTime() : null);
+                        
+                        System.out.println("Utente trovato con successo: "  + u.getUsername() + " " + u.getEmail() + " " + u.getData_creazione() + " " + u.getData_modifica() + " " + u.getRuolo());
+                    }else {
+                    	 System.out.println("Utente non trovato con username: " + username);
+                    }
+                }
 
-    	//va inserito string query non va usato findAll
-    	for(Utente u : findAll()) {
-    		
-    		if(u.getUsername().equalsIgnoreCase(username)) {
-    			
-    			System.out.println("Utente trovato con successo " + username);
-    			return u;
-    		}else {
-    			
-    			System.out.println("Utente non trovato");
-    		}
-    		
-    		
-    	}
-		return null;
+        } catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+        return null;
     }
+
+
 
     @Override
     public Utente update(int id,String username, String email, String password) {
