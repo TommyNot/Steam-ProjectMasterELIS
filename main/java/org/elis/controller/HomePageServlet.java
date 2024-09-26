@@ -21,7 +21,7 @@ public class HomePageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-			request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp");
+			request.getRequestDispatcher("META-INF/public-jsp/HomePagePrincipale.jsp");
 		
 	}
 
