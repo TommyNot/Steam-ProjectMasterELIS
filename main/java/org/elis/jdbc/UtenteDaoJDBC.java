@@ -233,62 +233,37 @@ public class UtenteDaoJDBC implements UtenteDao {
 
 
     @Override
-    public Utente update(long id,String username,String email, String password) {
-        
-    	String query="UPDATE utente SET username=?, email=?, password=? WHERE id=?";
-    	
-    	
-    	//controllare id se viene ricavato quel dal database
-    	try(
-    			
-    			Connection c = JdbcDaoFactory.getConnection();
-    			PreparedStatement ps = c.prepareStatement(query);
-    			
-    		){
-    		
-    		ps.setLong(4, id);
-    		ps.setString(1, username);
-    		ps.setString(2, email);
-    		ps.setString(3, password);
-    		
-    		int aggio = ps.executeUpdate();
-    		
-    		
-    		
-    		if(aggio > 0) {
-    			
-    		Utente u = new Utente();
-    			
-    		u.setUsername(username);
-    		u.setEmail(email);
-    		u.setPassword(password);
-    		
-    		System.out.println("Success Utente aggiornato con successo");
-    		return u;
-    		
-    		}else {
-    			
-    			System.out.println("Error");
-    		}
-    	
-    	
-    		
-    		
-    	} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-    	
-    	
-    	
-    	
-    	
-    	
-        return null;
+    public Utente updateUsername(long id, String username) {
+        String query = "UPDATE utente SET username = ? WHERE id = ?";
+
+        try (
+            Connection c = JdbcDaoFactory.getConnection();
+            PreparedStatement ps = c.prepareStatement(query)
+        ) {
+            ps.setString(1, username);
+            ps.setLong(2, id);
+
+            int aggio = ps.executeUpdate();
+
+            if (aggio > 0) {
+                Utente u = new Utente();
+                u.setId(id);
+                u.setUsername(username);
+
+                System.out.println("Utente aggiornato con successo.");
+                return u;
+            } else {
+                System.out.println("Error: Aggiornamento non riuscito.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
+
+        return null; 
     }
+
 
     @Override
     public Utente deleteByName(String email, String password) {
