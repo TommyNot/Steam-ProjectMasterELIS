@@ -32,6 +32,6 @@ public static Utente UpdateUsername(long id,String username) {
 
 public static Utente UtenteDeletByEmail(String email,String Password) {
 	
-	return DaoFactory.getDaoFactory().getUtenteDao().deleteByName(email, Password);
+	return DaoFactory.getDaoFactory().getUtenteDao().deleteByName(email,Password);
 }
 }
