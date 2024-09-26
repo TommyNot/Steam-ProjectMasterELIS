@@ -1,5 +1,6 @@
 package org.elis.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Utente {
@@ -9,7 +10,8 @@ public class Utente {
 	private String username;
 	private String email;
 	private String password;
-
+	private LocalDateTime data_creazione;
+	private LocalDateTime data_modifica;
 	private List<Gioco> giochiPubblicati;
 	private List<Libreria> librerie;
 	private List<Recensione> rencensioni;

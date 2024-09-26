@@ -25,7 +25,7 @@ public class JdbcDaoFactory extends DaoFactory{
 			
 		}
 		
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/steamdb","root","root");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/steampezzotto","root","root");
 	}
 
 

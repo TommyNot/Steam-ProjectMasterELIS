@@ -117,6 +117,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     @Override
     public Utente findByName(String username) {
 
+    	//va inserito string query non va usato findAll
     	for(Utente u : findAll()) {
     		
     		if(u.getUsername().equalsIgnoreCase(username)) {
@@ -136,10 +137,10 @@ public class UtenteDaoJDBC implements UtenteDao {
     @Override
     public Utente update(int id,String username, String email, String password) {
         
-    	String query="UPDATE utente SET WHERE id=?,username=?, email=?, password=?";
+    	String query="UPDATE utente SET username=?, email=?, password=? WHERE id=?";
     	
-    	//bisogna aggiungere error se utente non presente?
     	
+    	//controllare id se viene ricavato quel dal database
     	try(
     			
     			Connection c = JdbcDaoFactory.getConnection();
@@ -147,14 +148,14 @@ public class UtenteDaoJDBC implements UtenteDao {
     			
     		){
     		
-    		ps.setInt(1, id);
+    		ps.setInt(4, id);
     		ps.setString(1, username);
     		ps.setString(2, email);
     		ps.setString(3, password);
     		
     		int aggio = ps.executeUpdate();
     		
-    		// execute torna un int faccio controllo sul ritorno ? non so è utile potrei mettere if per far return u se update a successo
+    		
     		
     		if(aggio > 0) {
     			
