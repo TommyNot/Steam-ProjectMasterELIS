@@ -9,7 +9,7 @@ public class Utente {
 	private String username;
 	private String email;
 	private String password;
-	
+
 	private List<Gioco> giochiPubblicati;
 	private List<Libreria> librerie;
 	private List<Recensione> rencensioni;
@@ -18,6 +18,7 @@ public class Utente {
 	public Utente(Ruolo ruolo, String username, String email, String password) {
 		
 		this.ruolo = ruolo;
+		
 		this.username = username;
 		this.email = email;
 		this.password = password;
