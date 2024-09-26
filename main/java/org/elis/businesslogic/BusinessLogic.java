@@ -25,9 +25,9 @@ public static Utente UtenteFindByName(String username) {
 }
 
 
-public static Utente UtenteUpdateInfo(int id,String username,String email,String password) {
+public static Utente UpdateUsername(long id,String username) {
 	
-	return DaoFactory.getDaoFactory().getUtenteDao().update(id,username, email, password);
+	return DaoFactory.getDaoFactory().getUtenteDao().updateUsername(id,username);
 }
 
 public static Utente UtenteDeletByEmail(String email,String Password) {

@@ -304,4 +304,18 @@ public class UtenteDaoJDBC implements UtenteDao {
     
 		return null;
     }
+
+
+	@Override
+	public Utente updateEmail(long id, String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Utente updatePassword(long id, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
