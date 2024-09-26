@@ -33,11 +33,15 @@ public class ControlloSessioniServlet extends HttpServlet {
 			switch(userInSession.getRuolo()){
 				
 				case UTENTE_BASE:
-					request.getRequestDispatcher("WEB-INF/private-jsp/da_sistemare.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 					break;
 				case ADMIN:
 					
-					request.getRequestDispatcher("WEB-INF/private-jsp/HomePageAdmin.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
+					break;
+				
+				case PUBLISHER:
+					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
 					break;
 					
 					default:
