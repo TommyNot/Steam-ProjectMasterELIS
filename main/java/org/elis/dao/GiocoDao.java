@@ -6,9 +6,9 @@ import org.elis.model.Gioco;
 
 public interface GiocoDao {
 	
-	Gioco add();
+	Gioco add(S);
 	List<Gioco> findAll();
-	Gioco finByName();
+	Gioco findByName();
 	Gioco updateGioco();
 	Gioco deleteGioco();
 

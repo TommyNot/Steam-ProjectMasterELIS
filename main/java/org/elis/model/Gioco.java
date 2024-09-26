@@ -17,7 +17,7 @@ public class Gioco {
 	Utente utente;
 	
 	public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			LocalDateTime data_rilascio, String descrzione, String immagine, boolean eliminato, double prezzo,
+			LocalDateTime data_rilascio, String descrizione, String immagine, boolean eliminato, double prezzo,
 			Offerta offerta, Utente utente) {
 		
 		
@@ -26,7 +26,7 @@ public class Gioco {
 		this.data_ultima_modifica = data_ultima_modifica;
 		this.nome = nome;
 		this.data_rilascio = data_rilascio;
-		this.descrzione = descrzione;
+		this.descrzione = descrizione;
 		this.immagine = immagine;
 		this.eliminato = eliminato;
 		this.prezzo = prezzo;

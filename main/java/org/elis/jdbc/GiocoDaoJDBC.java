@@ -34,7 +34,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	}
 
 	@Override
-	public Gioco finByName() {
+	public Gioco findByName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
