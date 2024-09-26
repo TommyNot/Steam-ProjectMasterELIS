@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     	Utente u = new Utente();
     	try(
     			Connection c = JdbcDaoFactory.getConnection();
-    			PreparedStatement ps = c.prepareStatement(query);
+    			PreparedStatement ps = c.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
     			
     		)
     	{
