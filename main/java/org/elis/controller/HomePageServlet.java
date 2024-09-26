@@ -20,7 +20,7 @@ public class HomePageServlet extends HttpServlet {
     }
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
 		request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
 	

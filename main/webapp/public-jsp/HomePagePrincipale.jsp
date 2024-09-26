@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="container-fluid">
+	<form action="<%=request.getContextPath()%>/HomePageServlet" method="post">
 	<div class="row">
 		<div class="col-xl-2 col-md-6 col-12">
 			<div class="col-6">
@@ -22,6 +23,7 @@
 			</div>
 		</div>
 	</div>
+	</form>
 	
 </body>
 </html>
