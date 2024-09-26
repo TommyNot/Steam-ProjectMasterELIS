@@ -1,9 +1,12 @@
 package org.elis.jdbc;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.dao.GiocoDao;
 import org.elis.model.Gioco;
+import org.elis.model.Offerta;
+import org.elis.model.Utente;
 
 public class GiocoDaoJDBC implements GiocoDao{
 	
@@ -22,8 +25,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
 	@Override
-	public Gioco add() {
-		// TODO Auto-generated method stub
+	public Gioco add(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo,
+			Offerta offerta, Utente utente) {
+		
 		return null;
 	}
 
@@ -34,19 +38,19 @@ public class GiocoDaoJDBC implements GiocoDao{
 	}
 
 	@Override
-	public Gioco findByName() {
+	public Gioco findByName(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Gioco updateGioco() {
+	public Gioco updateGioco(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo,Offerta offerta, Utente utente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Gioco deleteGioco() {
+	public Gioco deleteGioco(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
