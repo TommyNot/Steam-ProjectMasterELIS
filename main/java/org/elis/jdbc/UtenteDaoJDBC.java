@@ -44,6 +44,7 @@ public class UtenteDaoJDBC implements UtenteDao {
                 String email = rs.getString("Email");
                 String password = rs.getString("Password");
                 
+                
                
                 Ruolo[] ruoli = Ruolo.values();
                 if (ruoloInt >= 0 && ruoloInt < ruoli.length) {
