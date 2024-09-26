@@ -11,19 +11,19 @@ public class Utente {
 	private String email;
 	private String password;
 	private LocalDateTime data_creazione;
-	private LocalDateTime data_modifica;
+	private LocalDateTime data_ultima_modifica;
 	private List<Gioco> giochiPubblicati;
 	private List<Libreria> librerie;
 	private List<Recensione> rencensioni;
 	
 	
-	public Utente(Ruolo ruolo, String username, String email, String password, LocalDateTime data_creazione, LocalDateTime data_modifica) {
+	public Utente(Ruolo ruolo, String username, String email, String password, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica) {
 	    this.ruolo = ruolo;
 	    this.username = username;
 	    this.email = email;
 	    this.password = password;
 	    this.data_creazione = data_creazione;
-	    this.data_modifica = data_modifica;
+	    this.data_ultima_modifica = data_ultima_modifica;
 	}
 
 	public Utente() {
@@ -92,12 +92,12 @@ public class Utente {
 
 
 	public LocalDateTime getData_modifica() {
-		return data_modifica;
+		return data_ultima_modifica;
 	}
 
 
-	public void setData_modifica(LocalDateTime data_modifica) {
-		this.data_modifica = data_modifica;
+	public void setData_modifica(LocalDateTime data_ultima_modifica) {
+		this.data_ultima_modifica = data_ultima_modifica;
 	}
 	
 	
