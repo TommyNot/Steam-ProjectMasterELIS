@@ -9,4 +9,24 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>HomePageServlet</display-name>
+    <servlet-name>HomePageServlet</servlet-name>
+    <servlet-class>org.elis.controller.HomePageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomePageServlet</servlet-name>
+    <url-pattern>/HomePageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControlloSessioniServlet</display-name>
+    <servlet-name>ControlloSessioniServlet</servlet-name>
+    <servlet-class>org.elis.controller.ControlloSessioniServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControlloSessioniServlet</servlet-name>
+    <url-pattern>/ControlloSessioniServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
