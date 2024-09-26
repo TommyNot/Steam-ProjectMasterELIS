@@ -103,7 +103,7 @@ public class UtenteDaoJDBC implements UtenteDao {
             
             if(aggio > 0) {
             	
-            	 try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+            	 try (ResultSet generatedKeys = ps.getGeneratedKeys()) { // errore You need to specify Statement.RETURN_GENERATED_KEYS to Statement.executeUpdate(), Statement.executeLargeUpdate() or Connection.prepareStatement().
                      if (generatedKeys.next()) {
                          long id = generatedKeys.getLong(1);
                          u.setId(id);
