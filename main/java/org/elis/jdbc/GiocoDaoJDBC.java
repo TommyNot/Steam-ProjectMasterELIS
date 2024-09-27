@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.dao.GiocoDao;
+import org.elis.model.Genere;
 import org.elis.model.Gioco;
 import org.elis.model.Offerta;
 import org.elis.model.Ruolo;
@@ -35,82 +36,104 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta,Utente utente) {
-        
-        String query = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo, id_offerta,id_utente)"
-                     + " VALUES(?, ?, ?, ?, ?, ?, ? ,?)";
-        
-        String quer2 = "SELECT id,Ruolo FROM utente WHERE id = ?";
-        
-        
+    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, List<Genere> generi, Offerta offerta, Utente utente) {
 
+        String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo, id_offerta, id_utente)"
+                                 + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        String querySelectUtente = "SELECT id, ruolo FROM utente WHERE id = ?";
+        
+        String queryInsertGenereGioco = "INSERT INTO genere_gioco(id_genere, id_gioco) VALUES(?, ?)";
+        
         try (
-        		
-        		
-        		
             Connection c = JdbcDaoFactory.getConnection();
-        		
-        	PreparedStatement selectUtente = c.prepareStatement(quer2);
-            PreparedStatement inserimentoUtente = c.prepareStatement(query);
-        		
-        		
-        		
+            
+            
+            PreparedStatement selectUtente = c.prepareStatement(querySelectUtente);
+            
+            
+            PreparedStatement inserimentoGioco = c.prepareStatement(queryInsertGioco);
+            
+            
+            PreparedStatement inserimentoGenereGioco = c.prepareStatement(queryInsertGenereGioco);
+            
         ) {
-        	
-        	   ResultSet ruoloInt = selectUtente.executeQuery();
-        	   
-               Ruolo[] ruoli = Ruolo.values();
-               
-               
-             for(Ruolo r : ruoli) {
-            	 
-            	 //if()
-             }
-               
-        	// Impostazione dei parametri
-        	int rs = inserimentoUtente.executeUpdate();
-        	inserimentoUtente.setString(1, nome);
-        	inserimentoUtente.setTimestamp(2, Timestamp.valueOf(dataRilascio));
-        	inserimentoUtente.setString(3, descrizione);
-        	inserimentoUtente.setString(4, immagine);
-        	inserimentoUtente.setBoolean(5, eliminato);
-        	inserimentoUtente.setDouble(6, prezzo);
-            if(offerta != null) {
-            	
-            	inserimentoUtente.setLong(7,offerta.getId());
-            	
-            }else {
-            	
-            	inserimentoUtente.setNull(7, Types.BIGINT);
-            	
-            }
-  
+            
+            
+            
+        	ResultSet resultSetUtente = selectUtente.executeQuery();
+            
+            
+            boolean userIsPublisher = false;
 
-            int aggiornamento = inserimentoUtente.executeUpdate();
+            if (resultSetUtente.next()) {
+                int ruoloInt = resultSetUtente.getInt("ruolo");
+                Ruolo[] ruoli = Ruolo.values();
+                userIsPublisher = ruoli[ruoloInt] == Ruolo.PUBLISHER;
+            }
+
+           
+            if (!userIsPublisher) {
+                return null;
+            }
+
+           
+            inserimentoGioco.setString(1, nome);
+            inserimentoGioco.setTimestamp(2, Timestamp.valueOf(dataRilascio));
+            inserimentoGioco.setString(3, descrizione);
+            inserimentoGioco.setString(4, immagine);
+            inserimentoGioco.setBoolean(5, eliminato);
+            inserimentoGioco.setDouble(6, prezzo);
+            
+            
+            if (offerta != null) {
+            	
+                inserimentoGioco.setLong(7, offerta.getId());
+            } else {
+                inserimentoGioco.setNull(7, Types.BIGINT);
+            }
+
+           
+            
+
+            
+            int aggiornamento = inserimentoGioco.executeUpdate();
+            
+        
 
             if (aggiornamento > 0) {
-              
-                        Gioco nuovoGioco = new Gioco();
-                        nuovoGioco.setNome(nome);
-                        nuovoGioco.setData_rilascio(dataRilascio);
-                        nuovoGioco.setDescrzione(descrizione);
-                        nuovoGioco.setImmagine(immagine);
-                        nuovoGioco.setEliminato(eliminato);
-                        nuovoGioco.setPrezzo(prezzo);
-                        nuovoGioco.setOfferta(offerta);
-                        nuovoGioco.setUtente(utente);
+            	
+            	ResultSet rs = inserimentoGioco.getGeneratedKeys();
+            	
+            	if(rs.next()) {
+            		
+            		int insID= rs.getInt("ID");
+            		selectUtente.setLong(1, insID);
+            	}
+            	
+            	
+               
+                Gioco nuovoGioco = new Gioco();
+                nuovoGioco.setNome(nome);
+                nuovoGioco.setData_rilascio(dataRilascio);
+                nuovoGioco.setDescrzione(descrizione);
+                nuovoGioco.setImmagine(immagine);
+                nuovoGioco.setEliminato(eliminato);
+                nuovoGioco.setPrezzo(prezzo);
+                
+                nuovoGioco.setOfferta(offerta);
+                nuovoGioco.setUtente(utente);
 
-                        System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
-                        return nuovoGioco;
-                    
-                }
-            
+                System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
+                return nuovoGioco;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         return null;
     }

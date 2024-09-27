@@ -21,7 +21,7 @@ public class Test {
 		
 		try {
 			
-			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", false, 49.99, null,null);
+			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", false, 49.99, null,null, null);
 			
 		}catch(Exception e) {
 			
