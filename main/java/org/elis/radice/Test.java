@@ -1,5 +1,6 @@
 package org.elis.radice;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
@@ -17,6 +18,17 @@ public class Test {
 			
 			System.out.println(u1.getUsername() + " " + u1.getRuolo() + " " + u1.getId());
 		}
+		
+		
+		try {
+			
+			BusinessLogic.GiocoAdd("mario-kart", LocalDateTime.now(), "A fun racing game", "mario_kart.png", false, 49.99, null);
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 		
 		
 		//trova utente per username = avvenuto con usccesso
