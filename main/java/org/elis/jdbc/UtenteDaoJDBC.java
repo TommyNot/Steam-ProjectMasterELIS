@@ -263,30 +263,91 @@ public class UtenteDaoJDBC implements UtenteDao {
 
         return null; 
     }
+    
+    @Override
+	public Utente updateEmail(long id,String email) {
+    	 String query = "UPDATE utente SET email = ? WHERE id = ?";
+    	 try(
+    			Connection c=JdbcDaoFactory.getConnection();
+    			 PreparedStatement ps=c.prepareStatement(query)
+    			 ){
+    		 ps.setString(1, email);
+    		 ps.setLong(2,id);
+    		 
+    		 int aggio=ps.executeUpdate();
+    		 
+    		 if(aggio>0) {
+    			 Utente u=new Utente();
+    			 u.setId(id);
+    			 u.setEmail(email);
+    			 
+    			 System.out.println("mail aggiornata");
+        		 return u;
+        	 }else {
+        		 System.out.println("Error:aggiornamento non riuscito");
+    		 }
+    		 
+    	 } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    }
+    @Override
+	public Utente updatePassword(long id,String password) {
+    	String query = "UPDATE utente SET password = ? WHERE id = ?";
+    	try(
+    			Connection c=JdbcDaoFactory.getConnection();
+    			 PreparedStatement ps=c.prepareStatement(query)
+    			 ){
+    		 ps.setString(1, password);
+    		 ps.setLong(2,id);
+    		 
+    		 int aggio=ps.executeUpdate();
+    		 
+    		 if(aggio>0) {
+    			 Utente u=new Utente();
+    			 u.setId(id);
+    			 u.setPassword(password);
+    			 
+    			 System.out.println("password aggiornata");
+        		 return u;
+        	 }else {
+        		 System.out.println("Error:aggiornamento non riuscito");
+    		 }
+    		 
+    	 } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    }
 
 
     @Override
-    public Utente deleteByName(String email, String password) {
-    	
-    	String query = "DELETE FROM utente WHERE email=? AND password=?";
-    	
-    	
+    public Utente deleteByName(long id,String email) {	
+    	String query = "DELETE id, ruolo, username, email, password, data_creazione FROM utente WHERE email=? AND id=?";
+    	  	
        	try(
     			Connection c = JdbcDaoFactory.getConnection();
-    			PreparedStatement ps = c.prepareStatement(query);
-       			
-    			
+    			PreparedStatement ps = c.prepareStatement(query);			
     		)
        	{
        		
        		ps.setString(1,email);
-       		ps.setString(2, password);
+       		ps.setLong(2,id);
        		
        		int aggio = ps.executeUpdate();
        		
        		if(aggio > 0) {
        			
-       			System.out.println("Eliminato con successo");
+       			System.out.println("Account eliminato con successo");
        			
        		}else {
        			
@@ -304,18 +365,5 @@ public class UtenteDaoJDBC implements UtenteDao {
     
 		return null;
     }
-
-
-	@Override
-	public Utente updateEmail(long id, String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Utente updatePassword(long id, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    
 }

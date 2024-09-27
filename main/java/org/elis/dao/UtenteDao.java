@@ -13,8 +13,8 @@ public interface UtenteDao {
 	Utente findByName(String username);
 	Utente updateUsername(long id,String username);
 	Utente updateEmail(long id,String email);
-	Utente updatePassword(long id,String password);
-	Utente deleteByName(String email,String password);
+	Utente updatePassword(long id,String passwordVecchia);
+	Utente deleteByName(long id,String email);
 	Utente selectById(long id);
 	
 
