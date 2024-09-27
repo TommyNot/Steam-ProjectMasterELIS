@@ -45,9 +45,5 @@ public static Gioco GiocoAdd(String nome, LocalDateTime dataRilascio, String des
 
 }
 
-public static Gioco GiocoAdd(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo,
-			Offerta offerta) {
-	
-	return DaoFactory.getDaoFactory().getGiocoDao().add(nome, dataRilascio, descrizione, immagine, eliminato, prezzo, offerta);
-}
+
 }
