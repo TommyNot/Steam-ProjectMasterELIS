@@ -32,9 +32,9 @@ public static Utente UpdateUsername(long id,String username) {
 	return DaoFactory.getDaoFactory().getUtenteDao().updateUsername(id,username);
 }
 
-public static Utente UtenteDeletByEmail(String email,String Password) {
+public static Utente UtenteDeletByEmail(long id,String email) {
 	
-	return DaoFactory.getDaoFactory().getUtenteDao().deleteByName(email,Password);
+	return DaoFactory.getDaoFactory().getUtenteDao().deleteByName(id,email);
 }
 
 public static Utente UtenteFindById(long id) {
