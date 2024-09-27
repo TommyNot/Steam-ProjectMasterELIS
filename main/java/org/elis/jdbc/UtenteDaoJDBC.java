@@ -332,7 +332,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 
     @Override
     public Utente deleteByName(long id,String email) {	
-    	String query = "UPDATE utente SET id=null, SET ruolo=null, SET username=null, SET email=null,SET password=null,SET data_creazione=null FROM utente WHERE email=? AND id=?";
+    	String query = "DELETE FROM utente WHERE email=? AND id=?";
     	  	
        	try(
     			Connection c = JdbcDaoFactory.getConnection();
