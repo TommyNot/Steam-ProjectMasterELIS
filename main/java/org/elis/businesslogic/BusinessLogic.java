@@ -37,11 +37,15 @@ public static Utente UtenteDeletByEmail(String email,String Password) {
 	return DaoFactory.getDaoFactory().getUtenteDao().deleteByName(email,Password);
 }
 
-public static Gioco GiocoAdd(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta) {
+public static Utente UtenteFindById(long id) {
+	
+	return DaoFactory.getDaoFactory().getUtenteDao().selectById(id);
+}
+
+public static Gioco GiocoAdd(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta,Utente utente) {
 	
 
-
-	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,dataRilascio,descrizione,immagine,false,prezzo,offerta);
+	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,dataRilascio,descrizione,immagine,false,prezzo,offerta,utente);
 
 }
 

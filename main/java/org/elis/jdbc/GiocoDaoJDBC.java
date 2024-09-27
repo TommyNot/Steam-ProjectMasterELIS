@@ -1,15 +1,21 @@
 package org.elis.jdbc;
 
 import java.sql.Connection;
+import java.sql.JDBCType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
+import java.sql.Timestamp;
+import java.sql.Types;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.elis.businesslogic.BusinessLogic;
 import org.elis.dao.GiocoDao;
 import org.elis.model.Gioco;
 import org.elis.model.Offerta;
+import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 public class GiocoDaoJDBC implements GiocoDao{
@@ -29,34 +35,59 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta) {
+    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta,Utente utente) {
         
-        String query = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo, id_offerta)"
-                     + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo, id_offerta,id_utente)"
+                     + " VALUES(?, ?, ?, ?, ?, ?, ? ,?)";
+        
+        String quer2 = "SELECT id,Ruolo FROM utente WHERE id = ?";
+        
+        
 
         try (
+        		
+        		
+        		
             Connection c = JdbcDaoFactory.getConnection();
-            PreparedStatement ps = c.prepareStatement(query);
+        		
+        	PreparedStatement selectUtente = c.prepareStatement(quer2);
+            PreparedStatement inserimentoUtente = c.prepareStatement(query);
+        		
+        		
+        		
         ) {
-            // Impostazione dei parametri
-            ps.setString(1, nome);
-            ps.setTimestamp(2, java.sql.Timestamp.valueOf(dataRilascio));
-            ps.setString(3, descrizione);
-            ps.setString(4, immagine);
-            ps.setBoolean(5, eliminato);
-            ps.setDouble(6, prezzo);
-            ps.setFloat(7, offerta != null ? offerta.getId() : null);
+        	
+        	   int ruoloInt = selectUtente.executeUpdate();
+               Ruolo[] ruoli = Ruolo.values();
+               if (ruoloInt != 2) {
+                   
+            	   return null;
+               } 
+               
+        	// Impostazione dei parametri
+        	int rs = inserimentoUtente.executeUpdate();
+        	inserimentoUtente.setString(1, nome);
+        	inserimentoUtente.setTimestamp(2, Timestamp.valueOf(dataRilascio));
+        	inserimentoUtente.setString(3, descrizione);
+        	inserimentoUtente.setString(4, immagine);
+        	inserimentoUtente.setBoolean(5, eliminato);
+        	inserimentoUtente.setDouble(6, prezzo);
+            if(offerta != null) {
+            	
+            	inserimentoUtente.setLong(7,offerta.getId());
+            	
+            }else {
+            	
+            	inserimentoUtente.setNull(7, Types.BIGINT);
+            	
+            }
+  
 
-            int aggiornamento = ps.executeUpdate();
+            int aggiornamento = inserimentoUtente.executeUpdate();
 
             if (aggiornamento > 0) {
-                try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        long id = generatedKeys.getLong(1); 
-
-                        
+              
                         Gioco nuovoGioco = new Gioco();
-                        nuovoGioco.setId(id);
                         nuovoGioco.setNome(nome);
                         nuovoGioco.setData_rilascio(dataRilascio);
                         nuovoGioco.setDescrzione(descrizione);
@@ -64,14 +95,13 @@ public class GiocoDaoJDBC implements GiocoDao{
                         nuovoGioco.setEliminato(eliminato);
                         nuovoGioco.setPrezzo(prezzo);
                         nuovoGioco.setOfferta(offerta);
+                        nuovoGioco.setUtente(utente);
 
                         System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
                         return nuovoGioco;
-                    }
+                    
                 }
-            } else {
-                System.out.println("Errore: Gioco non aggiunto.");
-            }
+            
 
         } catch (SQLException e) {
             e.printStackTrace();
