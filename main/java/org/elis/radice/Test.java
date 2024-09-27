@@ -66,7 +66,7 @@ public class Test {
 		//test eliminazione utente = savvenuto con successo
 		try {
 			
-			BusinessLogic.UtenteDeletByEmail("email@email.com", "tommy1");
+			BusinessLogic.UtenteDeletByEmail(21,"email@email.com");
 			
 		}catch(Exception e) {
 			

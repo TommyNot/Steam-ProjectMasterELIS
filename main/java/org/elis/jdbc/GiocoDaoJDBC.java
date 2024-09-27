@@ -57,12 +57,15 @@ public class GiocoDaoJDBC implements GiocoDao{
         		
         ) {
         	
-        	   int ruoloInt = selectUtente.executeUpdate();
+        	   ResultSet ruoloInt = selectUtente.executeQuery();
+        	   
                Ruolo[] ruoli = Ruolo.values();
-               if (ruoloInt != 2) {
-                   
-            	   return null;
-               } 
+               
+               
+             for(Ruolo r : ruoli) {
+            	 
+            	 //if()
+             }
                
         	// Impostazione dei parametri
         	int rs = inserimentoUtente.executeUpdate();
