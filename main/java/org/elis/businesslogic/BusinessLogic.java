@@ -44,6 +44,7 @@ public static Utente UtenteFindById(long id) {
 
 public static Gioco GiocoAdd(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta,Utente utente) {
 	
+	
 
 	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,dataRilascio,descrizione,immagine,false,prezzo,offerta,utente);
 
