@@ -19,6 +19,15 @@ public class Test {
 			System.out.println(u1.getUsername() + " " + u1.getRuolo() + " " + u1.getId());
 		}
 		
+		try {
+			
+			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", false, 49.99, null);
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 		
 		try {
 			

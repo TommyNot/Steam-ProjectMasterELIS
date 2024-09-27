@@ -1,6 +1,7 @@
 package org.elis.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Offerta {
 	
@@ -11,6 +12,8 @@ public class Offerta {
 	private double sconto;
 	private LocalDateTime data_inizio;
 	private LocalDateTime data_fine;
+	List<Gioco> gioco;
+	List<Genere> genere;
 	
 	
 	public Offerta(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
