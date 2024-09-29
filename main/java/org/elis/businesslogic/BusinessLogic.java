@@ -50,5 +50,10 @@ public static Gioco GiocoAdd(String nome, LocalDateTime dataRilascio, String des
 
 }
 
+public static List<Gioco> VisualizzaTuttiGiochi() {
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().findAll();
+}
+
 
 }

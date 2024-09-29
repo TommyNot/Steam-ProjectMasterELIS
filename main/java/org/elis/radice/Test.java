@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.jdbc.UtenteDaoJDBC;
+import org.elis.model.Gioco;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
@@ -18,6 +19,14 @@ public class Test {
 		for(Utente u1 : u) {
 			
 			System.out.println(u1.getUsername() + " " + u1.getRuolo() + " " + u1.getId());
+		}
+		
+		//stampa tutti giochi nel db 
+		List<Gioco> g;
+		g = BusinessLogic.VisualizzaTuttiGiochi();
+		for(Gioco g1 : g) {
+			
+			System.out.println("Nome Gioco:" + g1.getNome() + "\nDescrzione= " + g1.getDescrzione() + " " +  "\nPrezzo: " + g1.getPrezzo() + " \n");
 		}
 		
 		try {

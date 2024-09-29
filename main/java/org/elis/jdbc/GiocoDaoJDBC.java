@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
@@ -127,9 +128,12 @@ public class GiocoDaoJDBC implements GiocoDao{
             }
 
         } catch (SQLException e) {
+        	
             System.out.println("Errore di connessione al database: " + e.getMessage());
+            
             e.printStackTrace();
         } catch (Exception e) {
+        	
             System.out.println("Errore generico: " + e.getMessage());
             e.printStackTrace();
         }
@@ -140,8 +144,51 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 	@Override
 	public List<Gioco> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT * FROM GIOCO";
+		 List<Gioco> giochi = new ArrayList<>();
+		
+		try(
+				Connection c = JdbcDaoFactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				ResultSet rs = ps.executeQuery();
+				
+			){
+			
+			
+			
+			while(rs.next()){
+				
+				Gioco g = new Gioco();
+				String nome = rs.getString("nome");
+				Timestamp dataRilascio = rs.getTimestamp("data_rilascio");
+				String descrzione = rs.getString("descrizione");
+				String immagine = rs.getString("immagine");
+				boolean eliminato = rs.getBoolean("eliminato");
+				double prezzo = rs.getDouble("prezzo");
+				
+				g.setNome(nome);
+				g.setData_rilascio(dataRilascio.toLocalDateTime());
+				g.setDescrzione(descrzione);
+				g.setImmagine(immagine);
+				g.setEliminato(eliminato);
+				g.setPrezzo(prezzo);
+				
+				
+				giochi.add(g);
+
+			}
+			
+			
+		}catch(SQLException e) {
+			
+			System.out.println("");
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		return giochi;
+		
+		
 	}
 
 	@Override
