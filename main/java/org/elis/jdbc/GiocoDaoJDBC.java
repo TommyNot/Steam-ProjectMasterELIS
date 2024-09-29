@@ -181,7 +181,8 @@ public class GiocoDaoJDBC implements GiocoDao{
 			
 		}catch(SQLException e) {
 			
-			System.out.println("");
+			System.out.println("Errore durante il recupero dei giochi: " + e.getMessage());
+			
 		}catch(Exception e) {
 			
 			e.printStackTrace();

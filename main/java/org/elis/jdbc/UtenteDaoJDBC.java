@@ -134,7 +134,7 @@ public class UtenteDaoJDBC implements UtenteDao {
                    if (e.getSQLState().equals("23505")) { // Stato SQL per mysql stackoverflow
                        System.out.println("Errore: il utente con questo nome esiste già.");
                    } else {
-                       System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
+                       System.out.println("Errore SQL durante l'inserimento dell'utente: " + e.getMessage());
                    }
            }
          } catch (SQLException e) {

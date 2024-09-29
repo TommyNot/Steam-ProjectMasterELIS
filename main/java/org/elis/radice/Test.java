@@ -31,8 +31,7 @@ public class Test {
 		
 		try {
 			
-	
-			
+
 			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", false, 49.99, null,null,4);
 			
 		}catch(Exception e) {
@@ -80,7 +79,7 @@ public class Test {
 		//test eliminazione utente = savvenuto con successo
 		try {
 			
-			BusinessLogic.UtenteDeletByEmail(21,"email@email.com");
+			BusinessLogic.UtenteDeletByEmail(5,"email@email.com");
 			
 		}catch(Exception e) {
 			
