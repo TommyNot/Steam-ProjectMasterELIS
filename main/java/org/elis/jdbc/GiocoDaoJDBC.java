@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLType;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.LocalDateTime;
@@ -36,82 +37,100 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, List<Genere> generi, Offerta offerta, Utente utente) {
+    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, List<Genere> generi, Offerta offerta, long idUtente) {
 
-        String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo, id_offerta, id_utente)"
+        String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo,id_offerta, id_casa_editrice)"
                                  + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         
         String querySelectUtente = "SELECT id, ruolo FROM utente WHERE id = ?";
         
+        
         String queryInsertGenereGioco = "INSERT INTO genere_gioco(id_genere, id_gioco) VALUES(?, ?)";
         
         try (
+        		
             Connection c = JdbcDaoFactory.getConnection();
             
-            
+            //preparo query per trovare utenteb publisher
             PreparedStatement selectUtente = c.prepareStatement(querySelectUtente);
             
+            //preparo query inserimento del gioco
+        		PreparedStatement inserimentoGioco = c.prepareStatement(queryInsertGioco, Statement.RETURN_GENERATED_KEYS);
             
-            PreparedStatement inserimentoGioco = c.prepareStatement(queryInsertGioco);
-            
-            
+            //query per inserimento genere_gioco
             PreparedStatement inserimentoGenereGioco = c.prepareStatement(queryInsertGenereGioco);
             
         ) {
+        	
+          
             
-            
-            
+        	selectUtente.setLong(1, idUtente);
+        	
+        	//prendo rs e attivo query utente
         	ResultSet resultSetUtente = selectUtente.executeQuery();
+        	
+        	
             
-            
+            //controllo utente
             boolean userIsPublisher = false;
 
             if (resultSetUtente.next()) {
+            	//prendo ruolo
                 int ruoloInt = resultSetUtente.getInt("ruolo");
                 Ruolo[] ruoli = Ruolo.values();
                 userIsPublisher = ruoli[ruoloInt] == Ruolo.PUBLISHER;
             }
 
-           
+           //se utente è falso tonra indietro
             if (!userIsPublisher) {
                 return null;
             }
 
-           
+           //setto paramatri del gioco
             inserimentoGioco.setString(1, nome);
             inserimentoGioco.setTimestamp(2, Timestamp.valueOf(dataRilascio));
             inserimentoGioco.setString(3, descrizione);
             inserimentoGioco.setString(4, immagine);
             inserimentoGioco.setBoolean(5, eliminato);
             inserimentoGioco.setDouble(6, prezzo);
-            
+    
             
             if (offerta != null) {
             	
                 inserimentoGioco.setLong(7, offerta.getId());
+                
             } else {
+            	
                 inserimentoGioco.setNull(7, Types.BIGINT);
             }
 
-           
+           inserimentoGioco.setLong(8, idUtente);
             
 
-            
+            //faccio update e controllo row restituite
             int aggiornamento = inserimentoGioco.executeUpdate();
             
         
 
             if (aggiornamento > 0) {
             	
-            	ResultSet rs = inserimentoGioco.getGeneratedKeys();
-            	
-            	if(rs.next()) {
+            	//dopo update facciamo insiemrnto genere iteriamo con for per capire quale genere è ststao associato e poi lo inseriamo in genere_gioco
+            	ResultSet recuperIdGioco = inserimentoGioco.getGeneratedKeys();
+            	if(recuperIdGioco.next()) {
             		
-            		int insID= rs.getInt("ID");
-            		selectUtente.setLong(1, insID);
+            		long giocoId = recuperIdGioco.getLong(1);
+            		
+            		for(Genere g : generi) {
+            			
+            			inserimentoGenereGioco.setLong(1, g.getId());
+            			inserimentoGenereGioco.setLong(2, giocoId);
+            			inserimentoGenereGioco.executeUpdate();
+            		}
             	}
             	
-            	
+            }
+            
+            
                
                 Gioco nuovoGioco = new Gioco();
                 nuovoGioco.setNome(nome);
@@ -120,14 +139,15 @@ public class GiocoDaoJDBC implements GiocoDao{
                 nuovoGioco.setImmagine(immagine);
                 nuovoGioco.setEliminato(eliminato);
                 nuovoGioco.setPrezzo(prezzo);
-                
+                nuovoGioco.setGeneri(generi);
                 nuovoGioco.setOfferta(offerta);
-                nuovoGioco.setUtente(utente);
+                nuovoGioco.setIdUtente(idUtente);
 
                 System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
                 return nuovoGioco;
-            }
-
+        
+            
+        
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {

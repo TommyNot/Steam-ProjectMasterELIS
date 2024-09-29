@@ -4,7 +4,6 @@
   <welcome-file-list>
     <welcome-file>public-jsp/HomePagePrincipale.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
     <description></description>
     <display-name>HomePageServlet</display-name>
@@ -24,5 +23,15 @@
   <servlet-mapping>
     <servlet-name>ControlloSessioniServlet</servlet-name>
     <url-pattern>/ControlloSessioniServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>addGiocoServlet</display-name>
+    <servlet-name>addGiocoServlet</servlet-name>
+    <servlet-class>org.elis.controller.addGiocoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addGiocoServlet</servlet-name>
+    <url-pattern>/addGiocoServlet</url-pattern>
   </servlet-mapping>
 </web-app>

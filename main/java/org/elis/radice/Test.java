@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.jdbc.UtenteDaoJDBC;
+import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 public class Test {
@@ -21,7 +22,9 @@ public class Test {
 		
 		try {
 			
-			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", false, 49.99, null,null, null);
+	
+			
+			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", false, 49.99, null,null,2);
 			
 		}catch(Exception e) {
 			
@@ -46,6 +49,8 @@ public class Test {
 		try {
 			
 			BusinessLogic.UtenteAdd(0,"tumnus", "email@email.com", "tommy1");
+		
+			
 			
 			
 		}catch(Exception e) {

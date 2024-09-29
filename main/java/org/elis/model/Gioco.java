@@ -1,6 +1,7 @@
 package org.elis.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Gioco {
 	
@@ -14,11 +15,11 @@ public class Gioco {
 	private boolean eliminato;
 	private double prezzo;
 	Offerta offerta;
-	Utente utente;
+	long idUtente;
 	
 	public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
 			LocalDateTime data_rilascio, String descrizione, String immagine, boolean eliminato, double prezzo,
-			Offerta offerta, Utente utente) {
+			Offerta offerta, long idUtente) {
 		
 		
 		this.id = id;
@@ -31,13 +32,25 @@ public class Gioco {
 		this.eliminato = eliminato;
 		this.prezzo = prezzo;
 		this.offerta = offerta;
-		this.utente = utente;
+		this.idUtente = idUtente;
 	}
 	
 	
 	public Gioco() {
 		
 		
+	}
+	
+	
+
+
+	public long getIdUtente() {
+		return idUtente;
+	}
+
+
+	public void setIdUtente(long idUtente) {
+		this.idUtente = idUtente;
 	}
 
 
@@ -141,13 +154,11 @@ public class Gioco {
 	}
 
 
-	public Utente getUtente() {
-		return utente;
-	}
 
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
+	public void setGeneri(List<Genere> generi) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
