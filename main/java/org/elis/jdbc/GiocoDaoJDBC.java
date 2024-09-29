@@ -90,6 +90,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
                 if (aggiornamento > 0) {
                     ResultSet recuperIdGioco = inserimentoGioco.getGeneratedKeys();
+                    
                     if (recuperIdGioco.next()) {
                         long giocoId = recuperIdGioco.getLong(1);
 

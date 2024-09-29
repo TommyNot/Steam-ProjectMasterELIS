@@ -100,6 +100,7 @@ public class UtenteDaoJDBC implements UtenteDao {
             
             u.setRuolo(rol);
             
+           try {
             int aggio = ps.executeUpdate();
             
             if(aggio > 0) {
@@ -127,6 +128,15 @@ public class UtenteDaoJDBC implements UtenteDao {
              } else {
                  System.out.println("Errore nell'aggiunta dell'utente");
              }
+            
+           }catch (SQLException e) {
+                   // Gestione errori di duplicati stackoverflow
+                   if (e.getSQLState().equals("23505")) { // Stato SQL per mysql stackoverflow
+                       System.out.println("Errore: il utente con questo nome esiste già.");
+                   } else {
+                       System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
+                   }
+           }
          } catch (SQLException e) {
              e.printStackTrace();
          } catch (Exception e) {
