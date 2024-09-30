@@ -107,4 +107,11 @@ public static Offerta deleteByNameOfferta(String username,long id) {
 	return DaoFactory.getDaoFactory().getOffertaDao().deleteByNome(username, id);
 }
 
+public static Offerta findOffertaById(long id) {
+	return DaoFactory.getDaoFactory().getOffertaDao().selectById(id);
+}
+
+public static Offerta findOffertaByNome(String nome) {
+	return DaoFactory.getDaoFactory().getOffertaDao().selectByName(nome);
+}
 }
