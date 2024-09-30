@@ -82,4 +82,29 @@ public static Genere DeleteByName(String nome) {
 	return DaoFactory.getDaoFactory().getGenereDao().deleteByName(nome);
 }
 
+public static Offerta offertaAdd(String nome, double sconto, LocalDateTime data_inizio, LocalDateTime data_fine) {
+	return DaoFactory.getDaoFactory().getOffertaDao().add(nome, sconto, data_inizio, data_fine);
+	
+}
+
+public static List<Offerta> offertaVisualizzaTutto() {
+	return DaoFactory.getDaoFactory().getOffertaDao().findAll();
+}
+
+public static Offerta updatePrezzoOfferta(long id,double prezzo) {
+	return DaoFactory.getDaoFactory().getOffertaDao().updatePrezzo(id, prezzo);
+}
+
+public static Offerta updateDataInizioOfferta(long id,LocalDateTime data_inizio) {
+	return DaoFactory.getDaoFactory().getOffertaDao().updateDataInizio(id, data_inizio);
+}
+
+public static Offerta updateDataFineOfferta(long id,LocalDateTime data_fine) {
+	return DaoFactory.getDaoFactory().getOffertaDao().updateDataFine(id, data_fine);
+}
+
+public static Offerta deleteByNameOfferta(String username,long id) {
+	return DaoFactory.getDaoFactory().getOffertaDao().deleteByNome(username, id);
+}
+
 }

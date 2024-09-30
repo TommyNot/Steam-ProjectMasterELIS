@@ -37,21 +37,21 @@ public class OffertaDaoJDBC implements OffertaDao {
 
 
 	@Override
-	public Offerta updatePrezzo(long id) {
+	public Offerta updatePrezzo(long id,double prezzo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public Offerta updateDataInizio(long id) {
+	public Offerta updateDataInizio(long id,LocalDateTime data_inizio) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public Offerta updateDataFine(long id) {
+	public Offerta updateDataFine(long id,LocalDateTime data_fine) {
 		// TODO Auto-generated method stub
 		return null;
 	}
