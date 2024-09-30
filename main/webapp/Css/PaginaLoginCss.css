@@ -1,34 +1,214 @@
-@charset "UTF-8";
-
-body{
-	background-color: rgb(26, 43, 61);
+/* Stile globale */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #171D25;
+    background-image: url("risorse-media/img_homepage/Steam-2.jpeg");
+    background-size: cover; 
+    background-position: center; 
+    
+    align-items: center;
+    height: 100vh;
 }
 
-h1{
+.container{
+	
+	align-content:center;
+	justify-content: center;
+    align-items: center;
+}
+
+#logo {
+    position: absolute;
+    top: 20px; 
+    left: 20px; 
+}
+
+
+h2{
 	text-align: center;
-	font-family: "Times-New-Roman";
+	position: absolute;
+    color: #C5C3C0;
+    margin-bottom: 20px;
+    position: absolute;
+    top:0px; 
+    left: 80px; 
+    
+	
+}
+/* Intestazione */
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
 }
 
-.form{
-	display: flex; 
-	justify-content: center; 
-	align-items: center; 
-	flex-direction: column;
+/* Stile del modulo */
+.form {
+	
+    background-color: #181A21;
+    justify-content:center;
+    padding: 20px;
+    margin: 0 auto; /* Centra il form orizzontalmente */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    
 }
 
-.cont{
-	padding: 10px;
+/* Contenitore dei campi */
+.cont {
+	
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-.cont-2{
-	margin-bottom: 20px
+/* Etichetta */
+label {
+    font-weight: bold; 
+    display: block;
+    margin-bottom: 5px;
+    color: #1899FF;
 }
 
-#link-registrazione{
-	margin-top: 20px; 
-	text-align: center;
+/* Input */
+input[type="email"],
+input[type="password"] {
+    width: 90%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
 }
 
-#ancora-registrazione{
-	color: black;
+input[type="email"]:focus,
+input[type="password"]:focus {
+    font-weight: bold; 
+    border-color: #007bff;
+    outline: none;
 }
+
+/* Contenitore per "Ricordami" */
+.cont-2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cont-2 input {
+    margin-right: 5px;
+}
+
+/* Pulsante di invio */
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; 
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Link di registrazione */
+#link-registrazione {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#ancora-registrazione {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#ancora-registrazione:hover {
+    text-decoration: underline;
+}
+
+
+
+
+#crea_account {
+    margin-top: 20px; 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px; 
+    background-color: #181A21; 
+    border-radius: 8px; 
+    text-align: center; 
+    color: #495057; 
+    font-size: 16px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+#crea_account p {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+}
+
+#crea_account button {
+    background-color: #007bff; 
+    color: white;
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+#crea_account button:hover {
+    background-color: #0056b3;
+}
+
+#crea_account button:focus {
+    outline: 2px solid #0056b3; /* Blue outline for focus */
+}
+
+#crea_account footer {
+	width:100%;
+	height:100%;
+    margin-top: 15px; 
+    color: white; 
+    font-size: 14px; 
+}
+
+
+#crea_account button:focus {
+    outline: 2px solid #0056b3; 
+}
+
+#crea_account footer {
+    margin-top: 15px; /* Spazio sopra il footer */
+    color: white; /* Colore del testo del footer */
+    font-size: 14px; /* Dimensione del font del footer */
+}
+
+#crea_account footer a {
+    color: #007bff; /* Colore dei link */
+    text-decoration: none; /* Nessuna sottolineatura */
+}
+
+#crea_account footer a:hover {
+    text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+}
+
+.social-icons {
+    margin-top: 10px; /* Spazio sopra le icone social */
+}
+
+.social-icons a {
+    margin: 0 5px; /* Spaziatura tra le icone */
+    font-size: 20px; /* Dimensione delle icone */
+}
+
+
+
+
+

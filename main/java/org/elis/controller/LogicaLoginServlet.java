@@ -32,13 +32,16 @@ public class LogicaLoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        String email = request.getParameter("emailAccesso");
-        String password = request.getParameter("passwordAccesso");
-        String ricordami = request.getParameter("RestaCollegato");
+        String email = request.getParameter("emailLogin");
+        String password = request.getParameter("passwordLogin");
+        String ricordami = request.getParameter("checkboxFormInput");
 
         
         if (email == null || email.isBlank() || password == null || password.isBlank()) {
-            request.setAttribute("Error", "Email e password sono obbligatori.");
+        	
+        	 String failed = "errore o meail o password.";
+               
+            request.setAttribute("Error", failed);
             request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
             return;
         }
@@ -59,7 +62,7 @@ public class LogicaLoginServlet extends HttpServlet {
             
             switch (u1.getRuolo()) {
                 case ADMIN:
-                    request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
                     break;
                 case PUBLISHER:
                     request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
