@@ -15,6 +15,10 @@ public interface GiocoDao {
 	Gioco findByName(String nome);
 	Gioco findGiocoById(long id);
 	Gioco updateGiocoNome(String nome);
+	Gioco updateGiocoDescrzione(long id,String descrzione);
+	Gioco updateGiocoImmagine(long id,String immagine);
+	Gioco updateGiocoPrezzo(long id,double prezzo);
+	Gioco updateGiocoOfferta(long id,Offerta offerta);
 	Gioco deleteGioco(String id);
 
 }
