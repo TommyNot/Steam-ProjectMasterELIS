@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.naming.java.javaURLContextFactory;
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.dao.GiocoDao;
 import org.elis.model.Genere;
@@ -360,6 +361,161 @@ public class GiocoDaoJDBC implements GiocoDao{
 	    
 	    return null;
 	}
+
+
+	@Override
+	public Gioco updateGiocoDescrzione(long id,String descrzione) {
+		
+		String query = "UPDATE gioco SET descrizione = ? WHERE id = ?";
+		
+		try(
+					Connection c = JdbcDaoFactory.getConnection();
+					PreparedStatement ps = c.prepareStatement(query);
+					
+				
+			){
+			
+			   ps.setString(1, descrzione); 
+		       ps.setLong(2, id);
+			
+			int aggiornamento = ps.executeUpdate();
+			
+			if(aggiornamento > 0) {
+				
+				System.out.println("Descrzione success");
+	            Gioco giocoAggiornato = findGiocoById(id);
+	            return giocoAggiornato;
+				
+			}else {
+				
+				System.out.println("Oppss....error nell'aggiunta");
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+
+
+	@Override
+	public Gioco updateGiocoImmagine(long id, String immagine) {
+	    
+	    String query = "UPDATE gioco SET immagine = ? WHERE id = ?";
+	    
+	    try (
+	        Connection c = JdbcDaoFactory.getConnection();
+	        PreparedStatement ps = c.prepareStatement(query);
+	    ) {
+	       
+	        ps.setString(1, immagine);
+	        ps.setLong(2, id);
+	        
+	        
+	        int aggiornamento = ps.executeUpdate();
+	        
+	        if (aggiornamento > 0) {
+	            System.out.println("Immagine aggiornata con successo.");
+	            
+	            
+	            Gioco giocoAggiornato = findGiocoById(id);
+	            return giocoAggiornato;
+	            
+	        } else {
+	            System.out.println("Errore nell'aggiornamento dell'immagine.");
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return null;
+	}
+
+
+	@Override
+	public Gioco updateGiocoPrezzo(long id, double prezzo) {
+		
+		String query = "UPDATE gioco SET prezzo=? WHERE id = ?";
+		
+		try(
+				Connection c = JdbcDaoFactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				
+			){
+			
+			ps.setDouble(1, prezzo);
+			ps.setLong(2, id);
+			
+			int aggiornamento = ps.executeUpdate();
+			
+			if(aggiornamento > 0) {
+				
+				System.out.println("Success prezzo modificato");
+			     Gioco giocoAggiornato = findGiocoById(id);
+		         return giocoAggiornato;
+			}else {
+				
+				System.out.println("Error modifica prezzo");
+				
+			}
+			
+			
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+
+
+	@Override
+	public Gioco updateGiocoOfferta(long id, Offerta offerta) {
+	    String query = "UPDATE gioco SET id_offerta = ? WHERE id = ?";
+	    
+	    try (Connection c = JdbcDaoFactory.getConnection(); 
+	         PreparedStatement ps = c.prepareStatement(query)) {
+
+	        if (offerta != null) {
+	            ps.setLong(1, offerta.getId());
+	        } else {
+	            ps.setNull(1, Types.BIGINT); 
+	        }
+	        ps.setLong(2, id);
+	        
+	        int aggiornamento = ps.executeUpdate();
+	        
+	        if (aggiornamento > 0) {
+	            System.out.println("Offerta aggiornata con successo.");
+	            return findGiocoById(id); 
+	        } else {
+	            System.out.println("Errore nell'offerta: ID non trovato.");
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return null; 
+	}
+
+
 
 
 
