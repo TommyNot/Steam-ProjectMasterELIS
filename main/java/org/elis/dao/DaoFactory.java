@@ -12,6 +12,8 @@ public abstract class DaoFactory {
 	public abstract GiocoDao getGiocoDao();
 	
 	public abstract LibreriaDao getLibreriaDao();
+	
+	public abstract GenereDao getGenereDao();
 
 	
 	public static JdbcDaoFactory getDaoFactory() {

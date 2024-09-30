@@ -60,5 +60,26 @@ public static Gioco TrovaByName(String nome) {
 	return DaoFactory.getDaoFactory().getGiocoDao().findByName(nome);
 }
 
+public static Genere GenereAdd(String nome) {
+	return DaoFactory.getDaoFactory().getGenereDao().add(nome);
+}
+
+public static List<Genere> VisalizzaTuttiGeneri(){
+	return DaoFactory.getDaoFactory().getGenereDao().findAll();
+}
+
+public static Genere SelectByName(String nome) {
+	return DaoFactory.getDaoFactory().getGenereDao().findByName(nome);
+}
+
+
+public static Genere getGenereById(long idGenere) {
+	
+	return DaoFactory.getDaoFactory().getGenereDao().selectById(idGenere);
+}
+
+public static Genere DeleteByName(String nome) {
+	return DaoFactory.getDaoFactory().getGenereDao().deleteByName(nome);
+}
 
 }
