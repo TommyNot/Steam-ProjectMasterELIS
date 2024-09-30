@@ -343,7 +343,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	            long idOfferta = rs.getLong("id_offerta");
 	            if (!rs.wasNull()) {
 	                
-	                Offerta offerta = findOffertaById(idOfferta); 
+	                Offerta offerta = BusinessLogic.findOffertaById(idOfferta);
 	                gioco.setOfferta(offerta);
 	            }
 	            
