@@ -382,5 +382,54 @@ public class UtenteDaoJDBC implements UtenteDao {
     
 		return null;
     }
+
+
+    @Override
+    public Utente loginUtente(String email, String password) {
+        
+        String query = "SELECT * FROM utente WHERE email = ? AND password = ?";
+        
+        try (Connection c = JdbcDaoFactory.getConnection();
+             PreparedStatement ps = c.prepareStatement(query)) {
+            
+            
+            ps.setString(1, email);
+            ps.setString(2, password);
+            
+            
+            ResultSet rs = ps.executeQuery();
+            
+            
+            if (rs.next()) {
+            	
+                Utente utente = new Utente();
+                utente.setEmail(rs.getString("email"));
+                utente.setPassword(rs.getString("password"));
+                int ruoloInt = rs.getInt("ruolo");
+                Ruolo[] ruoli = Ruolo.values();
+                if (ruoloInt >= 0 && ruoloInt < ruoli.length) {
+                    utente.setRuolo(ruoli[ruoloInt]);
+                } else {
+                    System.out.println("Ruolo non valido per l'utente con ID: " + utente.getId());
+                    return null;
+                }
+ 
+                System.out.println("Utente trovato: " + utente.getEmail());
+                
+                return utente;  
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        } catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+        
+        
+        System.out.println("Email o password errati.");
+        return null;
+    }
     
 }

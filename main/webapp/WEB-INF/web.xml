@@ -26,13 +26,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>addGiocoServlet</display-name>
-    <servlet-name>addGiocoServlet</servlet-name>
-    <servlet-class>org.elis.controller.addGiocoServlet</servlet-class>
+    <display-name>GiocoAggiungiServlet</display-name>
+    <servlet-name>GiocoAggiungiServlet</servlet-name>
+    <servlet-class>org.elis.controller.GiocoAggiungiServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>addGiocoServlet</servlet-name>
-    <url-pattern>/addGiocoServlet</url-pattern>
+    <servlet-name>GiocoAggiungiServlet</servlet-name>
+    <url-pattern>/GiocoAggiungiServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -46,22 +46,32 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>UpdateGiocoNomeServlet</display-name>
-    <servlet-name>UpdateGiocoNomeServlet</servlet-name>
-    <servlet-class>org.elis.controller.UpdateGiocoNomeServlet</servlet-class>
+    <display-name>GiocoAggiornaServlet</display-name>
+    <servlet-name>GiocoAggiornaServlet</servlet-name>
+    <servlet-class>org.elis.controller.GiocoAggiornaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UpdateGiocoNomeServlet</servlet-name>
-    <url-pattern>/UpdateGiocoNomeServlet</url-pattern>
+    <servlet-name>GiocoAggiornaServlet</servlet-name>
+    <url-pattern>/GiocoAggiornaServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AggiornaGiocoServlet</display-name>
-    <servlet-name>AggiornaGiocoServlet</servlet-name>
-    <servlet-class>org.elis.controller.AggiornaGiocoServlet</servlet-class>
+    <display-name>GiocoEliminaServlet</display-name>
+    <servlet-name>GiocoEliminaServlet</servlet-name>
+    <servlet-class>org.elis.controller.GiocoEliminaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AggiornaGiocoServlet</servlet-name>
-    <url-pattern>/AggiornaGiocoServlet</url-pattern>
+    <servlet-name>GiocoEliminaServlet</servlet-name>
+    <url-pattern>/GiocoEliminaServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogicaLoginServlet</display-name>
+    <servlet-name>LogicaLoginServlet</servlet-name>
+    <servlet-class>org.elis.controller.LogicaLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogicaLoginServlet</servlet-name>
+    <url-pattern>/LogicaLoginServlet</url-pattern>
   </servlet-mapping>
 </web-app>

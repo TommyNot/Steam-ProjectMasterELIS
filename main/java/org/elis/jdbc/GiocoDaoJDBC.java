@@ -283,33 +283,53 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 	@Override
 	public Gioco deleteGioco(String nome) {
-	    String query = "DELETE FROM gioco WHERE nome = ?";
+	    String findQuery = "SELECT * FROM gioco WHERE nome = ?";
+	    String deleteQuery = "DELETE FROM gioco WHERE nome = ?";
 	    
 	    try (
 	        Connection c = JdbcDaoFactory.getConnection();
-	        PreparedStatement ps = c.prepareStatement(query);
+	        PreparedStatement findPs = c.prepareStatement(findQuery);
+	        PreparedStatement deletePs = c.prepareStatement(deleteQuery);
 	    ) {
-	        ps.setString(1, nome);
 	        
-	        int aggiornamento = ps.executeUpdate();
-	        
-	        if (aggiornamento == 0) {
-	            System.out.println("Nessun gioco eliminato, ID non trovato");
-	            
-	        } else {
-	            System.out.println("Successo: gioco eliminato");
-	            
+	        findPs.setString(1, nome);
+	        try (ResultSet rs = findPs.executeQuery()) {
+	            if (rs.next()) {
+	                
+	                Gioco gioco = new Gioco();
+	                gioco.setId(rs.getLong("id"));
+	                gioco.setNome(rs.getString("nome"));
+	                gioco.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	                gioco.setDescrzione(rs.getString("descrizione"));
+	                gioco.setImmagine(rs.getString("immagine"));
+	                gioco.setEliminato(rs.getBoolean("eliminato"));
+	                gioco.setPrezzo(rs.getDouble("prezzo"));
+	                
+	                
+	                deletePs.setString(1, nome);
+	                int aggiornamento = deletePs.executeUpdate();
+	                
+	                if (aggiornamento == 0) {
+	                    System.out.println("Nessun gioco eliminato, nome non trovato");
+	                    return null;
+	                } else {
+	                    System.out.println("Successo: gioco eliminato");
+	                    return gioco;  
+	                }
+	            } else {
+	                System.out.println("Nessun gioco trovato con il nome: " + nome);
+	                return null; 
+	            }
 	        }
-	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        
-	    }catch(Exception e) {
-	    	
-	    	e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
 	    }
-		return null;
+	    
+	    return null;
 	}
+
 
 
 	@Override

@@ -24,13 +24,13 @@ import org.elis.model.Utente;
 /**
  * Servlet implementation class addGiocoServlet
  */
-public class addGiocoServlet extends HttpServlet {
+public class GiocoAggiungiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addGiocoServlet() {
+    public GiocoAggiungiServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -17,6 +17,7 @@ public abstract class DaoFactory {
 	
 	public abstract OffertaDao getOffertaDao();
 	
+	
 	public static JdbcDaoFactory getDaoFactory() {
 		
 		return new JdbcDaoFactory();
