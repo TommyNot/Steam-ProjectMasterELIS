@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import org.elis.dao.DaoFactory;
+import org.elis.dao.GenereDao;
 import org.elis.dao.GiocoDao;
 import org.elis.dao.LibreriaDao;
 import org.elis.dao.UtenteDao;
@@ -48,6 +49,13 @@ public class JdbcDaoFactory extends DaoFactory{
 		// TODO Auto-generated method stub
 		return LibreriaDaoJDBC.getInstance();
 				
+	}
+
+
+	@Override
+	public GenereDao getGenereDao() {
+		// TODO Auto-generated method stub
+		return GenereDaoJDBC.getInstance();
 	}
 
 
