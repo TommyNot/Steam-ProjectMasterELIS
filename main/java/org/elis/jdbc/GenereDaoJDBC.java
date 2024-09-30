@@ -1,5 +1,9 @@
 package org.elis.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.elis.dao.GenereDao;
@@ -22,11 +26,40 @@ private static GenereDaoJDBC instance;
         return instance;
     }
 	
-	@Override
-	public Genere add(String nome) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Genere add(String nome) {
+        String query = "INSERT INTO genere(nome) VALUES(?)";
+        
+        try (
+            Connection c = JdbcDaoFactory.getConnection(); 
+            PreparedStatement ps = c.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, nome);
+            
+            int aggio = ps.executeUpdate();
+            
+            if (aggio == 0) {
+                throw new SQLException("inserimento fallito");
+            }
+            
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    Genere genere = new Genere();
+                    genere.setId(generatedKeys.getLong(1)); 
+                    genere.setNome(nome);
+                    return genere;
+                } else {
+                    throw new SQLException("inserimento fallito,nessun id trovato");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; 
+    }
+
 
 	@Override
 	public List<Genere> findAll() {
