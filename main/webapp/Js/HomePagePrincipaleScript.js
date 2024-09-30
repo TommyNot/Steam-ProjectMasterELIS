@@ -24,7 +24,7 @@ function immaginePrima(event){
 	
 	let immagine = document.getElementById("immagine");
 	if(counter == 0){
-	   counter = 10;
+	   counter = arrayImmagini.length;
 	 }
 	counter--;
 	immagine.src = arrayImmagini[counter];
