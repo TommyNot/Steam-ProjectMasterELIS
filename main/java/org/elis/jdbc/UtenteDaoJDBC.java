@@ -79,72 +79,75 @@ public class UtenteDaoJDBC implements UtenteDao {
     
     @Override
     public Utente add(int ruolo, String username, String email, String password) {
-    	
-    	String query = "INSERT INTO utente (ruolo,username,email,password) VALUES(?,?,?,?)";
-    	Utente u = new Utente();
-    	try(
-    			Connection c = JdbcDaoFactory.getConnection();
-    			PreparedStatement ps = c.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-    			
-    		)
-    	{
-            ps.setInt(1, ruolo);
-            ps.setString(2, username);
-            ps.setString(3, email);
-            ps.setString(4, password);
+        
+        String checkQuery = "SELECT id FROM utente WHERE username = ? OR email = ?";
+        String insertQuery = "INSERT INTO utente (ruolo,username,email,password) VALUES(?,?,?,?)";
+        Utente u = new Utente();
+        
+        try (
+            Connection c = JdbcDaoFactory.getConnection();
+            PreparedStatement checkPs = c.prepareStatement(checkQuery);
+            PreparedStatement insertPs = c.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+        ) {
+            checkPs.setString(1, username);
+            checkPs.setString(2, email);
             
+            try (ResultSet rs = checkPs.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Errore: utente con questo username o email esiste già.");
+                    return null;
+                }
+            }
             
+            insertPs.setInt(1, ruolo);
+            insertPs.setString(2, username);
+            insertPs.setString(3, email);
+            insertPs.setString(4, password);
             
             Ruolo[] ruoli = Ruolo.values();
             Ruolo rol = ruoli[ruolo];
-            
             u.setRuolo(rol);
             
-           try {
-            int aggio = ps.executeUpdate();
+            int aggio = insertPs.executeUpdate();
             
-            if(aggio > 0) {
-            	
-            	 try (ResultSet generatedKeys = ps.getGeneratedKeys()) { 
-                     if (generatedKeys.next()) {
-                         long id = generatedKeys.getLong(1);
-                         u.setId(id);
-
-                         String selectQuery = "SELECT data_creazione FROM utente WHERE id = ?";
-                         try (PreparedStatement selectPs = c.prepareStatement(selectQuery)) {
-                             selectPs.setLong(1, id);
-                             try (ResultSet rs = selectPs.executeQuery()) {
-                                 if (rs.next()) {
-                                     Timestamp dataCreazione = rs.getTimestamp("data_creazione");
-                                     u.setData_creazione(dataCreazione != null ? dataCreazione.toLocalDateTime() : null);
-                                 }
-                             }
-                         }
-                         
-                         System.out.println("Utente aggiunto con successo. ID: " + id);
-                         return u;
-                     }
-                 }
-             } else {
-                 System.out.println("Errore nell'aggiunta dell'utente");
-             }
+            if (aggio > 0) {
+                try (ResultSet generatedKeys = insertPs.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        long id = generatedKeys.getLong(1);
+                        u.setId(id);
+                        
+                        String selectQuery = "SELECT data_creazione FROM utente WHERE id = ?";
+                        try (PreparedStatement selectPs = c.prepareStatement(selectQuery)) {
+                            selectPs.setLong(1, id);
+                            try (ResultSet selectRs = selectPs.executeQuery()) {
+                                if (selectRs.next()) {
+                                    Timestamp dataCreazione = selectRs.getTimestamp("data_creazione");
+                                    u.setData_creazione(dataCreazione != null ? dataCreazione.toLocalDateTime() : null);
+                                }
+                            }
+                        }
+                        
+                        System.out.println("Utente aggiunto con successo. ID: " + id);
+                        return u;
+                    }
+                }
+            } else {
+                System.out.println("Errore nell'aggiunta dell'utente.");
+            }
             
-           }catch (SQLException e) {
-                   // Gestione errori di duplicati stackoverflow
-                   if (e.getSQLState().equals("23505")) { // Stato SQL per mysql stackoverflow
-                       System.out.println("Errore: il utente con questo nome esiste già.");
-                   } else {
-                       System.out.println("Errore SQL durante l'inserimento dell'utente: " + e.getMessage());
-                   }
-           }
-         } catch (SQLException e) {
-             e.printStackTrace();
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
+        } catch (SQLException e) {
+            if (e.getSQLState().equals("23505")) { 
+                System.out.println("Errore: utente con questo username o email esiste già.");
+            } else {
+                System.out.println("Errore SQL durante l'inserimento dell'utente: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-         return null;
+        return null;
     }
+
 
 
     @Override
