@@ -247,14 +247,16 @@ public class UtenteDaoJDBC implements UtenteDao {
 
     @Override
     public Utente updateUsername(long id, String username) {
-        String query = "UPDATE utente SET username = ? WHERE id = ?";
-
+        String query = "UPDATE utente SET username = ?,data_ultima_modifica = ? WHERE id = ?";
+        LocalDateTime now = LocalDateTime.now();
+        
         try (
             Connection c = JdbcDaoFactory.getConnection();
             PreparedStatement ps = c.prepareStatement(query)
         ) {
             ps.setString(1, username);
-            ps.setLong(2, id);
+            ps.setTimestamp(2, java.sql.Timestamp.valueOf(now)); 
+            ps.setLong(3, id);
 
             int aggio = ps.executeUpdate();
 
@@ -262,6 +264,7 @@ public class UtenteDaoJDBC implements UtenteDao {
                 Utente u = new Utente();
                 u.setId(id);
                 u.setUsername(username);
+                u.setData_modifica(now); 
 
                 System.out.println("Utente aggiornato con successo.");
                 return u;
@@ -279,13 +282,16 @@ public class UtenteDaoJDBC implements UtenteDao {
     
     @Override
 	public Utente updateEmail(long id,String email) {
-    	 String query = "UPDATE utente SET email = ? WHERE id = ?";
+    	 String query = "UPDATE utente SET email = ?,data_ultima_modifica = ? WHERE id = ?";
+    	 LocalDateTime now = LocalDateTime.now();
+    	 
     	 try(
     			Connection c=JdbcDaoFactory.getConnection();
     			 PreparedStatement ps=c.prepareStatement(query)
     			 ){
     		 ps.setString(1, email);
-    		 ps.setLong(2,id);
+    		 ps.setTimestamp(2, java.sql.Timestamp.valueOf(now)); 
+    		 ps.setLong(3,id);
     		 
     		 int aggio=ps.executeUpdate();
     		 
@@ -293,6 +299,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     			 Utente u=new Utente();
     			 u.setId(id);
     			 u.setEmail(email);
+    			 u.setData_modifica(now);
     			 
     			 System.out.println("mail aggiornata");
         		 return u;
@@ -311,13 +318,15 @@ public class UtenteDaoJDBC implements UtenteDao {
     }
     @Override
 	public Utente updatePassword(long id,String password) {
-    	String query = "UPDATE utente SET password = ? WHERE id = ?";
+    	String query = "UPDATE utente SET password = ?,data_ultima_modifica = ? WHERE id = ?";
+    	LocalDateTime now = LocalDateTime.now();
     	try(
     			Connection c=JdbcDaoFactory.getConnection();
     			 PreparedStatement ps=c.prepareStatement(query)
     			 ){
     		 ps.setString(1, password);
-    		 ps.setLong(2,id);
+    		 ps.setTimestamp(2, java.sql.Timestamp.valueOf(now)); 
+    		 ps.setLong(3,id);
     		 
     		 int aggio=ps.executeUpdate();
     		 
@@ -325,6 +334,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     			 Utente u=new Utente();
     			 u.setId(id);
     			 u.setPassword(password);
+    			 u.setData_modifica(now); 
     			 
     			 System.out.println("password aggiornata");
         		 return u;
