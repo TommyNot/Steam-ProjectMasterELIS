@@ -11,6 +11,12 @@ import org.elis.model.Utente;
 
 public class BusinessLogic {
 	
+	
+public static Utente UtenteLogin(String email,String password) {
+	
+	return DaoFactory.getDaoFactory().getUtenteDao().loginUtente(email, password);
+}
+	
 public static List<Utente> UtenteFindAll() {
 		
 		return  DaoFactory.getDaoFactory().getUtenteDao().findAll();
@@ -114,4 +120,12 @@ public static Offerta findOffertaById(long id) {
 public static Offerta findOffertaByNome(String nome) {
 	return DaoFactory.getDaoFactory().getOffertaDao().selectByName(nome);
 }
+
+public static Gioco eliminaGioco(String nome) {
+	
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().deleteGioco(nome);
+}
+
+
 }

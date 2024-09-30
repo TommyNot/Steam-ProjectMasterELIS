@@ -11,7 +11,7 @@
 <body>
 	<h1>Login to your account</h1>
 	
-	 <form action="<%=request.getContextPath()%>/LogicaLogin" method="post" class="form">
+	 <form action="<%=request.getContextPath()%>/LogicaLoginServlet" method="post" class="form">
 	 	<div class="cont">
 	   		<label for="emailAccesso">Email:</label>
 	   		<input type="email" id="emailAccesso" placeholder="mario.rossi@gmail.com" name="emailLogin" required>

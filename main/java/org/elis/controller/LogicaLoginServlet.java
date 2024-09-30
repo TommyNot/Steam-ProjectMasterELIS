@@ -1,0 +1,82 @@
+package org.elis.controller;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+
+import org.elis.businesslogic.BusinessLogic;
+
+import org.elis.model.Ruolo;
+import org.elis.model.Utente;
+
+
+/**
+ * Servlet implementation class LogicaLogin
+ */
+public class LogicaLoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LogicaLoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String email = request.getParameter("emailAccesso");
+        String password = request.getParameter("passwordAccesso");
+        String ricordami = request.getParameter("RestaCollegato");
+
+        
+        if (email == null || email.isBlank() || password == null || password.isBlank()) {
+            request.setAttribute("Error", "Email e password sono obbligatori.");
+            request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
+            return;
+        }
+
+        
+        Utente u1 = BusinessLogic.UtenteLogin(email, password);
+        
+        if (u1 != null) {
+           
+            HttpSession sessione = request.getSession();
+            sessione.setAttribute("utenteLoggato", u1);
+            
+            
+    	    if(ricordami != null) {
+		        sessione.setAttribute("ricordami", u1);
+		    }
+
+            
+            switch (u1.getRuolo()) {
+                case ADMIN:
+                    request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+                    break;
+                case PUBLISHER:
+                    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+                    break;
+                case UTENTE_BASE:
+                    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
+                    break;
+                default:
+                    request.setAttribute("Error", "Ruolo utente non riconosciuto.");
+                    request.getRequestDispatcher("public-jsp/LoginPage.jsp").forward(request, response);
+            }
+        } else {
+            
+            request.setAttribute("Error", "Email o password non validi.");
+            request.getRequestDispatcher("public-jsp/LoginPage.jsp").forward(request, response);
+        }
+    }
+
+
+}
