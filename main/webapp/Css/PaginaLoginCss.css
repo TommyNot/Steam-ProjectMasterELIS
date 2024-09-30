@@ -1,4 +1,4 @@
-/* Stile globale */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #171D25;
@@ -35,34 +35,34 @@ h2{
     
 	
 }
-/* Intestazione */
+
 h1 {
     text-align: center;
     color: white;
     margin-bottom: 20px;
 }
 
-/* Stile del modulo */
+
 .form {
 	
     background-color: #181A21;
     justify-content:center;
     padding: 20px;
-    margin: 0 auto; /* Centra il form orizzontalmente */
+    margin: 0 auto; 
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
     
 }
 
-/* Contenitore dei campi */
+
 .cont {
 	
     margin-bottom: 15px;
     text-align: center;
 }
 
-/* Etichetta */
+
 label {
     font-weight: bold; 
     display: block;
@@ -70,7 +70,7 @@ label {
     color: #1899FF;
 }
 
-/* Input */
+
 input[type="email"],
 input[type="password"] {
     width: 90%; 
@@ -87,7 +87,7 @@ input[type="password"]:focus {
     outline: none;
 }
 
-/* Contenitore per "Ricordami" */
+
 .cont-2 {
     display: flex;
     align-items: center;
@@ -98,7 +98,7 @@ input[type="password"]:focus {
     margin-right: 5px;
 }
 
-/* Pulsante di invio */
+
 input[type="submit"] {
     background-color: #007bff;
     color: white;
@@ -114,7 +114,7 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Link di registrazione */
+
 #link-registrazione {
     text-align: center;
     margin-top: 10px;
@@ -168,7 +168,7 @@ input[type="submit"]:hover {
 }
 
 #crea_account button:focus {
-    outline: 2px solid #0056b3; /* Blue outline for focus */
+    outline: 2px solid #0056b3; 
 }
 
 #crea_account footer {
