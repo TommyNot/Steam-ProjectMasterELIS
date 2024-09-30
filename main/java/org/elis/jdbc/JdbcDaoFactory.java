@@ -7,6 +7,7 @@ import org.elis.dao.DaoFactory;
 import org.elis.dao.GenereDao;
 import org.elis.dao.GiocoDao;
 import org.elis.dao.LibreriaDao;
+import org.elis.dao.OffertaDao;
 import org.elis.dao.UtenteDao;
 
 
@@ -56,6 +57,13 @@ public class JdbcDaoFactory extends DaoFactory{
 	public GenereDao getGenereDao() {
 		// TODO Auto-generated method stub
 		return GenereDaoJDBC.getInstance();
+	}
+
+
+	@Override
+	public OffertaDao getOffertaDao() {
+		// TODO Auto-generated method stub
+		return OffertaDaoJDBC.getInstance();
 	}
 
 

@@ -163,8 +163,36 @@ private static GenereDaoJDBC instance;
 
 	@Override
 	public Genere deleteByName(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	    String selectQuery = "SELECT * FROM genere WHERE nome = ?";
+	    String deleteQuery = "DELETE FROM genere WHERE nome = ?";
+
+	    try (
+	        Connection c = JdbcDaoFactory.getConnection(); 
+	        PreparedStatement selectStmt = c.prepareStatement(selectQuery);
+	        PreparedStatement deleteStmt = c.prepareStatement(deleteQuery)
+	    ) {
+	        selectStmt.setString(1, nome);
+	        try (ResultSet rs = selectStmt.executeQuery()) {
+	            if (rs.next()) {
+	                Genere g = new Genere();
+	                g.setId(rs.getLong("id"));
+	                g.setNome(rs.getString("nome"));
+	                
+	                deleteStmt.setString(1, nome);
+	                int affectedRows = deleteStmt.executeUpdate();
+	                
+	                if (affectedRows > 0) {
+	                    return g;  
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return null;
 	}
 
 }
