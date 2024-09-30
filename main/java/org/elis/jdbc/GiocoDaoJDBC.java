@@ -194,7 +194,44 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 	@Override
 	public Gioco findByName(String nome) {
-		// TODO Auto-generated method stub
+		
+		String query = "SELECT * FROM gioco WHERE nome = ?";
+		
+		try(
+				Connection c = JdbcDaoFactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				
+				
+			){
+			
+			ps.setString(1, nome);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				
+		          Gioco g = new Gioco();
+	                g.setNome(rs.getString("nome"));
+	                g.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	                g.setDescrzione(rs.getString("descrizione"));
+	                g.setImmagine(rs.getString("immagine"));
+	                g.setEliminato(rs.getBoolean("eliminato"));
+	                g.setPrezzo(rs.getDouble("prezzo"));
+	                
+	               System.out.println("gioco trovato");
+	                return g;
+				
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 

@@ -55,5 +55,10 @@ public static List<Gioco> VisualizzaTuttiGiochi() {
 	return DaoFactory.getDaoFactory().getGiocoDao().findAll();
 }
 
+public static Gioco TrovaByName(String nome) {
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().findByName(nome);
+}
+
 
 }

@@ -66,6 +66,15 @@ public class Test {
 			e.printStackTrace();
 		}
 		
+		try {
+			
+			BusinessLogic.TrovaByName("Mario-kart");
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 		//test aggiorhnamento utente
 		/*try {
 			
