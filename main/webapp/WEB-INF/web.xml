@@ -44,4 +44,24 @@
     <servlet-name>UpdateGiocoServlet</servlet-name>
     <url-pattern>/UpdateGiocoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateGiocoNomeServlet</display-name>
+    <servlet-name>UpdateGiocoNomeServlet</servlet-name>
+    <servlet-class>org.elis.controller.UpdateGiocoNomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateGiocoNomeServlet</servlet-name>
+    <url-pattern>/UpdateGiocoNomeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AggiornaGiocoServlet</display-name>
+    <servlet-name>AggiornaGiocoServlet</servlet-name>
+    <servlet-class>org.elis.controller.AggiornaGiocoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiornaGiocoServlet</servlet-name>
+    <url-pattern>/AggiornaGiocoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

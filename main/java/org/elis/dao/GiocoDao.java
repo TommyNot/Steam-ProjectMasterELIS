@@ -19,6 +19,7 @@ public interface GiocoDao {
 	Gioco updateGiocoImmagine(long id,String immagine);
 	Gioco updateGiocoPrezzo(long id,double prezzo);
 	Gioco updateGiocoOfferta(long id,Offerta offerta);
+	Gioco updateGiocoGenere(long id,Genere genere);
 	Gioco deleteGioco(String id);
 
 }

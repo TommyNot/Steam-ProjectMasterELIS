@@ -445,7 +445,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	@Override
 	public Gioco updateGiocoPrezzo(long id, double prezzo) {
 		
-		String query = "UPDATE gioco SET prezzo=? WHERE id = ?";
+		String query = "UPDATE gioco SET nome = ?, prezzo=? WHERE id = ?";
 		
 		try(
 				Connection c = JdbcDaoFactory.getConnection();
@@ -501,6 +501,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	        
 	        if (aggiornamento > 0) {
 	            System.out.println("Offerta aggiornata con successo.");
+	            
 	            return findGiocoById(id); 
 	        } else {
 	            System.out.println("Errore nell'offerta: ID non trovato.");
@@ -514,6 +515,69 @@ public class GiocoDaoJDBC implements GiocoDao{
 	    
 	    return null; 
 	}
+
+
+	@Override
+	public Gioco updateGiocoGenere(long id, Genere genere) {
+	    String queryUpdateGenere = 
+	        "UPDATE genere_gioco SET id_genere = ? WHERE id_gioco = ?";
+
+	    String querySelectGioco = 
+	        "SELECT g.*, u.Ruolo FROM gioco g " +
+	        "JOIN utente u ON g.id_utente = u.id WHERE g.id = ?";
+
+	    try (
+	    	 Connection c = JdbcDaoFactory.getConnection();
+	         PreparedStatement updateGenere = c.prepareStatement(queryUpdateGenere);
+	         PreparedStatement selectGioco = c.prepareStatement(querySelectGioco)
+	        ) {
+
+	        
+	        updateGenere.setLong(1, genere.getId());
+	        updateGenere.setLong(2, id);
+	        int rowsAffected = updateGenere.executeUpdate();
+
+	        if (rowsAffected == 0) {
+	            System.out.println("Nessun genere aggiornato, il gioco non esiste.");
+	            return null; 
+	        }
+
+	        
+	        selectGioco.setLong(1, id);
+	        ResultSet rs = selectGioco.executeQuery();
+
+	        if (!rs.next()) {
+	            System.out.println("Il gioco non è stato trovato dopo l'aggiornamento.");
+	            return null; 
+	        }
+
+	        
+	        Gioco giocoAggiornato = new Gioco();
+	        giocoAggiornato.setId(id);
+	        giocoAggiornato.setNome(rs.getString("nome"));
+	        giocoAggiornato.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	        giocoAggiornato.setDescrzione(rs.getString("descrizione"));
+	        giocoAggiornato.setImmagine(rs.getString("immagine"));
+	        giocoAggiornato.setEliminato(rs.getBoolean("eliminato"));
+	        giocoAggiornato.setPrezzo(rs.getDouble("prezzo"));
+
+	       
+	        List<Genere> generi = new ArrayList<>();
+	        generi.add(genere);
+	        giocoAggiornato.setGeneri(generi);
+
+	        System.out.println("Genere aggiornato per il gioco con ID " + id);
+	        return giocoAggiornato;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return null; 
+	}
+
 
 
 
