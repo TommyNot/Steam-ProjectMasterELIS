@@ -38,7 +38,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, List<Genere> generi, Offerta offerta, long idUtente) {
+    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, double prezzo, List<Genere> generi, Offerta offerta, long idUtente) {
 
         String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo,id_offerta, id_casa_editrice)"
                                  + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -75,16 +75,15 @@ public class GiocoDaoJDBC implements GiocoDao{
             inserimentoGioco.setTimestamp(2, Timestamp.valueOf(dataRilascio));
             inserimentoGioco.setString(3, descrizione);
             inserimentoGioco.setString(4, immagine);
-            inserimentoGioco.setBoolean(5, eliminato);
-            inserimentoGioco.setDouble(6, prezzo);
+            inserimentoGioco.setDouble(5, prezzo);
 
             if (offerta != null) {
-                inserimentoGioco.setLong(7, offerta.getId());
+                inserimentoGioco.setLong(6, offerta.getId());
             } else {
-                inserimentoGioco.setNull(7, Types.BIGINT);
+                inserimentoGioco.setNull(6, Types.BIGINT);
             }
 
-            inserimentoGioco.setLong(8, idUtente);
+            inserimentoGioco.setLong(7, idUtente);
 
             try {
                 int aggiornamento = inserimentoGioco.executeUpdate();
@@ -109,7 +108,6 @@ public class GiocoDaoJDBC implements GiocoDao{
                 nuovoGioco.setData_rilascio(dataRilascio);
                 nuovoGioco.setDescrzione(descrizione);
                 nuovoGioco.setImmagine(immagine);
-                nuovoGioco.setEliminato(eliminato);
                 nuovoGioco.setPrezzo(prezzo);
                 nuovoGioco.setGeneri(generi);
                 nuovoGioco.setOfferta(offerta);
@@ -120,7 +118,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
             } catch (SQLException e) {
                 // Gestione errori di duplicati stackoverflow
-                if (e.getSQLState().equals("23505")) { // Stato SQL per mysql stackoverflow
+                if (e.getSQLState().equals("23000")) { // Stato SQL per mysql stackoverflow
                     System.out.println("Errore: il gioco con questo nome esiste già.");
                 } else {
                     System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
@@ -236,15 +234,133 @@ public class GiocoDaoJDBC implements GiocoDao{
 	}
 
 	@Override
-	public Gioco updateGioco(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo,Offerta offerta, Utente utente) {
-		// TODO Auto-generated method stub
+	public Gioco updateGiocoNome(String nome) {
+		
+		String query = "UPDATE gioco SET nome = ? WHERE nome = ?";
+		try(
+				
+			Connection c = JdbcDaoFactory.getConnection();
+			PreparedStatement ps = c.prepareStatement(query);
+			
+				
+		){
+			
+			//imposto parametri
+			ps.setString(1,nome);
+			
+	     
+	        int aggiornamento = ps.executeUpdate();
+	        
+	        if(aggiornamento > 0) {
+	        	
+	        	System.out.println("Gioco Aggiornato");
+	        	
+	        	Gioco giocoAggiornato = new Gioco();
+	
+	            giocoAggiornato.setNome(nome);
+	            
+	            return giocoAggiornato;
+	        	
+	        }else {
+	        	
+	        	System.out.println("Errore nell'aggiornamento");
+	        }
+			
+			
+			
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
 		return null;
+		
 	}
 
 	@Override
-	public Gioco deleteGioco(long id) {
-		// TODO Auto-generated method stub
+	public Gioco deleteGioco(String nome) {
+	    String query = "DELETE FROM gioco WHERE nome = ?";
+	    
+	    try (
+	        Connection c = JdbcDaoFactory.getConnection();
+	        PreparedStatement ps = c.prepareStatement(query);
+	    ) {
+	        ps.setString(1, nome);
+	        
+	        int aggiornamento = ps.executeUpdate();
+	        
+	        if (aggiornamento == 0) {
+	            System.out.println("Nessun gioco eliminato, ID non trovato");
+	            
+	        } else {
+	            System.out.println("Successo: gioco eliminato");
+	            
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        
+	    }catch(Exception e) {
+	    	
+	    	e.printStackTrace();
+	    }
 		return null;
 	}
+
+
+	@Override
+	public Gioco findGiocoById(long id) {
+	    
+	    String query = "SELECT * FROM gioco WHERE id = ?";
+	    
+	    try (
+	        Connection c = JdbcDaoFactory.getConnection();
+	        PreparedStatement ps = c.prepareStatement(query);
+	    ) {
+	        
+	        ps.setLong(1, id);
+	        
+	        
+	        ResultSet rs = ps.executeQuery();
+	        
+	        
+	        if (rs.next()) {
+	            
+	            Gioco gioco = new Gioco();
+	            gioco.setId(rs.getLong("id"));
+	            gioco.setNome(rs.getString("nome"));
+	            gioco.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	            gioco.setDescrzione(rs.getString("descrizione"));
+	            gioco.setImmagine(rs.getString("immagine"));
+	            gioco.setEliminato(rs.getBoolean("eliminato"));
+	            gioco.setPrezzo(rs.getDouble("prezzo"));
+	            
+	            
+	            long idOfferta = rs.getLong("id_offerta");
+	            if (!rs.wasNull()) {
+	                
+	                Offerta offerta = findOffertaById(idOfferta); 
+	                gioco.setOfferta(offerta);
+	            }
+	            
+	            System.out.println("Gioco trovato: " + gioco.getNome());
+	            return gioco;
+	        } else {
+	            System.out.println("Nessun gioco trovato con l'ID: " + id);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return null;
+	}
+
+
 
 }

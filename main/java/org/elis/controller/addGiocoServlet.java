@@ -45,7 +45,7 @@ public class addGiocoServlet extends HttpServlet {
 		String dataRilascio = request.getParameter("dataRilascio");//da convertire in LocalDateTime
 		String descrizione = request.getParameter("descrizione");
 		String immagine = request.getParameter("immagine");
-		String eliminato = request.getParameter("eliminato");// da convertire in booelan
+		
 		String prezzo = request.getParameter("prezzo");
 		String[] offerta = request.getParameterValues("offerta");//frontend checkbox da fare
 		String[] generi = request.getParameterValues("generi");
@@ -75,14 +75,12 @@ public class addGiocoServlet extends HttpServlet {
         
 
 
-        boolean eliminatoBoolean = Boolean.parseBoolean(eliminato);
-
         // Gestione dell'offerta
         Offerta offertaObj = null; //
         if (offerta != null && offerta.length > 0) {
             try {
                 long idOfferta = Long.parseLong(offerta[0]); // supponendo che sia un singolo ID
-                offertaObj = BusinessLogic.getOffertaById(idOfferta); // metodo che recupera l'offerta da fare dic
+                offertaObj = BusinessLogic.findOffertaById(idOfferta); // metodo che recupera l'offerta da fare dic
             } catch (NumberFormatException e) {
                 System.out.println("Errore nel formato dell'ID dell'offerta: " + e.getMessage());
                 return;
@@ -123,7 +121,7 @@ public class addGiocoServlet extends HttpServlet {
 		
 		if(isPublisher) {
 			
-			BusinessLogic.GiocoAdd(nome,localDateTime, descrizione,immagine, eliminatoBoolean, prezzoDouble, generiList, offertaObj, idUtente);
+			BusinessLogic.GiocoAdd(nome,localDateTime, descrizione,immagine, prezzoDouble, generiList, offertaObj, idUtente);
 		}
 		
 		

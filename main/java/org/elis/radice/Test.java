@@ -32,7 +32,7 @@ public class Test {
 		try {
 			
 
-			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", false, 49.99, null,null,4);
+			BusinessLogic.GiocoAdd("Mario-kart", LocalDateTime.now(), "A fun racing game" , "mario_kart.png", 49.99, null,null,4);
 			
 		}catch(Exception e) {
 			

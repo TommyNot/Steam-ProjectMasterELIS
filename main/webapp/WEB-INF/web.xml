@@ -34,4 +34,14 @@
     <servlet-name>addGiocoServlet</servlet-name>
     <url-pattern>/addGiocoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateGiocoServlet</display-name>
+    <servlet-name>UpdateGiocoServlet</servlet-name>
+    <servlet-class>org.elis.controller.UpdateGiocoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateGiocoServlet</servlet-name>
+    <url-pattern>/UpdateGiocoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

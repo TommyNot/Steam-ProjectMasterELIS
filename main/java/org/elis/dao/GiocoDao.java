@@ -10,10 +10,11 @@ import org.elis.model.Utente;
 
 public interface GiocoDao {
 	
-	Gioco add(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, List<Genere> genere,Offerta offerta,long utente);
+	Gioco add(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, double prezzo, List<Genere> genere,Offerta offerta,long utente);
 	List<Gioco> findAll();
 	Gioco findByName(String nome);
-	Gioco updateGioco(String nome,LocalDateTime dataRilascio, String descrizione, String immagine, boolean eliminato, double prezzo, Offerta offerta, Utente utente);
-	Gioco deleteGioco(long id);
+	Gioco findGiocoById(long id);
+	Gioco updateGiocoNome(String nome);
+	Gioco deleteGioco(String id);
 
 }
