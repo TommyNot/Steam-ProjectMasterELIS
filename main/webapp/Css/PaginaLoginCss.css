@@ -1,20 +1,22 @@
-
 body {
     font-family: Arial, sans-serif;
     background-color: #171D25;
     background-image: url("risorse-media/img_homepage/Steam-2.jpeg");
     background-size: cover; 
     background-position: center; 
-    
-    align-items: center;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
     height: 100vh;
+    margin: 0; 
 }
 
-.container{
-	
-	align-content:center;
-	justify-content: center;
-    align-items: center;
+.container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    width: 100%; 
 }
 
 #logo {
@@ -23,17 +25,11 @@ body {
     left: 20px; 
 }
 
-
-h2{
-	text-align: center;
-	position: absolute;
+h2 {
+    text-align: center;
     color: #C5C3C0;
     margin-bottom: 20px;
-    position: absolute;
-    top:0px; 
-    left: 80px; 
-    
-	
+    position: relative; 
 }
 
 h1 {
@@ -42,26 +38,22 @@ h1 {
     margin-bottom: 20px;
 }
 
-
 .form {
-	
     background-color: #181A21;
-    justify-content:center;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
     padding: 20px;
-    margin: 0 auto; 
+    margin: 20px auto; 
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
-    
 }
 
-
 .cont {
-	
     margin-bottom: 15px;
     text-align: center;
 }
-
 
 label {
     font-weight: bold; 
@@ -69,7 +61,6 @@ label {
     margin-bottom: 5px;
     color: #1899FF;
 }
-
 
 input[type="email"],
 input[type="password"] {
@@ -87,21 +78,21 @@ input[type="password"]:focus {
     outline: none;
 }
 
-
 .cont-2 {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    
 }
 
 .cont-2 input {
     margin-right: 5px;
 }
 
-
 input[type="submit"] {
     background-color: #007bff;
     color: white;
+    font-weight: bold;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -113,7 +104,6 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
-
 
 #link-registrazione {
     text-align: center;
@@ -129,10 +119,8 @@ input[type="submit"]:hover {
     text-decoration: underline;
 }
 
-
-
-
 #crea_account {
+	
     margin-top: 20px; 
     display: flex;
     justify-content: center;
@@ -141,15 +129,16 @@ input[type="submit"]:hover {
     background-color: #181A21; 
     border-radius: 8px; 
     text-align: center; 
-    color: #495057; 
-    font-size: 16px; 
+    color: #495057;
+    list-style-type: none;
+    font-size: 16px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 #crea_account p {
     margin: 0;
     color: white;
-    font-weight: bold;
+    
 }
 
 #crea_account button {
@@ -172,23 +161,14 @@ input[type="submit"]:hover {
 }
 
 #crea_account footer {
-	width:100%;
-	height:100%;
+    width: 100%;
+    height: 100%;
     margin-top: 15px; 
     color: white; 
     font-size: 14px; 
 }
 
 
-#crea_account button:focus {
-    outline: 2px solid #0056b3; 
-}
-
-#crea_account footer {
-    margin-top: 15px; /* Spazio sopra il footer */
-    color: white; /* Colore del testo del footer */
-    font-size: 14px; /* Dimensione del font del footer */
-}
 
 #crea_account footer a {
     color: #007bff; /* Colore dei link */
@@ -198,16 +178,6 @@ input[type="submit"]:hover {
 #crea_account footer a:hover {
     text-decoration: underline; /* Sottolineatura al passaggio del mouse */
 }
-
-.social-icons {
-    margin-top: 10px; /* Spazio sopra le icone social */
-}
-
-.social-icons a {
-    margin: 0 5px; /* Spaziatura tra le icone */
-    font-size: 20px; /* Dimensione delle icone */
-}
-
 
 
 

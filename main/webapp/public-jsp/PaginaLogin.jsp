@@ -53,27 +53,23 @@
         <h1>Accedi</h1>
         <div class="cont">
             <label for="emailAccesso">Accedi con Email</label>
-            <input type="email" id="emailAccesso" placeholder="mario.rossi@gmail.com" name="emailLogin" required>
+            <input type="email" id="emailAccesso" name="emailLogin" required>
         </div>
         <div class="cont">
             <label for="passwordAccesso">Password</label>
             <input type="password" id="passwordAccesso" name="passwordLogin" required>
-        </div>        <div class="cont-2">
+        </div>        
+        <div class="cont-2">
             <label for="RestaCollegato">Ricordami</label>
             <input type="checkbox" id="RestaCollegato" name="checkboxFormInput">
         </div>
         <input type="submit" value="Login">
-        <div id="link-registrazione">
-            <a href="PaginaRegistrazione.jsp" id="ancora-registrazione">Non sei ancora registrato? Crea un account!</a>
-        </div>
+   
     </form>
     
-   <div id="crea_account">
-    	<p>Sei un nuovo utente? <button type="button" >Crea un account!</button></p>
-    	<footer>
-        <p>Tutti i diritti riservati © 2024</p>
-        <p>Contattaci: <a href="mailto:support@example.com" style="color: #007bff;">support@example.com</a></p>
-        <p><a href="#terms" style="color: #007bff;">Termini di servizio</a> | <a href="#privacy" style="color: #007bff;">Privacy Policy</a></p>
+<div class="col-12" id="crea_account">
+    <p>Sei un nuovo utente? <button type="button">Crea un account!</button></p>
+    <footer>
         <p>Seguici sui social media!</p>
         <div class="social-icons">
             <a href="https://facebook.com" target="_blank">
@@ -87,7 +83,28 @@
             </a>
         </div>
     </footer>
-	</div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>Chi Siamo</h3>
+                <p>La nostra missione è fornire il miglior servizio ai nostri clienti.</p>
+            </div>
+            <div>
+                <h3>Link Utili</h3>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Termini di Servizio</a>
+                <a href="#">Contattaci</a>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contatti</h3>
+                <p>Email: info@tuosito.com</p>
+                <p>Telefono: +39 123 456 7890</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
 
 
 
