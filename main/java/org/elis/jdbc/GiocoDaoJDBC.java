@@ -237,51 +237,39 @@ public class GiocoDaoJDBC implements GiocoDao{
 	}
 
 	@Override
-	public Gioco updateGiocoNome(String nome) {
-		
-		String query = "UPDATE gioco SET nome = ? WHERE nome = ?";
-		try(
-				
-			Connection c = JdbcDaoFactory.getConnection();
-			PreparedStatement ps = c.prepareStatement(query);
-			
-				
-		){
-			
-			//imposto parametri
-			ps.setString(1,nome);
-			
-	     
+	public Gioco updateGiocoNome(long id, String nome) {
+	    String query = "UPDATE gioco SET nome = ? WHERE id = ?";
+	    
+	    try (
+	        Connection c = JdbcDaoFactory.getConnection();
+	        PreparedStatement ps = c.prepareStatement(query);
+	    ) {
+	        // Imposto i parametri
+	        ps.setString(1, nome);
+	        ps.setLong(2, id); 
+
 	        int aggiornamento = ps.executeUpdate();
 	        
-	        if(aggiornamento > 0) {
-	        	
-	        	System.out.println("Gioco Aggiornato");
-	        	
-	        	Gioco giocoAggiornato = new Gioco();
-	
-	            giocoAggiornato.setNome(nome);
-	            
-	            return giocoAggiornato;
-	        	
-	        }else {
-	        	
-	        	System.out.println("Errore nell'aggiornamento");
+	        if (aggiornamento > 0) {
+	            System.out.println("Gioco aggiornato con successo");
+
+	            Gioco giocoAggiornato = new Gioco();
+	            giocoAggiornato.setId(id);
+	            giocoAggiornato.setNome(nome); 
+
+	            return giocoAggiornato; 
+	        } else {
+	            System.out.println("Errore nell'aggiornamento: nessun gioco trovato con l'ID specificato");
 	        }
-			
-			
-			
-			
-		}catch(SQLException e) {
-			
-			e.printStackTrace();
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-		}
-		return null;
-		
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return null; 
 	}
+
 
 	@Override
 	public Gioco deleteGioco(String nome) {
@@ -699,6 +687,41 @@ public class GiocoDaoJDBC implements GiocoDao{
 	    
 	    return giochi;
 	}
+
+
+	@Override
+	public Gioco updateGiocoDataRilascio(long id, LocalDateTime data) {
+	    
+	    String query = "UPDATE gioco SET data_rilascio = ? WHERE id = ?";
+
+	    
+	    try (Connection c = JdbcDaoFactory.getConnection();
+	         PreparedStatement ps = c.prepareStatement(query)) {
+	        
+	        // Imposto i parametri per la query
+	        ps.setTimestamp(1, java.sql.Timestamp.valueOf(data));
+	        ps.setLong(2, id);
+	        
+	        // Eseguo l'aggiornamento
+	        int aggiornamento = ps.executeUpdate();
+	        
+	        if (aggiornamento > 0) {
+	            System.out.println("Data di rilascio aggiornata con successo per il gioco ID: " + id);
+	            
+	            Gioco giocoAggiornato = findGiocoById(id);
+	            return giocoAggiornato;
+	        } else {
+	            System.out.println("Errore nell'aggiornamento della data di rilascio");
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
 
 
 

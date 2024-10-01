@@ -82,7 +82,6 @@ input[type="password"]:focus {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    
 }
 
 .cont-2 input {
@@ -92,6 +91,7 @@ input[type="password"]:focus {
 input[type="submit"] {
     background-color: #007bff;
     color: white;
+    font-size: 18px;
     font-weight: bold;
     padding: 10px;
     border: none;
@@ -167,6 +167,7 @@ input[type="submit"]:hover {
     color: white; 
     font-size: 14px; 
 }
+
 
 
 

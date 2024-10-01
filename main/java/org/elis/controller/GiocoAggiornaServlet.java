@@ -38,8 +38,21 @@ public class GiocoAggiornaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         HttpSession sessione = request.getSession(false);
-        boolean isPublisher = false;
+        if (sessione == null) {
+            response.sendRedirect("public-jsp/LoginPage.jsp");
+            return;
+        }
+        
 
+
+        Utente utente = (Utente) sessione.getAttribute("utente");
+        if (utente == null || utente.getRuolo() != Ruolo.PUBLISHER) {
+            response.sendRedirect("public-jsp/AccessoNegato.jsp");
+            return;
+        }
+        boolean isPublisher = false;
+        
+        long idGioco = Long.parseLong(request.getParameter("giocoId"));
         String nomeGioco = request.getParameter("nome");
         String dataRilascio = request.getParameter("dataRilascio");
         String descrzioneGioco = request.getParameter("descrzione");
@@ -48,28 +61,58 @@ public class GiocoAggiornaServlet extends HttpServlet {
         String[] offerta = request.getParameterValues("offerta");
         String[] generi = request.getParameterValues("generi");
         
-        LocalDateTime localDateTime = null;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-            localDateTime = LocalDateTime.parse(dataRilascio, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Errore nella formattazione della data: " + e.getMessage());
-            return;
+
+   
+        boolean aggiornato = false;
+
+        if (nomeGioco != null && !nomeGioco.isEmpty()) {
+            
+            BusinessLogic.updateGiocoNome(idGioco,nomeGioco);
+            aggiornato = true;
         }
-        
-        double prezzoGioco = 0;
-        try {
-            prezzoGioco = Double.parseDouble(prezzo);
-        } catch(NumberFormatException e) {
-            System.out.println("Errore nel formato del prezzo: " + e.getMessage());
-            return;
+
+        if (dataRilascio != null && !dataRilascio.isEmpty()) {
+            LocalDateTime localDateTime;
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                localDateTime = LocalDateTime.parse(dataRilascio, formatter);
+                BusinessLogic.updateGiocoDataRilascio(idGioco,localDateTime);
+                aggiornato = true;
+            } catch (DateTimeParseException e) {
+                request.setAttribute("errorMessage", "Formato di data non valido.");
+                request.getRequestDispatcher("WEB-INF/public-jsp/error.jsp").forward(request, response);
+                return;
+            }
+        }
+
+        if (descrzioneGioco != null && !descrzioneGioco.isEmpty()) {
+            BusinessLogic.updateGiocoDescrzione(idGioco, descrzioneGioco);
+            aggiornato = true;
+        }
+
+        if (immagineGioco != null && !immagineGioco.isEmpty()) {
+            BusinessLogic.updateGiocoImmagine(idGioco, immagineGioco);
+            aggiornato = true;
+        }
+
+        if (prezzo != null && !prezzo.isEmpty()) {
+            double prezzoGioco;
+            try {
+                prezzoGioco = Double.parseDouble(prezzo);
+                BusinessLogic.updateGiocoPrezzo(idGioco,prezzoGioco);
+                aggiornato = true;
+            } catch (NumberFormatException e) {
+                request.setAttribute("errorMessage", "Formato del prezzo non valido.");
+                request.getRequestDispatcher("WEB-INF/public-jsp/error.jsp").forward(request, response);
+                return;
+            }
         }
         
         // Gestione dell'offerta
         Offerta offertaObj = null;
         if (offerta != null && offerta.length > 0) {
             try {
-                long idOfferta = Long.parseLong(offerta[0]); // supponendo che sia un singolo ID
+                long idOfferta = Long.parseLong(offerta[0]); 
                 offertaObj = BusinessLogic.findOffertaById(idOfferta);
             } catch (NumberFormatException e) {
                 System.out.println("Errore nel formato dell'ID dell'offerta: " + e.getMessage());
@@ -94,49 +137,9 @@ public class GiocoAggiornaServlet extends HttpServlet {
             }
         }
 
-        if (sessione == null) {
-            response.sendRedirect("public-jsp/LoginPage.jsp");
-            return;
-        }
-
-        Object obj = sessione.getAttribute("utente");
-        
-        if (obj instanceof Utente) {
-            Utente utente = (Utente)obj;
-            isPublisher = utente.getRuolo() == Ruolo.PUBLISHER;
-        }
+     
 		
-		if(isPublisher) {
-			
-			if(nomeGioco != null) {
-				
-			
-			}
-			
-			if(descrzioneGioco != null) {
-				
-				
-			}
-			
-			if(immagineGioco != null) {
-				
-				
-			}
-			
-			if(prezzo != null) {
-				
-				
-			}
-			
-			if(offerta != null) {
-				
-				
-			}
-			
-			if(generi != null) {
-				
-				
-			}
+		
 			
 			
 		}
@@ -144,4 +147,4 @@ public class GiocoAggiornaServlet extends HttpServlet {
 		
 	}
 
-}
+

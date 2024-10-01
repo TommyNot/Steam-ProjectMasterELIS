@@ -58,8 +58,7 @@
         <div class="cont">
             <label for="passwordAccesso">Password</label>
             <input type="password" id="passwordAccesso" name="passwordLogin" required>
-        </div>        
-        <div class="cont-2">
+        </div>        <div class="cont-2">
             <label for="RestaCollegato">Ricordami</label>
             <input type="checkbox" id="RestaCollegato" name="checkboxFormInput">
         </div>

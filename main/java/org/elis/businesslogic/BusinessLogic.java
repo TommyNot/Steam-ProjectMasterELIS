@@ -145,4 +145,31 @@ public static List<Gioco> GiocoOfferta(Offerta offerta){
 	return DaoFactory.getDaoFactory().getGiocoDao().findGiocoOffertaByOfferta(offerta);
 			
 }
+
+public static Gioco updateGiocoNome(long id,String nome){
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().updateGiocoNome(id,nome);
+			
+}
+
+
+public static Gioco updateGiocoDescrzione(long id,String descrzione) {
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().updateGiocoDescrzione(id,descrzione);
+}
+
+public static Gioco updateGiocoImmagine(long id,String immagine) {
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().updateGiocoImmagine(id,immagine);
+}
+
+public static Gioco updateGiocoPrezzo(long id,double prezzo) {
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().updateGiocoPrezzo(id,prezzo);
+}
+
+public static Gioco updateGiocoDataRilascio(long id,LocalDateTime data) {
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().updateGiocoDataRilascio(id, data);
+			}
 }
