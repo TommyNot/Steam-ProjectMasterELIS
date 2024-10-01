@@ -43,7 +43,8 @@ private static GenereDaoJDBC instance;
             int aggio = ps.executeUpdate();
             
             if (aggio == 0) {
-                throw new SQLException("inserimento fallito");
+                System.out.println("errore");
+                return null;
             }
             
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
@@ -53,7 +54,8 @@ private static GenereDaoJDBC instance;
                     genere.setNome(nome);
                     return genere;
                 } else {
-                    throw new SQLException("inserimento fallito,nessun id trovato");
+                    System.out.println("errore di compilazione");
+                    return null;
                 }
             }
         } catch (SQLException e) {

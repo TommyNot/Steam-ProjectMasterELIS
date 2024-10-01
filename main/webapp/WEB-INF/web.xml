@@ -74,4 +74,14 @@
     <servlet-name>LogicaLoginServlet</servlet-name>
     <url-pattern>/LogicaLoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtenteAggiungServlet</display-name>
+    <servlet-name>UtenteAggiungServlet</servlet-name>
+    <servlet-class>org.elis.controller.UtenteAggiungServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtenteAggiungServlet</servlet-name>
+    <url-pattern>/UtenteAggiungServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
