@@ -43,7 +43,7 @@ public class UtenteAggiungServlet extends HttpServlet {
 
 	    if (username == null || email == null || password == null || 
 	            username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-	        response.getWriter().write("Errore: tutti i campi sono obbligatori!");
+	        request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -52,11 +52,11 @@ public class UtenteAggiungServlet extends HttpServlet {
 
 	    if (nuovoUtente != null) {
 	        response.getWriter().write("Utente aggiunto con successo! ID: " + nuovoUtente.getId());
-	    } else {
-	        response.getWriter().write("Errore nell'aggiunta dell'utente.");
+	        request.getRequestDispatcher("private-jsp/DashboardUtente.jsp").forward(request, response);
+	        
 	    }
 
-	    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
+	    request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 	}
 
 }
