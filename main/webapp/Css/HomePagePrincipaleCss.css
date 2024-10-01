@@ -225,6 +225,7 @@ body{
 .testo-aside-section-2{
 	color: rgb(112, 121, 134);
 	margin: 0;
+	margin-bottom: 5%;
 }
 
 #evidenza-consigliati{
@@ -233,14 +234,15 @@ body{
 	right: 27%;
 	color: rgb(112, 121, 134);
 	font-size: 13pt;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 #immagine{
 	position: absolute;
 	top: 70%;
 	right: 28%;
-	width: 13%;
+	width: 200px;
+	height: 350px;
 	padding: 20px;
 }
 
