@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import org.elis.businesslogic.BusinessLogic;
@@ -36,28 +38,31 @@ public class UtenteAggiornaUsernameServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idParam = request.getParameter("id");
-		String nuovoUsername = request.getParameter("nuovoUsername");
-		
-		if (idParam == null || nuovoUsername == null || idParam.isEmpty() || nuovoUsername.isEmpty()) {
-			response.getWriter().write("Errore: ID e nuovo nome utente sono obbligatori!");
-			return;
-		}
-		long idUtente;
-		try {
-			idUtente = Long.parseLong(idParam);
-		} catch (NumberFormatException e) {
-			response.getWriter().write("Errore: ID utente non valido.");
-			return;
-		}
-		Utente utenteAggiornato = BusinessLogic.UpdateUsername(idUtente, nuovoUsername);
-		
-		if (utenteAggiornato != null) {
-			response.getWriter().write("Nome utente aggiornato con successo! Nuovo username: " + utenteAggiornato.getUsername());
-		} else {
-			response.getWriter().write("Errore nell'aggiornamento del nome utente.");
-		}
-		 request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
+	    HttpSession session = request.getSession(false);
+	    if (session == null || session.getAttribute("utenteId") == null) {
+	        response.getWriter().write("Errore: Utente non autenticato.");
+	        return;
+	    }
+	    
+	    long idUtente = (long) session.getAttribute("utenteId");
+	    
+	    String nuovoUsername = request.getParameter("nuovoUsername");
+
+	    if (nuovoUsername == null || nuovoUsername.isEmpty()) {
+	        response.getWriter().write("Errore: Il nuovo nome utente è obbligatorio!");
+	        return;
+	    }
+
+	    Utente utenteAggiornato = BusinessLogic.UpdateUsername(idUtente, nuovoUsername);
+
+	    if (utenteAggiornato != null) {
+	        response.getWriter().write("Nome utente aggiornato con successo! Nuovo username: " + utenteAggiornato.getUsername());
+	    } else {
+	        response.getWriter().write("Errore nell'aggiornamento del nome utente.");
+	    }
+
+	    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	}
+
 
 }
