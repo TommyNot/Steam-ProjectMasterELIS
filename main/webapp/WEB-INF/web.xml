@@ -76,12 +76,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>UtenteAggiungServlet</display-name>
-    <servlet-name>UtenteAggiungServlet</servlet-name>
-    <servlet-class>org.elis.controller.UtenteAggiungServlet</servlet-class>
+    <display-name>GiocoCercaServlet</display-name>
+    <servlet-name>GiocoCercaServlet</servlet-name>
+    <servlet-class>org.elis.controller.GiocoCercaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UtenteAggiungServlet</servlet-name>
-    <url-pattern>/UtenteAggiungServlet</url-pattern>
+    <servlet-name>GiocoCercaServlet</servlet-name>
+    <url-pattern>/GiocoCercaServlet</url-pattern>
   </servlet-mapping>
 </web-app>

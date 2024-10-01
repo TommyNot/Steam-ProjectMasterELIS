@@ -36,6 +36,8 @@ public class GiocoDaoJDBC implements GiocoDao{
         }
         return instance;
     }
+    
+    
 
 
     @Override
@@ -118,7 +120,7 @@ public class GiocoDaoJDBC implements GiocoDao{
                 return nuovoGioco;
 
             } catch (SQLException e) {
-                // Gestione errori di duplicati stackoverflow
+                
                 if (e.getSQLState().equals("23000")) { // Stato SQL per mysql stackoverflow
                     System.out.println("Errore: il gioco con questo nome esiste già.");
                 } else {
@@ -596,6 +598,68 @@ public class GiocoDaoJDBC implements GiocoDao{
 	    }
 
 	    return null; 
+	}
+
+
+	@Override
+	public List<Gioco> findGiocoGenereByGenere(Genere genere) {
+		
+	    String query = "SELECT g.*, o.* FROM gioco g " +
+                "JOIN gioco_genere gg ON g.id = gg.id_gioco " +
+                "JOIN genere ge ON ge.id = gg.id_genere " +
+                "LEFT JOIN offerta o ON g.id_offerta = o.id " +
+                "WHERE ge.nome = ?";
+		
+		List<Gioco> giochi = new ArrayList<>();
+		try(
+				
+				Connection c = JdbcDaoFactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				
+			){
+			
+			ps.setString(1, genere.toString());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+					
+	            Gioco gioco = new Gioco();
+	            gioco.setId(rs.getLong("g.id"));
+	            gioco.setNome(rs.getString("g.nome"));
+	            gioco.setData_rilascio(rs.getTimestamp("g.data_rilascio").toLocalDateTime());
+	            gioco.setDescrzione(rs.getString("g.descrizione"));
+	            gioco.setImmagine(rs.getString("g.immagine"));
+	            gioco.setPrezzo(rs.getDouble("g.prezzo"));
+				
+				long idOfferta = rs.getLong("o.id");
+				if(!rs.wasNull()) {
+					
+					Offerta offerta = new Offerta();
+					offerta.setId(idOfferta);
+					offerta.setNome(rs.getString("o.nome"));
+					offerta.setSconto(rs.getDouble("o.sconto"));
+	                offerta.setData_inizio(rs.getTimestamp("o.data_inizio").toLocalDateTime());
+	                offerta.setData_fine(rs.getTimestamp("o.data_fine").toLocalDateTime());
+					
+				}
+	            
+	            giochi.add(gioco);
+				
+				
+			}
+			
+			
+			
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 
