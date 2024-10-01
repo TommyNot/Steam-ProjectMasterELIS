@@ -127,5 +127,11 @@ public static Gioco eliminaGioco(String nome) {
 	return DaoFactory.getDaoFactory().getGiocoDao().deleteGioco(nome);
 }
 
+public static Utente updateEmail(long id,String email) {
+	return DaoFactory.getDaoFactory().getUtenteDao().updateEmail(id, email);
+}
 
+public static Utente updatePassword(long id,String password) {
+	return DaoFactory.getDaoFactory().getUtenteDao().updatePassword(id, password);
+	}
 }

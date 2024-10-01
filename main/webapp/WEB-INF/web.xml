@@ -84,4 +84,24 @@
     <servlet-name>GiocoCercaServlet</servlet-name>
     <url-pattern>/GiocoCercaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtenteAggiornaUsernameServlet</display-name>
+    <servlet-name>UtenteAggiornaUsernameServlet</servlet-name>
+    <servlet-class>org.elis.controller.UtenteAggiornaUsernameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtenteAggiornaUsernameServlet</servlet-name>
+    <url-pattern>/UtenteAggiornaUsernameServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtenteAggiornaEmailServlet</display-name>
+    <servlet-name>UtenteAggiornaEmailServlet</servlet-name>
+    <servlet-class>org.elis.controller.UtenteAggiornaEmailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtenteAggiornaEmailServlet</servlet-name>
+    <url-pattern>/UtenteAggiornaEmailServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
