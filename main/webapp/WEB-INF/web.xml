@@ -134,4 +134,14 @@
     <servlet-name>LogicaRegistrazioneServlet</servlet-name>
     <url-pattern>/LogicaRegistrazioneServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GiocoListaCompletaServlet</display-name>
+    <servlet-name>GiocoListaCompletaServlet</servlet-name>
+    <servlet-class>org.elis.controller.GiocoListaCompletaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GiocoListaCompletaServlet</servlet-name>
+    <url-pattern>/GiocoListaCompletaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
