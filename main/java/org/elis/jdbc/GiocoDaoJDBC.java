@@ -659,7 +659,8 @@ public class GiocoDaoJDBC implements GiocoDao{
 			
 			e.printStackTrace();
 		}
-		return null;
+		
+		return giochi;
 	}
 
 

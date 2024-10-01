@@ -39,12 +39,13 @@ public class GiocoCercaServlet extends HttpServlet {
 		Gioco search = BusinessLogic.TrovaByName(ricerca);
 		
 		if(search == null) {
-			
+	        String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
+	        request.setAttribute("errorMessage", errorMessage);
 			request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
 			return;
 		}
 		
-		
+		request.setAttribute("gioco", search);
 		request.getRequestDispatcher("public-jsp/PaginaGioco.jsp").forward(request, response);
 		
 		
