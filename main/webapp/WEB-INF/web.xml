@@ -126,22 +126,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>LogicaRegistrazioneServlet</display-name>
-    <servlet-name>LogicaRegistrazioneServlet</servlet-name>
-    <servlet-class>org.elis.controller.LogicaRegistrazioneServlet</servlet-class>
+    <display-name>UtenteEliminaServlet</display-name>
+    <servlet-name>UtenteEliminaServlet</servlet-name>
+    <servlet-class>org.elis.controller.UtenteEliminaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LogicaRegistrazioneServlet</servlet-name>
-    <url-pattern>/LogicaRegistrazioneServlet</url-pattern>
+    <servlet-name>UtenteEliminaServlet</servlet-name>
+    <url-pattern>/UtenteEliminaServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GiocoListaCompletaServlet</display-name>
-    <servlet-name>GiocoListaCompletaServlet</servlet-name>
-    <servlet-class>org.elis.controller.GiocoListaCompletaServlet</servlet-class>
+    <display-name>AdminEliminaServlet</display-name>
+    <servlet-name>AdminEliminaServlet</servlet-name>
+    <servlet-class>org.elis.controller.AdminEliminaServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GiocoListaCompletaServlet</servlet-name>
-    <url-pattern>/GiocoListaCompletaServlet</url-pattern>
+    <servlet-name>AdminEliminaServlet</servlet-name>
+    <url-pattern>/AdminEliminaServlet</url-pattern>
   </servlet-mapping>
 </web-app>
