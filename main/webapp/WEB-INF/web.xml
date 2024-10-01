@@ -124,4 +124,14 @@
     <servlet-name>GiocoOffertaServlet</servlet-name>
     <url-pattern>/GiocoOffertaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogicaRegistrazioneServlet</display-name>
+    <servlet-name>LogicaRegistrazioneServlet</servlet-name>
+    <servlet-class>org.elis.controller.LogicaRegistrazioneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogicaRegistrazioneServlet</servlet-name>
+    <url-pattern>/LogicaRegistrazioneServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
