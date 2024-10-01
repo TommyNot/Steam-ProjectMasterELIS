@@ -99,9 +99,6 @@
 					<strong>LIBRERIA</strong>
 				</div>
 				<div class="testo-scritte-2">
-					<strong>COMUNITA'</strong>
-				</div>
-				<div class="testo-scritte-2">
 					<strong>ACCOUNT</strong>
 				</div>
 			</div>
