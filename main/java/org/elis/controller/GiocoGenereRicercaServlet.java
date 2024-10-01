@@ -27,9 +27,7 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String[] generiSelezionati = request.getParameterValues("genere");
 
@@ -45,7 +43,9 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
             List<Gioco> giochiTrovati = BusinessLogic.GiocoCercaPerGenere((Genere) generi);
             request.setAttribute("giochi", giochiTrovati);
             request.getRequestDispatcher("public-jsp/PaginaGioco.jsp").forward(request, response);
+            
         } else {
+        	
             request.setAttribute("Error", "Seleziona almeno un genere.");
             request.getRequestDispatcher("public-jsp/paginaRicerca.jsp").forward(request, response);
         }

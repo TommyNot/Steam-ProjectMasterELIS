@@ -114,4 +114,14 @@
     <servlet-name>GiocoGenereRicercaServlet</servlet-name>
     <url-pattern>/GiocoGenereRicercaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GiocoOffertaServlet</display-name>
+    <servlet-name>GiocoOffertaServlet</servlet-name>
+    <servlet-class>org.elis.controller.GiocoOffertaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GiocoOffertaServlet</servlet-name>
+    <url-pattern>/GiocoOffertaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

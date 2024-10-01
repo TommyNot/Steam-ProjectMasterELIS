@@ -139,4 +139,10 @@ public static List<Gioco> GiocoCercaPerGenere(Genere genere) {
 	
 	return DaoFactory.getDaoFactory().getGiocoDao().findGiocoGenereByGenere(genere);
 }
+
+public static List<Gioco> GiocoOfferta(Offerta offerta){
+	
+	return DaoFactory.getDaoFactory().getGiocoDao().findGiocoOffertaByOfferta(offerta);
+			
+}
 }
