@@ -49,7 +49,7 @@ public class UtenteAggiornaEmailServlet extends HttpServlet {
 	    String nuovaEmail = request.getParameter("nuovaEmail");
 
 	    if (nuovaEmail == null || nuovaEmail.isEmpty()) {
-	        response.getWriter().write("Errore: La nuova email è obbligatoria!");
+	    	request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -58,7 +58,7 @@ public class UtenteAggiornaEmailServlet extends HttpServlet {
 	    if (utenteAggiornato != null) {
 	        response.getWriter().write("Email aggiornata con successo! Nuova email: " + utenteAggiornato.getEmail());
 	    } else {
-	        response.getWriter().write("Errore nell'aggiornamento dell'email.");
+	    	request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 	    }
 
 	    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);

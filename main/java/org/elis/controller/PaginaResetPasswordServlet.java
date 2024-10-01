@@ -41,7 +41,7 @@ public class PaginaResetPasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("userId") == null) {
-			response.getWriter().write("Errore: utente non autenticato.");
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 			return;
 		}
 
@@ -53,28 +53,28 @@ public class PaginaResetPasswordServlet extends HttpServlet {
 		
 		if (passwordVecchia == null || passwordNuova == null || passwordConferma == null ||
 			passwordVecchia.isEmpty() || passwordNuova.isEmpty() || passwordConferma.isEmpty()) {
-			response.getWriter().write("Errore: tutti i campi sono obbligatori.");
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 			return;
 		}
 		
 		if (passwordVecchia.equals(passwordNuova)) {
-			response.getWriter().write("Errore: la nuova password non può essere uguale alla vecchia.");
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 			return;
 		}
 		
 		if (!passwordNuova.equals(passwordConferma)) {
-			response.getWriter().write("Errore: la nuova password e la conferma non corrispondono.");
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 			return;
 		}
 
 		Utente utente = BusinessLogic.UtenteFindById(idUtente);
 		if (utente == null) {
-			response.getWriter().write("Errore: utente non trovato.");
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 			return;
 		}
 
 		if (!utente.getPassword().equals(passwordVecchia)) {
-			response.getWriter().write("Errore: la vecchia password non è corretta.");
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 			return;
 		}
 
@@ -82,7 +82,7 @@ public class PaginaResetPasswordServlet extends HttpServlet {
 		if (utenteAggiornato != null) {
 			response.getWriter().write("Password aggiornata con successo!");
 		} else {
-			response.getWriter().write("Errore nell'aggiornamento della password.");
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 		}
 		 request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	}
