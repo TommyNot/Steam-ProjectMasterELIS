@@ -78,7 +78,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     }
     
     @Override
-    public Utente add(int ruolo, String username, String email, String password) {
+    public Utente add(String username, String email, String password) {
         
         String checkQuery = "SELECT id FROM utente WHERE username = ? OR email = ?";
         String insertQuery = "INSERT INTO utente (ruolo,username,email,password) VALUES(?,?,?,?)";
@@ -95,18 +95,19 @@ public class UtenteDaoJDBC implements UtenteDao {
             try (ResultSet rs = checkPs.executeQuery()) {
                 if (rs.next()) {
                     System.out.println("Errore: utente con questo username o email esiste già.");
-                    return null;
+                    return null; 
                 }
             }
             
-            insertPs.setInt(1, ruolo);
+            Ruolo[] ruoli = Ruolo.values();
+            Ruolo ruoloPredefinito = ruoli[1];
+            
+            insertPs.setInt(1, ruoloPredefinito.ordinal());
             insertPs.setString(2, username);
             insertPs.setString(3, email);
             insertPs.setString(4, password);
             
-            Ruolo[] ruoli = Ruolo.values();
-            Ruolo rol = ruoli[ruolo];
-            u.setRuolo(rol);
+            u.setRuolo(ruoloPredefinito);
             
             int aggio = insertPs.executeUpdate();
             
@@ -128,7 +129,7 @@ public class UtenteDaoJDBC implements UtenteDao {
                         }
                         
                         System.out.println("Utente aggiunto con successo. ID: " + id);
-                        return u;
+                        return u; 
                     }
                 }
             } else {
@@ -147,6 +148,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 
         return null;
     }
+
 
 
 
