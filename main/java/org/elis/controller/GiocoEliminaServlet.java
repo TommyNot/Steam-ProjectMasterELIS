@@ -5,10 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Gioco;
+import org.elis.model.Ruolo;
+import org.elis.model.Utente;
 
 /**
  * Servlet implementation class EliminaGioco
@@ -28,6 +32,20 @@ public class GiocoEliminaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String eliminaGiocoNome = request.getParameter("nome");
+        
+        HttpSession sessione = request.getSession(false);
+        if (sessione == null) {
+            response.sendRedirect("public-jsp/LoginPage.jsp");
+            return;
+        }
+        
+
+
+        Utente utente = (Utente) sessione.getAttribute("utente");
+        if (utente == null || utente.getRuolo() != Ruolo.PUBLISHER) {
+            response.sendRedirect("public-jsp/AccessoNegato.jsp");
+            return;
+        }
         
         
         if (eliminaGiocoNome == null || eliminaGiocoNome.isBlank()) {
