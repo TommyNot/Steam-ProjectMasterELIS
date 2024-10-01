@@ -23,9 +23,9 @@ public static List<Utente> UtenteFindAll() {
 	}
 
 
-public static Utente UtenteAdd(int ruolo, String username, String email, String password) {
+public static Utente UtenteAdd(String username, String email, String password) {
 	
-	return DaoFactory.getDaoFactory().getUtenteDao().add(ruolo,username,email,password);
+	return DaoFactory.getDaoFactory().getUtenteDao().add(username,email,password);
 }
 	
 public static Utente UtenteFindByName(String username) {
