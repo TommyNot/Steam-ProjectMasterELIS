@@ -56,7 +56,7 @@ public class Test {
 		//test logica aggiunta admin o utente = avvenuta con successo  
 		try {
 			
-			BusinessLogic.UtenteAdd(0,"tumnus", "email@email.com", "tommy1");
+			BusinessLogic.UtenteAdd("tumnus", "email@email.com", "tommy1");
 		
 			
 			
