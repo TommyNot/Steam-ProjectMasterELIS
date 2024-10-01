@@ -84,6 +84,7 @@ public class PaginaResetPasswordServlet extends HttpServlet {
 		} else {
 			response.getWriter().write("Errore nell'aggiornamento della password.");
 		}
+		 request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	}
 	
 }

@@ -57,6 +57,7 @@ public class UtenteAggiornaEmailServlet extends HttpServlet {
 		} else {
 			response.getWriter().write("Errore nell'aggiornamento del nome utente.");
 		}
+		 request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	}
 
 }

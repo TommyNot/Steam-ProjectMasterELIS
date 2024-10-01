@@ -55,6 +55,8 @@ public class UtenteAggiungServlet extends HttpServlet {
 	    } else {
 	        response.getWriter().write("Errore nell'aggiunta dell'utente.");
 	    }
+
+	    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	}
 
 }
