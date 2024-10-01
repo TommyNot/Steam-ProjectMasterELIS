@@ -26,36 +26,43 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
     }
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String email = request.getParameter("emailFromInput") ;
-		String username = request.getParameter("usernameFromInput");
-		String password = request.getParameter("passwordFromInput");
-		
-		
-	 
-		if(email == null || username == null || password == null || !isValidEmail(email) || !isValidPassword(password) ||password.length() < 6) {
-				    request.setAttribute("Error", "Errore nell'inserimento dei dati: controlla email e password.");
-				    request.getRequestDispatcher("public-jsp/RegisterPage.jsp").forward(request, response);
-				    return;
-				}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("emailFromInput");
+        String username = request.getParameter("usernameFromInput");
+        String password = request.getParameter("passwordFromInput");
 
-		
-		Utente u = BusinessLogic.UtenteAdd(email,username,password);
-		
-		 if (u == null) {
-		        request.setAttribute("Registrazione fallita per l'utente: " , username);
-		        request.getRequestDispatcher("WEB-INF/public-jsp/error.jsp").forward(request, response);
-		        return;
-		    }
-		    
-		    request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username);
-		    request.getRequestDispatcher("WEB-INF/private-jsp/Homepage.jsp").forward(request, response);
+        
+        if (email == null || username == null || password == null) {
+            request.setAttribute("Error", "Errore nell'inserimento dei dati: tutti i campi sono obbligatori.");
+            request.getRequestDispatcher("public-jsp/RegisterPage.jsp").forward(request, response);
+            return;
+        }
 
-		
-	}
-	
-	private boolean isValidEmail(String email) {
+        if (!isValidEmail(email)) {
+            request.setAttribute("Error", "Errore nell'inserimento dei dati: email non valida.");
+            request.getRequestDispatcher("public-jsp/RegisterPage.jsp").forward(request, response);
+            return;
+        }
+
+        if (!isValidPassword(password)) {
+            request.setAttribute("Error", "Errore nell'inserimento dei dati: password non valida.");
+            request.getRequestDispatcher("public-jsp/RegisterPage.jsp").forward(request, response);
+            return;
+        }
+
+        // Logica per l'aggiunta dell'utente
+        Utente u = BusinessLogic.UtenteAdd(email, username, password);
+        if (u == null) {
+            request.setAttribute("Error", "Registrazione fallita per l'utente: " + username + ". Potrebbe essere già registrato.");
+            request.getRequestDispatcher("WEB-INF/public-jsp/error.jsp").forward(request, response);
+            return;
+        }
+
+        request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username);
+        request.getRequestDispatcher("WEB-INF/private-jsp/Homepage.jsp").forward(request, response);
+    }
+
+    private boolean isValidEmail(String email) {
 		// Regex prese da 101 per validare un indirizzo email
 		String emailRegex = "^[a-zA-Z0-9._%+-]+" + // Deve iniziare con uno o più caratteri alfanumerici o i seguenti simboli: ., _, %, +, -
 		                       "@" + // Deve contenere il simbolo '@'
@@ -76,7 +83,8 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
 		                       ".{8,}$"; // La lunghezza totale della password deve essere di almeno 8 caratteri
 		
 		return password.matches(passwordRegex);
-	}
+    }
+
 
 
 }
