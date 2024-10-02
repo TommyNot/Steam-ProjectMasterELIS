@@ -61,11 +61,11 @@
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
 			<label for="usernameFromInput" style="font-weight: bold;">Username</label>
-			<input type="text" placeholder="Username" id="usernameFromInput" name="usernameFromInput" required />
+			<input type="text"  id="usernameFromInput" name="usernameFromInput" required />
 			<label for="emailFromInput" style="font-weight: bold;">Email</label>
-			<input type="email" placeholder="Email" id="emailFromInput" name="emailFromInput" required />
+			<input type="email"  id="emailFromInput" name="emailFromInput" required />
 			<label for="passwordFromInput" style="font-weight: bold;">Password</label>
-			<input type="password" placeholder="Password" id="passwordFromInput" name="passwordFromInput" required />
+			<input type="password"  id="passwordFromInput" name="passwordFromInput" required />
 			<button type="submit">Registrati</button>
 		</form>
 	</div>
