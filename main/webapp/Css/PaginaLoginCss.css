@@ -1,185 +1,259 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #171D25;
-    background-image: url("risorse-media/img_homepage/Steam-2.jpeg");
-    background-size: cover; 
-    background-position: center; 
-    display: flex; 
-    justify-content: center;
-    align-items: center; 
-    height: 100vh;
-    margin: 0; 
-}
-
-.container {
+    background: #1B2838; 
     display: flex;
-    flex-direction: column; 
     justify-content: center;
-    align-items: center; 
-    width: 100%; 
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    margin: 0;
+    color: #C7D5E0; 
 }
 
-#logo {
-    position: absolute;
-    top: 20px; 
-    left: 20px; 
+h1 {
+    font-weight: bold;
+    margin: 0;
+    color: #66C0F4; 
 }
 
 h2 {
     text-align: center;
-    color: #C5C3C0;
-    margin-bottom: 20px;
-    position: relative; 
+    color: #66C0F4; 
 }
 
-h1 {
-    text-align: center;
-    color: white;
-    margin-bottom: 20px;
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+    color: #C7D5E0; 
 }
 
-.form {
-    background-color: #181A21;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    padding: 20px;
-    margin: 20px auto; 
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+span {
+    font-size: 12px;
+    color: #66C0F4; 
 }
 
-.cont {
-    margin-bottom: 15px;
-    text-align: center;
+a {
+    color: #66C0F4; 
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
 }
 
-label {
-    font-weight: bold; 
-    display: block;
-    margin-bottom: 5px;
-    color: #1899FF;
+button {
+    border-radius: 20px;
+    border: 1px solid #66C0F4; 
+    background-color: #66C0F4; 
+    cursor:pointer;
+    color: #1B2838; 
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
 }
 
-input[type="email"],
-input[type="password"] {
-    width: 90%; 
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s;
+button:active {
+    transform: scale(0.95);
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
-    font-weight: bold; 
-    border-color: #007bff;
+button:focus {
     outline: none;
 }
 
-.cont-2 {
+button.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF; /* White border */
+    color: #FFFFFF;
+}
+
+form {
+    background-color: #2A475E; 
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
-}
-
-.cont-2 input {
-    margin-right: 5px;
-}
-
-input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%; 
-    transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-#link-registrazione {
-    text-align: center;
-    margin-top: 10px;
-}
-
-#ancora-registrazione {
-    color: #007bff;
-    text-decoration: none;
-}
-
-#ancora-registrazione:hover {
-    text-decoration: underline;
-}
-
-#crea_account {
-	
-    margin-top: 20px; 
-    display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 15px; 
-    background-color: #181A21; 
-    border-radius: 8px; 
-    text-align: center; 
-    color: #495057;
-    list-style-type: none;
-    font-size: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-}
-
-#crea_account p {
-    margin: 0;
-    color: white;
-    
-}
-
-#crea_account button {
-    background-color: #007bff; 
-    color: white;
-    border: none; 
-    border-radius: 5px; 
-    padding: 10px 20px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
-}
-
-#crea_account button:hover {
-    background-color: #0056b3;
-}
-
-#crea_account button:focus {
-    outline: 2px solid #0056b3; 
-}
-
-#crea_account footer {
-    width: 100%;
+    padding: 0 50px;
     height: 100%;
-    margin-top: 15px; 
-    color: white; 
-    font-size: 14px; 
+    text-align: center;
+    color: #C7D5E0; 
 }
 
-
-
-
-#crea_account footer a {
-    color: #007bff; /* Colore dei link */
-    text-decoration: none; /* Nessuna sottolineatura */
+input {
+    background-color: #C7D5E0; 
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
 }
 
-#crea_account footer a:hover {
-    text-decoration: underline; /* Sottolineatura al passaggio del mouse */
+.container {
+    background-color: #2A475E; 
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+                0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
 }
 
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
 
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
 
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+}
 
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    background: #1B2838; 
+    background: -webkit-linear-gradient(to right, #1B2838, #171D25);
+    background: linear-gradient(to right, #1B2838, #171D25);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #66C0F4;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+.social-container {
+    margin: 20px 0;
+}
+
+.social-container a {
+    border: 1px solid #DDDDDD;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+}
+
+footer {
+    background-color: #171D25;
+    color: #66C0F4; /* Footer text in light blue */
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #66C0F4; /* Steam blue links */
+    text-decoration: none;
+}

@@ -1,3 +1,4 @@
+<%@page import="org.apache.tomcat.util.http.fileupload.RequestContext"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -7,12 +8,12 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/Css/PaginaLoginCss.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" type="text/css">
 </head>
-<body class="container">
+<body>
 
     <div id="logo">
         <nav>
            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				 width="200px" height="89px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
+				 width="300px" height="189px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
 				 xml:space="preserve">
 			<g>
 				<path fill="#C5C3C0" d="M44.238,0.601C21,0.601,1.963,18.519,0.154,41.29l23.71,9.803c2.009-1.374,4.436-2.179,7.047-2.179
@@ -49,64 +50,72 @@
         </nav>
     </div>
 
-    <form action="<%= request.getContextPath() %>/LogicaLoginServlet" method="post" class="form">
-        <h1>Accedi</h1>
-        <div class="cont">
-            <label for="emailAccesso">Accedi con Email</label>
-            <input type="email" id="emailAccesso" name="emailLogin" required>
+  
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="<%=request.getContextPath()%>/LogicaRegistrazioneServlet" method="post">
+			<h1>Crea Account</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
+				<a href="#" class="social"><i class="bi bi-google"></i></a>
+				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
+			</div>
+			<label for="usernameFromInput" style="font-weight: bold;">Username</label>
+			<input type="text" placeholder="Username" name="usernameFromInput"/>
+			<label for="emailFromInput" style="font-weight: bold;">Email</label>
+			<input type="email" placeholder="Email" name="emailFromInput" />
+			<label for="passwordFromInput" style="font-weight: bold;">Password</label>
+			<input type="password" placeholder="Password" name="passwordFromInput" />
+			<button type="submit">Registrati</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form  action="<%=request.getContextPath()%>/LogicaLoginServlet" method="post">
+			<h1>Accedi</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
+				<a href="#" class="social"><i class="bi bi-google"></i></a>
+				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
+			</div>
+			
+			<label for="emailLogin" style="font-weight: bold;">Email</label>
+			<input type="email"  name="emailLogin"/>
+			<label for="passwordLogin" style="font-weight: bold;">Password</label>
+			<input type="password" name="passwordLogin" />
+			<div class="checkbox-container">
+            <input type="checkbox" value="ricordami" id="ricordami">
+            <label for="ricordami" id="rcd">ricordami</label>
         </div>
-        <div class="cont">
-            <label for="passwordAccesso">Password</label>
-            <input type="password" id="passwordAccesso" name="passwordLogin" required>
-        </div>        <div class="cont-2">
-            <label for="RestaCollegato">Ricordami</label>
-            <input type="checkbox" id="RestaCollegato" name="checkboxFormInput">
-        </div>
-        <input type="submit" value="Login">
-   
-    </form>
-    
-<div class="col-12" id="crea_account">
-    <p>Sei un nuovo utente? <button type="button">Crea un account!</button></p>
-    <footer>
-        <p>Seguici sui social media!</p>
-        <div class="social-icons">
-            <a href="https://facebook.com" target="_blank">
-                <i class="bi bi-facebook" style="color: #007bff;"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank">
-                <i class="bi bi-twitter" style="color: #007bff;"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank">
-                <i class="bi bi-instagram" style="color: #007bff;"></i>
-            </a>
-        </div>
-    </footer>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <h3>Chi Siamo</h3>
-                <p>La nostra missione è fornire il miglior servizio ai nostri clienti.</p>
-            </div>
-            <div>
-                <h3>Link Utili</h3>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Termini di Servizio</a>
-                <a href="#">Contattaci</a>
-            </div>
-            <div class="footer-section contact">
-                <h3>Contatti</h3>
-                <p>Email: info@tuosito.com</p>
-                <p>Telefono: +39 123 456 7890</p>
-            </div>
-        </div>
-    </footer>
+			<a href="#">Password dimenticata?</a>
+			<button type="submit">Login</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Bentornato</h1>
+				<p>Accedi con i tuoi dati dell'account Steam Pezzotto</p>
+				<button class="ghost" id="signIn">Login!</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Non sei ancora registrato?</h1>
+				<p>Entra a far parte della nostra famiglia , Steam Pezzotto Family</p>
+				<button class="ghost" id="signUp">Registrati!</button>
+			</div>
+		</div>
+	</div>
 </div>
 
+<footer>
+	<p>
+		Created by
+		<a target="_blank" href="#">Tommaso Maglio</a>
+		
+	</p>
+</footer>
 
 
-
-
+			
+		<script src="<%=request.getContextPath()%>/Js/LoginPageScript.js"></script>
 </body>
 </html>

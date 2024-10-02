@@ -27,8 +27,10 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("emailFromInput");
-        String username = request.getParameter("usernameFromInput");
+    	String username = request.getParameter("usernameFromInput");
+    	
+    	String email = request.getParameter("emailFromInput");
+        
         String password = request.getParameter("passwordFromInput");
 
         
@@ -53,13 +55,13 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
         // Logica per l'aggiunta dell'utente
         Utente u = BusinessLogic.UtenteAdd(email, username, password);
         if (u == null) {
-            request.setAttribute("Error", "Registrazione fallita per l'utente: " + username + ". Potrebbe essere già registrato.");
-            request.getRequestDispatcher("WEB-INF/public-jsp/error.jsp").forward(request, response);
+           
+            request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
             return;
         }
 
         request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username);
-        request.getRequestDispatcher("WEB-INF/private-jsp/Homepage.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/private-jsp/HomePagePrincipale.jsp").forward(request, response);
     }
 
     private boolean isValidEmail(String email) {
