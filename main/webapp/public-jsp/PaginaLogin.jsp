@@ -86,7 +86,7 @@
             <input type="checkbox" value="ricordami" id="ricordami">
             <label for="ricordami" id="rcd">ricordami</label>
         </div>
-			<a href="#">Password dimenticata?</a>
+			<a href="PaginaResetPassword">Password dimenticata?</a>
 			<button type="submit">Login</button>
 		</form>
 	</div>
