@@ -55,6 +55,16 @@
     <url-pattern>/GiocoAggiornaServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>LogicaRegistrazioneServlet</servlet-name>
+    <servlet-class>org.elis.controller.LogicaRegistrazioneServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LogicaRegistrazioneServlet</servlet-name>
+    <url-pattern>/LogicaRegistrazioneServlet</url-pattern>
+</servlet-mapping>
+  
+  <servlet>
     <description></description>
     <display-name>GiocoEliminaServlet</display-name>
     <servlet-name>GiocoEliminaServlet</servlet-name>

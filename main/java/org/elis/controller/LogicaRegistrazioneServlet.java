@@ -53,7 +53,7 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
         }
 
         // Logica per l'aggiunta dell'utente
-        Utente u = BusinessLogic.UtenteAdd(email, username, password);
+        Utente u = BusinessLogic.UtenteAdd( username,email, password);
         if (u == null) {
            
             request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
@@ -61,7 +61,7 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
         }
 
         request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username);
-        request.getRequestDispatcher("WEB-INF/private-jsp/HomePagePrincipale.jsp").forward(request, response);
+        request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
     }
 
     private boolean isValidEmail(String email) {

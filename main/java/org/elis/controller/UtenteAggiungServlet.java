@@ -31,8 +31,7 @@ public class UtenteAggiungServlet extends HttpServlet {
 	    String email = request.getParameter("email");
 	    String password = request.getParameter("password");
 
-	    if (username == null || email == null || password == null || 
-	            username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+	    if (username == null || email == null || password == null || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
 	        request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 	        return;
 	    }

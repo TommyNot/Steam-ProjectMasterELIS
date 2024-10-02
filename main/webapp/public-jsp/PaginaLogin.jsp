@@ -61,35 +61,36 @@
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
 			<label for="usernameFromInput" style="font-weight: bold;">Username</label>
-			<input type="text" placeholder="Username" name="usernameFromInput"/>
+			<input type="text" placeholder="Username" id="usernameFromInput" name="usernameFromInput" required />
 			<label for="emailFromInput" style="font-weight: bold;">Email</label>
-			<input type="email" placeholder="Email" name="emailFromInput" />
+			<input type="email" placeholder="Email" id="emailFromInput" name="emailFromInput" required />
 			<label for="passwordFromInput" style="font-weight: bold;">Password</label>
-			<input type="password" placeholder="Password" name="passwordFromInput" />
+			<input type="password" placeholder="Password" id="passwordFromInput" name="passwordFromInput" required />
 			<button type="submit">Registrati</button>
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form  action="<%=request.getContextPath()%>/LogicaLoginServlet" method="post">
+		<form action="<%=request.getContextPath()%>/LogicaLoginServlet" method="post">
 			<h1>Accedi</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
 				<a href="#" class="social"><i class="bi bi-google"></i></a>
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
-			
 			<label for="emailLogin" style="font-weight: bold;">Email</label>
-			<input type="email"  name="emailLogin"/>
+			<input type="email" id="emailLogin" name="emailLogin" required />
 			<label for="passwordLogin" style="font-weight: bold;">Password</label>
-			<input type="password" name="passwordLogin" />
+			<input type="password" id="passwordLogin" name="passwordLogin" required />
 			<div class="checkbox-container">
-            <input type="checkbox" value="ricordami" id="ricordami">
-            <label for="ricordami" id="rcd">ricordami</label>
-        </div>
+				<input type="checkbox" value="ricordami" id="ricordami" name="ricordami">
+				<label for="ricordami" id="rcd">Ricordami</label>
+			</div>
 			<a href="PaginaResetPassword">Password dimenticata?</a>
 			<button type="submit">Login</button>
 		</form>
 	</div>
+
+
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
