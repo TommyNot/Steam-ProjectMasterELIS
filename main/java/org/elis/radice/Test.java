@@ -85,16 +85,7 @@ public class Test {
 			e.printStackTrace();
 		}*/
 		
-		//test eliminazione utente = savvenuto con successo
-		try {
-			
-			BusinessLogic.UtenteDeletByEmail(5,"email@email.com");
-			
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-		}
-		
+
 		//Stampa tutti utenti nel database
 		
 		u = BusinessLogic.UtenteFindAll();
