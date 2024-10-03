@@ -38,14 +38,15 @@
         </ul>
         
    <div class="user-info">
-    <img src="path/to/profile/picture.jpg" alt="User Profile Picture"> 
+    <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture"> 
     <%
        
         Utente utente = (Utente) session.getAttribute("utenteLoggato");
         if (utente != null) {
     %>
         <div>
-            <p>Benvenuto, <%= utente.getUsername() %></p>
+            <p>Benvenuto 
+             <%= utente.getUsername() %></p>
             
         </div>
     <%
@@ -65,17 +66,6 @@
             <p>Qui puoi vedere una panoramica delle tue attività recenti.</p>
         </section>
 
-        <section id="prodotti">
-            <h1>Prodotti</h1>
-            <p>Elenco dei tuoi prodotti disponibili qui.</p>
-            <!-- Inserisci qui la tabella o i dettagli sui prodotti -->
-        </section>
-
-        <section id="settings">
-            <h1>Settings</h1>
-            <p>Configura le tue impostazioni qui.</p>
-            <!-- Inserisci qui le impostazioni utente -->
-        </section>
     </div>
 </body>
 </html>
