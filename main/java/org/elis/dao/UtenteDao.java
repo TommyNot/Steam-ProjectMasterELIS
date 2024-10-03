@@ -15,7 +15,8 @@ public interface UtenteDao {
 	Utente updateUsername(long id,String username);
 	Utente updateEmail(long id,String email);
 	Utente updatePassword(long id,String passwordVecchia);
-	Utente deleteByName(long id,String email);
+	Utente deleteByPassword(long id,String passowrd);
+	Utente deleteByNome(long id,String username);
 	Utente selectById(long id);
 	
 

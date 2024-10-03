@@ -355,46 +355,6 @@ public class UtenteDaoJDBC implements UtenteDao {
     }
 
 
-    @Override
-    public Utente deleteByName(long id,String email) {	
-
-    	String query = "DELETE FROM utente WHERE email=? AND id=?";
-
-    
-
-    	  	
-       	try(
-    			Connection c = JdbcDaoFactory.getConnection();
-    			PreparedStatement ps = c.prepareStatement(query);			
-    		)
-       	{
-       		
-       		ps.setString(1,email);
-       		ps.setLong(2,id);
-       		
-       		int aggio = ps.executeUpdate();
-       		
-       		if(aggio > 0) {
-       			
-       			System.out.println("Account eliminato con successo");
-       			
-       		}else {
-       			
-       			System.out.println("Errore nell' eliminazione");
-       		}
-	
-       		
-       	} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    
-		return null;
-    }
-
 
     @Override
     public Utente loginUtente(String email, String password) {
@@ -442,6 +402,86 @@ public class UtenteDaoJDBC implements UtenteDao {
         
         System.out.println("Email o password errati.");
         return null;
+    }
+
+
+	@Override
+	public Utente deleteByPassword(long id, String password) {
+		String query = "DELETE FROM utente WHERE password=? AND id=?";
+
+	    
+
+	  	
+       	try(
+    			Connection c = JdbcDaoFactory.getConnection();
+    			PreparedStatement ps = c.prepareStatement(query);			
+    		)
+       	{
+       		
+       		ps.setString(1,password);
+       		ps.setLong(2,id);
+       		
+       		int aggio = ps.executeUpdate();
+       		
+       		if(aggio > 0) {
+       			
+       			System.out.println("Account eliminato con successo");
+       			
+       		}else {
+       			
+       			System.out.println("Errore nell' eliminazione");
+       		}
+	
+       		
+       	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    
+		return null;
+    }
+
+
+	@Override
+	public Utente deleteByNome(long id, String username) {
+		String query = "DELETE FROM utente WHERE username=? AND id=?";
+
+	    
+
+	  	
+       	try(
+    			Connection c = JdbcDaoFactory.getConnection();
+    			PreparedStatement ps = c.prepareStatement(query);			
+    		)
+       	{
+       		
+       		ps.setString(1,username);
+       		ps.setLong(2,id);
+       		
+       		int aggio = ps.executeUpdate();
+       		
+       		if(aggio > 0) {
+       			
+       			System.out.println("Account eliminato con successo");
+       			
+       		}else {
+       			
+       			System.out.println("Errore nell' eliminazione");
+       		}
+	
+       		
+       	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    
+		return null;
     }
     
 }

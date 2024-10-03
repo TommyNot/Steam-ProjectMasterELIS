@@ -39,9 +39,9 @@ public static Utente UpdateUsername(long id,String username) {
 	return DaoFactory.getDaoFactory().getUtenteDao().updateUsername(id,username);
 }
 
-public static Utente UtenteDeletByEmail(long id,String email) {
+public static Utente UtenteDeletByPassword(long id,String password) {
 	
-	return DaoFactory.getDaoFactory().getUtenteDao().deleteByName(id,email);
+	return DaoFactory.getDaoFactory().getUtenteDao().deleteByPassword(id, password);
 }
 
 public static Utente UtenteFindById(long id) {
@@ -172,4 +172,8 @@ public static Gioco updateGiocoDataRilascio(long id,LocalDateTime data) {
 	
 	return DaoFactory.getDaoFactory().getGiocoDao().updateGiocoDataRilascio(id, data);
 			}
+public static Utente UtenteDeletByNome(long id,String usernome) {
+	
+	return DaoFactory.getDaoFactory().getUtenteDao().deleteByNome(id, usernome);
+}
 }
