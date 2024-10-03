@@ -375,6 +375,7 @@ public class UtenteDaoJDBC implements UtenteDao {
             if (rs.next()) {
             	
                 Utente utente = new Utente();
+                utente.setUsername(rs.getString("username"));
                 utente.setEmail(rs.getString("email"));
                 utente.setPassword(rs.getString("password"));
                 int ruoloInt = rs.getInt("ruolo");

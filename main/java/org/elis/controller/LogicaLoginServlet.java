@@ -65,7 +65,8 @@ public class LogicaLoginServlet extends HttpServlet {
                     request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
                     break;
                 case PUBLISHER:
-                    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+                	request.setAttribute("utenteLoggato", u1);
+                    request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
                     break;
                 case UTENTE_BASE:
                     request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
