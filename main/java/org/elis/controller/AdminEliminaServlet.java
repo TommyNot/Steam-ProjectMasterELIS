@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Utente;
+
 /**
  * Servlet implementation class AdminEliminaServlet
  */
@@ -33,8 +36,29 @@ public class AdminEliminaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	    long id = 0;
+	    try {
+	        id = Long.parseLong(request.getParameter("id"));
+	    } catch (NumberFormatException e) {
+	        response.getWriter().write("Errore: ID non valido.");
+	        return;
+	    }
+
+	    String username = request.getParameter("username");
+
+	    if (username == null || username.isEmpty()) {
+	        response.getWriter().write("Errore: Username non valido o mancante.");
+	        return;
+	    }
+
+	    Utente eliminaUtente = BusinessLogic.UtenteDeletByNome(id, username);
+
+	    if (eliminaUtente != null) {
+	        response.getWriter().write("Account eliminato con successo.");
+	    } else {
+	        response.getWriter().write("Errore: Account non trovato o eliminazione fallita.");
+	    }
 	}
+
 
 }
