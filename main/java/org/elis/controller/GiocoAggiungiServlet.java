@@ -54,7 +54,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
         // Validazione dei parametri
         if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || immagine == null || prezzo == null) {
             request.setAttribute("errore", "Tutti i campi sono obbligatori.");
-            request.getRequestDispatcher("WEB-INF/private-jsp/GiocoAdd.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return;
         }
 

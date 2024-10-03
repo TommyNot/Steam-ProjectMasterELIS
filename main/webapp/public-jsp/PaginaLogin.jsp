@@ -107,13 +107,7 @@
 	</div>
 </div>
 
-<footer>
-	<p>
-		Created by
-		<a target="_blank" href="#">Tommaso Maglio</a>
-		
-	</p>
-</footer>
+
 
 
 			

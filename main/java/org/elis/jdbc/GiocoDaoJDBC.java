@@ -121,7 +121,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
             } catch (SQLException e) {
                 
-                if (e.getSQLState().equals("23000")) { // Stato SQL per mysql stackoverflow
+                if (e.getSQLState().equals("23000")) { // Stato SQL per mysql stackoverflow non sicuro
                     System.out.println("Errore: il gioco con questo nome esiste già.");
                 } else {
                     System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
@@ -698,11 +698,11 @@ public class GiocoDaoJDBC implements GiocoDao{
 	    try (Connection c = JdbcDaoFactory.getConnection();
 	         PreparedStatement ps = c.prepareStatement(query)) {
 	        
-	        // Imposto i parametri per la query
+	        
 	        ps.setTimestamp(1, java.sql.Timestamp.valueOf(data));
 	        ps.setLong(2, id);
 	        
-	        // Eseguo l'aggiornamento
+	        
 	        int aggiornamento = ps.executeUpdate();
 	        
 	        if (aggiornamento > 0) {
