@@ -18,6 +18,7 @@ public interface UtenteDao {
 	Utente deleteByPassword(long id,String passowrd);
 	Utente deleteByNome(long id,String username);
 	Utente selectById(long id);
+	Utente ripristinaPassword(String username,String email,String password);
 	
 
 }

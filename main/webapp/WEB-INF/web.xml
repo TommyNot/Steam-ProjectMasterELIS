@@ -162,4 +162,14 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtenteRipristinaPasswordServlet</display-name>
+    <servlet-name>UtenteRipristinaPasswordServlet</servlet-name>
+    <servlet-class>org.elis.controller.UtenteRipristinaPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtenteRipristinaPasswordServlet</servlet-name>
+    <url-pattern>/UtenteRipristinaPasswordServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

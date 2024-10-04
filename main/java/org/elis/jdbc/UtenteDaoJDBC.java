@@ -484,5 +484,41 @@ public class UtenteDaoJDBC implements UtenteDao {
     
 		return null;
     }
+
+
+	@Override
+	public Utente ripristinaPassword(String username, String email, String password) {
+	    String query = "UPDATE utente SET password = ?, data_ultima_modifica = ? WHERE username = ? AND email = ?";
+	    LocalDateTime now = LocalDateTime.now();
+
+	    try (Connection c = JdbcDaoFactory.getConnection();
+	         PreparedStatement ps = c.prepareStatement(query)) {
+
+	        ps.setString(1, password);
+	        ps.setTimestamp(2, java.sql.Timestamp.valueOf(now)); 
+	        ps.setString(3, username);
+	        ps.setString(4, email);
+
+	        int aggiornamenti = ps.executeUpdate();
+
+	        if (aggiornamenti > 0) {
+	            Utente u = new Utente();
+	            u.setPassword(password);
+	            u.setData_modifica(now);
+
+	            System.out.println("Password aggiornata");
+	            return u; 
+	        } else {
+	            System.out.println("Errore: aggiornamento non riuscito");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return null;
+	}
+
     
 }

@@ -176,4 +176,9 @@ public static Utente UtenteDeletByNome(long id,String usernome) {
 	
 	return DaoFactory.getDaoFactory().getUtenteDao().deleteByNome(id, usernome);
 }
+
+public static Utente RipristinaPassword(String username,String email,String password) {
+	return DaoFactory.getDaoFactory().getUtenteDao().ripristinaPassword(username, email, password);
+}
+
 }
