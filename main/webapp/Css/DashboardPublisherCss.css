@@ -1,99 +1,138 @@
-@charset "UTF-8";
-* {
+/* Stile generale */
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    background-color: #1b2838; /* Colore di sfondo simile a Steam */
 }
 
-body {
-
-    display: flex;
-    height: 100vh;
-}
-
-
+/* Barra laterale */
 .barralato {
     width: 250px;
-    background-color: #1B2838;
+    height: 100vh;
+    background-color: #1b2838; /* Colore della barra laterale */
+    color: #fff;
+    position: fixed;
     padding: 20px;
-    color: white;
-    flex-direction: column;
 }
 
 .barralato h2 {
-    text-align: center;
-    margin-bottom: 30px;
-      
+    font-size: 24px;
+    margin: 0 0 20px 0;
+    color: #ffffff; /* Bianco per il titolo */
 }
 
 .barralato ul {
-    list-style-type: none;
-     flex-grow: 1;
+    list-style: none;
+    padding: 0;
 }
 
-.barralato ul li {
+.barralato li {
     margin: 15px 0;
 }
 
-.barralato ul li a {
-    color: white;
+.barralato a {
+    color: #ffffff; /* Colore del testo */
     text-decoration: none;
-    font-size: 17px;
-    display: block;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: background 0.3s;
 }
 
-.barralato ul li a:hover {
-    background-color: #1B2838;
-    padding-left: 15px;
-    transition: 0.3s;
-}
-
-.content {
-	text-align: center;
-    flex: 1;
-    padding: 20px;
-}
-
-section {
-	background-color: #1B2838; 
-    margin-bottom: 40px;
-}
-
-h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-}
-
-p {
-    font-size: 16px;
-    color: #333;
+.barralato a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Effetto hover chiaro */
 }
 
 .user-info {
+    margin-top: 20px;
     text-align: center;
-    border-top: 1px solid #34495e;
-    padding-top: 20px;
+    padding: 20px 0; /* Padding verticale per distanziare meglio */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Bordo leggero sopra */
+    font-family: fantasy;
 }
-
 .user-info img {
-	width: 80px;
     border-radius: 50%;
-    margin-bottom: 10px;
+    width: 60px;
+    height: 60px;
 }
 
-.user-info p {
-	color: white;
-	font-weight: bold;
-    margin-bottom: 10px;
+/* Contenuto principale */
+.content {
+	text-align:center;
+    margin-left: 270px; /* Spazio per la barra laterale */
+    padding: 20px;
+    background-color: #f0f0f0; /* Sfondo del contenuto principale */
+    min-height: 100vh; /* Assicura che il contenuto si estenda per tutta l'altezza */
 }
 
-.user-info a {
-    color: white;
+/* Statistiche */
+.statistiche {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #ffffff; /* Sfondo delle card */
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Ombra più marcata per le card */
+    margin: 10px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    transition: transform 0.3s;
+}
+
+
+
+
+.card:hover {
+    transform: translateY(-5px); /* Effetto di sollevamento quando si passa il mouse */
+}
+
+.card img {
+    border-radius: 8px 8px 0 0;
+}
+
+/* Grafico e attività */
+.grafico, .attivita, .notifiche {
+    background-color: #ffffff; /* Sfondo per le sezioni di contenuto */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+    padding: 20px;
+}
+
+/* Titoli delle sezioni */
+h1, h2 {
+    color: #333; /* Colore dei titoli */
+}
+
+/* Pulsanti */
+.btn {
+    background-color: #1b2838; /* Colore del pulsante */
+    color: #ffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
     text-decoration: none;
-    font-size: 14px;
+    transition: background 0.3s, transform 0.3s; /* Aggiunto effetto di trasformazione */
 }
 
-.user-info a:hover {
-    text-decoration: underline;
+.btn:hover {
+    background-color: #007bff; /* Colore del pulsante al passaggio del mouse */
+    transform: translateY(-2px); /* Effetto di sollevamento */
+}
+
+/* Notifiche */
+.notifiche {
+    position: relative;
+}
+
+.notifiche::after {
+    content: "Nessuna notifica al momento."; /* Messaggio di assenza notifiche */
+    color: #777;
+    display: block;
+    margin-top: 10px;
 }

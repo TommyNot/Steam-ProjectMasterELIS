@@ -57,13 +57,11 @@
   <servlet>
     <servlet-name>LogicaRegistrazioneServlet</servlet-name>
     <servlet-class>org.elis.controller.LogicaRegistrazioneServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
+  </servlet>
+  <servlet-mapping>
     <servlet-name>LogicaRegistrazioneServlet</servlet-name>
     <url-pattern>/LogicaRegistrazioneServlet</url-pattern>
-</servlet-mapping>
-  
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>GiocoEliminaServlet</display-name>
@@ -153,5 +151,15 @@
   <servlet-mapping>
     <servlet-name>AdminEliminaServlet</servlet-name>
     <url-pattern>/AdminEliminaServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>org.elis.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
 </web-app>
