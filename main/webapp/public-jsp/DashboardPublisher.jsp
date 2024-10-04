@@ -15,26 +15,26 @@
     <!-- Barra laterale -->
     <div class="barralato">
         <h2>Dashboard Casa Editrice</h2>
-        <ul>
-            <li><a href="DashboardPublisher.jsp">
-                <i class="bi bi-house"></i> 
-                <span>Home</span></a>
-            </li>
-            <li><a href="<%= request.getContextPath() %>/public-jsp/GiochiPublisher.jsp">
-                <i class="bi bi-bag"></i>
-                <span>Prodotti</span></a>
-            </li>
-            <li><a href="#settings">
-                <i class="bi bi-gear"></i>
-                <span>Impostazioni</span>
-            </a></li>
-            <li>
-                <a href="<%= request.getContextPath() %>/LogoutServlet">
-                    <i class="bi bi-box-arrow-left"></i>
-                    <span>Logout</span>
-                </a>
-            </li>
-        </ul>
+			<ul>
+			    <li><a href="#" class="nav-link" data-target="home">
+			        <i class="bi bi-house"></i> 
+			        <span>Home</span></a>
+			    </li>
+			    <li><a href="<%=request.getContextPath() %>GiochiPublisher.jsp" class="nav-link" data-target="prodotti">
+			        <i class="bi bi-bag"></i>
+			        <span>Prodotti</span></a>
+			    </li>
+			    <li><a href="#settings">
+			        <i class="bi bi-gear"></i>
+			        <span>Impostazioni</span>
+			    </a></li>
+			    <li>
+			        <a href="<%= request.getContextPath() %>/LogoutServlet">
+			            <i class="bi bi-box-arrow-left"></i>
+			            <span>Logout</span>
+			        </a>
+			    </li>
+			</ul>
         
         <div class="user-info">
             <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture"> 
@@ -188,8 +188,10 @@
 
               </div>  
             </div>
+            
+
           
         
-   
+   <script src="<%=request.getContextPath()%>/Js/DashboardPublisherScript.js"></script>
 </body>
 </html>

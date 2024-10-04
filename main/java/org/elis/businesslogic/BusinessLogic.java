@@ -1,5 +1,6 @@
 package org.elis.businesslogic;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -49,10 +50,10 @@ public static Utente UtenteFindById(long id) {
 	return DaoFactory.getDaoFactory().getUtenteDao().selectById(id);
 }
 
-public static Gioco GiocoAdd(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, double prezzo,List<Genere> genere, Offerta offerta,long idUtente) {
+public static Gioco GiocoAdd(String nome, LocalDate data, String descrizione, String immagine, double prezzo,List<Genere> genere, Offerta offerta,long idUtente) {
 	
 
-	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,dataRilascio,descrizione,immagine,prezzo,genere,offerta,idUtente);
+	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,data,descrizione,immagine,prezzo,genere,offerta,idUtente);
 
 }
 

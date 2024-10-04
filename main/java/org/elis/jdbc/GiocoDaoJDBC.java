@@ -9,6 +9,7 @@ import java.sql.SQLType;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDateTime dataRilascio, String descrizione, String immagine, double prezzo, List<Genere> generi, Offerta offerta, long idUtente) {
+    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, String immagine, double prezzo, List<Genere> generi, Offerta offerta, long idUtente) {
 
         String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo,id_offerta, id_casa_editrice)"
                                  + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -75,7 +76,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
             // Inserimento gioco
             inserimentoGioco.setString(1, nome);
-            inserimentoGioco.setTimestamp(2, Timestamp.valueOf(dataRilascio));
+            inserimentoGioco.setTimestamp(2, Timestamp.valueOf(dataRilascio.atStartOfDay()));
             inserimentoGioco.setString(3, descrizione);
             inserimentoGioco.setString(4, immagine);
             inserimentoGioco.setDouble(5, prezzo);
@@ -161,14 +162,14 @@ public class GiocoDaoJDBC implements GiocoDao{
 				
 				Gioco g = new Gioco();
 				String nome = rs.getString("nome");
-				Timestamp dataRilascio = rs.getTimestamp("data_rilascio");
+				 LocalDate dataRilascio = rs.getDate("data_rilascio").toLocalDate();
 				String descrzione = rs.getString("descrizione");
 				String immagine = rs.getString("immagine");
 				boolean eliminato = rs.getBoolean("eliminato");
 				double prezzo = rs.getDouble("prezzo");
 				
 				g.setNome(nome);
-				g.setData_rilascio(dataRilascio.toLocalDateTime());
+				g.setData_rilascio(dataRilascio);
 				g.setDescrzione(descrzione);
 				g.setImmagine(immagine);
 				g.setEliminato(eliminato);
