@@ -62,12 +62,12 @@
             <div class="statistiche">
                 
                     <div class="container">
-                        <h4><b><%= utente != null ? utente.getUsername() : "Utente" %></b></h4>
+                        
                         <div class="card">
                             <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Elden_Ring.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Prodotti</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">Visualizza i tuoi prodotti .</p>
                                 <a href="#" class="btn">Vai ai tuoi prodotti</a>
                             </div>
                         </div>
