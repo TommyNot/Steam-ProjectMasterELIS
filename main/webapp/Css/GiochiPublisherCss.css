@@ -1,161 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+/* GiochiPublisherCss.css */
 
+/* Sfondo generale */
 body {
-    font-family: "Poppins", sans-serif;
-    color: #444444;
-}
-
-a,
-a:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
-.section-products {
-    padding: 80px 0 54px;
-}
-
-.section-products .header {
-    margin-bottom: 50px;
-}
-
-.section-products .header h3 {
-    font-size: 1rem;
-    color: #fe302f;
-    font-weight: 500;
-}
-
-.section-products .header h2 {
-    font-size: 2.2rem;
-    font-weight: 400;
-    color: #444444; 
-}
-
-.section-products .single-product {
-    margin-bottom: 26px;
-}
-
-.section-products .single-product .part-1 {
-    position: relative;
-    height: 290px;
-    max-height: 290px;
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-
-.section-products .single-product .part-1::before {
-		position: absolute;
-		content: "";
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-		transition: all 0.3s;
-}
-
-.section-products .single-product:hover .part-1::before {
-		transform: scale(1.2,1.2) rotate(5deg);
-}
-
-.section-products #product-1 .part-1::before {
-    background: url("https://i.ibb.co/L8Nrb7p/1.jpg") no-repeat center;
-    background-size: cover;
-		transition: all 0.3s;
-}
-
-.section-products #product-2 .part-1::before {
-    background: url("https://i.ibb.co/cLnZjnS/2.jpg") no-repeat center;
-    background-size: cover;
-}
-
-.section-products #product-3 .part-1::before {
-    background: url("https://i.ibb.co/L8Nrb7p/1.jpg") no-repeat center;
-    background-size: cover;
-}
-
-.section-products #product-4 .part-1::before {
-    background: url("https://i.ibb.co/cLnZjnS/2.jpg") no-repeat center;
-    background-size: cover;
-}
-
-.section-products .single-product .part-1 .discount,
-.section-products .single-product .part-1 .new {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    color: #ffffff;
-    background-color: #fe302f;
-    padding: 2px 8px;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-}
-
-.section-products .single-product .part-1 .new {
-    left: 0;
-    background-color: #444444;
-}
-
-.section-products .single-product .part-1 ul {
-    position: absolute;
-    bottom: -41px;
-    left: 20px;
+    background-color: #1b2838;
+    color: #c7d5e0;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    list-style: none;
-    opacity: 0;
-    transition: bottom 0.5s, opacity 0.5s;
 }
 
-.section-products .single-product:hover .part-1 ul {
-    bottom: 30px;
-    opacity: 1;
+h2{
+	
+	font-size: 26px;
 }
 
-.section-products .single-product .part-1 ul li {
-    display: inline-block;
-    margin-right: 4px;
+/* Sezione prodotti */
+.section-products {
+    padding: 50px 0px;
+    background-color: #171a21;
 }
 
-.section-products .single-product .part-1 ul li a {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    background-color: #ffffff;
-    color: #444444;
+/* Header */
+.header {
+    margin-bottom: 50px;
     text-align: center;
-    box-shadow: 0 2px 20px rgb(50 50 50 / 10%);
-    transition: color 0.2s;
 }
 
-.section-products .single-product .part-1 ul li a:hover {
-    color: #fe302f;
+.header h3 {
+    font-size: 30px;
+    color: #66c0f4;
+    font-weight: 700;
 }
 
-.section-products .single-product .part-2 .product-title {
-    font-size: 1rem;
+/* Logo Steam */
+#logo svg {
+    max-width: 300px;
+    margin: 10px auto;
 }
 
-.section-products .single-product .part-2 h4 {
-    display: inline-block;
-    font-size: 1rem;
+/* Single product card */
+.single-product {
+	margin: 10px;
+    background-color: #2a475e;
+    border: 1px solid #66c0f4;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-.section-products .single-product .part-2 .product-old-price {
+.single-product:hover {
+    transform: scale(1.00);
+}
+
+/* Product image */
+.single-product .part-1 {
     position: relative;
-    padding: 0 7px;
-    margin-right: 2px;
-    opacity: 0.6;
+    height: 300px;
+    background-color: #171a21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.section-products .single-product .part-2 .product-old-price::after {
+.single-product .part-1 img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* Discount badge */
+.discount {
     position: absolute;
-    content: "";
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #444444;
-    transform: translateY(-50%);
+    top: 10px;
+    left: 10px;
+    background-color: #ff4040;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
+.single-product .part-1 ul {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.single-product .part-1 ul li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.single-product .part-1 ul li a {
+    color: #66c0f4;
+    font-size: 24px;
+}
+
+.single-product .part-2 {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Prodotto titlo */
+.single-product .part-2 h3 {
+    font-size: 19px;
+    color: #c7d5e0;
+    margin-bottom: 15px;
+}
+
+/* Prodotto prezzo */
+.single-product .part-2 h4 {
+    font-size: 20px;
+    color: #66c0f4;
+    font-weight: bold;
+}
+
+.product-old-price {
+    font-size: 18px;
+    color: #c7d5e0;
+}
+
+/* Bottone */
+.btn-primary {
+    background-color: #66c0f4;
+    border-color: #66c0f4;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #5aa0d1;
+    border-color: #5aa0d1;
 }

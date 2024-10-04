@@ -60,11 +60,12 @@ public class GiocoAggiungiServlet extends HttpServlet {
 
         LocalDateTime localDateTime;
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             localDateTime = LocalDateTime.parse(dataRilascio, formatter);
         } catch (DateTimeParseException e) {
             request.setAttribute("errore", "Errore nella formattazione della data: " + e.getMessage());
-            request.getRequestDispatcher("WEB-INF/private-jsp/GiocoAdd.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+            System.out.println("errore qui nel lcal");
             return;
         }
 

@@ -20,7 +20,7 @@
                 <i class="bi bi-house"></i> 
                 <span>Home</span></a>
             </li>
-            <li><a href="#prodotti">
+            <li><a href="<%= request.getContextPath() %>/public-jsp/GiochiPublisher.jsp">
                 <i class="bi bi-bag"></i>
                 <span>Prodotti</span></a>
             </li>
