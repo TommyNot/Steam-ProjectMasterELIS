@@ -3,6 +3,7 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="org.elis.model.Gioco" %>
+<%@ page import="org.elis.model.Genere" %>
 <%@ page import="org.elis.model.Offerta" %> 
 <%@ page import="org.elis.model.Utente" %> 
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
@@ -114,10 +115,39 @@
 				
 				        <label for="prezzo">Prezzo:</label>
 				        <input type="number" id="prezzo" name="prezzo" required>
+				        
+				  
+				        
+						<label for="genere">Seleziona genere:</label>	
+							<select id="genere" name="genere">
+							    <%
+							        List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
+							        Genere genereSelezionato = (Genere) request.getAttribute("genereSelezionato"); 
+							        for (Genere genere : generi) {
+							    %>
+							        <option value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
+							    <%
+							        }
+							    %>
+							</select>
+							
+							<label for="offerta">Seleziona offerta:</label>	
+							<select id="offerta" name="offerta">
+							    <%
+							        List<Offerta> offerte = BusinessLogic.offertaVisualizzaTutto();
+							        Offerta offertaSelezionata = (Offerta) request.getAttribute("offertaSelezionata"); 
+							        for (Offerta offerta : offerte) {
+							    %>
+							        <option value="<%= offerta.getId() %>" <%= (offertaSelezionata != null && offertaSelezionata.getId() == offerta.getId()) ? "selected" : "" %>><%= offerta.getNome() %></option>
+							    <%
+							        }
+							    %>
+							</select>
+
+
+
 				
-				        <label for="offerta">Offerta:</label>
-				        <input type="hidden" name="offerta" value="false">
-				        <input type="checkbox" id="offerta" name="offerta" value="true"> Offerta attiva?
+				        
 				
 				        <button type="submit" class="btn btn-success">Aggiungi Prodotto</button>
 				        <button type="button" id="cancel-add-product" class="btn btn-secondary">Annulla</button>
@@ -131,7 +161,7 @@
 				        
 				        <label for="confirmation">Sei sicuro di voler eliminare questo gioco?</label>
 				        <input type="hidden" name="confirm" value="false">
-				        <input type="checkbox" id="confirmation" name="confirm" value="true"> Conferma eliminazione
+				        <input type="checkbox" id="confirmation" name="confirm" value="true" required> Conferma eliminazione
 				        
 				        <button type="submit" class="btn btn-danger">Elimina Prodotto</button>
 				        <button type="button" id="cancel-remove-product" class="btn btn-secondary">Annulla</button>
@@ -164,14 +194,19 @@
 				                            <span class="discount"><%= offerta.getSconto() + "% off" %></span>
 				                        <% } %>
 				                        <img class="product__image" alt="<%= gioco.getNome() %>" src="<%= request.getContextPath() + "/risorse-media/img_giochi/" + gioco.getImmagine() %>">
+				                        <ul>
+				                       		 <li>
+				                        		<a id="btn-modifica" href="#" style="text-decoration: none;"><i class="bi bi-pencil-square"></i>Modifica</a>
+				                       		 </li>
 				                        
-				                            <a href="#"><i class="bi bi-pencil-square"></i></a>
+				                        </ul>
+				                            
 				                        
 				                    </div>
 				                    <div class="part-2">
 				                        <h3 class="product-title"><%= gioco.getNome() %></h3>
 				                        <h4 class="product-price">€<%= gioco.getPrezzo() %></h4>
-				                        <h6 class="product-title">ID GIOCO: <%= gioco.getId() %></h6>
+				                        <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
 				                        <% if (offerta != null) { %>
 				                            <h4 class="product-old-price" style="text-decoration: line-through;">€<%= gioco.getPrezzo() + (gioco.getPrezzo() * offerta.getSconto() / 100) %></h4>
 				                        <% } %>
@@ -213,7 +248,7 @@
         </main>
         
         <footer>
-            <p> 2024 Casa Editrice FamilyPezzotto</p>
+            <p> @2024 Copywrite SteamFamilyPezzotto</p>
         </footer>
     </div>
     

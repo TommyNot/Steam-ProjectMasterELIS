@@ -42,7 +42,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, String immagine, double prezzo, List<Genere> generi, Offerta offerta, long idUtente) {
+    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, String immagine, double prezzo, Genere genere, Offerta offerta, long idUtente) {
 
         String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo,id_offerta, id_casa_editrice)"
                                  + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -98,11 +98,11 @@ public class GiocoDaoJDBC implements GiocoDao{
                     if (recuperIdGioco.next()) {
                         long giocoId = recuperIdGioco.getLong(1);
 
-                        for (Genere g : generi) {
-                            inserimentoGenereGioco.setLong(1, g.getId());
+                        
+                            inserimentoGenereGioco.setLong(1, genere.getId());
                             inserimentoGenereGioco.setLong(2, giocoId);
                             inserimentoGenereGioco.executeUpdate();
-                        }
+                        
                     }
                 }
 
@@ -113,7 +113,7 @@ public class GiocoDaoJDBC implements GiocoDao{
                 nuovoGioco.setDescrzione(descrizione);
                 nuovoGioco.setImmagine(immagine);
                 nuovoGioco.setPrezzo(prezzo);
-                nuovoGioco.setGeneri(generi);
+                nuovoGioco.setGenere(genere);
                 nuovoGioco.setOfferta(offerta);
                 nuovoGioco.setIdUtente(idUtente);
 
@@ -577,7 +577,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	       
 	        List<Genere> generi = new ArrayList<>();
 	        generi.add(genere);
-	        giocoAggiornato.setGeneri(generi);
+	        //giocoAggiornato.setGenere(generi);
 
 	        System.out.println("Genere aggiornato per il gioco con ID " + id);
 	        return giocoAggiornato;

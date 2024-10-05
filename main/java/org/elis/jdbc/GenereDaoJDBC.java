@@ -67,44 +67,57 @@ private static GenereDaoJDBC instance;
     }
 
 
-	@Override
-	public List<Genere> findAll() {
-		List<Genere> genere = new ArrayList<>();
-		String query="SELECT * FROM GENERE";
-		
-		try(
-				Connection c=JdbcDaoFactory.getConnection();
-				PreparedStatement ps=c.prepareStatement(query);
-				ResultSet rs=ps.executeQuery();
-				){
-			while(rs.next()) {
-				Genere g=new Genere();
-				String nome=rs.getString("nome");
-				Timestamp dataCreazione=rs.getTimestamp("data_creazione");
-                LocalDateTime data_creazione = dataCreazione != null ? dataCreazione.toLocalDateTime() : null;
-                Timestamp dataModifica=rs.getTimestamp("data_ultima_modifica");
-                LocalDateTime data_modifica= dataModifica !=null ? dataModifica.toLocalDateTime():null;
-                Offerta offerta=((Genere) rs).getOfferta();     
+    @Override
+    public List<Genere> findAll() {
+        List<Genere> generi = new ArrayList<>();
+        String query = "SELECT "
+                     + "g.id AS genere_id, g.nome AS genere_nome, "
+                     + "g.data_creazione AS genere_data_creazione, "
+                     + "g.data_ultima_modifica AS genere_data_ultima_modifica, "
+                     + "o.id AS offerta_id, o.nome AS offerta_nome, "
+                     + "o.sconto AS offerta_sconto, "
+                     + "o.data_inizio AS offerta_data_inizio, "
+                     + "o.data_fine AS offerta_data_fine "
+                     + "FROM genere g "
+                     + "LEFT JOIN offerta o ON g.id_offerta = o.id";
+
+        try (
+            Connection c = JdbcDaoFactory.getConnection();
+            PreparedStatement ps = c.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+        ) {
+            while (rs.next()) {
+                Genere g = new Genere();
+                g.setId(rs.getInt("genere_id"));
+                g.setNome(rs.getString("genere_nome"));
+                g.setData_creazione(rs.getTimestamp("genere_data_creazione").toLocalDateTime());
+                g.setData_ultima_modifica(rs.getTimestamp("genere_data_ultima_modifica").toLocalDateTime());
+
+                // Estrai i dettagli dell'offerta
+                Offerta offerta = null; // Default null
+                int offertaId = rs.getInt("offerta_id");
+                if (offertaId > 0) { // Controlla se esiste un'offerta
+                    offerta = new Offerta();
+                    offerta.setId(offertaId);
+                    offerta.setNome(rs.getString("offerta_nome"));
+                   
+                    offerta.setData_inizio(rs.getTimestamp("offerta_data_inizio").toLocalDateTime());
+                    offerta.setData_fine(rs.getTimestamp("offerta_data_fine").toLocalDateTime());
+                }
                 
-                g.setNome(nome);
-                g.setData_creazione(data_creazione);
-                g.setData_ultima_modifica(data_modifica);
                 g.setOfferta(offerta);
-                
-                genere.add(g);
-				
-			}
-					
-			
-		} catch (SQLException e) {
+                generi.add(g);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-		return null;
-	}
+        return generi;
+    }
+
+
 
 	@Override
 	public Genere findByName(String nome) {

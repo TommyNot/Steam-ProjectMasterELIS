@@ -16,6 +16,10 @@ public class Gioco {
 	private boolean eliminato;
 	private double prezzo;
 	Offerta offerta;
+	Genere genere;
+
+
+
 	long idUtente;
 	
 	public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
@@ -157,9 +161,13 @@ public class Gioco {
 
 
 
-	public void setGeneri(List<Genere> generi) {
-		// TODO Auto-generated method stub
-		
+	public Genere getGenere() {
+		return genere;
+	}
+
+
+	public void setGenere(Genere genere) {
+		this.genere = genere;
 	}
 
 

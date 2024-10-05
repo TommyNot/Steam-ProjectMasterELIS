@@ -8,16 +8,6 @@
     display: block; /* Assicurati che la sezione attiva venga visualizzata */
 }
 
-#imgUtente{
-	
-	border-radius: 50%;
-	width: 50px;
-}
-
-#user{
-	
-	margin-top:20px;
-}
 
 
 /* Stile generale del corpo */
@@ -53,6 +43,44 @@ header {
     vertical-align: middle;
 }
 
+/* Contenitore principale per le informazioni dell'utente */
+.user-info {
+    display: flex; /* Dispone l'immagine e il testo in linea orizzontale */
+    align-items: center; /* Allinea verticalmente l'immagine e il testo */
+    background-color: #2c3e50; /* Sfondo scuro */
+    padding: 10px; /* Spaziatura interna */
+    border-radius: 8px; /* Angoli arrotondati */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra per dare profondità */
+    color: #ecf0f1; /* Colore del testo */
+    margin-bottom: 20px; /* Spaziatura inferiore */
+}
+
+/* Immagine del profilo utente */
+#imgUtente {
+    width: 50px; /* Larghezza fissa dell'immagine */
+    height: 50px; /* Altezza fissa dell'immagine */
+    border-radius: 50%; /* Rende l'immagine circolare */
+    object-fit: cover; /* Mantiene il rapporto dell'immagine */
+    margin-right: 15px; /* Spaziatura tra l'immagine e il testo */
+    border: 2px solid #fff; /* Bordo bianco intorno all'immagine */
+}
+
+/* Stile per il testo utente */
+#user p {
+    margin: 0; /* Rimuove il margine predefinito */
+    font-size: 18px; /* Dimensione del testo */
+    color: #ecf0f1; /* Colore del testo */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+/* Messaggio per utente non loggato */
+.user-info p {
+    font-size: 16px; /* Dimensione leggermente più piccola per il messaggio */
+    color: #e74c3c; /* Colore rosso per il messaggio di errore */
+    margin: 0; /* Rimuove il margine predefinito */
+}
+
+
 /* Titolo */
 h1 {
     display: inline-block;
@@ -62,33 +90,57 @@ h1 {
 }
 
 /* Navigazione */
+/* Stile per il menu di navigazione */
 nav {
-    display: inline-block;
-    float: right;
+    background-color: #1b2838; /* Sfondo scuro per la barra di navigazione */
+    padding: 15px; /* Spaziatura intorno agli elementi di navigazione */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombra per dare profondità */
+    border-radius: 8px; /* Angoli arrotondati per il contenitore */
 }
 
 nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    list-style-type: none; /* Rimuove i puntini dall'elenco */
+    margin: 0; /* Rimuove i margini esterni */
+    padding: 0; /* Rimuove il padding predefinito */
+    display: flex; /* Dispone gli elementi orizzontalmente */
+    justify-content: space-around; /* Distribuisce gli elementi in modo uniforme */
+    align-items: center; /* Allinea verticalmente gli elementi */
 }
 
 nav ul li {
-    display: inline;
-    margin-left: 15px;
+    margin: 0 15px; /* Spaziatura tra gli elementi di navigazione */
 }
 
 nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px;
-    transition: background 0.3s;
+    color: #ffffff; /* Colore bianco per il testo dei link */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    padding: 10px 15px; /* Spaziatura interna per i link */
+    border-radius: 5px; /* Angoli leggermente arrotondati */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transizione per un effetto hover fluido */
 }
 
-/* Effetto hover */
 nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Leggero effetto hover */
+    background-color: rgba(255, 255, 255, 0.2); /* Colore di sfondo traslucido al passaggio del mouse */
+    color: #00b300; /* Cambia il colore del testo a verde al passaggio del mouse */
 }
+
+nav ul li a:active {
+    background-color: #00b300; /* Colore di sfondo verde per il link attivo */
+    color: #ffffff; /* Colore bianco per il testo del link attivo */
+}
+
+/* Stile responsivo */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Dispone gli elementi verticalmente su schermi piccoli */
+        align-items: flex-start; /* Allinea gli elementi a sinistra */
+    }
+
+    nav ul li {
+        margin: 10px 0; /* Aumenta lo spazio tra gli elementi di navigazione su schermi piccoli */
+    }
+}
+
 
 /* Sezioni */
 main {
@@ -122,7 +174,7 @@ section {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #007bff; /* Stessa colorazione dell'intestazione */
+    background-color: #1b2838; /* Stessa colorazione dell'intestazione */
     color: #ffffff;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -173,8 +225,10 @@ footer {
 }
 
 .single-product {
+	
 	align-content: center;
 	justify-content: center;
+	align-items: center;
     background-color: #3c3c3c; /* Sfondo della card */
     border-radius: 8px; /* Angoli arrotondati */
     margin: 10px;
@@ -183,6 +237,15 @@ footer {
     transition: transform 0.2s; /* Effetto hover */
     position: relative; /* Per gestire la posizione delle etichette di sconto */
 }
+
+.product__image {
+    max-width: 100%; /* La larghezza massima dell'immagine è limitata */
+    max-height: 100%; /* L'altezza massima dell'immagine è limitata */
+    object-fit: cover; /* L'immagine copre l'area mantenendo le proporzioni */
+    border-radius: 5px; /* Angoli arrotondati */
+}
+
+
 
 .single-product:hover {
     transform: scale(1.05); /* Zoom sulla card al passaggio del mouse */
@@ -204,6 +267,7 @@ footer {
 }
 
 .product__image {
+	
     width: 200px; /* Larghezza fissa per l'immagine */
     height: 300px; /* Altezza fissa per l'immagine */
     object-fit: cover; /* Per mantenere le proporzioni e coprire l'area */
@@ -219,6 +283,13 @@ footer {
     font-size: 18px;
     margin: 10px 0 5px;
     color: #ffffff; /* Colore del titolo */
+}
+
+.product-id{
+	
+	 font-size: 12px;
+    margin: 10px 0 5px;
+    color: #ffffff;
 }
 
 .product-price {

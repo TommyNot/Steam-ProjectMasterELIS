@@ -42,12 +42,12 @@ public class GiocoAggiungiServlet extends HttpServlet {
 
         
         String nome = request.getParameter("nome");
-        String dataRilascio = request.getParameter("dataRilascio"); // da convertire in LocalDateTime
+        String dataRilascio = request.getParameter("dataRilascio"); 
         String descrizione = request.getParameter("descrizione");
         String immagine = request.getParameter("immagine");
         String prezzo = request.getParameter("prezzo");
-        String[] offerta = request.getParameterValues("offerta"); // frontend checkbox
-        String[] generi = request.getParameterValues("generi");
+        String offerta = request.getParameter("offerta"); 
+        String generi = request.getParameter("genere");
 
         long idUtente = 0;
         boolean isPublisher = false;
@@ -85,36 +85,29 @@ public class GiocoAggiungiServlet extends HttpServlet {
             return;
         }
 
-        // Gestione dell'offerta
-        Offerta offertaObj = null;
-        if (offerta != null && offerta.length > 0) {
-            try {
-                long idOfferta = Long.parseLong(offerta[0]);
-                offertaObj = BusinessLogic.findOffertaById(idOfferta);
-            } catch (NumberFormatException e) {
-                request.setAttribute("errore", "Errore nel formato dell'ID dell'offerta: " + e.getMessage());
-                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
-                System.out.println("Gestione errore offerta");
-                return;
-            }
+      
+        
+        Genere genereSelezionato = null;
+        // Logica per i generi
+        if (generi != null && !generi.isEmpty()) {
+            long genereId= Long.parseLong(generi);
+            // Recupera l'oggetto Offerta utilizzando la logica di business
+            genereSelezionato = BusinessLogic.getGenereById(genereId);
+            request.setAttribute("genereSelezionato", genereSelezionato);
+            System.out.println("errrore genere");
+        }
+        
+        Offerta offertaSelezionata = null;
+
+        if (offerta != null && !offerta.isEmpty()) {
+            long offertaId = Long.parseLong(offerta);
+            // Recupera l'oggetto Offerta utilizzando la logica di business
+            offertaSelezionata = BusinessLogic.findOffertaById(offertaId);
+            request.setAttribute("offertaSelezionata", offertaSelezionata); 
+            System.out.println("errore offerta");
+            
         }
 
-        // Gestione dei generi
-        List<Genere> generiList = new ArrayList<>();
-        if (generi != null) {
-            for (String genereId : generi) {
-                try {
-                    long idGenere = Long.parseLong(genereId);
-                    Genere genere = BusinessLogic.getGenereById(idGenere);
-                    generiList.add(genere);
-                } catch (NumberFormatException e) {
-                    request.setAttribute("errore", "Errore nel formato dell'ID del genere: " + e.getMessage());
-                    request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
-                    System.out.println("Errore nel genere lista");
-                    return;
-                }
-            }
-        }
 
         // Controllo sessione
         if (sessione == null) {
@@ -131,18 +124,14 @@ public class GiocoAggiungiServlet extends HttpServlet {
         }
 
         if (isPublisher) {
-            Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagine, prezzoDouble, generiList, offertaObj, idUtente);
+            Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagine, prezzoDouble, genereSelezionato , offertaSelezionata, idUtente);
             if (aggiunto != null) {
                 response.sendRedirect("successPage.jsp");
             } else {
                 request.setAttribute("errore", "Errore nell'aggiunta del gioco.");
                 request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
             }
-        } else {
-            request.setAttribute("errore", "Accesso non autorizzato.");
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
-            System.out.println("errore nell accesso");
-        }
+        } 
     }
 
 		
