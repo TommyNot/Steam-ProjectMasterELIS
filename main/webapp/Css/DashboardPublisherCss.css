@@ -1,138 +1,303 @@
-/* Stile generale */
+/* style.css */
+
+.hidden {
+    display: none;
+}
+
+.active {
+    display: block; /* Assicurati che la sezione attiva venga visualizzata */
+}
+
+#imgUtente{
+	
+	border-radius: 50%;
+	width: 50px;
+}
+
+#user{
+	
+	margin-top:20px;
+}
+
+
+/* Stile generale del corpo */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #1b2838; /* Colore di sfondo chiaro */
     margin: 0;
     padding: 0;
-    background-color: #1b2838; /* Colore di sfondo simile a Steam */
 }
 
-/* Barra laterale */
-.barralato {
-    width: 250px;
-    height: 100vh;
-    background-color: #1b2838; /* Colore della barra laterale */
-    color: #fff;
-    position: fixed;
+/* Contenitore principale */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #1b2838; /* Sfondo bianco per il contenitore */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra per un effetto di profondità */
+}
+
+/* Intestazione */
+header {
+    background-color: #1b2838; /* Colore blu per l'intestazione */
+    color: #ffffff; /* Testo bianco */
     padding: 20px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
-.barralato h2 {
+/* Logo */
+.logo {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Titolo */
+h1 {
+    display: inline-block;
+    margin: 0;
     font-size: 24px;
-    margin: 0 0 20px 0;
-    color: #ffffff; /* Bianco per il titolo */
+    vertical-align: middle;
 }
 
-.barralato ul {
-    list-style: none;
+/* Navigazione */
+nav {
+    display: inline-block;
+    float: right;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
     padding: 0;
 }
 
-.barralato li {
-    margin: 15px 0;
+nav ul li {
+    display: inline;
+    margin-left: 15px;
 }
 
-.barralato a {
-    color: #ffffff; /* Colore del testo */
+nav ul li a {
+    color: #ffffff;
     text-decoration: none;
-    display: flex;
-    align-items: center;
     padding: 10px;
     transition: background 0.3s;
 }
 
-.barralato a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Effetto hover chiaro */
+/* Effetto hover */
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Leggero effetto hover */
 }
 
-.user-info {
-    margin-top: 20px;
-    text-align: center;
-    padding: 20px 0; /* Padding verticale per distanziare meglio */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Bordo leggero sopra */
-    font-family: fantasy;
-}
-.user-info img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-}
-
-/* Contenuto principale */
-.content {
-	text-align:center;
-    margin-left: 270px; /* Spazio per la barra laterale */
+/* Sezioni */
+main {
     padding: 20px;
-    background-color: #f0f0f0; /* Sfondo del contenuto principale */
-    min-height: 100vh; /* Assicura che il contenuto si estenda per tutta l'altezza */
+}
+
+section {
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0; /* Bordo leggero */
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #fafafa; /* Sfondo delle sezioni */
 }
 
 /* Statistiche */
-.statistiche {
+.stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat {
+    flex: 1;
+    margin: 0 10px;
+    padding: 20px;
+    background-color: #ffffff; /* Sfondo bianco per le statistiche */
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff; /* Stessa colorazione dell'intestazione */
+    color: #ffffff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+
+.button {
+    display: inline-block;
+    padding: 10px 15px; /* Spaziatura interna */
+    border: none; /* Nessun bordo */
+    border-radius: 5px; /* Angoli arrotondati */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    font-size: 16px; /* Dimensione del testo */
+    text-align: center; /* Centra il testo */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    transition: background-color 0.3s, color 0.3s; /* Transizioni per effetto hover */
+    background-color: #4CAF50; /* Verde per il pulsante primario */
+    color: white; /* Testo bianco */
+}
+
+
+
+.button:hover {
+    background-color: #45a049; /* Colore più scuro al passaggio del mouse */
+}
+
+
+
+#prodotti {
+    padding: 20px;
+    background-color: #1b2838; /* Sfondo della sezione */
+    color: #ffffff; /* Testo bianco */
+}
+
+#prodotti h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#prodotti p {
+    margin-bottom: 20px;
+}
+
+#products-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.card {
-    background-color: #ffffff; /* Sfondo delle card */
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Ombra più marcata per le card */
+.single-product {
+	align-content: center;
+	justify-content: center;
+    background-color: #3c3c3c; /* Sfondo della card */
+    border-radius: 8px; /* Angoli arrotondati */
     margin: 10px;
-    flex: 1;
-    min-width: 250px;
-    max-width: 300px;
-    transition: transform 0.3s;
+    padding: 15px;
+    width: calc(25% - 20px); /* Larghezza della card */
+    transition: transform 0.2s; /* Effetto hover */
+    position: relative; /* Per gestire la posizione delle etichette di sconto */
+}
+
+.single-product:hover {
+    transform: scale(1.05); /* Zoom sulla card al passaggio del mouse */
+}
+
+.part-1 {
+    position: relative; /* Necessario per posizionare correttamente lo sconto */
+}
+
+.discount {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff1e1e; /* Colore di sfondo dello sconto */
+    color: #ffffff; /* Colore del testo dello sconto */
+    padding: 5px 10px;
+    border-radius: 5px; /* Angoli arrotondati per il badge di sconto */
+    font-weight: bold;
+}
+
+.product__image {
+    width: 200px; /* Larghezza fissa per l'immagine */
+    height: 300px; /* Altezza fissa per l'immagine */
+    object-fit: cover; /* Per mantenere le proporzioni e coprire l'area */
+    border-radius: 5px; /* Angoli arrotondati per l'immagine */
 }
 
 
-
-
-.card:hover {
-    transform: translateY(-5px); /* Effetto di sollevamento quando si passa il mouse */
+.part-2 {
+    margin-top: 15px;
 }
 
-.card img {
-    border-radius: 8px 8px 0 0;
+.product-title {
+    font-size: 18px;
+    margin: 10px 0 5px;
+    color: #ffffff; /* Colore del titolo */
 }
 
-/* Grafico e attività */
-.grafico, .attivita, .notifiche {
-    background-color: #ffffff; /* Sfondo per le sezioni di contenuto */
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    margin: 20px 0;
-    padding: 20px;
+.product-price {
+    font-size: 20px;
+    color: #00b300; /* Colore verde per il prezzo */
 }
 
-/* Titoli delle sezioni */
-h1, h2 {
-    color: #333; /* Colore dei titoli */
+.product-old-price {
+    color: #b3b3b3; /* Colore grigio per il prezzo originale */
+    font-size: 16px;
 }
 
-/* Pulsanti */
+.edit-form-container {
+    max-width: 600px; /* Larghezza massima del modulo */
+    margin: 20px auto; /* Margine automatico per centrare il modulo */
+    padding: 20px; /* Spaziatura interna */
+    background-color: #2c2f33; /* Colore di sfondo del modulo */
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombra per un effetto sollevato */
+    color: white; /* Colore del testo */
+}
+
+.btn-danger {
+    background-color: #f44336; /* Rosso per il pulsante di eliminazione */
+    color: white; /* Testo bianco */
+}
+
+.btn-danger:hover {
+    background-color: #e53935; /* Colore più scuro al passaggio del mouse */
+}
+
+
+.edit-form-container label {
+    display: block; /* Imposta le etichette come blocchi */
+    margin-bottom: 5px; /* Margine inferiore per separare le etichette dai campi di input */
+}
+
+.edit-form-container input[type="text"],
+.edit-form-container input[type="date"],
+.edit-form-container input[type="number"] {
+    width: 100%; /* Larghezza al 100% per i campi di input */
+    padding: 10px; /* Spaziatura interna per i campi di input */
+    margin-bottom: 15px; /* Margine inferiore per separare i campi */
+    border: 1px solid #555; /* Bordo grigio */
+    border-radius: 5px; /* Angoli arrotondati */
+    background-color: #40444b; /* Colore di sfondo per i campi di input */
+    color: white; /* Colore del testo */
+}
+
+.edit-form-container input[type="checkbox"] {
+    margin-right: 5px; /* Spazio a destra per il checkbox */
+}
+
 .btn {
-    background-color: #1b2838; /* Colore del pulsante */
-    color: #ffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.3s; /* Aggiunto effetto di trasformazione */
+    display: inline-block; /* Imposta i pulsanti come blocchi in linea */
+    padding: 10px 20px; /* Spaziatura interna per i pulsanti */
+    border: none; /* Nessun bordo */
+    border-radius: 5px; /* Angoli arrotondati */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    font-size: 16px; /* Dimensione del testo */
+    text-align: center; /* Centra il testo */
+    transition: background-color 0.3s; /* Transizione per effetto hover */
 }
 
-.btn:hover {
-    background-color: #007bff; /* Colore del pulsante al passaggio del mouse */
-    transform: translateY(-2px); /* Effetto di sollevamento */
+.btn-success {
+    background-color: #4CAF50; /* Verde per il pulsante di successo */
+    color: white; /* Testo bianco */
 }
 
-/* Notifiche */
-.notifiche {
-    position: relative;
+.btn-success:hover {
+    background-color: #45a049; /* Colore più scuro al passaggio del mouse */
 }
 
-.notifiche::after {
-    content: "Nessuna notifica al momento."; /* Messaggio di assenza notifiche */
-    color: #777;
-    display: block;
-    margin-top: 10px;
+.btn-secondary {
+    background-color: #555; /* Grigio scuro per il pulsante secondario */
+    color: white; /* Testo bianco */
 }
+
+.btn-secondary:hover {
+    background-color: #333; /* Colore più scuro al passaggio del mouse */
+}
+

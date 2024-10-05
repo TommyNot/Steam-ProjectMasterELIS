@@ -24,6 +24,6 @@ public interface GiocoDao {
 	Gioco updateGiocoPrezzo(long id,double prezzo);
 	Gioco updateGiocoOfferta(long id,Offerta offerta);
 	Gioco updateGiocoGenere(long id,Genere genere);
-	Gioco deleteGioco(String nome);
+	Gioco deleteGioco(long id);
 
 }

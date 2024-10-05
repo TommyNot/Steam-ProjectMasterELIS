@@ -31,7 +31,9 @@ public class GiocoEliminaServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        String eliminaGiocoNome = request.getParameter("nome");
+        String eliminaGiocoNome = request.getParameter("productId");
+        
+        long idGioco = Long.parseLong(eliminaGiocoNome);
         
         HttpSession sessione = request.getSession(false);
         if (sessione == null) {
@@ -41,7 +43,7 @@ public class GiocoEliminaServlet extends HttpServlet {
         
 
 
-        Utente utente = (Utente) sessione.getAttribute("utente");
+        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
         if (utente == null || utente.getRuolo() != Ruolo.PUBLISHER) {
             response.sendRedirect("public-jsp/AccessoNegato.jsp");
             return;
@@ -51,12 +53,12 @@ public class GiocoEliminaServlet extends HttpServlet {
         if (eliminaGiocoNome == null || eliminaGiocoNome.isBlank()) {
             String errore = "Il nome del gioco non può essere vuoto.";
             request.setAttribute("errore", errore); 
-            request.getRequestDispatcher("private-jsp/DashboardPublisher.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return; 
         }
 
         
-        Gioco giocoEliminato = BusinessLogic.eliminaGioco(eliminaGiocoNome);
+        Gioco giocoEliminato = BusinessLogic.eliminaGioco(idGioco);
 
         
         if (giocoEliminato != null) {
@@ -69,7 +71,7 @@ public class GiocoEliminaServlet extends HttpServlet {
         }
 
        
-        request.getRequestDispatcher("private-jsp/DashboardPublisher.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
     }
 
 }

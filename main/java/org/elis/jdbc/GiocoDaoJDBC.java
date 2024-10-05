@@ -161,13 +161,15 @@ public class GiocoDaoJDBC implements GiocoDao{
 			while(rs.next()){
 				
 				Gioco g = new Gioco();
+				
 				String nome = rs.getString("nome");
-				 LocalDate dataRilascio = rs.getDate("data_rilascio").toLocalDate();
+				LocalDate dataRilascio = rs.getDate("data_rilascio").toLocalDate();
 				String descrzione = rs.getString("descrizione");
 				String immagine = rs.getString("immagine");
 				boolean eliminato = rs.getBoolean("eliminato");
 				double prezzo = rs.getDouble("prezzo");
 				
+				g.setId(rs.getInt("id"));
 				g.setNome(nome);
 				g.setData_rilascio(dataRilascio);
 				g.setDescrzione(descrzione);
@@ -273,9 +275,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
 	@Override
-	public Gioco deleteGioco(String nome) {
-	    String findQuery = "SELECT * FROM gioco WHERE nome = ?";
-	    String deleteQuery = "DELETE FROM gioco WHERE nome = ?";
+	public Gioco deleteGioco(long id) {
+	    String findQuery = "SELECT * FROM gioco WHERE id = ?";
+	    String deleteQuery = "DELETE FROM gioco WHERE id = ?";
 	    
 	    try (
 	        Connection c = JdbcDaoFactory.getConnection();
@@ -283,7 +285,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	        PreparedStatement deletePs = c.prepareStatement(deleteQuery);
 	    ) {
 	        
-	        findPs.setString(1, nome);
+	        findPs.setLong(1, id);
 	        try (ResultSet rs = findPs.executeQuery()) {
 	            if (rs.next()) {
 	                
@@ -297,7 +299,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	                gioco.setPrezzo(rs.getDouble("prezzo"));
 	                
 	                
-	                deletePs.setString(1, nome);
+	                deletePs.setLong(1, id);
 	                int aggiornamento = deletePs.executeUpdate();
 	                
 	                if (aggiornamento == 0) {
@@ -308,7 +310,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	                    return gioco;  
 	                }
 	            } else {
-	                System.out.println("Nessun gioco trovato con il nome: " + nome);
+	                System.out.println("Nessun gioco trovato con id: " + id);
 	                return null; 
 	            }
 	        }

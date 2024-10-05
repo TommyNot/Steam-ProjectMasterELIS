@@ -122,10 +122,10 @@ public static Offerta findOffertaByNome(String nome) {
 	return DaoFactory.getDaoFactory().getOffertaDao().selectByName(nome);
 }
 
-public static Gioco eliminaGioco(String nome) {
+public static Gioco eliminaGioco(long id) {
 	
 	
-	return DaoFactory.getDaoFactory().getGiocoDao().deleteGioco(nome);
+	return DaoFactory.getDaoFactory().getGiocoDao().deleteGioco(id);
 }
 
 public static Utente updateEmail(long id,String email) {
