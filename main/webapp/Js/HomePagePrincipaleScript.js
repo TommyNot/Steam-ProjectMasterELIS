@@ -7,10 +7,6 @@ let arrayImmagini =["../risorse-media/img_giochi/Cyberpunk_2077.jpg",
 let counter = 0;
 
 $(document).ready(function(){
-	$("#input-ricerca").on("click", function(){
-		$(this).css("text-decoration", "underline");
-	})
-	
 	$("#lente-ingrandimento").on("click", function() {
 	      $("#input-ricerca").toggleClass("nascondi-input-ricerca"); // Alterna la visualizzazione della barra di ricerca
 	  });
