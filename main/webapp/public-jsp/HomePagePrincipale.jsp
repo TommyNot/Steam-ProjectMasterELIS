@@ -15,12 +15,11 @@
 </head>
 <body>
 	<div class="container-fluid">
-	    <!-- Navbar Section -->
 	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	    	<a class="navbar-brand" href="#">
 	            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	            width="90px" height="22px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
-	            xml:space="preserve">
+	            xml:space="preserve" style="margin-left: 10px;">
 	           <g>
 	           <path fill="#C5C3C0" d="M44.238,0.601C21,0.601,1.963,18.519,0.154,41.29l23.71,9.803c2.009-1.374,4.436-2.179,7.047-2.179
 	               c0.234,0,0.467,0.008,0.698,0.021l10.544-15.283c0-0.073-0.001-0.144-0.001-0.216c0-9.199,7.483-16.683,16.683-16.683

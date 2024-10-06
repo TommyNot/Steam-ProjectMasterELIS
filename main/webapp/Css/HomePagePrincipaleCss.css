@@ -375,6 +375,11 @@ form {
 	padding: 20px;
 }
 
+.slider{
+	display: flex;
+    align-items: center;
+}
+
 #button-previous{
     border-radius: 5px;
     height: 5vh;
