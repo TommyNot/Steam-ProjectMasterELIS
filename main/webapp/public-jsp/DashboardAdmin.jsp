@@ -40,7 +40,7 @@
                 <ul class="sub-menu">
                     <div>
                         <li><a href="#Ban" onclick="showSection('Ban')">Ban utente</a></li>
-                        <li><a href="#Elimina gioco" onclick="showSection('Elimina')">Elimina gioco</a></li>
+                        <li><a href="#Elimina" onclick="showSection('Elimina')">Elimina gioco</a></li>
                     </div>
                 </ul>
             </li>
@@ -56,8 +56,8 @@
                 </button>
                 <ul class="sub-menu">
                     <div>
-                        <li><a href="#Gestisci offerte">Gestisci offerte</a></li>
-                        <li><a href="#Crea offerta">Crea offerta</a></li>
+                        <li><a href="#Gestisci" onclick="showSection('Gestisci')">Gestisci offerte</a></li>
+                        <li><a href="#Crea" onclick="showSection('Crea')">Crea offerta</a></li>
                     </div>
                 </ul>
             </li>
@@ -73,8 +73,8 @@
                 </button>
                 <ul class="sub-menu">
                     <div>
-                        <li><a href="#Visualizza utenti">Visualizza utenti</a></li>
-                        <li><a href="#Cerca utente">Cerca utente</a></li>
+                        <li><a href="#Visualizza" onclick="showSection('Visualizza')">Visualizza utenti</a></li>
+                        <li><a href="#Cerca" onclick="showSection('Cerca')">Cerca utente</a></li>
                     </div>
                 </ul>
             </li>
@@ -86,6 +86,22 @@
         </div>
         <div class="container " id="Ban">
             <h2>ciao</h2>
+        </div>
+        <div class="container " id="Elimina">
+            <h2>elimina</h2>
+        </div>
+
+        <div class="container " id="Gestisci">
+            <h2>Gestisci offerta</h2>
+        </div>
+        <div class="container" id="Crea">
+            <h2>crea offerta</h2>
+        </div>
+        <div class="container" id="Visualizza">
+            <h2>Visualizza utenti</h2>
+        </div>
+        <div class="container" id="Cerca">
+            <h2>Cerca utenti</h2>
         </div>
     </main>
 

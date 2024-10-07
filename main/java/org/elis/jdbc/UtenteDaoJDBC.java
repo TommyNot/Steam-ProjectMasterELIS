@@ -33,7 +33,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     @Override
     public List<Utente> findAll() {
         List<Utente> utente = new ArrayList<>();
-        String query = "SELECT * FROM UTENTE";
+        String query = "SELECT Ruolo,Username,Email,Data_creazione,Data_ultima_modifica FROM UTENTE";
         
         try (
             Connection c = JdbcDaoFactory.getConnection();
@@ -45,7 +45,6 @@ public class UtenteDaoJDBC implements UtenteDao {
                 int ruoloInt = rs.getInt("Ruolo");
                 String username = rs.getString("Username");
                 String email = rs.getString("Email");
-                String password = rs.getString("Password");
                 Timestamp dataCreazione=rs.getTimestamp("data_creazione");
                 LocalDateTime data_creazione = dataCreazione != null ? dataCreazione.toLocalDateTime() : null;
                 Timestamp dataModifica=rs.getTimestamp("data_ultima_modifica");
@@ -62,7 +61,6 @@ public class UtenteDaoJDBC implements UtenteDao {
                 
                 u.setUsername(username);
                 u.setEmail(email);
-                u.setPassword(password);
                 u.setData_creazione(data_creazione);
                 u.setData_modifica(data_modifica);
                 
