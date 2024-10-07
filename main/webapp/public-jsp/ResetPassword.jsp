@@ -52,7 +52,7 @@
     </div>
  
     <div class="container" id="container">
-		<form action="<%=request.getContextPath()%>/PaginaResetPasswordServlet" method="post">
+		<form action="<%=request.getContextPath()%>/UtenteRipristinaPasswordServlet" method="post">
 			<h1>Reset password</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
