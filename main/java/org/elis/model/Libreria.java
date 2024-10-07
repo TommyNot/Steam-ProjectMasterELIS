@@ -1,6 +1,7 @@
 package org.elis.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Libreria {
 	
@@ -8,7 +9,8 @@ public class Libreria {
 	private LocalDateTime data_creazione;
 	private LocalDateTime data_ultima_modifica;
 	private String nome;
-	Utente utente;
+	private Utente utente;
+	private List<Gioco> giochiAcquistati;
 	
 	public Libreria(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
 			Utente utente) {

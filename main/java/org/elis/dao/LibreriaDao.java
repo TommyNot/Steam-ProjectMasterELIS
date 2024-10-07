@@ -3,14 +3,15 @@ package org.elis.dao;
 import java.util.List;
 
 import org.elis.model.Libreria;
+import org.elis.model.Utente;
 
 public interface LibreriaDao {
 	
-	Libreria add();
+	Libreria add(String nome, long id_utente);
 	List<Libreria> findAll();
-	Libreria findByName();
-	Libreria updateNome();
-	Libreria deleteByName();
+	Libreria findByName(String nome);
+	Libreria updateNome(long id, String nome);
+	Libreria deleteById(long id);
 	
 
 }
