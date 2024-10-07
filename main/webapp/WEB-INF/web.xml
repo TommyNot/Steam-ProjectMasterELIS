@@ -172,4 +172,14 @@
     <servlet-name>UtenteRipristinaPasswordServlet</servlet-name>
     <url-pattern>/UtenteRipristinaPasswordServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TrovaTuttiUtentiServlet</display-name>
+    <servlet-name>TrovaTuttiUtentiServlet</servlet-name>
+    <servlet-class>org.elis.controller.TrovaTuttiUtentiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrovaTuttiUtentiServlet</servlet-name>
+    <url-pattern>/TrovaTuttiUtentiServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
