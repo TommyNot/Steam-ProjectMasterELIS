@@ -9,8 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +33,7 @@ import org.elis.model.Utente;
 /**
  * Servlet implementation class addGiocoServlet
  */
-
+@MultipartConfig(maxFileSize=1024*1024*20, maxRequestSize=1024*1024*50)
 public class GiocoAggiungiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,8 +53,11 @@ public class GiocoAggiungiServlet extends HttpServlet {
         String dataRilascio = request.getParameter("dataRilascio"); 
         String descrizione = request.getParameter("descrizione");
         Part immaginePart = request.getPart("immagine"); 
-     
         
+     
+        salvaImmagineSuFile(immaginePart, request);
+        
+        String nomeFile = immaginePart.getSubmittedFileName();
 
         String prezzo = request.getParameter("prezzo");
         String offerta = request.getParameter("offerta"); 
@@ -164,7 +171,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
                 boolean isPublisher = u.getRuolo() == Ruolo.PUBLISHER;
                 if (isPublisher) {
                     System.out.println("L'utente è un Publisher.");
-                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione,immagineNome, prezzoDouble, genereSelezionato , offertaSelezionata, u);
+                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione,nomeFile , prezzoDouble, genereSelezionato , offertaSelezionata, u);
                     if (aggiunto != null) {
                         response.sendRedirect("successPage.jsp");
                     } else {
@@ -181,6 +188,29 @@ public class GiocoAggiungiServlet extends HttpServlet {
             System.out.println("Nessun utente loggato trovato nella sessione.");
         }
 
+    }
+    
+    void salvaImmagineSuFile(Part filePart, HttpServletRequest request) {
+    	File file = new File(request.getServletContext().getRealPath("/")+"risorse-media/img_giochi/"+filePart.getSubmittedFileName());
+    	if(!file.exists()) {
+    		try {
+				file.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	try(InputStream fis= filePart.getInputStream();
+    		OutputStream os = new FileOutputStream(file)){
+    		byte[] buffer = new byte[1024];
+    		int byteRead = 0;
+    		while((byteRead=fis.read(buffer))!=-1) {
+    			os.write(buffer);
+    		}
+    	} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
 }

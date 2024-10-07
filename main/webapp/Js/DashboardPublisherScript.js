@@ -12,6 +12,8 @@ function showSection(sectionId) {
     activeSection.classList.add('active');
 }
 
+
+
 document.getElementById('add-product-btn').addEventListener("click",function(){
 	
 	document.getElementById('add-product-form').style.display = "block";
@@ -21,6 +23,12 @@ document.getElementById('cancel-add-product').addEventListener("click",function(
 	
 	document.getElementById('add-product-form').style.display = 'none';
 })
+
+
+
+
+
+
 
 document.getElementById('remove-product-btn').addEventListener("click", function() {
     document.getElementById('remove-product-form').style.display = "block";
