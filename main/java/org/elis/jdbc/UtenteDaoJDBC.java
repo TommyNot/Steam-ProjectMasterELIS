@@ -201,16 +201,15 @@ public class UtenteDaoJDBC implements UtenteDao {
     @Override
     public Utente selectById(long id) {
         String query = "SELECT id, ruolo, username, email, password, data_creazione, data_ultima_modifica FROM utente WHERE id = ?";
-        Utente u = null;
+        Utente u = null; // Inizializzazione dell'oggetto Utente
 
-        try (
-            Connection c = JdbcDaoFactory.getConnection();
-            PreparedStatement ps = c.prepareStatement(query)
-        ) {
-            ps.setLong(1, id); 
+        try (Connection c = JdbcDaoFactory.getConnection();
+             PreparedStatement ps = c.prepareStatement(query)) {
+            
+            ps.setLong(1, id);
             
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
+                if (rs.next()) {  // Controlla se ci sono risultati
                     u = new Utente();
                     u.setId(rs.getLong("id"));
                     u.setUsername(rs.getString("username"));
@@ -223,7 +222,7 @@ public class UtenteDaoJDBC implements UtenteDao {
                         u.setRuolo(ruoli[ruoloInt]);
                     } else {
                         System.out.println("Ruolo non valido per l'utente con ID: " + id);
-                        return null;
+                        return null;  // Ruolo non valido, ritorna null
                     }
 
                     Timestamp dataCreazione = rs.getTimestamp("data_creazione");
@@ -231,18 +230,21 @@ public class UtenteDaoJDBC implements UtenteDao {
                     Timestamp dataModifica = rs.getTimestamp("data_ultima_modifica");
                     u.setData_modifica(dataModifica != null ? dataModifica.toLocalDateTime() : null);
 
-                    System.out.println("Utente trovato con successo: "+ u.getUsername() + " " + u.getEmail() + " "+ u.getData_creazione() + " " + u.getData_modifica() + " " + u.getRuolo());
+                    System.out.println("Utente trovato con successo: " + u.getUsername() + ", " + u.getEmail() + ", " + u.getData_creazione() + ", " + u.getData_modifica() + ", " + u.getRuolo());
                 } else {
-                    System.out.println("Utente non trovato con ID: " + id);
+                    // Se non si trova l'utente, informa l'utente o registra l'errore
+                    System.out.println("Nessun utente trovato con ID: " + id);
                 }
             }
         } catch (SQLException e) {
+            System.err.println("Errore SQL durante la selezione dell'utente: " + e.getMessage());
             e.printStackTrace();
-        } catch (Exception e1) {
-            e1.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Errore generico: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        return u;
+        return u;  // Restituisce l'utente trovato o null se non trovato
     }
 
 
@@ -375,6 +377,7 @@ public class UtenteDaoJDBC implements UtenteDao {
             if (rs.next()) {
             	
                 Utente utente = new Utente();
+                utente.setId(rs.getLong("id"));
                 utente.setUsername(rs.getString("username"));
                 utente.setEmail(rs.getString("email"));
                 utente.setPassword(rs.getString("password"));

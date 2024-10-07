@@ -42,11 +42,11 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, String immagine, double prezzo, Genere genere, Offerta offerta, long idUtente) {
+    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, String immagine, double prezzo, Genere genere, Offerta offerta, Utente u) {
 
-        String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, eliminato, prezzo,id_offerta, id_casa_editrice)"
-                                 + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        
+        String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, prezzo,id_offerta, id_casa_editrice)"
+                                 + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+
         String querySelectUtente = "SELECT id, ruolo FROM utente WHERE id = ?";
         
         String queryInsertGenereGioco = "INSERT INTO genere_gioco(id_genere, id_gioco) VALUES(?, ?)";
@@ -57,20 +57,12 @@ public class GiocoDaoJDBC implements GiocoDao{
             PreparedStatement inserimentoGioco = c.prepareStatement(queryInsertGioco, Statement.RETURN_GENERATED_KEYS);
             PreparedStatement inserimentoGenereGioco = c.prepareStatement(queryInsertGenereGioco);
         ) {
-            
-            // Verifica utente publisher
-            selectUtente.setLong(1, idUtente);
+            // Verifica se l'utente esiste
+            selectUtente.setLong(1, u.getId());
             ResultSet resultSetUtente = selectUtente.executeQuery();
-
-            boolean userIsPublisher = false;
-            if (resultSetUtente.next()) {
-                int ruoloInt = resultSetUtente.getInt("ruolo");
-                Ruolo[] ruoli = Ruolo.values();
-                userIsPublisher = ruoli[ruoloInt] == Ruolo.PUBLISHER;
-            }
-
-            if (!userIsPublisher) {
-                System.out.println("L'utente non è un publisher.");
+            
+            if (!resultSetUtente.next()) {
+                System.out.println("Errore: Nessun utente trovato con ID: " + u.getId());
                 return null;
             }
 
@@ -87,7 +79,7 @@ public class GiocoDaoJDBC implements GiocoDao{
                 inserimentoGioco.setNull(6, Types.BIGINT);
             }
 
-            inserimentoGioco.setLong(7, idUtente);
+            inserimentoGioco.setLong(7, u.getId());
 
             try {
                 int aggiornamento = inserimentoGioco.executeUpdate();
@@ -98,15 +90,12 @@ public class GiocoDaoJDBC implements GiocoDao{
                     if (recuperIdGioco.next()) {
                         long giocoId = recuperIdGioco.getLong(1);
 
-                        
-                            inserimentoGenereGioco.setLong(1, genere.getId());
-                            inserimentoGenereGioco.setLong(2, giocoId);
-                            inserimentoGenereGioco.executeUpdate();
-                        
+                        inserimentoGenereGioco.setLong(1, genere.getId());
+                        inserimentoGenereGioco.setLong(2, giocoId);
+                        inserimentoGenereGioco.executeUpdate();
                     }
                 }
 
-                // Creazione Gioco
                 Gioco nuovoGioco = new Gioco();
                 nuovoGioco.setNome(nome);
                 nuovoGioco.setData_rilascio(dataRilascio);
@@ -115,33 +104,24 @@ public class GiocoDaoJDBC implements GiocoDao{
                 nuovoGioco.setPrezzo(prezzo);
                 nuovoGioco.setGenere(genere);
                 nuovoGioco.setOfferta(offerta);
-                nuovoGioco.setIdUtente(idUtente);
+                nuovoGioco.setIdUtente(u.getId());
 
                 System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
                 return nuovoGioco;
 
             } catch (SQLException e) {
-                
-                if (e.getSQLState().equals("23000")) { // Stato SQL per mysql stackoverflow non sicuro
-                    System.out.println("Errore: il gioco con questo nome esiste già.");
-                } else {
-                    System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
-                }
+                System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
+                e.printStackTrace();
             }
-
-        } catch (SQLException e) {
-        	
-            System.out.println("Errore di connessione al database: " + e.getMessage());
             
-            e.printStackTrace();
         } catch (Exception e) {
-        	
             System.out.println("Errore generico: " + e.getMessage());
             e.printStackTrace();
         }
 
         return null;
     }
+
 
 
 	@Override
@@ -278,11 +258,15 @@ public class GiocoDaoJDBC implements GiocoDao{
 	public Gioco deleteGioco(long id) {
 	    String findQuery = "SELECT * FROM gioco WHERE id = ?";
 	    String deleteQuery = "DELETE FROM gioco WHERE id = ?";
+	    String deleteGenereGioco = "DELETE FROM genere_gioco WHERE id_gioco = ?";
 	    
 	    try (
+	    	
 	        Connection c = JdbcDaoFactory.getConnection();
 	        PreparedStatement findPs = c.prepareStatement(findQuery);
 	        PreparedStatement deletePs = c.prepareStatement(deleteQuery);
+	    	PreparedStatement deleteGg = c.prepareStatement(deleteGenereGioco);
+	    		
 	    ) {
 	        
 	        findPs.setLong(1, id);
@@ -299,6 +283,16 @@ public class GiocoDaoJDBC implements GiocoDao{
 	                gioco.setPrezzo(rs.getDouble("prezzo"));
 	                
 	                
+	                deleteGg.setLong(1, id);
+	                int aggiornamentoGiocoGenere = deleteGg.executeUpdate();
+	                
+	                if(aggiornamentoGiocoGenere == 0) {
+	                	
+	                	System.out.println("Nessun gioco eliminato, nome non trovato");
+	                    
+	                }
+	
+	                
 	                deletePs.setLong(1, id);
 	                int aggiornamento = deletePs.executeUpdate();
 	                
@@ -313,6 +307,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	                System.out.println("Nessun gioco trovato con id: " + id);
 	                return null; 
 	            }
+	            
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();

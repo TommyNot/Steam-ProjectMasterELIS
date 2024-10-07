@@ -50,10 +50,10 @@ public static Utente UtenteFindById(long id) {
 	return DaoFactory.getDaoFactory().getUtenteDao().selectById(id);
 }
 
-public static Gioco GiocoAdd(String nome, LocalDate data, String descrizione, String immagine, double prezzo,Genere genereSelezionato , Offerta offerta,long idUtente) {
+public static Gioco GiocoAdd(String nome, LocalDate data, String descrizione, String immagine, double prezzo,Genere genereSelezionato , Offerta offerta,Utente u) {
 	
 
-	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,data,descrizione,immagine,prezzo,genereSelezionato,offerta,idUtente);
+	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,data,descrizione,immagine,prezzo,genereSelezionato,offerta,u);
 
 }
 

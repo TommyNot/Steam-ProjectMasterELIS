@@ -11,7 +11,7 @@ import org.elis.model.Utente;
 
 public interface GiocoDao {
 	
-	Gioco add(String nome,LocalDate data, String descrizione, String immagine, double prezzo, Genere genereSelezionato,Offerta offerta,long utente);
+	Gioco add(String nome,LocalDate data, String descrizione, String immagine, double prezzo, Genere genereSelezionato,Offerta offerta,Utente u);
 	List<Gioco> findAll();
 	Gioco findByName(String nome);
 	Gioco findGiocoById(long id);

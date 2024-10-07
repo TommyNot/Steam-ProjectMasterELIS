@@ -48,9 +48,12 @@ public class GiocoAggiungiServlet extends HttpServlet {
         String prezzo = request.getParameter("prezzo");
         String offerta = request.getParameter("offerta"); 
         String generi = request.getParameter("genere");
+        
+        System.out.println(offerta);
+        System.out.println(generi);
 
         long idUtente = 0;
-        boolean isPublisher = false;
+        
 
         
         if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || immagine == null || prezzo == null) {
@@ -88,26 +91,51 @@ public class GiocoAggiungiServlet extends HttpServlet {
       
         
         Genere genereSelezionato = null;
-        // Logica per i generi
-        if (generi != null && !generi.isEmpty()) {
-            long genereId= Long.parseLong(generi);
-            // Recupera l'oggetto Offerta utilizzando la logica di business
-            genereSelezionato = BusinessLogic.getGenereById(genereId);
-            request.setAttribute("genereSelezionato", genereSelezionato);
-            System.out.println("errrore genere");
+        
+        if(generi == null) {
+        	
+        	System.out.println("errore");
         }
+        
+        long genereId;
+        
+        try {
+        	genereId= Long.parseLong(generi);
+        	genereSelezionato = BusinessLogic.getGenereById(genereId);
+        	System.out.println("fin qui tutto bene");
+        	
+        }catch(Exception e) {
+        	
+        	e.printStackTrace();
+        }
+        
+ 
+        
+        
         
         Offerta offertaSelezionata = null;
 
-        if (offerta != null && !offerta.isEmpty()) {
-            long offertaId = Long.parseLong(offerta);
-            // Recupera l'oggetto Offerta utilizzando la logica di business
-            offertaSelezionata = BusinessLogic.findOffertaById(offertaId);
-            request.setAttribute("offertaSelezionata", offertaSelezionata); 
-            System.out.println("errore offerta");
+        if (offerta == null) {
+        	
+        	System.out.println("errore offerta");
+            
             
         }
-
+        
+        long offertaId;
+        
+        try {
+        	
+        	offertaId = Long.parseLong(offerta);
+        	offertaSelezionata = BusinessLogic.findOffertaById(offertaId);
+        	System.out.println("qui tutto bene");
+        	
+        }catch(NumberFormatException e ){
+        	
+        	e.printStackTrace();
+        	
+        }
+        
 
         // Controllo sessione
         if (sessione == null) {
@@ -115,26 +143,36 @@ public class GiocoAggiungiServlet extends HttpServlet {
             return;
         }
 
-        Object obj = sessione.getAttribute("utente");
+        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+        
+        
 
-        if (obj instanceof Utente) {
-            Utente utente = (Utente) obj;
-            idUtente = utente.getId();
-            isPublisher = utente.getRuolo() == Ruolo.PUBLISHER;
+        if (utente != null) {
+            long idUtente1 =  utente.getId();
+            System.out.println("ID Utente loggato: " + idUtente1);
+            
+            Utente u = BusinessLogic.UtenteFindById(idUtente1);
+            if (u != null) {
+                boolean isPublisher = u.getRuolo() == Ruolo.PUBLISHER;
+                if (isPublisher) {
+                    System.out.println("L'utente è un Publisher.");
+                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagine, prezzoDouble, genereSelezionato , offertaSelezionata, u);
+                    if (aggiunto != null) {
+                        response.sendRedirect("successPage.jsp");
+                    } else {
+                        request.setAttribute("errore", "Errore nell'aggiunta del gioco.");
+                        request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+                    }
+                } else {
+                    System.out.println("L'utente non è un Publisher.");
+                }
+            } else {
+                System.out.println("Errore: utente non trovato con ID: " + idUtente1);
+            }
+        } else {
+            System.out.println("Nessun utente loggato trovato nella sessione.");
         }
 
-        if (isPublisher) {
-            Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagine, prezzoDouble, genereSelezionato , offertaSelezionata, idUtente);
-            if (aggiunto != null) {
-                response.sendRedirect("successPage.jsp");
-            } else {
-                request.setAttribute("errore", "Errore nell'aggiunta del gioco.");
-                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
-            }
-        } 
     }
-
-		
-	
-
+    
 }

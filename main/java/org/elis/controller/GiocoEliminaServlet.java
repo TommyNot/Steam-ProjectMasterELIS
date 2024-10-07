@@ -33,7 +33,7 @@ public class GiocoEliminaServlet extends HttpServlet {
         
         String eliminaGiocoNome = request.getParameter("productId");
         
-        long idGioco = Long.parseLong(eliminaGiocoNome);
+        long idGioco=0;
         
         HttpSession sessione = request.getSession(false);
         if (sessione == null) {
@@ -55,6 +55,17 @@ public class GiocoEliminaServlet extends HttpServlet {
             request.setAttribute("errore", errore); 
             request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return; 
+        }
+        
+       
+        
+        try {
+        	
+        	idGioco = Long.parseLong(eliminaGiocoNome);
+        	
+        }catch(Exception e) {
+        	
+        	System.out.println("errore");
         }
 
         

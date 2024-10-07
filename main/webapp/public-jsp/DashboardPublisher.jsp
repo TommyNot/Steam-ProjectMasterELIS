@@ -89,7 +89,7 @@
                     <li><a href="#" onclick="showSection('prodotti')">Prodotti</a></li>
                     <li><a href="#" onclick="showSection('statistiche')">Statistiche</a></li>
                     <li><a href="#" onclick="showSection('impostazioni')">Impostazioni</a></li>
-                    <li><a href="#" onclick="logout()">Logout</a></li>
+                    <li><a href="<%= request.getContextPath()%>/LogoutServlet" >Logout</a></li>
                 </ul>
             </nav>
         </header>
@@ -147,7 +147,7 @@
 
 
 				
-				        
+				         
 				
 				        <button type="submit" class="btn btn-success">Aggiungi Prodotto</button>
 				        <button type="button" id="cancel-add-product" class="btn btn-secondary">Annulla</button>
