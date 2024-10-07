@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"  import="java.util.List, org.elis.model.Utente" %>
+    pageEncoding="UTF-8" %>
 
 <%@ page import="java.util.List" %>
 <%@ page import="org.elis.model.Gioco" %>
@@ -66,9 +66,10 @@
                     <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
                     <%
                         Utente utente = (Utente) session.getAttribute("utenteLoggato");
+                    	long idUtente;
                         if (utente != null) {
                         	
-                        	long idUtente = utente.getId();
+                        	idUtente = utente.getId();
                     %>
                     <div id = "user">
                         <p>Benvenuto <%= utente.getUsername() %></p>
@@ -178,19 +179,24 @@
     				<button class="button" type="button" id="remove-product-btn">Elimina Prodotto</button>
 				    <p>Elenco dei tuoi giochi pubblicati e delle loro informazioni.</p>
 				    <div id="products-container">
-				        <% 
-				        List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi();
-				        if (giochi.isEmpty()) {
-				        %>
-				            <p>Nessun gioco disponibile.</p>
-				        <% 
-				        } else {
-				            for (Gioco gioco : giochi) { 
-				            	
-				            	long id = gioco.getId();
-				            	 System.out.println("ID Gioco: " + id); 
-				                Offerta offerta = gioco.getOfferta(); 
-				        %>
+				     <% 
+				     Utente utenteGioco = (Utente) session.getAttribute("utenteLoggato");
+                 		long idUtenteGioco;
+			            
+			            if (utenteGioco != null) {
+			            	idUtenteGioco = utenteGioco.getId();
+			            	System.out.println(utenteGioco.getId());//visualizza id utente controllo da levare dopo 
+			                List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(idUtenteGioco);
+			                if (giochi.isEmpty()) {
+			        %>
+                    <p>Nessun gioco disponibile.</p>
+        			<% 
+                			} else {
+                   					 for (Gioco gioco : giochi) { 
+                        				long id = gioco.getId(); 
+                        				System.out.println(gioco.getId());// controllo id gioco da levare dopo
+                       					 Offerta offerta = gioco.getOfferta(); 
+       							 %>
 				                <div id="product-<%= gioco.getId() %>" class="single-product">
 				                    <div class="part-1">
 				                        <% if (offerta != null) { %>
@@ -218,6 +224,7 @@
 				        <% 
 				            }
 				        } 
+			            }
 				        %>
 				    </div>
 			</section>

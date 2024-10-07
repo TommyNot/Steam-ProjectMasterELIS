@@ -724,7 +724,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	public List<Gioco> VisualizzaGiochiPerUtente(long idUtente) {
 	    List<Gioco> giochi = new ArrayList<>();
 	    
-	    String sql = "SELECT * FROM giochi WHERE id_utente = ?";
+	    String sql = "SELECT * FROM gioco WHERE id_casa_editrice = ?";
 
 	    try (
 	        Connection c = JdbcDaoFactory.getConnection();
@@ -753,7 +753,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 				
 				
 				giochi.add(g);
-
+				
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
