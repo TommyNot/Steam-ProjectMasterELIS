@@ -36,7 +36,7 @@ public class PaginaResetPasswordServlet extends HttpServlet {
 			return;
 		}
 
-		long idUtente = (Long) session.getAttribute("utenteLogato");
+		long idUtente = (Long) session.getAttribute("utenteLoggato");
 
 		String passwordVecchia = request.getParameter("passwordVecchia");
 		String passwordNuova = request.getParameter("passwordNuova");
