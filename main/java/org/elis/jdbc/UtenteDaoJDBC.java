@@ -33,7 +33,7 @@ public class UtenteDaoJDBC implements UtenteDao {
     @Override
     public List<Utente> findAll() {
         List<Utente> utente = new ArrayList<>();
-        String query = "SELECT Ruolo,Username,Email,Data_creazione,Data_ultima_modifica FROM UTENTE";
+        String query = "SELECT Ruolo,Id,Username,Email,Data_creazione,Data_ultima_modifica FROM UTENTE";
         
         try (
             Connection c = JdbcDaoFactory.getConnection();
@@ -43,6 +43,7 @@ public class UtenteDaoJDBC implements UtenteDao {
             while (rs.next()) {
                 Utente u = new Utente();
                 int ruoloInt = rs.getInt("Ruolo");
+                long Id=rs.getLong("Id");
                 String username = rs.getString("Username");
                 String email = rs.getString("Email");
                 Timestamp dataCreazione=rs.getTimestamp("data_creazione");
@@ -58,7 +59,7 @@ public class UtenteDaoJDBC implements UtenteDao {
                 if (ruoloInt >= 0 && ruoloInt < ruoli.length) {
                     u.setRuolo(ruoli[ruoloInt]);
                 }
-                
+                u.setId(Id);
                 u.setUsername(username);
                 u.setEmail(email);
                 u.setData_creazione(data_creazione);

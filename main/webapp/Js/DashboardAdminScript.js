@@ -56,3 +56,11 @@ function showSection(sectionId) {
             activeContainer.classList.remove('hidden'); 
             activeContainer.classList.add('active'); 
         }
+		
+ 	window.onload = function() {
+		   fetch('/SteamProject/TrovaTuttiUtentiServlet')
+		      .then(response => response.text())
+		      .then(data => {
+		        document.getElementById('Visualizza').innerHTML = data;
+		      });
+		  };
