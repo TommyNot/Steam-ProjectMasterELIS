@@ -1,13 +1,16 @@
 package org.elis.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,6 +29,7 @@ import org.elis.model.Utente;
 /**
  * Servlet implementation class addGiocoServlet
  */
+
 public class GiocoAggiungiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,7 +48,10 @@ public class GiocoAggiungiServlet extends HttpServlet {
         String nome = request.getParameter("nome");
         String dataRilascio = request.getParameter("dataRilascio"); 
         String descrizione = request.getParameter("descrizione");
-        String immagine = request.getParameter("immagine");
+        Part immaginePart = request.getPart("immagine"); 
+     
+        
+
         String prezzo = request.getParameter("prezzo");
         String offerta = request.getParameter("offerta"); 
         String generi = request.getParameter("genere");
@@ -52,11 +59,11 @@ public class GiocoAggiungiServlet extends HttpServlet {
         System.out.println(offerta);
         System.out.println(generi);
 
-        long idUtente = 0;
+       
         
 
         
-        if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || immagine == null || prezzo == null) {
+        if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || immaginePart == null || prezzo == null) {
             request.setAttribute("errore", "Tutti i campi sono obbligatori.");
             request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return;
@@ -136,6 +143,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
         	
         }
         
+        
 
         // Controllo sessione
         if (sessione == null) {
@@ -156,7 +164,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
                 boolean isPublisher = u.getRuolo() == Ruolo.PUBLISHER;
                 if (isPublisher) {
                     System.out.println("L'utente è un Publisher.");
-                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagine, prezzoDouble, genereSelezionato , offertaSelezionata, u);
+                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione,immagineNome, prezzoDouble, genereSelezionato , offertaSelezionata, u);
                     if (aggiunto != null) {
                         response.sendRedirect("successPage.jsp");
                     } else {

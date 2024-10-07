@@ -103,7 +103,7 @@
                 <p>Qui puoi gestire i tuoi giochi, visualizzare le vendite, le recensioni e controllare lo stock.</p>
             </section>
                 <div id="add-product-form" class="edit-form-container" style="display: none;">
-				    <form action="<%= request.getContextPath()%>/GiocoAggiungiServlet" method="post">
+				    <form action="<%= request.getContextPath()%>/GiocoAggiungiServlet" method="post" enctype="multipart/form-data">
 				        <label for="nome">Nome Gioco:</label>
 				        <input type="text" id="nome" name="nome" required>
 				
@@ -113,8 +113,8 @@
 				        <label for="descrizione">Descrizione:</label>
 				        <input type="text" id="descrizione" name="descrizione" required>
 				
-				        <label for="immagine">Inserisci Immagine:</label>
-				        <input type="text" id="immagine" name="immagine" required>
+				        <label for="immagine">Carica Immagine:</label>
+    					<input type="file" name="immagine" accept="image/*" size=35 required><br>
 				
 				        <label for="prezzo">Prezzo:</label>
 				        <input type="number" id="prezzo" name="prezzo" required>
