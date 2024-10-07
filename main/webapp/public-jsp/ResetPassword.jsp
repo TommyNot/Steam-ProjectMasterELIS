@@ -11,6 +11,7 @@
 <body>
     <div id="logo">
         <nav>
+        <a  href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp">
            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 				 width="300px" height="189px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
 				 xml:space="preserve">
@@ -46,6 +47,7 @@
 					H289.066z M288.207,32.142h0.814c0.527,0,0.838-0.331,0.838-0.747c0-0.42-0.223-0.69-0.84-0.69h-0.813V32.142z"/>
 			</g>
 			</svg>
+			</a>
         </nav>
     </div>
  
