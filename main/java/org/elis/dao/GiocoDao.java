@@ -17,6 +17,7 @@ public interface GiocoDao {
 	Gioco findGiocoById(long id);
 	List<Gioco> findGiocoGenereByGenere(Genere genere);
 	List<Gioco> findGiocoOffertaByOfferta(Offerta offerta);
+	List<Gioco> VisualizzaGiochiPerUtente(long idUtente);
 	Gioco updateGiocoNome(long id,String nome);
 	Gioco updateGiocoDataRilascio(long id,LocalDateTime data);
 	Gioco updateGiocoDescrzione(long id,String descrzione);

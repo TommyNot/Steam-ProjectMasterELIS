@@ -720,8 +720,49 @@ public class GiocoDaoJDBC implements GiocoDao{
 	    return null;
 	}
 
+	@Override
+	public List<Gioco> VisualizzaGiochiPerUtente(long idUtente) {
+	    List<Gioco> giochi = new ArrayList<>();
+	    
+	    String sql = "SELECT * FROM giochi WHERE id_utente = ?";
 
+	    try (
+	        Connection c = JdbcDaoFactory.getConnection();
+	        PreparedStatement ps = c.prepareStatement(sql)) {
+	        
+	        ps.setLong(1, idUtente);
+	        ResultSet rs = ps.executeQuery();
 
+	        while (rs.next()) {
+	        	Gioco g = new Gioco();
+				
+				String nome = rs.getString("nome");
+				LocalDate dataRilascio = rs.getDate("data_rilascio").toLocalDate();
+				String descrzione = rs.getString("descrizione");
+				String immagine = rs.getString("immagine");
+				
+				double prezzo = rs.getDouble("prezzo");
+				
+				g.setId(rs.getInt("id"));
+				g.setNome(nome);
+				g.setData_rilascio(dataRilascio);
+				g.setDescrzione(descrzione);
+				g.setImmagine(immagine);
+				
+				g.setPrezzo(prezzo);
+				
+				
+				giochi.add(g);
+
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e1) {
+	        e1.printStackTrace();
+	    }
+
+	    return giochi;
+	}
 
 
 

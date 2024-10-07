@@ -67,6 +67,8 @@
                     <%
                         Utente utente = (Utente) session.getAttribute("utenteLoggato");
                         if (utente != null) {
+                        	
+                        	long idUtente = utente.getId();
                     %>
                     <div id = "user">
                         <p>Benvenuto <%= utente.getUsername() %></p>
@@ -184,6 +186,7 @@
 				        <% 
 				        } else {
 				            for (Gioco gioco : giochi) { 
+				            	
 				            	long id = gioco.getId();
 				            	 System.out.println("ID Gioco: " + id); 
 				                Offerta offerta = gioco.getOfferta(); 
