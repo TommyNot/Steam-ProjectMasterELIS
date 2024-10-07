@@ -45,3 +45,14 @@ function closeAllSubmenu(){
     })
 }
 
+function showSection(sectionId) {
+            const containers = document.querySelectorAll('main div.container');
+            containers.forEach(container => {
+                container.classList.add('hidden');
+                container.classList.remove('active');
+            });
+
+            const activeContainer = document.getElementById(sectionId);
+            activeContainer.classList.remove('hidden'); 
+            activeContainer.classList.add('active'); 
+        }

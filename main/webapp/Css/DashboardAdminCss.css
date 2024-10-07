@@ -137,11 +137,19 @@ main p{
     margin-top: 5px;
     margin-bottom: 15px;
 }
-.container{
+div.container.active {
+            display: block; 
+        }
+        
+div.container.hidden {
+            display: none;
+        }
+div.container{
     border: 1px solid var(--line-clr);
     border-radius: 1em;
     margin-bottom: 20px;
     padding: min(3em,15%);
+    display: none;
     h2,p{
         margin-top: 1em;
     }
@@ -223,3 +231,4 @@ main p{
     }
 
 }
+
