@@ -125,7 +125,7 @@
 							        Genere genereSelezionato = (Genere) request.getAttribute("genereSelezionato"); 
 							        for (Genere genere : generi) {
 							    %>
-							        <option value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
+							        <option id="genere" value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
 							    <%
 							        }
 							    %>

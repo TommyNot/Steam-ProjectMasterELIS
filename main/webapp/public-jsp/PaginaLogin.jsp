@@ -85,7 +85,7 @@
 				<input type="checkbox" value="ricordami" id="ricordami" name="ricordami">
 				<label for="ricordami" id="rcd">Ricordami</label>
 			</div>
-			<a href="PaginaResetPassword">Password dimenticata?</a>
+			<a href="<%= request.getContextPath() %>/public-jsp/ResetPassword.jsp">Password dimenticata?</a>
 			<button type="submit">Login</button>
 		</form>
 	</div>
