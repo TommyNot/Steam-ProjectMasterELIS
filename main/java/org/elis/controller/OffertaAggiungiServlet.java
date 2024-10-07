@@ -38,8 +38,6 @@ public class OffertaAggiungiServlet extends HttpServlet {
 		String data_inizio = request.getParameter("data_inizio");
 		String data_fine = request.getParameter("data_fine");
 		
-		LocalDateTime dataCreazione = LocalDateTime.now();
-        LocalDateTime dataUltimaModifica = dataCreazione;
 		
 		
 		
@@ -63,11 +61,11 @@ public class OffertaAggiungiServlet extends HttpServlet {
         }
 
 		
-        LocalDate fine_offerta = null;
+        LocalDateTime fine_offerta = null;
         if (data_fine != null && !data_fine.isEmpty()) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH: mm:ss");
-                fine_offerta = LocalDate.parse(data_fine, formatter); 
+                fine_offerta = LocalDateTime.parse(data_fine, formatter); 
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data: " + e.getMessage());
                 request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
@@ -89,7 +87,42 @@ public class OffertaAggiungiServlet extends HttpServlet {
             return;
         }
         
+        
+        // Controllo sulla sessione
+        if (sessione == null) {
+            response.sendRedirect("public-jsp/LoginPage.jsp");
+            return;
+        }
 
+        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+        
+        
+       //Controllo sull'utente
+        if (utente != null) {
+            long idUtente =  utente.getId();
+            System.out.println("ID Utente loggato: " + idUtente);
+            
+            Utente u = BusinessLogic.UtenteFindById(idUtente);
+            if (u != null) {
+                boolean isAdmin= u.getRuolo() == Ruolo.ADMIN;
+                if (isAdmin) {
+                    System.out.println("L'utente è un Admin.");
+                    Offerta aggiunta = BusinessLogic.offertaAdd(nome, scontoDouble, inizio_offerta, fine_offerta);
+                    if (aggiunta != null) {
+                        response.sendRedirect("successPage.jsp");
+                    } else {
+                        request.setAttribute("errore", "Errore nell'aggiunta dell'offerta.");
+                        request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+                    }
+                } else {
+                    System.out.println("L'utente non è un Admin.");
+                }
+            } else {
+                System.out.println("Errore: utente non trovato con ID: " + idUtente);
+            }
+        } else {
+            System.out.println("Nessun utente loggato trovato nella sessione.");
+        }
 
     
 	}
