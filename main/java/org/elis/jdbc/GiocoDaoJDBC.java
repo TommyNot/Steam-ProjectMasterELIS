@@ -1,5 +1,6 @@
 package org.elis.jdbc;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.JDBCType;
 import java.sql.PreparedStatement;
@@ -42,13 +43,10 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, String immagine, double prezzo, Genere genere, Offerta offerta, Utente u) {
+    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, byte[] immagine, double prezzo, Genere genere, Offerta offerta, Utente u) {
 
-        String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, prezzo,id_offerta, id_casa_editrice)"
-                                 + " VALUES(?, ?, ?, ?, ?, ?, ?)";
-
+        String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, prezzo, id_offerta, id_casa_editrice) VALUES(?, ?, ?, ?, ?, ?, ?)";
         String querySelectUtente = "SELECT id, ruolo FROM utente WHERE id = ?";
-        
         String queryInsertGenereGioco = "INSERT INTO genere_gioco(id_genere, id_gioco) VALUES(?, ?)";
 
         try (
@@ -70,7 +68,12 @@ public class GiocoDaoJDBC implements GiocoDao{
             inserimentoGioco.setString(1, nome);
             inserimentoGioco.setTimestamp(2, Timestamp.valueOf(dataRilascio.atStartOfDay()));
             inserimentoGioco.setString(3, descrizione);
-            inserimentoGioco.setString(4, immagine);
+
+            // Creazione e impostazione del BLOB
+            Blob blobImmagine = c.createBlob();
+            blobImmagine.setBytes(1, immagine);
+            inserimentoGioco.setBlob(4, blobImmagine);
+
             inserimentoGioco.setDouble(5, prezzo);
 
             if (offerta != null) {
@@ -81,39 +84,36 @@ public class GiocoDaoJDBC implements GiocoDao{
 
             inserimentoGioco.setLong(7, u.getId());
 
-            try {
-                int aggiornamento = inserimentoGioco.executeUpdate();
+            int aggiornamento = inserimentoGioco.executeUpdate();
 
-                if (aggiornamento > 0) {
-                    ResultSet recuperIdGioco = inserimentoGioco.getGeneratedKeys();
-                    
-                    if (recuperIdGioco.next()) {
-                        long giocoId = recuperIdGioco.getLong(1);
+            if (aggiornamento > 0) {
+                ResultSet recuperIdGioco = inserimentoGioco.getGeneratedKeys();
+                
+                if (recuperIdGioco.next()) {
+                    long giocoId = recuperIdGioco.getLong(1);
 
-                        inserimentoGenereGioco.setLong(1, genere.getId());
-                        inserimentoGenereGioco.setLong(2, giocoId);
-                        inserimentoGenereGioco.executeUpdate();
-                    }
+                    inserimentoGenereGioco.setLong(1, genere.getId());
+                    inserimentoGenereGioco.setLong(2, giocoId);
+                    inserimentoGenereGioco.executeUpdate();
                 }
-
-                Gioco nuovoGioco = new Gioco();
-                nuovoGioco.setNome(nome);
-                nuovoGioco.setData_rilascio(dataRilascio);
-                nuovoGioco.setDescrzione(descrizione);
-                nuovoGioco.setImmagine(immagine);
-                nuovoGioco.setPrezzo(prezzo);
-                nuovoGioco.setGenere(genere);
-                nuovoGioco.setOfferta(offerta);
-                nuovoGioco.setIdUtente(u.getId());
-
-                System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
-                return nuovoGioco;
-
-            } catch (SQLException e) {
-                System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
-                e.printStackTrace();
             }
-            
+
+            Gioco nuovoGioco = new Gioco();
+            nuovoGioco.setNome(nome);
+            nuovoGioco.setData_rilascio(dataRilascio);
+            nuovoGioco.setDescrzione(descrizione);
+            nuovoGioco.setByteImmagine(immagine);
+            nuovoGioco.setPrezzo(prezzo);
+            nuovoGioco.setGenere(genere);
+            nuovoGioco.setOfferta(offerta);
+            nuovoGioco.setIdUtente(u.getId());
+
+            System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
+            return nuovoGioco;
+
+        } catch (SQLException e) {
+            System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
+            e.printStackTrace();
         } catch (Exception e) {
             System.out.println("Errore generico: " + e.getMessage());
             e.printStackTrace();
@@ -121,7 +121,6 @@ public class GiocoDaoJDBC implements GiocoDao{
 
         return null;
     }
-
 
 
 	@Override

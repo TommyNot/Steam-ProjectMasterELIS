@@ -52,12 +52,17 @@ public class GiocoAggiungiServlet extends HttpServlet {
         String nome = request.getParameter("nome");
         String dataRilascio = request.getParameter("dataRilascio"); 
         String descrizione = request.getParameter("descrizione");
-        Part immaginePart = request.getPart("immagine"); 
-        
-     
-        salvaImmagineSuFile(immaginePart, request);
-        
-        String nomeFile = immaginePart.getSubmittedFileName();
+        // Ricevi il file immagine
+        Part filePart = request.getPart("immagine");
+        byte[] immagineBytes = null;
+
+        if (filePart != null) {
+            // Converti l'input stream in un array di byte
+            try (InputStream inputStream = filePart.getInputStream()) {
+                immagineBytes = new byte[(int) filePart.getSize()];
+                inputStream.read(immagineBytes); // Leggi i byte dall'input stream
+            }
+        }
 
         String prezzo = request.getParameter("prezzo");
         String offerta = request.getParameter("offerta"); 
@@ -70,7 +75,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
         
 
         
-        if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || immaginePart == null || prezzo == null) {
+        if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || filePart == null || prezzo == null) {
             request.setAttribute("errore", "Tutti i campi sono obbligatori.");
             request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return;
@@ -149,8 +154,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
         	e.printStackTrace();
         	
         }
-        
-        
+     
 
         // Controllo sessione
         if (sessione == null) {
@@ -171,7 +175,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
                 boolean isPublisher = u.getRuolo() == Ruolo.PUBLISHER;
                 if (isPublisher) {
                     System.out.println("L'utente è un Publisher.");
-                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione,nomeFile , prezzoDouble, genereSelezionato , offertaSelezionata, u);
+                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagineBytes , prezzoDouble, genereSelezionato , offertaSelezionata, u);
                     if (aggiunto != null) {
                         response.sendRedirect("successPage.jsp");
                     } else {
@@ -190,27 +194,6 @@ public class GiocoAggiungiServlet extends HttpServlet {
 
     }
     
-    void salvaImmagineSuFile(Part filePart, HttpServletRequest request) {
-    	File file = new File(request.getServletContext().getRealPath("/")+"risorse-media/img_giochi/"+filePart.getSubmittedFileName());
-    	if(!file.exists()) {
-    		try {
-				file.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	}
-    	try(InputStream fis= filePart.getInputStream();
-    		OutputStream os = new FileOutputStream(file)){
-    		byte[] buffer = new byte[1024];
-    		int byteRead = 0;
-    		while((byteRead=fis.read(buffer))!=-1) {
-    			os.write(buffer);
-    		}
-    	} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
+
     
 }

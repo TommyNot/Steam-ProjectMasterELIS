@@ -169,6 +169,8 @@
 				        <button type="submit" class="btn btn-danger">Elimina Prodotto</button>
 				        <button type="button" id="cancel-remove-product" class="btn btn-secondary">Annulla</button>
 				    </form>
+	
+				    
 				</div>
 
 				
@@ -177,6 +179,22 @@
     				<h2>Prodotti</h2>
     				<button class="button" type="button" id="add-product-btn">Aggiungi Prodotto</button>
     				<button class="button" type="button" id="remove-product-btn">Elimina Prodotto</button>
+    				<form action="<%= request.getContextPath()%>/GiocoGenereRicercaServlet" method="get">
+						  <label for="genere">Filtri:</label>
+						  <select id="genere" name="genere">
+							<%
+							
+							        for (Genere genere : generi) {
+							    %>
+							        <option id="genere" value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
+							    <%
+							        }
+							    %>
+						    <!-- Aggiungi altre opzioni di genere -->
+						  </select>
+						  <input type="submit" value="Filtra">
+						</form>
+    				
 				    <p>Elenco dei tuoi giochi pubblicati e delle loro informazioni.</p>
 				    <div id="products-container">
 				     <% 
@@ -202,7 +220,8 @@
 				                        <% if (offerta != null) { %>
 				                            <span class="discount"><%= offerta.getSconto() + "% off" %></span>
 				                        <% } %>
-				                        <img class="product__image" alt="<%= gioco.getNome() %>" src="<%= request.getContextPath() + "/risorse-media/img_giochi/" + gioco.getImmagine() %>">
+				                        <img style='display:block; width:100px;height:100px;' id='base64image'
+    											src='data:image/jpeg;base64,<%= gioco.getByteImmagine() %>' />
 				                        <ul>
 				                       		 <li>
 				                        		<a id="btn-modifica" href="#" style="text-decoration: none;"><i class="bi bi-pencil-square"></i>Modifica</a>
@@ -261,7 +280,7 @@
             <p> @2024 Copywrite SteamFamilyPezzotto</p>
         </footer>
     </div>
-    
+
 
 
    <script src="<%= request.getContextPath() %>/Js/DashboardPublisherScript.js"></script>
