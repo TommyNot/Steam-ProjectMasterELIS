@@ -182,4 +182,14 @@
     <servlet-name>TrovaTuttiUtentiServlet</servlet-name>
     <url-pattern>/TrovaTuttiUtentiServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtenteFindByNameServlet</display-name>
+    <servlet-name>UtenteFindByNameServlet</servlet-name>
+    <servlet-class>org.elis.controller.UtenteFindByNameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtenteFindByNameServlet</servlet-name>
+    <url-pattern>/UtenteFindByNameServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
