@@ -39,6 +39,9 @@ document.getElementById('cancel-remove-product').addEventListener("click", funct
     toggleFormVisibility('remove-product-form', false);
 });
 
+console.log('${genere}');
+console.log('${giochi}')
+
 
 
 //Funzione per filtrare prodotti in base al genere
@@ -46,7 +49,7 @@ document.getElementById('cancel-remove-product').addEventListener("click", funct
 //quando non è submit no hidden product 
 
 document.getElementById("filtra").addEventListener("submit", function(event){
-    // Previene il comportamento predefinito del form
+    
     event.preventDefault();
     
     // Ottieni i dati dal form per filtrare i prodotti

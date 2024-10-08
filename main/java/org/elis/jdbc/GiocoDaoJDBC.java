@@ -179,6 +179,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 	public Gioco findByName(String nome) {
 		
 		String query = "SELECT * FROM gioco WHERE nome = ?";
+		Gioco g = null;
 		
 		try(
 				Connection c = JdbcDaoFactory.getConnection();
@@ -193,17 +194,21 @@ public class GiocoDaoJDBC implements GiocoDao{
 			
 			if(rs.next()) {
 				
-		          Gioco g = new Gioco();
+		           g = new Gioco();
+		          	g.setId(rs.getLong("id"));
 	                g.setNome(rs.getString("nome"));
 	                g.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
 	                g.setDescrzione(rs.getString("descrizione"));
 	                g.setImmagine(rs.getString("immagine"));
-	                g.setEliminato(rs.getBoolean("eliminato"));
 	                g.setPrezzo(rs.getDouble("prezzo"));
 	                
 	               System.out.println("gioco trovato");
-	                return g;
+	               
 				
+				
+			}else {
+				
+				System.out.println("errore");
 				
 			}
 			
@@ -215,7 +220,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return g;
 	}
 
 	@Override

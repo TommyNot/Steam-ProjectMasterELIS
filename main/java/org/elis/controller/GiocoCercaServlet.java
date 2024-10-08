@@ -27,12 +27,13 @@ public class GiocoCercaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String ricerca = request.getParameter("searchBarInput");
+		String ricerca = request.getParameter("barraRicerca");
 		
-		if(ricerca == null || ricerca.isBlank()) {
+		if(ricerca.isBlank()) {
 			String error = "campo vuoto";
 			request.setAttribute("campo vuoto", error);
 			request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+			System.out.println("errore qui ricerca ");
 			return;
 		}
 		
@@ -42,6 +43,7 @@ public class GiocoCercaServlet extends HttpServlet {
 	        String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
 	        request.setAttribute("errorMessage", errorMessage);
 			request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+			System.out.println("errore qui ricerca on seacrh");
 			return;
 		}
 		

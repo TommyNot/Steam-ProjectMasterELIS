@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="org.elis.model.Utente" %> 
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steam-like Homepage</title>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/Css/HomePagePrincipaleCss.css">
     
@@ -20,7 +21,7 @@
                 <div class="logo">
                     <a href="<%= request.getContextPath() %>/public-jsp/DashboardPublisher.jsp">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                              width="150px" height="100px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
+                              width="180px" height="120px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
                               xml:space="preserve">
                          <g>
                              <path fill="#C5C3C0" d="M44.238,0.601C21,0.601,1.963,18.519,0.154,41.29l23.71,9.803c2.009-1.374,4.436-2.179,7.047-2.179
@@ -58,32 +59,59 @@
                         </div>
 
             </div>
+            
+            
+  
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Giochi</a></li>
+                    <li><a href="<%=request.getContextPath() %>/public-jsp/PageGiochi.jsp">Giochi</a></li>
+                    <li><a href="#">Generi</a></li>
                     <li><a href="#">Offerte</a></li>
-                    <li><a href="#">Comunità</a></li>
                     <li><a href="#">Supporto</a></li>
+            <li> 
+            <%
+                
+                Utente username = (Utente) session.getAttribute("utenteLoggato");
+                if (username != null) {
+            %>
+            	 <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
+                <p>Welcome, <%= username.getUsername() %></p>
+                <a href="<%= request.getContextPath() %>/LogoutServlet" class="btn btn-danger">Logout</a>
+            <%
+                } else {
+            %>
+                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Login</a>
+            <%
+                }
+            %>
+        </li>
                 </ul>
             </nav>
-        </div>
-    </header>
+                <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="post" class="d-flex">
+                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
+                <button type="submit" class="btn btn-outline-success">Cerca</button>
+            </form>
+                                                                                                                                
 
-    <section class="featured-games">
+        </div>
+        
+ 
+    
+    </header>
+    
+       <section class="featured-games">
         <div class="container">
             <h2>Giochi in evidenza</h2>
             <div class="slider">
-                <img src="game1.jpg" alt="Gioco 1">
-                <img src="game2.jpg" alt="Gioco 2">
-                <img src="game3.jpg" alt="Gioco 3">
+                <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Elden_Ring.jpg" alt="Gioco 1">
+                <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Doom_Eternal.jpg" alt="Gioco 2">
+                <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Cyberpunk_2077.jpg" alt="Gioco 3">
             </div>
-            <span class="prev">&#10094;</span>
-            <span class="next">&#10095;</span>
         </div>
     </section>
-
-    <section class="hero">
+    
+        <section class="hero">
         <div class="container">
             <h1>Benvenuto su Steam</h1>
             <p>Trova i migliori giochi a prezzi incredibili!</p>
@@ -91,15 +119,46 @@
         </div>
     </section>
 
+ 
+	
+
+
 
     
 
-    <footer>
-        <div class="container">
-            <p>© 2024 Steam Family Pezzotto - Tutti i diritti riservati</p>
-        </div>
-    </footer>
+      <footer class="footer">
 
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contatti</h3>
+                <p>Email: <a href="mailto:info@example.com">SteamPezzotto@example.com</a></p>
+                <p>Phone: +39 328-9998244</p>
+                
+            </div>
+
+            <div class="footer-section">
+                <h3>Seguici</h3>
+                
+                <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://www.instagram.com/curiosostore_official/" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Chi siamo?</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Steam Family Pezzotto. All rights reserved.</p>
+            <p>Developed by Steam Family Pezzotto</p>
+        </div>
+
+    </footer>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="<%=request.getContextPath()%>/Js/HomePagePrincipaleScript.js"></script>
 </body>
 </html>
