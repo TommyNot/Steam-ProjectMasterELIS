@@ -68,7 +68,7 @@ function showSection(sectionId) {
 document.getElementById('searchForm').addEventListener('submit', function(event) {
        event.preventDefault();
 	   
-       const username = document.getElementById('username').value;  
+       const username = document.getElementById('username1').value;  
        fetch('/SteamProject/UtenteFindByNameServlet', {
            method: 'POST',
            headers: {

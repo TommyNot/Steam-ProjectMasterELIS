@@ -58,6 +58,8 @@ public class AdminEliminaServlet extends HttpServlet {
 	    } else {
 	        response.getWriter().write("Errore: Account non trovato o eliminazione fallita.");
 	    }
+	    
+	    request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
 	}
 
 
