@@ -154,6 +154,24 @@ div.container{
         margin-top: 1em;
     }
 }
+cco utable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
 
 @media(max-width: 800px){
     body{
