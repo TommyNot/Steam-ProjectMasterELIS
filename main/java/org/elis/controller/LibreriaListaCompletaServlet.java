@@ -6,30 +6,30 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-/**
- * Servlet implementation class LibreriaListaCompletaServlet
- */
+import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Libreria;
+
 public class LibreriaListaCompletaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public LibreriaListaCompletaServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		List<Libreria> librerie = BusinessLogic.VisualizzaTutteLibrerie();
+		
+		if(librerie == null || librerie.isEmpty()) {
+			request.setAttribute("errorMessage", "Nessun gioco disponibile.");
+			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+            return;
+		}
 	}
 
 }

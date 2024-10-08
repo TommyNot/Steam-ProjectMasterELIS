@@ -7,34 +7,41 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Libreria;
+
 /**
  * Servlet implementation class LibreriaFindByNameServlet
  */
 public class LibreriaFindByNameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public LibreriaFindByNameServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String ricerca = request.getParameter("nomeLibreriaInput");
+		
+		if(ricerca == null || ricerca.isBlank()) {
+			String messaggioErrore = "campo di ricerca vuoto";
+			request.setAttribute("messaggioErrore", messaggioErrore);
+			return;
+		}
+		
+		Libreria nomeCercato = BusinessLogic.findLibreriaByNome(ricerca);
+		
+		if(nomeCercato == null){
+			String errore = "Nessuna libreria trovata con il nome " + ricerca;
+			request.setAttribute("errore", errore);
+			return;
+		}
 	}
 
 }
