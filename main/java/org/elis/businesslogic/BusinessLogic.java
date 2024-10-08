@@ -7,6 +7,7 @@ import java.util.List;
 import org.elis.dao.DaoFactory;
 import org.elis.model.Genere;
 import org.elis.model.Gioco;
+import org.elis.model.Libreria;
 import org.elis.model.Offerta;
 import org.elis.model.Utente;
 
@@ -192,4 +193,27 @@ public static Offerta OffertaById(long id) {
 	return DaoFactory.getDaoFactory().getOffertaDao().selectById(id);
 			}
 
+public static Libreria LibreriaAdd(String nome, long id_utente) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().add(nome, id_utente);
+}
+
+public static List<Libreria> VisualizzaTutteLibrerie(){
+	return DaoFactory.getDaoFactory().getLibreriaDao().findAll();
+}
+
+public static Libreria findLibreriaByNome(String nome) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().findByName(nome);
+}
+
+public static List<Libreria> findLibreriaByIdUtente(long id_utente){
+	return DaoFactory.getDaoFactory().getLibreriaDao().findByIdUtente(id_utente);
+}
+
+public static Libreria updateLibreriaNome(long id, String nome) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().updateNome(id, nome);
+}
+
+public static Libreria eliminaLibreria(long id) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().deleteById(id);
+}
 }

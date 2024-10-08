@@ -111,7 +111,36 @@ public class LibreriaDaoJDBC implements LibreriaDao{
 		return librerie;
 	}
 
-	//scrivere metodo findAllByIdUtente per poter tornare all'utente tutte le sue librerie
+	
+	@Override
+	public List<Libreria> findByIdUtente(long id_utente) {
+		String query = "SELECT nome FROM libreria WHERE id_utente = ?";
+		List<Libreria> librerie = new ArrayList<>();
+		
+		try(
+				Connection c = JdbcDaoFactory.getConnection();
+				PreparedStatement ps = c.prepareStatement(query);
+				){
+			ps.setLong(1, id_utente);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Libreria l = new Libreria();
+				l.setId(rs.getLong("id"));
+				l.setNome(rs.getString("nome"));
+				
+				librerie.add(l);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return librerie;
+	}
+	
 	
 	@Override
 	public Libreria findByName(String nome) {
@@ -204,6 +233,5 @@ public class LibreriaDaoJDBC implements LibreriaDao{
 		
 		return null;
 	}
-
 
 }
