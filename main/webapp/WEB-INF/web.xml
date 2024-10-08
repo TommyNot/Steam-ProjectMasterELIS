@@ -212,4 +212,14 @@
     <servlet-name>LibreriaAggiornaNomeServlet</servlet-name>
     <url-pattern>/LibreriaAggiornaNomeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LibreriaListaCompletaServlet</display-name>
+    <servlet-name>LibreriaListaCompletaServlet</servlet-name>
+    <servlet-class>org.elis.controller.LibreriaListaCompletaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LibreriaListaCompletaServlet</servlet-name>
+    <url-pattern>/LibreriaListaCompletaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

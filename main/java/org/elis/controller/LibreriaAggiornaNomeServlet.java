@@ -5,36 +5,65 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
-/**
- * Servlet implementation class LibreriaAggiornaNomeServlet
- */
+import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Libreria;
+import org.elis.model.Ruolo;
+import org.elis.model.Utente;
+
 public class LibreriaAggiornaNomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public LibreriaAggiornaNomeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession(false);
+		if(session == null) {
+			request.getRequestDispatcher("public-jsp/LoginPage.jsp");
+			return;
+		}
+		
+		String nomeNuovo = request.getParameter("nomeNuovoInput");
+		
+		if(nomeNuovo == null || nomeNuovo.isEmpty()) {
+			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	        return;
+		}
+		
+		Utente utente = (Utente) session.getAttribute("utenteLoggato");
+		if(utente != null) {
+			long idUtente = utente.getId();
+			
+			Utente u = BusinessLogic.UtenteFindById(idUtente);
+			if(u != null) {
+				boolean isUtenteBase = u.getRuolo() == Ruolo.UTENTE_BASE;
+				if(isUtenteBase) {
+					Libreria libreriaNuovoNome = BusinessLogic.updateLibreriaNome(idUtente, nomeNuovo);
+					
+					if(libreriaNuovoNome != null) {
+						System.out.println("Il nome della libreria è stato aggiornato con successo.");
+					}else {
+						request.getRequestDispatcher("public-jsp/ErrorPage.jsp");
+						return;
+					}
+				}else {
+					System.out.println("L'utente non è un utente base.");
+				}
+			}else {
+				System.out.println("Utente non trovato con id " + idUtente);
+			}
+		}else {
+			System.out.println("Nessun utente trovato nella sessione.");
+		}
 	}
 
 }
