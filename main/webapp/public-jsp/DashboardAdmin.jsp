@@ -98,10 +98,15 @@
             <h2>crea offerta</h2>
         </div>
         <div class="container" id="Visualizza">
-            <h2>Visualizza utenti</h2>
         </div>
         <div class="container" id="Cerca">
             <h2>Cerca utenti</h2>
+            <form id="searchForm">
+			    <label for="username">Nome utente da cercare</label>
+			    <input type="text" id="username" name="username" required placeholder="Nome utente da cercare">
+			    <button type="submit" class="btn-conf">Avvia ricerca</button>
+			</form>
+			<div id="result"></div>
         </div>
     </main>
 

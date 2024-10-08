@@ -194,7 +194,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-        return null;
+        return u;
     }
     
     @Override

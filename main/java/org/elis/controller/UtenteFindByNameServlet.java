@@ -37,24 +37,34 @@ public class UtenteFindByNameServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
-	    String ricerca = request.getParameter("username");
-	    
+		String ricerca = request.getParameter("username");
+
 	    if (ricerca == null || ricerca.isBlank()) {
 	        String error = "Il campo di ricerca è vuoto.";
-	        request.setAttribute("errorMessage", error);
+	        response.setContentType("text/html");
+	        response.getWriter().write("<p style=\"color:red;\">" + error + "</p>");
 	        return;
 	    }
 
 	    Utente uCerca = BusinessLogic.UtenteFindByName(ricerca);
 
 	    if (uCerca == null) {
-	    	StringBuilder sb = new StringBuilder();
-	       sb.append("<p>");
-	       sb.append("nessun utente trovato con questo id");
-	       sb.append("</p>");
+	        response.setContentType("text/html");
+	        response.getWriter().write("<p style=\"color:red;\">Nessun utente trovato con questo username</p>");
 	        return;
 	    }
 
-	    request.setAttribute("utente", uCerca);
+	    response.setContentType("text/html");
+	    response.getWriter().write(
+	        "<h2>Dettagli Utente</h2>" +
+	        "<table border='1'>" +
+	        "<tr><th>ID</th><td>" + uCerca.getId() + "</td></tr>" +
+	        "<tr><th>Ruolo</th><td>" + uCerca.getRuolo() + "</td></tr>" +
+	        "<tr><th>Username</th><td>" + uCerca.getUsername() + "</td></tr>" +
+	        "<tr><th>Email</th><td>" + uCerca.getEmail() + "</td></tr>" +
+	        "<tr><th>Data Creazione</th><td>" + uCerca.getData_creazione() + "</td></tr>" +
+	        "<tr><th>Data Ultima Modifica</th><td>" + uCerca.getData_modifica() + "</td></tr>" +
+	        "</table>"
+	    );
 	}
 }
