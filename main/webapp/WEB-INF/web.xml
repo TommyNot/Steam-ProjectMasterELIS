@@ -222,4 +222,14 @@
     <servlet-name>LibreriaListaCompletaServlet</servlet-name>
     <url-pattern>/LibreriaListaCompletaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LibreriaFindByIdUtenteServlet</display-name>
+    <servlet-name>LibreriaFindByIdUtenteServlet</servlet-name>
+    <servlet-class>org.elis.controller.LibreriaFindByIdUtenteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LibreriaFindByIdUtenteServlet</servlet-name>
+    <url-pattern>/LibreriaFindByIdUtenteServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
