@@ -587,28 +587,24 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
 	@Override
-	public List<Gioco> findGiocoGenereByGenere(Genere genere) {
-		
+	public List<Gioco> findGiocoGenereByGenere(long idGenere) {
+	    
 	    String query = "SELECT g.*, o.* FROM gioco g " +
-                "JOIN gioco_genere gg ON g.id = gg.id_gioco " +
-                "JOIN genere ge ON ge.id = gg.id_genere " +
-                "LEFT JOIN offerta o ON g.id_offerta = o.id " +
-                "WHERE ge.nome = ?";
-		
-		List<Gioco> giochi = new ArrayList<>();
-		try(
-				
-				Connection c = JdbcDaoFactory.getConnection();
-				PreparedStatement ps = c.prepareStatement(query);
-				
-			){
-			
-			ps.setString(1, genere.toString());
-			
-			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-					
+	            "JOIN genere_gioco gg ON g.id = gg.id_gioco " +
+	            "JOIN genere ge ON ge.id = gg.id_genere " +
+	            "LEFT JOIN offerta o ON g.id_offerta = o.id " +
+	            "WHERE ge.id = ?"; // Cambiato per utilizzare l'ID del genere
+	    
+	    List<Gioco> giochi = new ArrayList<>();
+	    try (
+	            Connection c = JdbcDaoFactory.getConnection();
+	            PreparedStatement ps = c.prepareStatement(query);
+	    ) {
+	        ps.setLong(1, idGenere); // Usa l'ID del genere
+	        
+	        ResultSet rs = ps.executeQuery();
+	        
+	        while (rs.next()) {
 	            Gioco gioco = new Gioco();
 	            gioco.setId(rs.getLong("g.id"));
 	            gioco.setNome(rs.getString("g.nome"));
@@ -616,36 +612,29 @@ public class GiocoDaoJDBC implements GiocoDao{
 	            gioco.setDescrzione(rs.getString("g.descrizione"));
 	            gioco.setImmagine(rs.getString("g.immagine"));
 	            gioco.setPrezzo(rs.getDouble("g.prezzo"));
-				
-				long idOfferta = rs.getLong("o.id");
-				if(!rs.wasNull()) {
-					
-					Offerta offerta = new Offerta();
-					offerta.setId(idOfferta);
-					offerta.setNome(rs.getString("o.nome"));
-					offerta.setSconto(rs.getDouble("o.sconto"));
+	            
+	            long idOfferta = rs.getLong("o.id");
+	            if (!rs.wasNull()) {
+	                Offerta offerta = new Offerta();
+	                offerta.setId(idOfferta);
+	                offerta.setNome(rs.getString("o.nome"));
+	                offerta.setSconto(rs.getDouble("o.sconto"));
 	                offerta.setData_inizio(rs.getTimestamp("o.data_inizio").toLocalDateTime());
 	                offerta.setData_fine(rs.getTimestamp("o.data_fine").toLocalDateTime());
-					
-				}
+	                
+	                gioco.setOfferta(offerta); // Assicurati di impostare l'offerta nel gioco
+	            }
 	            
 	            giochi.add(gioco);
-				
-				
-			}
-			
-			
-			
-			
-		}catch(SQLException e) {
-			
-			e.printStackTrace();
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-		return giochi;
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return giochi;
 	}
 
 

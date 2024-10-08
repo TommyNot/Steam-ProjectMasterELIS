@@ -179,22 +179,24 @@
     				<h2>Prodotti</h2>
     				<button class="button" type="button" id="add-product-btn">Aggiungi Prodotto</button>
     				<button class="button" type="button" id="remove-product-btn">Elimina Prodotto</button>
-    				<form action="<%= request.getContextPath()%>/GiocoGenereRicercaServlet" method="get">
-						  <label for="genere">Filtri:</label>
-						  <select id="genere" name="genere">
-							<%
-							
-							        for (Genere genere : generi) {
-							    %>
-							        <option id="genere" value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
-							    <%
-							        }
-							    %>
-						    <!-- Aggiungi altre opzioni di genere -->
-						  </select>
-						  <input type="submit" value="Filtra">
-						</form>
-    				
+						<label for="genere">Filtri:</label>
+					<form action="<%= request.getContextPath() %>/GiocoGenereRicercaServlet" method="get" id="filter-form">
+					    <select name="genere" id="genere" style="margin-right: 10px;">
+					        <option value="">Seleziona un genere</option>
+					        <%
+					            for (Genere genere : generi) {
+					        %>
+					            <option id="opt" value="<%= genere.getId() %>"><%= genere.getNome() %></option>
+					        <%
+					            }
+					        %>
+					    </select>
+					    <input type="submit" id="filtra" value="Filtra" style="margin-top: 10px; cursor: pointer;">
+					</form>
+
+					<div id="result">
+					</div>
+
 				    <p>Elenco dei tuoi giochi pubblicati e delle loro informazioni.</p>
 				    <div id="products-container">
 				     <% 

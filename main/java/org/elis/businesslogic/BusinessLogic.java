@@ -143,9 +143,9 @@ public static Utente updatePassword(long id,String password) {
 	return DaoFactory.getDaoFactory().getUtenteDao().updatePassword(id, password);
 	}
 
-public static List<Gioco> GiocoCercaPerGenere(Genere genere) {
+public static List<Gioco> GiocoCercaPerGenere(long Idgenere) {
 	
-	return DaoFactory.getDaoFactory().getGiocoDao().findGiocoGenereByGenere(genere);
+	return DaoFactory.getDaoFactory().getGiocoDao().findGiocoGenereByGenere(Idgenere);
 }
 
 public static List<Gioco> GiocoOfferta(Offerta offerta){
