@@ -202,4 +202,14 @@
     <servlet-name>LibreriaAggiungiServlet</servlet-name>
     <url-pattern>/LibreriaAggiungiServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LibreriaAggiornaNomeServlet</display-name>
+    <servlet-name>LibreriaAggiornaNomeServlet</servlet-name>
+    <servlet-class>org.elis.controller.LibreriaAggiornaNomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LibreriaAggiornaNomeServlet</servlet-name>
+    <url-pattern>/LibreriaAggiornaNomeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
