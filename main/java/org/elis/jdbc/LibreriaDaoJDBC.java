@@ -114,7 +114,7 @@ public class LibreriaDaoJDBC implements LibreriaDao{
 	
 	@Override
 	public List<Libreria> findByIdUtente(long id_utente) {
-		String query = "SELECT nome FROM libreria WHERE id_utente = ?";
+		String query = "SELECT id, nome FROM libreria WHERE id_utente = ?";
 		List<Libreria> librerie = new ArrayList<>();
 		
 		try(
