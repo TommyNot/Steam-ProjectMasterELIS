@@ -2,7 +2,10 @@ package org.elis.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
+
+
 
 public class Gioco {
 	
@@ -13,6 +16,7 @@ public class Gioco {
 	private LocalDate data_rilascio;
 	private String descrzione;
 	private String immagine;
+	private byte[] byteImmagine;
 	private boolean eliminato;
 	private double prezzo;
 	Offerta offerta;
@@ -23,7 +27,7 @@ public class Gioco {
 	long idUtente;
 	
 	public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			LocalDate data_rilascio, String descrizione, String immagine, boolean eliminato, double prezzo,
+			LocalDate data_rilascio, String descrizione, byte[] byteImmagine, boolean eliminato, double prezzo,
 			Offerta offerta, long idUtente) {
 		
 		
@@ -33,7 +37,7 @@ public class Gioco {
 		this.nome = nome;
 		this.data_rilascio = data_rilascio;
 		this.descrzione = descrizione;
-		this.immagine = immagine;
+		this.byteImmagine = byteImmagine;
 		this.eliminato = eliminato;
 		this.prezzo = prezzo;
 		this.offerta = offerta;
@@ -120,7 +124,7 @@ public class Gioco {
 
 
 	public String getImmagine() {
-		return immagine;
+		return Base64.getEncoder().encodeToString(byteImmagine);
 	}
 
 
@@ -174,6 +178,16 @@ public class Gioco {
 	public void setData_rilascio(LocalDateTime localDateTime) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public byte[] getByteImmagine() {
+		return byteImmagine;
+	}
+
+
+	public void setByteImmagine(byte[] byteImmagine) {
+		this.byteImmagine = byteImmagine;
 	}
 	
 	

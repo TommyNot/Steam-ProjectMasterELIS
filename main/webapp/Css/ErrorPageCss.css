@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1b2838; /* Colore di sfondo tipico di Steam */
+    color: #c7d5e0; /* Colore del testo chiaro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+	
+    text-align: center;
+    padding: 20px;
+    background-color: #2a475e; /* Colore della scheda centrale */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.error-title {
+    font-size: 120px;
+    color: #66c0f4; /* Colore azzurro ispirato a Steam */
+}
+
+.error-message {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.description {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.home-button {
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #66c0f4;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+.home-button:hover {
+    background-color: #4a9bcf;
+}
+
+.steam-style {
+    margin-top: 50px;
+}
+
+.steam-footer {
+    font-size: 14px;
+    color: #4a9bcf;
+}

@@ -57,10 +57,31 @@ function showSection(sectionId) {
             activeContainer.classList.add('active'); 
         }
 		
- 	window.onload = function() {
+ window.onload = function() {
 		   fetch('/SteamProject/TrovaTuttiUtentiServlet')
 		      .then(response => response.text())
 		      .then(data => {
 		        document.getElementById('Visualizza').innerHTML = data;
 		      });
-		  };
+};
+
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+       event.preventDefault();
+	   
+       const username = document.getElementById('username1').value;  
+       fetch('/SteamProject/UtenteFindByNameServlet', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/x-www-form-urlencoded'
+           },
+           body: 'username=' + encodeURIComponent(username)
+       })
+       .then(response => response.text())
+       .then(data => {
+           document.getElementById('result').innerHTML = data;
+       })
+       .catch(error => {
+           console.error('Errore:', error);
+           document.getElementById('result').innerHTML = '<p style="color:red;">Errore nella richiesta.</p>';
+      });
+   });

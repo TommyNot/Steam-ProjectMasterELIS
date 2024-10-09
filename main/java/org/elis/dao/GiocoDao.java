@@ -1,5 +1,6 @@
 package org.elis.dao;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,11 +12,11 @@ import org.elis.model.Utente;
 
 public interface GiocoDao {
 	
-	Gioco add(String nome,LocalDate data, String descrizione, String immagine, double prezzo, Genere genereSelezionato,Offerta offerta,Utente u);
+	Gioco add(String nome,LocalDate data, String descrizione, byte[] immagine, double prezzo, Genere genereSelezionato,Offerta offerta,Utente u);
 	List<Gioco> findAll();
 	Gioco findByName(String nome);
 	Gioco findGiocoById(long id);
-	List<Gioco> findGiocoGenereByGenere(Genere genere);
+	List<Gioco> findGiocoGenereByGenere(long idGenere);
 	List<Gioco> findGiocoOffertaByOfferta(Offerta offerta);
 	List<Gioco> VisualizzaGiochiPerUtente(long idUtente);
 	Gioco updateGiocoNome(long id,String nome);

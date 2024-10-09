@@ -20,7 +20,7 @@
                 </button>
             </li>
             <li class="active">
-                <a href="DashboardAdmin.jsp">
+                <a href="<%= request.getContextPath()%>/public-jsp/DashboardAdmin.jsp">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
                         <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
                     </svg>
@@ -78,15 +78,35 @@
                     </div>
                 </ul>
             </li>
+            <li class="">
+            <a href="<%= request.getContextPath()%>/LogoutServlet" >
+	            	<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+	            	<path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
+	            	<span>Logout</span>
+            	</a>
+            </li>            
         </ul>
     </nav>
     <main>
         <div class="container active" id="home">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem perferendis repellat beatae exercitationem officiis recusandae tempora temporibus odio voluptatem perspiciatis sit ipsa, placeat corporis nisi iure ipsum eveniet, suscipit dicta!</p>
+            <p>Benvenuto nella pagina Admin di Steam pezzotto family</p>
         </div>
+        
         <div class="container " id="Ban">
-            <h2>ciao</h2>
+            <h2>Ban utente</h2>
+            <h2>Elimina Account</h2>
+   		<form action="<%=request.getContextPath()%>/AdminEliminaServlet" method="post">
+        
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id" required><br><br>
+
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <input type="submit" value="Elimina Account">
+    	</form>
         </div>
+        
         <div class="container " id="Elimina">
             <h2>elimina</h2>
         </div>
@@ -98,10 +118,15 @@
             <h2>crea offerta</h2>
         </div>
         <div class="container" id="Visualizza">
-            <h2>Visualizza utenti</h2>
         </div>
         <div class="container" id="Cerca">
             <h2>Cerca utenti</h2>
+            <form id="searchForm">
+			    <label for="username">Nome utente da cercare</label>
+			    <input type="text" id="username1" name="username" required placeholder="Nome utente da cercare">
+			    <button type="submit" class="btn-conf">Avvia ricerca</button>
+			</form>
+			<div id="result"></div>
         </div>
     </main>
 

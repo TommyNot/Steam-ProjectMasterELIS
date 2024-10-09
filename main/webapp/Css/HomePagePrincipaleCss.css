@@ -1,489 +1,367 @@
 @charset "UTF-8";
 
-body{
-	background-color: rgb(26, 43, 61);
-	background-image: url("risorse-media/img/Homepage_background.jpg") no-repeat center center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html, body {
-  max-width: 100%;
-  overflow-x: hidden; /* Evita la barra di scorrimento orizzontale */
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #1b2838;
+    color: #fff;
+    line-height: 1.6;
 }
 
-.container-fluid {
-  padding: 0;
-  margin: 0;
-  width: 100%;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-
-
-.colore-scritte{
-	color: rgb(107, 113, 121);
+header {
+    background-color:#171D25;
+    padding: 1em 0;
+    border-bottom: 2px solid #2c2c2c;
 }
 
-.box-1{
-	display: flex;
-	justify-content: space-between;
+.logo {
+    font-size: 1.5em;
+    color: #66c0f4;
+    font-weight: bold;
 }
 
-.riga-intestazione-1{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 25%;
-}
-
-.div-icona-scritta-steam{
-	display: flex; 
-	justify-content: space-between;
-}
-
-#steam{
-	margin-left: 5px;
-}
-
-#megafono{
-	background-color: rgb(28, 151, 251); 
-	padding: 10px; 
-	box-sizing: border-box; 
-	width: 30%;
-	height: inherit;
-	min-height: auto;
-	display: flex; 
-	justify-content: center;
-}
-
-#bell{
-	background-color: rgb(94, 126, 12);
-	padding: 10px; 
-	box-sizing: border-box; 
-	width: 30%;
-	height: inherit;
-	min-height: auto;
-	display: flex; 
-	justify-content: center;
-}
-
-.link-utente{
-	display: flex;
-	flex-direction: column;
-}
-
-.riga-intestazione-2{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 25%;
-}
-
-  @media (max-width: 768px) {
-      .testo-menu-alto {
-        font-size: 14px;
-      }
-      #img-background {
-        height: auto;
-        max-width: 100%;
-      }
-      .box-1 {
-        text-align: center;
-      }
-      #input-ricerca {
-        width: 100%;
-        margin-top: 10px;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      .riga-intestazione-1,
-      .riga-intestazione-2 {
-        flex-direction: column;
-        align-items: center;
-      }
-      #lista-desideri, #carrello {
-        font-size: 12px;
-      }
-      .testo-scritte-2 {
-        font-size: 14px;
-      }
-    }
-
-    .img-fluid {
-      max-width: 100%;
-      height: auto;
-    }
-    
-    .container-fluid {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    
-    .box-2 {
-      text-align: center;
-      margin-top: 10px;
-    }
-    
-    #img-background {
-      width: 100%;
-      object-fit: cover;
-    }
-
-    #input-ricerca {
-      max-width: 300px;
-    }
-
-    .navbar-collapse {
-      justify-content: space-between;
-}
-
-.seconda-nav{
-	margin-right: 3%;
-}
-
-.testo-menu-alto{
-	margin: 0;
-	font-size: 10pt;
-}
-
-.box-2{
-	display: flex;
-	justify-content: space-around;
-	width: 50%;
-}
-
-.testo-scritte-2{
-	color: rgb(208, 212, 217);
-	font-size: 13pt;
-}
-
-
-#barra-ricerca{
-    background-color: rgb(58, 96, 140);
-    text-align: center;
-    height: 5vh;
+nav ul {
+    list-style: none;
     display: flex;
     justify-content: space-between;
-}
-
-/* Sezione per novità, categorie e notizie */
-#barra-opzioni {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#news-trends, #categorie, #notizie {
-  color: white;
-  margin: 0 10px;
-  font-size: 14pt;
-  padding: 10px;
-}
-
-@media (max-width: 768px) {
-  #news-trends, #categorie, #notizie {
-    font-size: 12pt;
-  }
-}
-
-@media (max-width: 576px) {
-  #news-trends, #categorie, #notizie {
-    font-size: 10pt;
-    margin: 5px;
     text-align: center;
-  }
 }
 
-#contenitore-lista-carrello{
-	margin-top: 10px;
+nav ul li {
+    margin: 0 15px;
 }
 
-
-#navbarNav.show > ul{
-	display: flex;
-	flex-direction: column;
+/* Stile per la barra di ricerca */
+/* Stile per il contenitore della ricerca */
+.search-container {
+    display: flex; /* Utilizza il flexbox per allineare la barra di ricerca */
+    align-items: center; /* Allinea verticalmente al centro */
+    margin-left: auto; /* Sposta la barra di ricerca a destra */
 }
 
-.navbar-nav {
-  flex-direction: row;
+/* Stile per il campo di input */
+input[type="text"] {
+    padding: 10px; /* Padding interno */
+    border: 1px solid #ced4da; /* Bordo del campo */
+    border-radius: 4px; /* Angoli arrotondati */
+    margin-right: 5px; /* Margine a destra */
+    width: 300px; /* Larghezza della barra di ricerca */
 }
 
-#introduzione {
-  position: relative;
-  width: 100%;
-  height: auto;
-  text-align: center;
+input[type="text"]:focus {
+    outline: none; /* Rimuove il bordo di focus */
+    box-shadow: 0 0 5px rgba(0, 150, 255, 0.5); /* Aggiunge un'ombra di focus */
 }
 
-#central-navigation{
-	display: flex;
-    flex-direction: column;
+/* Stile per il pulsante di ricerca */
+.btn-outline-success {
+    background-color: transparent; /* Sfondo trasparente */
+    color: #28a745; /* Colore del testo */
+    border: 1px solid #28a745; /* Bordo del pulsante */
+    border-radius: 4px; /* Angoli arrotondati */
+    padding: 10px 15px; /* Padding interno */
+    cursor: pointer; /* Cambia il cursore quando passa sopra */
 }
 
-.image-container {
-  position: relative;
-  max-width: 100%;
-  height: 38vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-size: 100% 100%;
+.btn-outline-success:hover {
+    background-color: #28a745; /* Colore di sfondo al passaggio del mouse */
+    color: white; /* Colore del testo al passaggio del mouse */
 }
 
-#img-background {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-#lista-desideri, #carrello {
-  font-size: 1.2rem;
-  padding: 10px;
-  color: white;
-  text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-}
-
-#icona-lista-desideri, #icona-carrello {
-  width: 24px;
-  height: 24px;
-  color: white;
-}
-
-#icona-lista-desideri {
-  right: 10%;
-}
-
-#icona-carrello {
-  right: 15%;
-}
-
-#testo-saldi {
-  font-size: 2rem;
-  color: white;
-  margin-top: 20px;
-}
-
-form {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-#input-ricerca {
-  width: 55%;
-  font-size: 1rem;
-}
-
-#lente-ingrandimento {
-  margin-left: 10px;
-}
-
-@media (max-width: 768px) {
-  #img-background {
-    height: 300px;
-  }
-
-  #lista-desideri, #carrello {
-    font-size: 1rem;
-    padding: 5px;
-  }
-
-  #icona-lista-desideri, #icona-carrello {
-    width: 16px;
-    height: 16px;
-  }
-
-  #testo-saldi {
-    font-size: 1.5rem;
-  }
-
-  #input-ricerca {
-    width: 70%;
-  }
-
-}
-
-@media (max-width: 576px) {
-  #img-background {
-    height: 200px;
-  }
-
-  #lista-desideri, #carrello {
-    font-size: 0.8rem;
-  }
-
-  #testo-saldi {
-    font-size: 1.2rem;
-  }
-
-  #input-ricerca {
-    width: 90%;
-  }
-}
-
-#second-section{
-	margin-top: 1em;
+nav img{
+	
+	width: 50px; /* Larghezza fissa dell'immagine */
+    height: 50px; /* Altezza fissa dell'immagine */
+    border-radius: 50%; /* Rende l'immagine circolare */
+    object-fit: cover; /* Mantiene il rapporto dell'immagine */
+    margin-bottom: 15PX;
+    border: 2px solid #fff; /* Bordo bianco intorno all'immagine */
 }
 
 
-.cont-slider-immagini{
-	display: flex;
-    flex-direction: column;
-    align-items: center;
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
-
-.nascondi-input-ricerca{
-	visibility: hidden;
+nav ul li a:hover {
+    color: #66c0f4;
 }
 
-.box-3{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: flex-end;
+.hero {
+    background-image: url('hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    text-align: center;
 }
 
-.img-aside-section{
-	width: 40%;
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
 }
 
-.testo-aside-section-1{
-	margin: 0;
-	color: rgb(123, 175, 215);
-	font-size: 11pt;
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 1em;
 }
 
-.testo-aside-section-2{
-	color: rgb(112, 121, 134);
-	margin: 0;
-	margin-bottom: 5%;
-	font-size: 10pt;
-}
-
-#evidenza-consigliati{
-	color: rgb(112, 121, 134);
-	font-size: 13pt;
-	margin-top: 5px;
-}
-
-#immagine{
-	width: 200px;
-	height: 350px;
-	padding: 20px;
-}
-
-.slider{
-	display: flex;
-    align-items: center;
-}
-
-#button-previous{
+.btn-primary {
+    background-color: #66c0f4;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
     border-radius: 5px;
-    height: 5vh;
-    font-weight: bold;
-    font-size: 15pt;
-    background-color: rgb(58, 96, 140);
+    transition: background-color 0.3s ease;
 }
 
-#button-next{
-	border-radius: 5px;
-    height: 5vh;
-    font-weight: bold;
-    font-size: 15pt;
-    background-color: rgb(58, 96, 140);	
+.btn-primary:hover {
+    background-color: #558cbf;
+}
+
+.featured-games {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.featured-games h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
 }
 
 
 
-/* Footer Styles */
+.game-card {
+    margin-top: 30px;
+
+    display: flex;
+    flex-wrap: wrap; /* Permette di adattarsi alla larghezza */
+    justify-content: space-around;
+    align-items: center;
+    gap: 12px; /* Spaziatura tra i prodotti */
+    padding: 20px;
+}
+
+
+.game-card img {
+    width: 375px; /* Riduce la dimensione dell'immagine per una griglia più densa */
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.game-card:hover{
+
+    transform: scale(1.05); /* Effetto zoom immagini prodotti */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra più grande durante l'hover */
+}
+
+
+.game-card h3 {
+    margin: 15px 0;
+}
+
+.btn-secondary {
+    background-color: #4CAF50;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #45a049;
+}
+
 footer {
-  background-color: #1b1c1d;
-  color: #b8b8b8;
-  padding: 40px 20px;
-  font-family: Arial, sans-serif;
+    background-color: #171D25;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 2px solid #2c2c2c;
+}
+
+footer p {
+    color: #666;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    font-size: 24px;
+    color: #C5C3C0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.prev:hover, .next:hover {
+    color: white;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.user-area {
+    float: right;
+    margin-bottom: 5px;
+    
+}
+.user-area p {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ffffff;
+}
+.user-area a {
+    color: #ffffff;
+}
+
+.user-area img{
+      width: 50px; /* Larghezza fissa dell'immagine */
+    height: 50px; /* Altezza fissa dell'immagine */
+    border-radius: 50%; /* Rende l'immagine circolare */
+    object-fit: cover; /* Mantiene il rapporto dell'immagine */
+    
+    border: 2px solid #fff; /* Bordo bianco intorno all'immagine */
+}
+
+.footer {
+    background-color: #171D25; /* Colore di sfondo scuro */
+    color: #c5c3c0; /* Colore del testo */
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
 }
 
 .footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
-.footer-about {
-  flex: 1 1 100%;
-  margin-bottom: 20px;
-  text-align: center;
+.footer-section {
+    flex: 1; /* Rende le sezioni del footer di dimensioni uguali */
+    margin: 0 15px; /* Spaziatura tra le sezioni */
 }
 
-.footer-about h2 {
-  color: #fff;
-  font-size: 24px;
-  margin-bottom: 10px;
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #c5c3c0; /* Sottolinea i titoli delle sezioni */
+    padding-bottom: 5px;
 }
 
-.footer-about p {
-  color: #b8b8b8;
-  font-size: 16px;
+.footer-section p {
+    margin: 5px 0;
 }
 
-.footer-links, .footer-social, .footer-legal {
-  flex: 1 1 200px;
-  margin-bottom: 20px;
+.footer-section a {
+    color: #c5c3c0;
+    text-decoration: none;
 }
 
-.footer-column h3, .footer-legal h3 {
-  color: #fff;
-  margin-bottom: 10px;
-  font-size: 18px;
+.footer-section a:hover {
+    text-decoration: underline; /* Effetto hover per i link */
 }
 
-.footer-links ul, .footer-legal ul {
-  list-style-type: none;
-  padding: 0;
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #c5c3c0; /* Linea superiore per separare il footer */
+    padding-top: 10px;
 }
 
-.footer-links li, .footer-legal li {
-  margin-bottom: 8px;
+.footer-bottom p {
+    margin: 5px 0;
 }
 
-.footer-links a, .footer-legal a {
-  color: #b8b8b8;
-  text-decoration: none;
+/* Stile per le icone dei social media */
+.social-icon {
+    color: #c5c3c0;
+    margin-right: 15px;
+    font-size: 24px; /* Dimensione delle icone */
 }
 
-.footer-links a:hover, .footer-legal a:hover {
-  color: #fff;
+.social-icon:hover {
+    color: #1b88d4; /* Colore delle icone al passaggio del mouse */
 }
 
-.footer-social .social-icons a {
-  width: 5%;
-  display: block;
+/* Aggiungi qualsiasi altro stile necessario */
+
+/* immagini -- */
+
+.featured-games {
+    background-color: #1b2838; /* Colore di sfondo scuro */
+    color: #c5c3c0; /* Colore del testo */
+    padding: 40px 0; /* Spaziatura verticale */
 }
 
-.social-icons{
-	display: flex;
-	justify-content: center;
+
+
+
+.featured-games h2 {
+    text-align: center; /* Centra il titolo */
+    font-size: 2.5em; /* Aumenta la dimensione del titolo */
+    margin-bottom: 20px; /* Spazio sotto il titolo */
 }
 
-.footer-social .social-icons svg {
-  width: 20px;
-  height: 20px;
+.slider {
+    display: flex; /* Utilizza il flexbox per il layout */
+    justify-content: center; /* Centra le immagini orizzontalmente */
+    overflow-x: auto; /* Abilita lo scroll orizzontale */
+    scroll-behavior: smooth; /* Effetto di scorrimento fluido */
+    padding: 20px 0; /* Aggiungi padding sopra e sotto */
 }
 
-.footer-copyright {
-  flex: 1 1 100%;
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-  margin-top: 20px;
+.slider img {
+    width: 300px; /* Larghezza fissa dell'immagine */
+    height: 400px; /* Altezza fissa dell'immagine per una visualizzazione uniforme */
+    object-fit: cover; /* Mantiene le proporzioni */
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombra per dare profondità */
+    margin: 0 10px; /* Spazio tra le immagini */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per effetto zoom e ombra */
 }
 
-.footer-copyright p {
-  margin: 0;
+.slider img:hover {
+	cursor: pointer;
+    transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Ombra più grande durante l'hover */
 }
 
+/* Aggiunta di uno stile per il contenitore dello slider */
+.slider::-webkit-scrollbar {
+    height: 8px; /* Altezza della scrollbar */
+}
+
+.slider::-webkit-scrollbar-thumb {
+    background-color: #c5c3c0; /* Colore della parte scorrevole */
+    border-radius: 4px; /* Angoli arrotondati della parte scorrevole */
+}
+
+.slider::-webkit-scrollbar-track {
+    background-color: #2b2b2b; /* Colore dello sfondo della scrollbar */
+}

@@ -1,5 +1,6 @@
 package org.elis.businesslogic;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.elis.dao.DaoFactory;
 import org.elis.model.Genere;
 import org.elis.model.Gioco;
+import org.elis.model.Libreria;
 import org.elis.model.Offerta;
 import org.elis.model.Utente;
 
@@ -50,7 +52,7 @@ public static Utente UtenteFindById(long id) {
 	return DaoFactory.getDaoFactory().getUtenteDao().selectById(id);
 }
 
-public static Gioco GiocoAdd(String nome, LocalDate data, String descrizione, String immagine, double prezzo,Genere genereSelezionato , Offerta offerta,Utente u) {
+public static Gioco GiocoAdd(String nome, LocalDate data, String descrizione, byte[] immagine, double prezzo,Genere genereSelezionato , Offerta offerta,Utente u) {
 	
 
 	return DaoFactory.getDaoFactory().getGiocoDao().add(nome,data,descrizione,immagine,prezzo,genereSelezionato,offerta,u);
@@ -141,9 +143,9 @@ public static Utente updatePassword(long id,String password) {
 	return DaoFactory.getDaoFactory().getUtenteDao().updatePassword(id, password);
 	}
 
-public static List<Gioco> GiocoCercaPerGenere(Genere genere) {
+public static List<Gioco> GiocoCercaPerGenere(long Idgenere) {
 	
-	return DaoFactory.getDaoFactory().getGiocoDao().findGiocoGenereByGenere(genere);
+	return DaoFactory.getDaoFactory().getGiocoDao().findGiocoGenereByGenere(Idgenere);
 }
 
 public static List<Gioco> GiocoOfferta(Offerta offerta){
@@ -192,4 +194,27 @@ public static Offerta OffertaById(long id) {
 	return DaoFactory.getDaoFactory().getOffertaDao().selectById(id);
 			}
 
+public static Libreria LibreriaAdd(String nome, long id_utente) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().add(nome, id_utente);
+}
+
+public static List<Libreria> VisualizzaTutteLibrerie(){
+	return DaoFactory.getDaoFactory().getLibreriaDao().findAll();
+}
+
+public static Libreria findLibreriaByNome(String nome) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().findByName(nome);
+}
+
+public static List<Libreria> findLibreriaByIdUtente(long id_utente){
+	return DaoFactory.getDaoFactory().getLibreriaDao().findByIdUtente(id_utente);
+}
+
+public static Libreria updateLibreriaNome(long id, String nome) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().updateNome(id, nome);
+}
+
+public static Libreria eliminaLibreria(long id) {
+	return DaoFactory.getDaoFactory().getLibreriaDao().deleteById(id);
+}
 }

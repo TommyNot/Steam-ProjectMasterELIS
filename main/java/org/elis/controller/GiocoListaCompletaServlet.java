@@ -42,7 +42,7 @@ public class GiocoListaCompletaServlet extends HttpServlet {
       
         	
          request.setAttribute("giochi", listaGiochi);
-         request.getRequestDispatcher("WEB-INF/private-jsp/GiochiLista.jsp").forward(request, response);
+         request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
         
         
 
