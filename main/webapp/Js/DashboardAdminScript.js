@@ -85,3 +85,4 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
            document.getElementById('result').innerHTML = '<p style="color:red;">Errore nella richiesta.</p>';
       });
    });
+   
