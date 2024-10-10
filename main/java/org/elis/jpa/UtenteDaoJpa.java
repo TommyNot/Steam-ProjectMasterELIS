@@ -29,7 +29,7 @@ public class UtenteDaoJpa implements JpaUtenteDao {
 	@Override
 	public List<Utente> getAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		Query q = em.createQuery("select a from utente a");
+		Query q = em.createQuery("select a from Utente a");
 		return q.getResultList();
 	}
 }

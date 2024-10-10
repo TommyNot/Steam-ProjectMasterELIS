@@ -1,5 +1,6 @@
 package org.elis.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity()
 @Table(name="Utente")
-public class Utente {
+public class Utente implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
