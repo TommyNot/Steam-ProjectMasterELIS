@@ -84,5 +84,4 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
            console.error('Errore:', error);
            document.getElementById('result').innerHTML = '<p style="color:red;">Errore nella richiesta.</p>';
       });
-   });
-   
+   }); 

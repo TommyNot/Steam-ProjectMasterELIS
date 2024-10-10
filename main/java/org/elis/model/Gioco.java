@@ -4,20 +4,62 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Base64;
 
-public class Gioco {
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-    private long id;
-    private LocalDateTime data_creazione;
-    private LocalDateTime data_ultima_modifica;
-    private String nome;
-    private LocalDate data_rilascio;
-    private String descrzione;
-    private byte[] byteImmagine; 
-    private boolean eliminato;
-    private double prezzo;
-    private Offerta offerta;
-    private Genere genere;
-    private long idUtente;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+
+@Entity()
+public class Gioco {
+	
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY) 
+		private long id;
+	
+	    @CreationTimestamp
+	    @Column(name = "data_creazione", nullable = false) 
+	    private LocalDateTime data_creazione;
+
+	    @UpdateTimestamp
+	    @Column(name = "data_ultima_modifica")
+	    private LocalDateTime data_ultima_modifica;
+
+	    @Column(name = "nome", nullable = false, length = 255)
+	    private String nome;
+
+	    @Column(name = "data_rilascio")
+	    private LocalDate data_rilascio;
+
+	    @Column(name = "descrizione", columnDefinition = "TEXT")
+	    private String descrizione;
+
+	    @Lob 
+	    @Column(name = "byte_immagine")
+	    private byte[] byteImmagine;
+
+	    @Column(name = "eliminato", nullable = false)
+	    private boolean eliminato;
+
+	    @Column(name = "prezzo", nullable = false)
+	    private double prezzo;
+
+	    @ManyToOne 
+	    @JoinColumn(name = "offerta_id")
+	    private Offerta offerta;
+
+	    @ManyToOne 
+	    @JoinColumn(name = "genere_id")
+	    private Genere genere;
+
+	    @Column(name = "id_utente", nullable = false)
+	    private long idUtente;
 
     // Costruttore
     public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
@@ -28,7 +70,7 @@ public class Gioco {
         this.data_ultima_modifica = data_ultima_modifica;
         this.nome = nome;
         this.data_rilascio = data_rilascio;
-        this.descrzione = descrizione;
+        this.descrizione = descrizione;
         this.byteImmagine = byteImmagine;
         this.eliminato = eliminato;
         this.prezzo = prezzo;
@@ -82,11 +124,11 @@ public class Gioco {
     }
 
     public String getDescrzione() {
-        return descrzione;
+        return descrizione;
     }
 
     public void setDescrzione(String descrzione) {
-        this.descrzione = descrzione;
+        this.descrizione = descrzione;
     }
 
     public String getImmagine() {
