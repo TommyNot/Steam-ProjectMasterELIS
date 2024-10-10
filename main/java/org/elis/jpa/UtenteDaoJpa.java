@@ -25,16 +25,11 @@ public class UtenteDaoJpa implements UtenteDao {
 		return instance;
 	}
 
-	@Override
-<<<<<<< Updated upstream
-	public List<Utente> getAll() {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		Query q = em.createQuery("select a from Utente a");
-=======
+
 	public List<Utente> findAll() {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		Query q = em.createQuery("select a from utente a");
->>>>>>> Stashed changes
+
 		return q.getResultList();
 	}
 
