@@ -59,12 +59,12 @@ public class Gioco {
 	    private Genere genere;
 
 	    @Column(name = "id_utente", nullable = false)
-	    private long idUtente;
+	    private Utente idUtente;
 
     // Costruttore
     public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
                  LocalDate data_rilascio, String descrizione, byte[] byteImmagine, boolean eliminato, double prezzo,
-                 Offerta offerta, long idUtente) {
+                 Offerta offerta, Utente idUtente) {
         this.id = id;
         this.data_creazione = data_creazione;
         this.data_ultima_modifica = data_ultima_modifica;
@@ -167,11 +167,11 @@ public class Gioco {
         this.genere = genere;
     }
 
-    public long getIdUtente() {
+    public Utente getIdUtente() {
         return idUtente;
     }
 
-    public void setIdUtente(long idUtente) {
+    public void setIdUtente(Utente idUtente) {
         this.idUtente = idUtente;
     }
 

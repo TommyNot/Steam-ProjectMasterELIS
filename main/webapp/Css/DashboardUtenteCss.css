@@ -191,6 +191,22 @@ body {
   outline: 1px solid #161D25;
 }
 
+.btn.btn-secondary{
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.profile-picture{
+  width: 40px;
+  height: 40px;
+  border-radius: 200px;
+  background: url("https://picsum.photos/id/440/60/60");
+  background-position: center;
+  background-size: cover;
+}
+
 .profile {
   display: flex;
   flex-direction: row;
@@ -214,12 +230,14 @@ body {
   margin-right: unset;
 }
 
-.profile > svg:hover {
+.profile > svg:hover,
+.profile-small > svg:hover {
   cursor: pointer;
   fill: #161D25;
 }
 
-.profile > svg:active {
+.profile > svg:active,
+.profile-small > svg:active {
   transform: scale(0.92);
 }
 
@@ -230,6 +248,10 @@ body {
   background: url("https://picsum.photos/id/440/60/60");
   background-position: center;
   background-size: cover;
+}
+
+.profile-small {
+  display: none;
 }
 
 .ui-row-2 {

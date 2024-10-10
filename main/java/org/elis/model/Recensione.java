@@ -2,17 +2,43 @@ package org.elis.model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 public class Recensione {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
+	@CreationTimestamp
+	@Column(name="data_creazione", nullable=false)
 	private LocalDateTime data_creazione;
+	
+	@UpdateTimestamp
+	@Column(name="data_ultima_modifica", nullable=false)
 	private LocalDateTime data_ultima_modifica;
+	
+	@Column(name="voto", nullable=false)
 	private int voto;
+	
+	@Column(name="testo")
 	private String testo;
+	
+	@ManyToOne
 	private Gioco gioco;
-	private Utente utente;
+	
+	@ManyToOne
+	private Utente idUtente;
 	
 	public Recensione(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, int voto, String testo,
-			Gioco gioco, Utente utente) {
+			Gioco gioco, Utente idUtente) {
 		super();
 		this.id = id;
 		this.data_creazione = data_creazione;
@@ -20,7 +46,7 @@ public class Recensione {
 		this.voto = voto;
 		this.testo = testo;
 		this.gioco = gioco;
-		this.utente = utente;
+		this.idUtente = idUtente;
 	}
 	
 	public Recensione() {
@@ -76,12 +102,12 @@ public class Recensione {
 		this.gioco = gioco;
 	}
 
-	public Utente getUtente() {
-		return utente;
+	public Utente getIdUtente() {
+		return idUtente;
 	}
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
+	public void setIdUtente(Utente idUtente) {
+		this.idUtente = idUtente;
 	}
 	
 	

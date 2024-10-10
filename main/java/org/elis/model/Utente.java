@@ -3,17 +3,49 @@ package org.elis.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity()
 public class Utente {
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
+	@Column(name="ruolo", nullable=false)
 	private Ruolo ruolo;
+	
+	@Column(name="username", nullable=false, unique= true)
 	private String username;
+	
+	@Column(name="email", nullable=false, unique= true)
 	private String email;
+	
+	@Column(name="password",nullable=false)
 	private String password;
+	
+	@CreationTimestamp
+	@Column(name="data_creazione", nullable=false)
 	private LocalDateTime data_creazione;
+	
+	@UpdateTimestamp
+	@Column(name="data_ultima_modifica", nullable=false)
 	private LocalDateTime data_ultima_modifica;
+	
+	@OneToMany(mappedBy="idUtente")
 	private List<Gioco> giochiPubblicati;
+	
+	@OneToMany(mappedBy="idUtente")
 	private List<Libreria> librerie;
+	
+	@OneToMany(mappedBy="idUtente")
 	private List<Recensione> rencensioni;
 	
 	
