@@ -9,6 +9,7 @@ import java.io.IOException;
 
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 /**
@@ -51,10 +52,14 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
             request.getRequestDispatcher("public-jsp/RegisterPage.jsp").forward(request, response);
             return;
         }
+        
+       
 
         // Logica per l'aggiunta dell'utente
-        Utente u = BusinessLogic.UtenteAdd( username,email, password);
-        if (u == null) {
+        Utente u = new Utente(Ruolo.UTENTE_BASE,username,email,password);
+        Utente uRestituito = BusinessLogic.UtenteAdd(u);
+        
+        if (uRestituito == null) {
            
             request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
             return;

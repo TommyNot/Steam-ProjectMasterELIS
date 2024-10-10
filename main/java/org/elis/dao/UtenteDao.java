@@ -8,7 +8,7 @@ import org.elis.model.Utente;
 
 public interface UtenteDao {
 	
-	Utente add(String username,String email, String password);
+	Utente add(Utente u);
 	Utente loginUtente(String email,String password);
 	List<Utente> findAll();
 	Utente findByName(String username);

@@ -20,6 +20,11 @@ import jakarta.persistence.Table;
 @Entity()
 @Table(name="Utente")
 public class Utente implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -55,13 +60,12 @@ public class Utente implements Serializable{
 	private List<Recensione> rencensioni;
 	
 	
-	public Utente(Ruolo ruolo, String username, String email, String password, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica) {
-	    this.ruolo = ruolo;
+	public Utente(Ruolo ruolo,String username, String email, String password) {
+	    
 	    this.username = username;
 	    this.email = email;
 	    this.password = password;
-	    this.data_creazione = data_creazione;
-	    this.data_ultima_modifica = data_ultima_modifica;
+	    this.ruolo = ruolo;
 	}
 
 	public Utente() {

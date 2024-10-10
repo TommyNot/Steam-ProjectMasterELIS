@@ -3,11 +3,13 @@ package org.elis.jpa;
 import java.util.List;
 
 import org.elis.dao.UtenteDao;
+import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 
 public class UtenteDaoJpa implements UtenteDao {
@@ -34,9 +36,14 @@ public class UtenteDaoJpa implements UtenteDao {
 	}
 
 	@Override
-	public Utente add(String username, String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public Utente add(Utente u) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.persist(u);
+		t.commit();
+		return u;
+	
 	}
 
 	@Override
