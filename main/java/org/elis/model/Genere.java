@@ -36,19 +36,19 @@ public class Genere {
 	private String nome;
 	
 	@ManyToOne
-	Offerta offerta;
+	private Offerta offertaGenere;
 	
 	@ManyToMany(mappedBy="genereGiochi")
 	private List<Gioco> giochi;
 	
 	public Genere(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			Offerta offerta) {
+			Offerta offertaGenere) {
 		
 		this.id = id;
 		this.data_creazione = data_creazione;
 		this.data_ultima_modifica = data_ultima_modifica;
 		this.nome = nome;
-		this.offerta = offerta;
+		this.offertaGenere = offertaGenere;
 	}
 	
 	public Genere() {
@@ -88,12 +88,12 @@ public class Genere {
 		this.nome = nome;
 	}
 
-	public Offerta getOfferta() {
-		return offerta;
+	public Offerta getOffertaGenere() {
+		return offertaGenere;
 	}
 
-	public void setOfferta(Offerta offerta) {
-		this.offerta = offerta;
+	public void setOffertaGenere(Offerta offertaGenere) {
+		this.offertaGenere = offertaGenere;
 	}
 	
 	

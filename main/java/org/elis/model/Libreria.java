@@ -35,19 +35,19 @@ public class Libreria {
 	private String nome;
 	
 	@ManyToOne
-	private Utente idUtente;
+	private Utente libreriaUtente;
 	
-	@OneToMany(mappedBy="idLibreria")
+	@OneToMany(mappedBy="libreriaGiochi")
 	private List<Gioco> giochiAcquistati;
 	
 	public Libreria(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			Utente idUtente) {
+			Utente libreriaUtente) {
 		super();
 		this.id = id;
 		this.data_creazione = data_creazione;
 		this.data_ultima_modifica = data_ultima_modifica;
 		this.nome = nome;
-		this.idUtente = idUtente;
+		this.libreriaUtente = libreriaUtente;
 	}
 	
 	public Libreria() {
@@ -87,12 +87,12 @@ public class Libreria {
 		this.nome = nome;
 	}
 
-	public Utente getIdUtente() {
-		return idUtente;
+	public Utente getLibreriaUtente() {
+		return libreriaUtente;
 	}
 
-	public void setIdUtente(Utente idUtente) {
-		this.idUtente = idUtente;
+	public void setLibreriaUtente(Utente libreriaUtente) {
+		this.libreriaUtente = libreriaUtente;
 	}
 	
 	

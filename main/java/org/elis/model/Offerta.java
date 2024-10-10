@@ -44,10 +44,10 @@ public class Offerta {
 	private LocalDateTime data_fine;
 	
     
-    @OneToMany(mappedBy = "offerta_id")
+    @OneToMany(mappedBy = "offertaGioco")
 	List<Gioco> gioco;
     
-    @OneToMany(mappedBy = "genere_id")
+    @OneToMany(mappedBy = "offertaGenere")
 	List<Genere> genere;
 	
 	

@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,6 +23,7 @@ public class Utente {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name="ruolo", nullable=false)
 	private Ruolo ruolo;
 	
@@ -44,10 +47,10 @@ public class Utente {
 	@OneToMany(mappedBy="idUtente")
 	private List<Gioco> giochiPubblicati;
 	
-	@OneToMany(mappedBy="idUtente")
+	@OneToMany(mappedBy="libreriaUtente")
 	private List<Libreria> librerie;
 	
-	@OneToMany(mappedBy="idUtente")
+	@OneToMany(mappedBy="recensioneUtente")
 	private List<Recensione> rencensioni;
 	
 	

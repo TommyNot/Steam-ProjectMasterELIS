@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -56,10 +57,9 @@ public class Gioco {
 	    private double prezzo;
 
 	    @ManyToOne 
-	    @JoinColumn(name = "offerta_id")
-	    private Offerta offerta;
+	    private Offerta offertaGioco;
  
-	    @ManyToMany()
+	    @ManyToMany(fetch=FetchType.LAZY)
 		@JoinTable(name="genere_gioco",
 					joinColumns= @JoinColumn(name="id_genere"),
 					inverseJoinColumns = @JoinColumn(name="id_gioco"))
@@ -67,11 +67,14 @@ public class Gioco {
 
 	    @Column(name = "id_utente", nullable = false)
 	    private Utente idUtente;
+	    
+	    @ManyToOne
+	    private Libreria libreriaGiochi;
 
     // Costruttore
     public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
                  LocalDate data_rilascio, String descrizione, byte[] byteImmagine, boolean eliminato, double prezzo,
-                 Offerta offerta, Utente idUtente) {
+                 Offerta offertaGioco, Utente idUtente) {
         this.id = id;
         this.data_creazione = data_creazione;
         this.data_ultima_modifica = data_ultima_modifica;
@@ -81,7 +84,7 @@ public class Gioco {
         this.byteImmagine = byteImmagine;
         this.eliminato = eliminato;
         this.prezzo = prezzo;
-        this.offerta = offerta;
+        this.offertaGioco = offertaGioco;
         this.idUtente = idUtente;
     }
 
@@ -158,12 +161,12 @@ public class Gioco {
         this.prezzo = prezzo;
     }
 
-    public Offerta getOfferta() {
-        return offerta;
+    public Offerta getOffertaGioco() {
+        return offertaGioco;
     }
 
-    public void setOfferta(Offerta offerta) {
-        this.offerta = offerta;
+    public void setOffertaGioco(Offerta offertaGioco) {
+        this.offertaGioco = offertaGioco;
     }
 
     

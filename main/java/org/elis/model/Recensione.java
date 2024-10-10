@@ -39,10 +39,10 @@ public class Recensione {
 	private Gioco gioco;
 	
 	@ManyToOne
-	private Utente idUtente;
+	private Utente recensioneUtente;
 	
 	public Recensione(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, int voto, String testo,
-			Gioco gioco, Utente idUtente) {
+			Gioco gioco, Utente recensioneUtente) {
 		super();
 		this.id = id;
 		this.data_creazione = data_creazione;
@@ -50,7 +50,7 @@ public class Recensione {
 		this.voto = voto;
 		this.testo = testo;
 		this.gioco = gioco;
-		this.idUtente = idUtente;
+		this.recensioneUtente = recensioneUtente;
 	}
 	
 	public Recensione() {
@@ -106,12 +106,12 @@ public class Recensione {
 		this.gioco = gioco;
 	}
 
-	public Utente getIdUtente() {
-		return idUtente;
+	public Utente getRecensioneUtente() {
+		return recensioneUtente;
 	}
 
-	public void setIdUtente(Utente idUtente) {
-		this.idUtente = idUtente;
+	public void setIdUtente(Utente recensioneUtente) {
+		this.recensioneUtente = recensioneUtente;
 	}
 	
 	
