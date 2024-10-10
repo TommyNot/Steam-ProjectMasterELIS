@@ -18,12 +18,12 @@ public class BusinessLogic {
 	
 public static Utente UtenteLogin(String email,String password) {
 	
-	return DaoFactory.getDaoFactory().getUtenteDao().loginUtente(email, password);
+	return DaoFactory.getDaoFactory("JPA").getUtenteDao().loginUtente(email, password);
 }
 	
 public static List<Utente> UtenteFindAll() {
 		
-		return  DaoFactoryJpa.getDaoFactoryJpa().getJpaUtenteDao().getAll();
+		return  DaoFactory.getDaoFactory("JPA").getUtenteDao().findAll();
 	}
 
 

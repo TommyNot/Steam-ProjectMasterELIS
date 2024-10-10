@@ -1,21 +1,54 @@
 package org.elis.jpa;
 
-import org.elis.daoJpa.JpaUtenteDao;
+import org.elis.dao.DaoFactory;
+import org.elis.dao.GenereDao;
+import org.elis.dao.GiocoDao;
+import org.elis.dao.LibreriaDao;
+import org.elis.dao.OffertaDao;
+import org.elis.dao.UtenteDao;
+
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 
-public class DaoFactoryJpa {
+public class DaoFactoryJpa extends DaoFactory{
 	
-	public UtenteDaoJpa getJpaUtenteDao() {
-		return UtenteDaoJpa.getInstance();
-	}
+
 	
+	//creo connessione con db
 	protected static EntityManager getEntityManager() {
 		return Persistence.createEntityManagerFactory("SteamProject").createEntityManager();
 	}
 	
-	public static DaoFactoryJpa getDaoFactoryJpa() {
-		return new DaoFactoryJpa();
+
+	@Override
+	public UtenteDao getUtenteDao() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public GiocoDao getGiocoDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LibreriaDao getLibreriaDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public GenereDao getGenereDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public OffertaDao getOffertaDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }
