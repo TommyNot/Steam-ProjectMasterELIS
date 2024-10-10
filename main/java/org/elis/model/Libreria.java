@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -37,7 +38,7 @@ public class Libreria {
 	@ManyToOne
 	private Utente libreriaUtente;
 	
-	@OneToMany(mappedBy="libreriaGiochi")
+	@ManyToMany(mappedBy="libreriaGiochi")
 	private List<Gioco> giochiAcquistati;
 	
 	public Libreria(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,

@@ -68,8 +68,11 @@ public class Gioco {
 	    @Column(name = "id_utente", nullable = false)
 	    private Utente idUtente;
 	    
-	    @ManyToOne
-	    private Libreria libreriaGiochi;
+	    @ManyToMany(fetch=FetchType.LAZY)
+	    @JoinTable(name = "libreria_gioco",
+	    			joinColumns=@JoinColumn(name="id_libreria"),
+	    			inverseJoinColumns=@JoinColumn(name="id_gioco"))
+	    private List<Libreria> libreriaGiochi;
 
     // Costruttore
     public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,

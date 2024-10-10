@@ -6,7 +6,7 @@ import org.elis.dao.GiocoDao;
 import org.elis.dao.LibreriaDao;
 import org.elis.dao.OffertaDao;
 import org.elis.dao.UtenteDao;
-
+import org.elis.jdbc.UtenteDaoJDBC;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
@@ -14,7 +14,6 @@ import jakarta.persistence.Persistence;
 public class DaoFactoryJpa extends DaoFactory{
 	
 
-	
 	//creo connessione con db
 	protected static EntityManager getEntityManager() {
 		return Persistence.createEntityManagerFactory("SteamProject").createEntityManager();
@@ -23,8 +22,8 @@ public class DaoFactoryJpa extends DaoFactory{
 
 	@Override
 	public UtenteDao getUtenteDao() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return UtenteDaoJpa.getInstance();
 	}
 
 	@Override
