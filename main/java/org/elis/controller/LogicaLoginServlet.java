@@ -56,7 +56,7 @@ public class LogicaLoginServlet extends HttpServlet {
             
             
     	    if(ricordami != null) {
-		        sessione.setAttribute("ricordami", u1);
+		        sessione.setAttribute("utenteLoggato", u1);
 		    }
 
             

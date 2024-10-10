@@ -7,6 +7,7 @@
 <%@ page import="org.elis.model.Offerta" %> 
 <%@ page import="org.elis.model.Utente" %> 
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
+<%@ page import="java.util.Base64" %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -114,7 +115,7 @@
 				        <input type="text" id="descrizione" name="descrizione" required>
 				
 				        <label for="immagine">Carica Immagine:</label>
-    					<input type="file" name="immagine" accept="image/*" size=35 required><br>
+    					<input type="file" name="immagine" accept="image/jpeg,image/png" required><br>
 				
 				        <label for="prezzo">Prezzo:</label>
 				        <input type="number" id="prezzo" name="prezzo" required>
@@ -222,12 +223,33 @@
 				                        <% if (offerta != null) { %>
 				                            <span class="discount"><%= offerta.getSconto() + "% off" %></span>
 				                        <% } %>
-				                        <img style='display:block; width:100px;height:100px;' id='base64image'
-    											src='data:image/jpeg;base64,<%= gioco.getByteImmagine() %>' />
+				                        	
+				                        	<div class="product__image">
+				                        	 <% 
+													    String immagineBase64 = gioco.getImmagine(); 
+				                        	 System.out.println("Immagine Base64: " + immagineBase64);
+
+													    if (immagineBase64 != null && !immagineBase64.isEmpty()) { 
+													%>
+													   <img src="data:image/jpeg;base64,<%= immagineBase64 %>" />
+													<% 
+													    } else { 
+													%>
+													    <p>Immagine non disponibile</p>
+													<% 
+													    } 
+													%>
+				                        	</div>
+
+											   
+
+
 				                        <ul>
 				                       		 <li>
-				                        		<a id="btn-modifica" href="#" style="text-decoration: none;"><i class="bi bi-pencil-square"></i>Modifica</a>
-				                       		 </li>
+				                        		<a id="btn-modifica" href="<%= request.getContextPath() %>/modificaGioco?id=<%= gioco.getId() %>" style="text-decoration: none;">
+													   <i class="bi bi-pencil-square"></i> Modifica
+														</a>
+								                  </li>
 				                        
 				                        </ul>
 				                            

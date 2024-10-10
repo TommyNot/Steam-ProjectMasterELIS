@@ -2,6 +2,7 @@ package org.elis.jdbc;
 
 import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.JDBCType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,11 +44,16 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
     @Override
-    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, byte[] immagine, double prezzo, Genere genere, Offerta offerta, Utente u) {
-
+    public Gioco add(String nome, LocalDate dataRilascio, String descrizione, String immagineBase64, double prezzo, Genere genere, Offerta offerta, Utente u) {
         String queryInsertGioco = "INSERT INTO gioco(nome, data_rilascio, descrizione, immagine, prezzo, id_offerta, id_casa_editrice) VALUES(?, ?, ?, ?, ?, ?, ?)";
         String querySelectUtente = "SELECT id, ruolo FROM utente WHERE id = ?";
         String queryInsertGenereGioco = "INSERT INTO genere_gioco(id_genere, id_gioco) VALUES(?, ?)";
+
+        // Verifica se i parametri sono validi
+        if (nome == null || nome.isEmpty() || descrizione == null || immagineBase64 == null || immagineBase64.isEmpty()) {
+            System.out.println("Errore: Parametri invalidi forniti.");
+            return null;
+        }
 
         try (
             Connection c = JdbcDaoFactory.getConnection();
@@ -66,14 +72,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 
             // Inserimento gioco
             inserimentoGioco.setString(1, nome);
-            inserimentoGioco.setTimestamp(2, Timestamp.valueOf(dataRilascio.atStartOfDay()));
+            inserimentoGioco.setDate(2, Date.valueOf(dataRilascio));
             inserimentoGioco.setString(3, descrizione);
-
-            // Creazione e impostazione del BLOB
-            Blob blobImmagine = c.createBlob();
-            blobImmagine.setBytes(1, immagine);
-            inserimentoGioco.setBlob(4, blobImmagine);
-
+            inserimentoGioco.setString(4, immagineBase64);
             inserimentoGioco.setDouble(5, prezzo);
 
             if (offerta != null) {
@@ -85,31 +86,33 @@ public class GiocoDaoJDBC implements GiocoDao{
             inserimentoGioco.setLong(7, u.getId());
 
             int aggiornamento = inserimentoGioco.executeUpdate();
-
+            long giocoId = 0;
             if (aggiornamento > 0) {
                 ResultSet recuperIdGioco = inserimentoGioco.getGeneratedKeys();
                 
                 if (recuperIdGioco.next()) {
-                    long giocoId = recuperIdGioco.getLong(1);
-
+                    giocoId = recuperIdGioco.getLong(1);
+                    
                     inserimentoGenereGioco.setLong(1, genere.getId());
                     inserimentoGenereGioco.setLong(2, giocoId);
                     inserimentoGenereGioco.executeUpdate();
                 }
+               
+
+                Gioco nuovoGioco = new Gioco();
+                nuovoGioco.setId(giocoId); 
+                nuovoGioco.setNome(nome);
+                nuovoGioco.setData_rilascio(dataRilascio);
+                nuovoGioco.setDescrzione(descrizione);
+                nuovoGioco.setByteImmagine(immagineBase64.getBytes()); 
+                nuovoGioco.setPrezzo(prezzo);
+                nuovoGioco.setGenere(genere);
+                nuovoGioco.setOfferta(offerta);
+                nuovoGioco.setIdUtente(u.getId());
+
+                System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
+                return nuovoGioco;
             }
-
-            Gioco nuovoGioco = new Gioco();
-            nuovoGioco.setNome(nome);
-            nuovoGioco.setData_rilascio(dataRilascio);
-            nuovoGioco.setDescrzione(descrizione);
-            nuovoGioco.setByteImmagine(immagine);
-            nuovoGioco.setPrezzo(prezzo);
-            nuovoGioco.setGenere(genere);
-            nuovoGioco.setOfferta(offerta);
-            nuovoGioco.setIdUtente(u.getId());
-
-            System.out.println("Gioco aggiunto con successo: " + nuovoGioco.getNome());
-            return nuovoGioco;
 
         } catch (SQLException e) {
             System.out.println("Errore SQL durante l'inserimento del gioco: " + e.getMessage());
@@ -123,57 +126,46 @@ public class GiocoDaoJDBC implements GiocoDao{
     }
 
 
-	@Override
-	public List<Gioco> findAll() {
-		String query = "SELECT * FROM GIOCO";
-		 List<Gioco> giochi = new ArrayList<>();
-		
-		try(
-				Connection c = JdbcDaoFactory.getConnection();
-				PreparedStatement ps = c.prepareStatement(query);
-				ResultSet rs = ps.executeQuery();
-				
-			){
-			
-			
-			
-			while(rs.next()){
-				
-				Gioco g = new Gioco();
-				
-				String nome = rs.getString("nome");
-				LocalDate dataRilascio = rs.getDate("data_rilascio").toLocalDate();
-				String descrzione = rs.getString("descrizione");
-				String immagine = rs.getString("immagine");
-				boolean eliminato = rs.getBoolean("eliminato");
-				double prezzo = rs.getDouble("prezzo");
-				
-				g.setId(rs.getInt("id"));
-				g.setNome(nome);
-				g.setData_rilascio(dataRilascio);
-				g.setDescrzione(descrzione);
-				g.setImmagine(immagine);
-				g.setEliminato(eliminato);
-				g.setPrezzo(prezzo);
-				
-				
-				giochi.add(g);
 
-			}
-			
-			
-		}catch(SQLException e) {
-			
-			System.out.println("Errore durante il recupero dei giochi: " + e.getMessage());
-			
-		}catch(Exception e) {
-			
-			e.printStackTrace();
-		}
-		return giochi;
-		
-		
-	}
+    @Override
+    public List<Gioco> findAll() {
+        String query = "SELECT * FROM gioco";
+        List<Gioco> giochi = new ArrayList<>();
+
+        try (
+            Connection c = JdbcDaoFactory.getConnection();
+            PreparedStatement ps = c.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+        ) {
+            while (rs.next()) {
+                Gioco g = new Gioco();
+
+                String nome = rs.getString("nome");
+                LocalDate dataRilascio = rs.getDate("data_rilascio").toLocalDate();
+                String descrizione = rs.getString("descrizione");
+                String immagine = rs.getString("immagine");  
+                double prezzo = rs.getDouble("prezzo");
+               
+                g.setId(rs.getInt("id"));
+                g.setNome(nome);
+                g.setData_rilascio(dataRilascio);
+                g.setDescrzione(descrizione);
+                g.setByteImmagine(immagine.getBytes());  
+                g.setIdUtente(rs.getInt("id_casa_editrice"));
+                g.setPrezzo(prezzo);
+
+                giochi.add(g);
+            }
+        } catch (SQLException e) {
+            System.out.println("Errore durante il recupero dei giochi: " + e.getMessage());
+            e.printStackTrace();  
+        } catch (Exception e) {
+            e.printStackTrace();  
+        }
+
+        return giochi;
+    }
+
 
 	@Override
 	public Gioco findByName(String nome) {
@@ -197,9 +189,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 		           g = new Gioco();
 		          	g.setId(rs.getLong("id"));
 	                g.setNome(rs.getString("nome"));
-	                g.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	                g.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime().toLocalDate());
 	                g.setDescrzione(rs.getString("descrizione"));
-	                g.setImmagine(rs.getString("immagine"));
+	                g.setByteImmagine(rs.getString("immagine").getBytes());
 	                g.setPrezzo(rs.getDouble("prezzo"));
 	                
 	               System.out.println("gioco trovato");
@@ -280,9 +272,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 	                Gioco gioco = new Gioco();
 	                gioco.setId(rs.getLong("id"));
 	                gioco.setNome(rs.getString("nome"));
-	                gioco.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	                gioco.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime().toLocalDate());
 	                gioco.setDescrzione(rs.getString("descrizione"));
-	                gioco.setImmagine(rs.getString("immagine"));
+	                gioco.setByteImmagine(rs.getString("immagine").getBytes());
 	                gioco.setEliminato(rs.getBoolean("eliminato"));
 	                gioco.setPrezzo(rs.getDouble("prezzo"));
 	                
@@ -345,9 +337,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 	            Gioco gioco = new Gioco();
 	            gioco.setId(rs.getLong("id"));
 	            gioco.setNome(rs.getString("nome"));
-	            gioco.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	            gioco.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime().toLocalDate());
 	            gioco.setDescrzione(rs.getString("descrizione"));
-	            gioco.setImmagine(rs.getString("immagine"));
+	            gioco.setByteImmagine(rs.getString("immagine").getBytes());
 	            gioco.setEliminato(rs.getBoolean("eliminato"));
 	            gioco.setPrezzo(rs.getDouble("prezzo"));
 	            
@@ -567,9 +559,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 	        Gioco giocoAggiornato = new Gioco();
 	        giocoAggiornato.setId(id);
 	        giocoAggiornato.setNome(rs.getString("nome"));
-	        giocoAggiornato.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime());
+	        giocoAggiornato.setData_rilascio(rs.getTimestamp("data_rilascio").toLocalDateTime().toLocalDate());
 	        giocoAggiornato.setDescrzione(rs.getString("descrizione"));
-	        giocoAggiornato.setImmagine(rs.getString("immagine"));
+	        giocoAggiornato.setByteImmagine(rs.getString("immagine").getBytes());
 	        giocoAggiornato.setEliminato(rs.getBoolean("eliminato"));
 	        giocoAggiornato.setPrezzo(rs.getDouble("prezzo"));
 
@@ -613,9 +605,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 	            Gioco gioco = new Gioco();
 	            gioco.setId(rs.getLong("g.id"));
 	            gioco.setNome(rs.getString("g.nome"));
-	            gioco.setData_rilascio(rs.getTimestamp("g.data_rilascio").toLocalDateTime());
+	            gioco.setData_rilascio(rs.getTimestamp("g.data_rilascio").toLocalDateTime().toLocalDate());
 	            gioco.setDescrzione(rs.getString("g.descrizione"));
-	            gioco.setImmagine(rs.getString("g.immagine"));
+	            gioco.setByteImmagine(rs.getString("g.immagine").getBytes());
 	            gioco.setPrezzo(rs.getDouble("g.prezzo"));
 	            
 	            long idOfferta = rs.getLong("o.id");
@@ -661,9 +653,9 @@ public class GiocoDaoJDBC implements GiocoDao{
 	            Gioco gioco = new Gioco();
 	            gioco.setId(rs.getLong("g.id"));
 	            gioco.setNome(rs.getString("g.nome"));
-	            gioco.setData_rilascio(rs.getTimestamp("g.data_rilascio").toLocalDateTime());
+	            gioco.setData_rilascio(rs.getTimestamp("g.data_rilascio").toLocalDateTime().toLocalDate());
 	            gioco.setDescrzione(rs.getString("g.descrizione"));
-	            gioco.setImmagine(rs.getString("g.immagine"));
+	            gioco.setByteImmagine(rs.getString("g.immagine").getBytes());
 	            gioco.setPrezzo(rs.getDouble("g.prezzo"));
 
 	            
@@ -740,7 +732,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 				g.setNome(nome);
 				g.setData_rilascio(dataRilascio);
 				g.setDescrzione(descrzione);
-				g.setImmagine(immagine);
+				g.setByteImmagine(immagine.getBytes());
 				
 				g.setPrezzo(prezzo);
 				

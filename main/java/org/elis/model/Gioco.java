@@ -3,195 +3,141 @@ package org.elis.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Base64;
-import java.util.List;
-
-
 
 public class Gioco {
-	
-	private long id;
-	private LocalDateTime data_creazione;
-	private LocalDateTime data_ultima_modifica;
-	private String nome;
-	private LocalDate data_rilascio;
-	private String descrzione;
-	private String immagine;
-	private byte[] byteImmagine;
-	private boolean eliminato;
-	private double prezzo;
-	Offerta offerta;
-	Genere genere;
 
+    private long id;
+    private LocalDateTime data_creazione;
+    private LocalDateTime data_ultima_modifica;
+    private String nome;
+    private LocalDate data_rilascio;
+    private String descrzione;
+    private byte[] byteImmagine; 
+    private boolean eliminato;
+    private double prezzo;
+    private Offerta offerta;
+    private Genere genere;
+    private long idUtente;
 
+    // Costruttore
+    public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
+                 LocalDate data_rilascio, String descrizione, byte[] byteImmagine, boolean eliminato, double prezzo,
+                 Offerta offerta, long idUtente) {
+        this.id = id;
+        this.data_creazione = data_creazione;
+        this.data_ultima_modifica = data_ultima_modifica;
+        this.nome = nome;
+        this.data_rilascio = data_rilascio;
+        this.descrzione = descrizione;
+        this.byteImmagine = byteImmagine;
+        this.eliminato = eliminato;
+        this.prezzo = prezzo;
+        this.offerta = offerta;
+        this.idUtente = idUtente;
+    }
 
-	long idUtente;
-	
-	public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			LocalDate data_rilascio, String descrizione, byte[] byteImmagine, boolean eliminato, double prezzo,
-			Offerta offerta, long idUtente) {
-		
-		
-		this.id = id;
-		this.data_creazione = data_creazione;
-		this.data_ultima_modifica = data_ultima_modifica;
-		this.nome = nome;
-		this.data_rilascio = data_rilascio;
-		this.descrzione = descrizione;
-		this.byteImmagine = byteImmagine;
-		this.eliminato = eliminato;
-		this.prezzo = prezzo;
-		this.offerta = offerta;
-		this.idUtente = idUtente;
-	}
-	
-	
-	public Gioco() {
-		
-		
-	}
-	
-	
+    public Gioco() {
+        // Costruttore vuoto
+    }
 
+    // Getters e Setters
+    public long getId() {
+        return id;
+    }
 
-	public long getIdUtente() {
-		return idUtente;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public LocalDateTime getData_creazione() {
+        return data_creazione;
+    }
 
-	public void setIdUtente(long idUtente) {
-		this.idUtente = idUtente;
-	}
+    public void setData_creazione(LocalDateTime data_creazione) {
+        this.data_creazione = data_creazione;
+    }
 
+    public LocalDateTime getData_ultima_modifica() {
+        return data_ultima_modifica;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public void setData_ultima_modifica(LocalDateTime data_ultima_modifica) {
+        this.data_ultima_modifica = data_ultima_modifica;
+    }
 
+    public String getNome() {
+        return nome;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
+    public LocalDate getData_rilascio() {
+        return data_rilascio;
+    }
 
-	public LocalDateTime getData_creazione() {
-		return data_creazione;
-	}
+    public void setData_rilascio(LocalDate dataRilascio) {
+        this.data_rilascio = dataRilascio;
+    }
 
+    public String getDescrzione() {
+        return descrzione;
+    }
 
-	public void setData_creazione(LocalDateTime data_creazione) {
-		this.data_creazione = data_creazione;
-	}
+    public void setDescrzione(String descrzione) {
+        this.descrzione = descrzione;
+    }
 
+    public String getImmagine() {
+        return Base64.getEncoder().encodeToString(byteImmagine);
+    }
 
-	public LocalDateTime getData_ultima_modifica() {
-		return data_ultima_modifica;
-	}
+    public boolean isEliminato() {
+        return eliminato;
+    }
 
+    public void setEliminato(boolean eliminato) {
+        this.eliminato = eliminato;
+    }
 
-	public void setData_ultima_modifica(LocalDateTime data_ultima_modifica) {
-		this.data_ultima_modifica = data_ultima_modifica;
-	}
+    public double getPrezzo() {
+        return prezzo;
+    }
 
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Offerta getOfferta() {
+        return offerta;
+    }
 
+    public void setOfferta(Offerta offerta) {
+        this.offerta = offerta;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Genere getGenere() {
+        return genere;
+    }
 
+    public void setGenere(Genere genere) {
+        this.genere = genere;
+    }
 
-	public LocalDate getData_rilascio() {
-		return data_rilascio;
-	}
+    public long getIdUtente() {
+        return idUtente;
+    }
 
+    public void setIdUtente(long idUtente) {
+        this.idUtente = idUtente;
+    }
 
-	public void setData_rilascio(LocalDate dataRilascio) {
-		this.data_rilascio = dataRilascio;
-	}
+    public byte[] getByteImmagine() {
+        return byteImmagine;
+    }
 
-
-	public String getDescrzione() {
-		return descrzione;
-	}
-
-
-	public void setDescrzione(String descrzione) {
-		this.descrzione = descrzione;
-	}
-
-
-	public String getImmagine() {
-		return Base64.getEncoder().encodeToString(byteImmagine);
-	}
-
-
-	public void setImmagine(String immagine) {
-		this.immagine = immagine;
-	}
-
-
-	public boolean isEliminato() {
-		return eliminato;
-	}
-
-
-	public void setEliminato(boolean eliminato) {
-		this.eliminato = eliminato;
-	}
-
-
-	public double getPrezzo() {
-		return prezzo;
-	}
-
-
-	public void setPrezzo(double prezzo) {
-		this.prezzo = prezzo;
-	}
-
-
-	public Offerta getOfferta() {
-		return offerta;
-	}
-
-
-	public void setOfferta(Offerta offerta) {
-		this.offerta = offerta;
-	}
-
-
-
-
-	public Genere getGenere() {
-		return genere;
-	}
-
-
-	public void setGenere(Genere genere) {
-		this.genere = genere;
-	}
-
-
-	public void setData_rilascio(LocalDateTime localDateTime) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public byte[] getByteImmagine() {
-		return byteImmagine;
-	}
-
-
-	public void setByteImmagine(byte[] byteImmagine) {
-		this.byteImmagine = byteImmagine;
-	}
-	
-	
-	
-	
-
+    public void setByteImmagine(byte[] byteImmagine) {
+        this.byteImmagine = byteImmagine;
+    }
 }

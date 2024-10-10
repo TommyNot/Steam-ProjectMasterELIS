@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
@@ -45,52 +46,37 @@ public class GiocoAggiungiServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sessione = request.getSession(false);
 
-        
         String nome = request.getParameter("nome");
-        String dataRilascio = request.getParameter("dataRilascio"); 
+        String dataRilascio = request.getParameter("dataRilascio");
         String descrizione = request.getParameter("descrizione");
-        // Ricevi il file immagine
-        Part filePart = request.getPart("immagine");
-        byte[] immagineBytes = null;
-
-        if (filePart != null) {
-            // Converti l'input stream in un array di byte
-            try (InputStream inputStream = filePart.getInputStream()) {
-                immagineBytes = new byte[(int) filePart.getSize()];
-                inputStream.read(immagineBytes); // Leggi i byte dall'input stream
-            }
-        }
-
         String prezzo = request.getParameter("prezzo");
-        String offerta = request.getParameter("offerta"); 
+        String offerta = request.getParameter("offerta");
         String generi = request.getParameter("genere");
-        
+
         System.out.println(offerta);
         System.out.println(generi);
 
-       
-        
-
-        
-        if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || filePart == null || prezzo == null) {
+        // Controllo campi obbligatori
+        if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || prezzo == null) {
             request.setAttribute("errore", "Tutti i campi sono obbligatori.");
             request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return;
         }
-        
+
         LocalDate data = null;
         if (dataRilascio != null && !dataRilascio.isEmpty()) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                data = LocalDate.parse(dataRilascio, formatter); 
+                data = LocalDate.parse(dataRilascio, formatter);
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data: " + e.getMessage());
                 request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
                 System.out.println("errore nella data");
-                return; 
+                return;
             }
         }
 
@@ -107,54 +93,33 @@ public class GiocoAggiungiServlet extends HttpServlet {
             return;
         }
 
-      
-        
         Genere genereSelezionato = null;
-        
-        if(generi == null) {
-        	
-        	System.out.println("errore");
+        if (generi == null) {
+            System.out.println("errore genere");
         }
-        
-        long genereId;
-        
-        try {
-        	genereId= Long.parseLong(generi);
-        	genereSelezionato = BusinessLogic.getGenereById(genereId);
-        	System.out.println("fin qui tutto bene");
-        	
-        }catch(Exception e) {
-        	
-        	e.printStackTrace();
-        }
-        
- 
-        
-        
-        
-        Offerta offertaSelezionata = null;
 
-        if (offerta == null) {
-        	
-        	System.out.println("errore offerta");
-            
-            
-        }
-        
-        long offertaId;
-        
+        long genereId;
         try {
-        	
-        	offertaId = Long.parseLong(offerta);
-        	offertaSelezionata = BusinessLogic.findOffertaById(offertaId);
-        	System.out.println("qui tutto bene");
-        	
-        }catch(NumberFormatException e ){
-        	
-        	e.printStackTrace();
-        	
+            genereId = Long.parseLong(generi);
+            genereSelezionato = BusinessLogic.getGenereById(genereId);
+            System.out.println("fin qui tutto bene");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-     
+
+        Offerta offertaSelezionata = null;
+        if (offerta == null) {
+            System.out.println("errore offerta");
+        }
+
+        long offertaId;
+        try {
+            offertaId = Long.parseLong(offerta);
+            offertaSelezionata = BusinessLogic.findOffertaById(offertaId);
+            System.out.println("qui tutto bene");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
         // Controllo sessione
         if (sessione == null) {
@@ -163,19 +128,30 @@ public class GiocoAggiungiServlet extends HttpServlet {
         }
 
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-        
-        
 
         if (utente != null) {
-            long idUtente1 =  utente.getId();
+            long idUtente1 = utente.getId();
             System.out.println("ID Utente loggato: " + idUtente1);
-            
             Utente u = BusinessLogic.UtenteFindById(idUtente1);
+            
             if (u != null) {
                 boolean isPublisher = u.getRuolo() == Ruolo.PUBLISHER;
                 if (isPublisher) {
                     System.out.println("L'utente è un Publisher.");
-                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagineBytes , prezzoDouble, genereSelezionato , offertaSelezionata, u);
+
+                 // Ricevi il file immagine
+                    Part filePart = request.getPart("immagine"); // Assicurati di avere l'input appropriato nel tuo form
+                 
+                     
+                    String immagineBase64 = null;
+
+                    if (filePart != null && filePart.getSize() > 0) {
+                        InputStream inputStream = filePart.getInputStream();
+                        byte[] byteImmagine = inputStream.readAllBytes(); // Leggi i byte dell'immagine
+                        immagineBase64 = Base64.getEncoder().encodeToString(byteImmagine); // Convertila in Base64
+                    }
+
+                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagineBase64, prezzoDouble, genereSelezionato, offertaSelezionata, u);
                     if (aggiunto != null) {
                         response.sendRedirect("successPage.jsp");
                     } else {
@@ -191,9 +167,5 @@ public class GiocoAggiungiServlet extends HttpServlet {
         } else {
             System.out.println("Nessun utente loggato trovato nella sessione.");
         }
-
     }
-    
-
-    
 }

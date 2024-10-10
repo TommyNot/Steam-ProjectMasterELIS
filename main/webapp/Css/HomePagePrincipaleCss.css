@@ -239,7 +239,7 @@ footer p {
 }
 
 .user-area img{
-      width: 50px; /* Larghezza fissa dell'immagine */
+    width: 50px; /* Larghezza fissa dell'immagine */
     height: 50px; /* Altezza fissa dell'immagine */
     border-radius: 50%; /* Rende l'immagine circolare */
     object-fit: cover; /* Mantiene il rapporto dell'immagine */
