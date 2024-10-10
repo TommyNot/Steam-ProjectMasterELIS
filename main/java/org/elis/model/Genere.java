@@ -1,15 +1,45 @@
 package org.elis.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity()
+@Table(name="Genere")
 public class Genere {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
+	@CreationTimestamp
+	@Column(name="data_creazione", nullable=false)
 	private LocalDateTime data_creazione;
+	
+	@UpdateTimestamp
+	@Column(name="data_ultima_modifica", nullable=false)
 	private LocalDateTime data_ultima_modifica;
+	
+	@Column(name="nome", nullable=false, unique= true)
 	private String nome;
+	
+	@ManyToOne
 	Offerta offerta;
 	
+	@ManyToMany(mappedBy="genereGiochi")
+	private List<Gioco> giochi;
 	
 	public Genere(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
 			Offerta offerta) {

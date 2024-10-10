@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.dao.DaoFactory;
+import org.elis.jpa.DaoFactoryJpa;
 import org.elis.model.Genere;
 import org.elis.model.Gioco;
 import org.elis.model.Libreria;
@@ -22,7 +23,7 @@ public static Utente UtenteLogin(String email,String password) {
 	
 public static List<Utente> UtenteFindAll() {
 		
-		return  DaoFactory.getDaoFactory().getUtenteDao().findAll();
+		return  DaoFactoryJpa.getDaoFactoryJpa().getJpaUtenteDao().getAll();
 	}
 
 

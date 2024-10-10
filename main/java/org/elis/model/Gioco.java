@@ -3,6 +3,7 @@ package org.elis.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,10 +14,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity()
+@Table(name="Gioco")
 public class Gioco {
 	
 		@Id
@@ -53,10 +58,12 @@ public class Gioco {
 	    @ManyToOne 
 	    @JoinColumn(name = "offerta_id")
 	    private Offerta offerta;
-
-	    @ManyToOne 
-	    @JoinColumn(name = "genere_id")
-	    private Genere genere;
+ 
+	    @ManyToMany()
+		@JoinTable(name="genere_gioco",
+					joinColumns= @JoinColumn(name="id_genere"),
+					inverseJoinColumns = @JoinColumn(name="id_gioco"))
+	    private List<Genere> genereGiochi;
 
 	    @Column(name = "id_utente", nullable = false)
 	    private Utente idUtente;
@@ -159,15 +166,16 @@ public class Gioco {
         this.offerta = offerta;
     }
 
-    public Genere getGenere() {
-        return genere;
-    }
+    
+    public List<Genere> getGenereGiochi() {
+		return genereGiochi;
+	}
 
-    public void setGenere(Genere genere) {
-        this.genere = genere;
-    }
+	public void setGenereGiochi(List<Genere> genereGiochi) {
+		this.genereGiochi = genereGiochi;
+	}
 
-    public Utente getIdUtente() {
+	public Utente getIdUtente() {
         return idUtente;
     }
 
