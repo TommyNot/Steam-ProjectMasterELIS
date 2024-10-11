@@ -54,8 +54,10 @@ public class UtenteDaoJpa implements UtenteDao {
 
 	@Override
 	public Utente findByName(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		Query q=em.createQuery("Select a from Utente a Where a.username=:username");
+		q.setParameter("username", username);
+		return (Utente) q.getSingleResult();
 	}
 
 	@Override
