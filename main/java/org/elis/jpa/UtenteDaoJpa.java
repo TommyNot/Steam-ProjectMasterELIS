@@ -30,7 +30,7 @@ public class UtenteDaoJpa implements UtenteDao {
 
 	public List<Utente> findAll() {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
-		Query q = em.createQuery("select a from Utente a");
+		Query q = em.createQuery("select a from Utente ");
 
 		return q.getResultList();
 	}
