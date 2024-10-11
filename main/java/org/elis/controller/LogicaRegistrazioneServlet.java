@@ -64,7 +64,7 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
             request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
             return;
         }
-
+        
         request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username);
         request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
     }

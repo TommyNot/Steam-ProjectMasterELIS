@@ -80,7 +80,7 @@ public class LogicaLoginServlet extends HttpServlet {
         } else {
             
             request.setAttribute("Error", "Email o password non validi.");
-            request.getRequestDispatcher("public-jsp/LoginPage.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
         }
     }
 
