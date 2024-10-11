@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.jdbc.UtenteDaoJDBC;
+import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 /**
@@ -35,8 +36,8 @@ public class UtenteAggiungServlet extends HttpServlet {
 	        request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
 	        return;
 	    }
-
-	    Utente nuovoUtente = BusinessLogic.UtenteAdd(username, email, password);
+	    Utente u=new Utente(Ruolo.UTENTE_BASE,username,email,password);
+	    Utente nuovoUtente = BusinessLogic.UtenteAdd(u);
 
 
 	    if (nuovoUtente != null) {
