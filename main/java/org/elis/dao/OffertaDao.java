@@ -6,7 +6,7 @@ import java.util.List;
 import org.elis.model.Offerta;
 
 public interface OffertaDao {
-	Offerta add(String nome,double sconto,LocalDateTime data_inizio, LocalDateTime data_fine);
+	Offerta add(Offerta o);
 	List<Offerta> findAll(); 
 	Offerta selectById(long id);
 	Offerta selectByName(String nome);
