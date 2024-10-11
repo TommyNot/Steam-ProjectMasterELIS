@@ -69,7 +69,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
        event.preventDefault();
 	   
        const username = document.getElementById('username1').value;  
-       fetch('/SteamProject/TrovaTuttiUtentiServlet', {
+       fetch('/SteamProject/UtenteFindByNameServlet', {
            method: 'POST',
            headers: {
                'Content-Type': 'application/x-www-form-urlencoded'
