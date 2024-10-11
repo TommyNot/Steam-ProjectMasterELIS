@@ -8,6 +8,7 @@ import org.elis.jdbc.UtenteDaoJDBC;
 import org.elis.jpa.DaoFactoryJpa;
 
 public abstract class DaoFactory {
+	
 	private static DaoFactory instance;
 	
 	public abstract UtenteDao getUtenteDao();
