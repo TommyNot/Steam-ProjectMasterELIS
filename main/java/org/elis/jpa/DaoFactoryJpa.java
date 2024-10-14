@@ -29,7 +29,7 @@ public class DaoFactoryJpa extends DaoFactory{
 	@Override
 	public GiocoDao getGiocoDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return GiocoDaoJpa.getInstance();
 	}
 
 	@Override

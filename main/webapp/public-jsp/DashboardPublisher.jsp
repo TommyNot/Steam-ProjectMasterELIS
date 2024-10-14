@@ -187,7 +187,7 @@
 					        <%
 					            for (Genere genere : generi) {
 					        %>
-					            <option id="opt" value="<%= genere.getId() %>"><%= genere.getNome() %></option>
+					            <option id="opt" value="<%= genere.getId()%>"><%= genere.getNome() %></option>
 					        <%
 					            }
 					        %>
@@ -216,7 +216,7 @@
                    					 for (Gioco gioco : giochi) { 
                         				long id = gioco.getId(); 
                         				System.out.println(gioco.getId());// controllo id gioco da levare dopo
-                       					 Offerta offerta = gioco.getOfferta(); 
+                       					 Offerta offerta = gioco.getOffertaGioco(); 
        							 %>
 				                <div id="product-<%= gioco.getId() %>" class="single-product">
 				                    <div class="part-1">
