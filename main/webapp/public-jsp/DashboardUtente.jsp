@@ -71,7 +71,7 @@
 		              <div class="profile-picture me-2"></div>
 		            </button>
 		            <ul class="dropdown-menu">
-		              <li><a class="dropdown-item" href="#">Action</a></li>
+		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaUsername.jsp">Modifica username</a></li>
 		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></li>
 		              <li><a class="dropdown-item" href="#">Something else here</a></li>
 		              <li><hr class="dropdown-divider"></li>
