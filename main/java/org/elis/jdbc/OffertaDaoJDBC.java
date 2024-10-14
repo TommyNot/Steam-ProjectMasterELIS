@@ -411,4 +411,11 @@ public class OffertaDaoJDBC implements OffertaDao {
 	    return null;
 	}
 
+
+	@Override
+	public Offerta add(Offerta o) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

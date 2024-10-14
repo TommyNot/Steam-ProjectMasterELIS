@@ -56,7 +56,7 @@
         <h1 class="error-title">404</h1>
         <h2 class="error-message">Oops! La pagina non è stata trovata.</h2>
         <p class="description">Sembra che la pagina che stai cercando non esista o sia stata spostata.</p>
-        <a href="HomePagePrincipale.jsp" class="home-button">Torna alla Home</a>
+        <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp" class="home-button">Torna alla Home</a>
         <div class="steam-style">
             <p class="steam-footer">Powered by FamilySteamPezzotto</p>
         </div>

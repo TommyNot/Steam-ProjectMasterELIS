@@ -14,6 +14,7 @@ import org.elis.model.Utente;
 /**
  * Servlet implementation class TrovaTuttiUtentiServlet
  */
+@WebServlet("/TrovaTuttiUtentiServlet")
 public class TrovaTuttiUtentiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

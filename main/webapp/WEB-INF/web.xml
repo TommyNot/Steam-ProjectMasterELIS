@@ -174,16 +174,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>TrovaTuttiUtentiServlet</display-name>
-    <servlet-name>TrovaTuttiUtentiServlet</servlet-name>
-    <servlet-class>org.elis.controller.TrovaTuttiUtentiServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TrovaTuttiUtentiServlet</servlet-name>
-    <url-pattern>/TrovaTuttiUtentiServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>UtenteFindByNameServlet</display-name>
     <servlet-name>UtenteFindByNameServlet</servlet-name>
     <servlet-class>org.elis.controller.UtenteFindByNameServlet</servlet-class>

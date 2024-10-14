@@ -19,7 +19,7 @@
             <div class="logo">
 
                 <div class="logo">
-                    <a href="<%= request.getContextPath() %>/public-jsp/DashboardPublisher.jsp">
+                    <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                               width="180px" height="120px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
                               xml:space="preserve">
