@@ -242,4 +242,14 @@
     <servlet-name>LibreriaFindByNameServlet</servlet-name>
     <url-pattern>/LibreriaFindByNameServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtenteFindByIDServlet</display-name>
+    <servlet-name>UtenteFindByIDServlet</servlet-name>
+    <servlet-class>org.elis.controller.UtenteFindByIDServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtenteFindByIDServlet</servlet-name>
+    <url-pattern>/UtenteFindByIDServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

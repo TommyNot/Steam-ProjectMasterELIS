@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="org.elis.model.Utente" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +90,23 @@
     </nav>
     <main>
         <div class="container active" id="home">
-            <p>Benvenuto nella pagina Admin di Steam pezzotto family</p>
+            <%
+                        Utente utente = (Utente) session.getAttribute("utenteLoggato");
+                    	long idUtente;
+                        if (utente != null) {
+                        	
+                        	idUtente = utente.getId();
+                    %>
+                    <div id = "user">
+                        <p>Benvenuto <%= utente.getUsername()%> Admin di Steam pezzotto family!</p>
+                    </div>
+                    <%
+                        } else {
+                    %>
+                    <p>Utente non loggato</p>
+                    <%
+                        }
+                    %>
         </div>
         
         <div class="container " id="Ban">
@@ -108,7 +125,12 @@
         </div>
         
         <div class="container " id="Elimina">
-            <h2>elimina</h2>
+            <h2>Elimina gioco</h2>
+            <form id="cercaGioco">
+            <label for="id">Id gioco da cercare</label>
+            <input type="text" id="gioco1" name="gioco" required placeholder="id gioco">
+			    <button type="submit" class="btn-conf">Avvia ricerca</button>
+            </form>
         </div>
 
         <div class="container " id="Gestisci">
@@ -125,7 +147,7 @@
 			    <label for="username">Nome utente da cercare</label>
 			    <input type="text" id="username1" name="username" required placeholder="Nome utente da cercare">
 			    <button type="submit" class="btn-conf">Avvia ricerca</button>
-			</form>
+			</form>	
 			<div id="result"></div>
         </div>
     </main>

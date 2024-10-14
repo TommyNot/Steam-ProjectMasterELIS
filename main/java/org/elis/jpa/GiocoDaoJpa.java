@@ -73,9 +73,26 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public Gioco findGiocoById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		 EntityManager em = DaoFactoryJpa.getEntityManager();
+	        Gioco gioco = null;
+
+	        try {
+	            gioco = em.find(Gioco.class, id);
+
+	            if (gioco != null) {
+	                System.out.println("Gioco trovato: " + gioco.getNome());
+	            } else {
+	                System.out.println("Nessun gioco trovato con ID: " + id);
+	                return null;
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            em.close();
+	        }
+
+	        return gioco;
+	    }
 
 	@Override
 	public List<Gioco> findGiocoGenereByGenere(long idGenere) {

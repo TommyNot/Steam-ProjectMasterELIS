@@ -262,6 +262,7 @@ public class UtenteDaoJpa implements UtenteDao {
 	                System.out.println("Utente trovato: " + utente.getUsername());
 	            } else {
 	                System.out.println("Nessun utente trovato con ID: " + id);
+	                return null;
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace(); 
