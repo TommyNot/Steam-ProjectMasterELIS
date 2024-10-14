@@ -142,13 +142,20 @@
         <div class="container" id="Visualizza">
         </div>
         <div class="container" id="Cerca">
-            <h2>Cerca utenti</h2>
+            <h2>Cerca utenti</h2><br>
             <form id="searchForm">
-			    <label for="username">Nome utente da cercare</label>
-			    <input type="text" id="username1" name="username" required placeholder="Nome utente da cercare">
+			    <label for="username">Nome utente da cercare</label><br>
+			    <input type="text" id="username1" name="username" required placeholder="Nome utente da cercare"><br><br>
 			    <button type="submit" class="btn-conf">Avvia ricerca</button>
 			</form>	
 			<div id="result"></div>
+			<br><br>
+				<form id="searchForm2">
+					<label for="idUtente">Id dell'utente</label><br>
+					<input type="text" id="idUtente" name="idUtente" required placeholder="Id utente"><br><br>
+					<button type="submit" class="btn-conf"> Avvia ricerca Id</button>
+				</form>
+				<div id="resultId"></div>
         </div>
     </main>
 

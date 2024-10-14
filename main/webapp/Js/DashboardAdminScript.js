@@ -89,4 +89,24 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
       });
    }); 
    
+   document.getElementById('searchForm2').addEventListener('submit', function(event) {
+          event.preventDefault();
+   	   
+          const idUtente = document.getElementById('idUtente').value;  
+          fetch('/SteamProject/UtenteFindByIDServlet', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: 'idUtente=' + encodeURIComponent(idUtente)
+          })
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('resultId').innerHTML = data;
+          })
+          .catch(error => {
+              console.error('Errore:', error);
+              document.getElementById('resultId').innerHTML = '<p style="color:red;">Errore nella richiesta.</p>';
+         });
+      }); 
 		  
