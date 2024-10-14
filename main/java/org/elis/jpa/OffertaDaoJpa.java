@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.dao.OffertaDao;
+import org.elis.model.Libreria;
 import org.elis.model.Offerta;
 
 import jakarta.persistence.EntityManager;
@@ -56,27 +57,47 @@ public class OffertaDaoJpa implements OffertaDao{
 	}
 
 	@Override
-	public Offerta updatePrezzo(long id, double prezzo) {
-		
-		
-		return null;
+	public Offerta updateSconto(long id, double sconto) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Offerta o = em.find(Offerta.class, id);
+		o.setSconto(sconto);
+		t.commit();
+		return o;
 	}
 
 	@Override
 	public Offerta updateDataInizio(long id, LocalDateTime data_inizio) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Offerta o = em.find(Offerta.class, id);
+		o.setData_inizio(data_inizio);
+		t.commit();
+		return o;
 		
-		return null;
 	}
 
 	@Override
 	public Offerta updateDataFine(long id, LocalDateTime data_fine) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Offerta o = em.find(Offerta.class, id);
+		o.setData_fine(data_fine);
+		t.commit();
+		return o;
 		
-		return null;
 	}
 
 	@Override
-	public Offerta deleteByNome(String nome, long id) {
-		
-		return null;
+	public void deleteByNome(String nome, long id) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		Offerta o = em.find(Offerta.class, nome);
+		t.begin();
+		em.remove(o);
+		t.commit();
 	}
 }

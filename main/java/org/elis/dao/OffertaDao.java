@@ -10,8 +10,8 @@ public interface OffertaDao {
 	List<Offerta> findAll(); 
 	Offerta selectById(long id);
 	Offerta selectByName(String nome);
-	Offerta updatePrezzo(long id,double prezzo);
+	Offerta updateSconto(long id,double sconto);
 	Offerta updateDataInizio(long id,LocalDateTime data_inizio);
 	Offerta updateDataFine(long id,LocalDateTime data_fine);
-	Offerta deleteByNome(String nome,long id);
+	void deleteByNome(String nome,long id);
 }
