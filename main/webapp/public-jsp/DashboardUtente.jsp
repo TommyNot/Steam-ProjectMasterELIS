@@ -194,7 +194,7 @@
 		            <div class="large-banner">
 		  
 		              <h2>Explore a World of Games</h2>
-		              <a href="javascript:void(0);" title="Explore">
+		              <a href="<%= request.getContextPath()%>/public-jsp/HomePagePrincipale.jsp" title="Explore">
 		                Homepage
 		              </a>
 		  
