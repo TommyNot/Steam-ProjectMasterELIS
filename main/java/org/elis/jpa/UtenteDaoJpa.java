@@ -176,10 +176,42 @@ public class UtenteDaoJpa implements UtenteDao {
 	}
 
 	@Override
-	public Utente deleteByPassword(long id, String passowrd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Utente deleteByPassword(long id, String password) {
+		 EntityManager em = DaoFactoryJpa.getEntityManager();
+	        EntityTransaction transaction = em.getTransaction();
+
+	        try {
+	            transaction.begin();
+
+	            Utente utente = em.find(Utente.class, id);
+	            if (utente == null) {
+	                System.out.println("Utente non trovato con ID: " + id);
+	                return null;
+	            }
+
+	            if (!utente.getPassword().equals(password)) {
+	                System.out.println("Password non corretta per l'utente ID: " + id);
+	                return null;
+	            }
+
+	            em.remove(utente);
+	            transaction.commit();
+
+	            System.out.println("Utente con ID " + id + " eliminato con successo.");
+	            return utente;
+
+	        } catch (Exception e) {
+	            if (transaction.isActive()) {
+	                transaction.rollback();
+	            }
+	            e.printStackTrace();
+	            return null;
+
+	        } finally {
+	            em.close();
+	        }
+	    }
+            
 
 	@Override
 	public Utente deleteByNome(long id, String username) {
