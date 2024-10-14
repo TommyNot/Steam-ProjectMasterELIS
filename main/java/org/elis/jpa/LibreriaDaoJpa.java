@@ -60,9 +60,9 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	public Libreria updateNome(long id, String nome) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		EntityTransaction t = em.getTransaction();
-		Libreria l = em.find(Libreria.class, id);
 		t.begin();
-		em.merge(l);
+		Libreria l = em.find(Libreria.class, id);
+		l.setNome(nome);
 		t.commit();
 		return l;
 	}
