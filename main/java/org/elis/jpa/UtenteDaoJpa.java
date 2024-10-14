@@ -215,19 +215,100 @@ public class UtenteDaoJpa implements UtenteDao {
 
 	@Override
 	public Utente deleteByNome(long id, String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		 EntityManager em = DaoFactoryJpa.getEntityManager();
+	        EntityTransaction transaction = em.getTransaction();
+
+	        try {
+	            transaction.begin();
+
+	            Utente utente = em.find(Utente.class, id);
+	            if (utente == null) {
+	                System.out.println("Utente non trovato con ID: " + id);
+	                return null;
+	            }
+
+	            if (!utente.getUsername().equals(username)) {
+	                System.out.println("Nome utente non corretto per l'utente ID: " + id);
+	                return null;
+	            }
+
+	            em.remove(utente);
+	            transaction.commit(); 
+
+	            System.out.println("Utente con ID " + id + " eliminato con successo.");
+	            return utente;
+
+	        } catch (Exception e) {
+	            if (transaction.isActive()) {
+	                transaction.rollback();
+	            }
+	            e.printStackTrace();
+	            return null;
+
+	        } finally {
+	            em.close();
+	        }
+   }
 
 	@Override
 	public Utente selectById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		 EntityManager em = DaoFactoryJpa.getEntityManager();
+	        Utente utente = null; 
+
+	        try {
+	            utente = em.find(Utente.class, id);
+	            
+	            if (utente != null) {
+	                System.out.println("Utente trovato: " + utente.getUsername());
+	            } else {
+	                System.out.println("Nessun utente trovato con ID: " + id);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace(); 
+	        } finally {
+	            em.close();
+	        }
+
+	        return utente; 
+   }
 
 	@Override
 	public Utente ripristinaPassword(String username, String email, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        Utente utente = null;
+
+        try {
+            transaction.begin();
+            
+            Query query = em.createQuery("SELECT u FROM Utente u WHERE u.username = :username AND u.email = :email");
+            query.setParameter("username", username);
+            query.setParameter("email", email);
+            utente = (Utente) query.getSingleResult();
+
+            if (utente != null) {
+                utente.setPassword(password);
+                em.merge(utente);
+            }
+
+            transaction.commit();
+            System.out.println("Password ripristinata con successo per l'utente: " + username);
+        } catch (jakarta.persistence.NoResultException e) {
+            System.out.println("Nessun utente trovato con le credenziali fornite.");
+            
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        } finally {
+            em.close();
+        }
+
+        return utente;
+    }
+		
 }
