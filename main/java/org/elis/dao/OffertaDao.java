@@ -13,5 +13,5 @@ public interface OffertaDao {
 	Offerta updateSconto(long id,double sconto);
 	Offerta updateDataInizio(long id,LocalDateTime data_inizio);
 	Offerta updateDataFine(long id,LocalDateTime data_fine);
-	void deleteByNome(String nome,long id);
+	Offerta deleteByNome(String nome,long id);
 }
