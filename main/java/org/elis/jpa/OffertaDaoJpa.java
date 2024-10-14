@@ -92,12 +92,13 @@ public class OffertaDaoJpa implements OffertaDao{
 	}
 
 	@Override
-	public void deleteByNome(String nome, long id) {
+	public Offerta deleteByNome(String nome, long id) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		EntityTransaction t = em.getTransaction();
 		Offerta o = em.find(Offerta.class, nome);
 		t.begin();
 		em.remove(o);
 		t.commit();
+		return o;
 	}
 }

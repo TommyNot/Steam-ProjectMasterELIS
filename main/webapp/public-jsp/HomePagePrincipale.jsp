@@ -65,7 +65,7 @@
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="<%=request.getContextPath() %>/public-jsp/PageGiochi.jsp">Giochi</a></li>
+                    <li><a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" >Giochi</a></li>
                     <li><a href="#">Generi</a></li>
                     <li><a href="#">Offerte</a></li>
                     <li><a href="#">Supporto</a></li>

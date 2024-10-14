@@ -1,0 +1,173 @@
+/* Reset browser defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1b2838;
+  color: #c7d5e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Barra di navigazione */
+.navbar {
+  background-color: #171a21;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar .logo h1 {
+  font-size: 24px;
+  color: #c7d5e0;
+  margin: 0;
+}
+
+.navbar .menu a {
+  color: #c7d5e0;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navbar .menu a:hover {
+  color: #66c0f4;
+}
+
+/* Contenuto principale */
+.content {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 28px;
+  border-bottom: 2px solid #66c0f4;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Elenco giochi */
+.games-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.game {
+  background-color: #2a475e;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.game h3 {
+  color: #c7d5e0;
+  margin: 15px 0 10px;
+  font-size: 18px;
+}
+
+.game p {
+  color: #8f98a0;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  background-color: #66c0f4;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #4a9bd8;
+}
+
+/* Footer */
+footer {
+  background-color: #171a21;
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+footer p {
+  color: #8f98a0;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar .menu a {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .game h3 {
+    font-size: 16px;
+  }
+
+  .game p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .menu a {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+  }
+}
+.errore {
+    background-color: #171a21; /* Colore di sfondo scuro simile a Steam */
+    color: #c6d4df; /* Colore del testo chiaro, simile a Steam */
+    border: 1px solid #4a4f58; /* Bordo con un colore leggermente più chiaro */
+    padding: 15px; /* Spazio interno per migliorare la leggibilità */
+    margin: 20px 0; /* Margine sopra e sotto */
+    border-radius: 5px; /* Angoli arrotondati */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font simile a quello di Steam */
+    font-size: 26px; /* Dimensione del testo */
+    text-align: center;
+        color: #e74c3c; /* Colore rosso per il titolo dell'errore */
+    margin-bottom: 10px; /* Spazio sotto il titolo */
+}
+
+
+
+

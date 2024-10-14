@@ -55,10 +55,10 @@ public static Utente UtenteFindById(long id) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getUtenteDao().selectById(id);
 }
 
-public static Gioco GiocoAdd(String nome, LocalDate data, String descrizione, String immagine, double prezzo,Genere genereSelezionato , Offerta offerta,Utente u) {
+public static Gioco GiocoAdd(Gioco g) {
 	
 
-	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().add(nome,data,descrizione,immagine,prezzo,genereSelezionato,offerta,u);
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().add(g);
 
 }
 
@@ -99,8 +99,8 @@ public static Genere DeleteByName(String nome) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().deleteByName(nome);
 }
 
-public static Offerta offertaAdd(String nome, double sconto, LocalDateTime data_inizio, LocalDateTime data_fine) {
-	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().add(nome, sconto, data_inizio, data_fine);
+public static Offerta offertaAdd(Offerta offerta) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().add(offerta);
 	
 }
 
@@ -109,7 +109,7 @@ public static List<Offerta> offertaVisualizzaTutto() {
 }
 
 public static Offerta updatePrezzoOfferta(long id,double prezzo) {
-	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().updatePrezzo(id, prezzo);
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().updateSconto(id, prezzo);
 }
 
 public static Offerta updateDataInizioOfferta(long id,LocalDateTime data_inizio) {
@@ -197,8 +197,8 @@ public static Offerta OffertaById(long id) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().selectById(id);
 			}
 
-public static Libreria LibreriaAdd(String nome, long id_utente) {
-	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().add(nome, id_utente);
+public static Libreria LibreriaAdd(Libreria l) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().add(l);
 }
 
 public static List<Libreria> VisualizzaTutteLibrerie(){

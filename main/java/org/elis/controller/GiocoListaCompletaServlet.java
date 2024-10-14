@@ -14,6 +14,7 @@ import org.elis.model.Gioco;
 /**
  * Servlet implementation class GiocoListaCompletaServlet
  */
+@WebServlet("/GiocoListaCompletaServlet")
 public class GiocoListaCompletaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,10 +32,11 @@ public class GiocoListaCompletaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	      
         List<Gioco> listaGiochi = BusinessLogic.VisualizzaTuttiGiochi();
+        System.out.println(listaGiochi);
         
         if (listaGiochi == null || listaGiochi.isEmpty()) {
             request.setAttribute("errorMessage", "Nessun gioco disponibile.");
-            request.getRequestDispatcher("WEB-INF/private-jsp/error.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
             return;
         }
 

@@ -1,7 +1,9 @@
 package org.elis.jpa;
 
+import java.nio.channels.NonReadableChannelException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.dao.GiocoDao;
@@ -12,6 +14,7 @@ import org.elis.model.Utente;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
 public class GiocoDaoJpa implements GiocoDao{
@@ -43,18 +46,32 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public List<Gioco> findAll() {
-		EntityManager em = DaoFactoryJpa.getEntityManager();
-		Query q = em.createQuery("select a from Utente a");
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    Query q = em.createQuery("select a from Gioco a");
 
-		return q.getResultList();
+	    List<Gioco> giochi = q.getResultList();
+	    for (Gioco gioco : giochi) {
+	        System.out.println("Gioco trovato: " + gioco.getNome());
+	    }
+
+	    return giochi;
 	}
+
 
 	@Override
 	public Gioco findByName(String nome) {
-		EntityManager em = DaoFactoryJpa.getEntityManager();
-		Query q=em.createQuery("Select a from Utente a Where a.username=:username");
-		q.setParameter("username", nome);
-		return (Gioco) q.getSingleResult();
+		try{
+			
+			EntityManager em = DaoFactoryJpa.getEntityManager();
+			Query q=em.createQuery("Select a from Gioco a Where a.nome=:nome");
+			q.setParameter("nome", nome);
+			return (Gioco) q.getSingleResult();
+			
+		}catch(NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 	@Override

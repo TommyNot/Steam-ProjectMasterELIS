@@ -1,5 +1,6 @@
 package org.elis.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -23,7 +24,8 @@ import jakarta.persistence.Table;
 
 @Entity()
 @Table(name="Gioco")
-public class Gioco {
+public class Gioco implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY) 
