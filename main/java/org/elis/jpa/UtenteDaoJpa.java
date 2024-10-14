@@ -10,6 +10,7 @@ import org.elis.model.Utente;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
 public class UtenteDaoJpa implements UtenteDao {
@@ -53,19 +54,43 @@ public class UtenteDaoJpa implements UtenteDao {
 	}
 
 	@Override
-	public Utente findByName(String username) {
+	public Utente findByName(String username){
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		Query q=em.createQuery("Select a from Utente a Where a.username=:username");
 		q.setParameter("username", username);
-		return (Utente) q.getSingleResult();
+		 try {
+		        return (Utente) q.getSingleResult();
+		    } catch (NoResultException e) {
+		        return null;
+		    }
 	}
 
 	@Override
 	public Utente updateUsername(long id, String username) {
-		// TODO Auto-generated method stub
-		return null;
+		 EntityManager em = DaoFactoryJpa.getEntityManager();
+		    Utente utente = null;
+		    try {
+		    	utente = em.find(Utente.class, id);
+		    	 if (utente == null) {
+		             System.out.println("Utente non trovato per l'ID: " + id);
+		             return null;
+		         }
+		    	 
+		    	 em.getTransaction().begin();
+		    	 utente.setUsername(username);
+		    	 em.getTransaction().commit(); 
+		    	 
+		    } catch (Exception e) {
+		    	if (em.getTransaction().isActive()) {
+		            em.getTransaction().rollback();
+		        }
+		        e.printStackTrace();
+		    } finally {
+		    	 em.close();
+		    }
+		    return utente;
 	}
-
+	
 	@Override
 	public Utente updateEmail(long id, String email) {
 		// TODO Auto-generated method stub
