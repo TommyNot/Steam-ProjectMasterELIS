@@ -44,7 +44,6 @@ public class UtenteAggiornaUsernameServlet extends HttpServlet {
 	        return;
 	    }
 	    
-	    //long idUtente = (long) session.getAttribute("idUtente");
 	    Utente u = (Utente) session.getAttribute("utenteLoggato");
 	    long idUtente = u.getId();
 	    

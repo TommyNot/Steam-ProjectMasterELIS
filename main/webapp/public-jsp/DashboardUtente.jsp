@@ -72,8 +72,8 @@
 		            </button>
 		            <ul class="dropdown-menu">
 		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaUsername.jsp">Modifica username</a></li>
+		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaEmail.jsp">Modifica email</a></li>
 		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></li>
-		              <li><a class="dropdown-item" href="#">Something else here</a></li>
 		              <li><hr class="dropdown-divider"></li>
 		              <li><a class="dropdown-item" href="#">Separated link</a></li>
 		            </ul>

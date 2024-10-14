@@ -39,12 +39,13 @@ public class UtenteAggiornaEmailServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session = request.getSession(false);
-	    if (session == null || session.getAttribute("utenteId") == null) {
+	    if (session == null || session.getAttribute("utenteLoggato") == null) {
 	        response.getWriter().write("Errore: Utente non autenticato.");
 	        return;
 	    }
 	    
-	    long idUtente = (long) session.getAttribute("utenteId");
+	    Utente u = (Utente) session.getAttribute("utenteLoggato");
+	    long idUtente = u.getId();
 	    
 	    String nuovaEmail = request.getParameter("nuovaEmail");
 

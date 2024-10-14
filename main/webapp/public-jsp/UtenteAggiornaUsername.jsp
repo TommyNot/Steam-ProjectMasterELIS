@@ -60,16 +60,7 @@
 				<a href="#" class="social"><i class="bi bi-google"></i></a>
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
-			<%
-				Utente utente = (Utente) session.getAttribute("utenteLoggato");
-				long idUtente;
-				if (utente != null) {
-                	idUtente = utente.getId();
-                	}else{
-            %>  <p>User not logged <p> 
-            <%
-                	}
-			%>
+			
 			<label for="username" style="font-weight: bold;">Nuovo username</label>
 			<input type="text"  id="username" name="nuovoUsername" required />
 			<button type="submit" id="Reset">Reset</button>
