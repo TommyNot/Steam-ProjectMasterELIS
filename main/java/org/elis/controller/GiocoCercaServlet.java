@@ -32,7 +32,7 @@ public class GiocoCercaServlet extends HttpServlet {
 		if(ricerca.isBlank()) {
 			String error = "campo vuoto";
 			request.setAttribute("campo vuoto", error);
-			request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+			request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
 			System.out.println("errore qui ricerca ");
 			return;
 		}
@@ -48,7 +48,7 @@ public class GiocoCercaServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("gioco", search);
-		request.getRequestDispatcher("public-jsp/PaginaGioco.jsp").forward(request, response);
+		request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
 		
 		
 		

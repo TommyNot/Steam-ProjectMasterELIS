@@ -63,7 +63,14 @@
       <a href="#">Genere</a>
       <a href="#">Offerte</a>
       <a href="#">Libreria</a>
+ 
     </div>
+         <div class="search-container">
+      <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="post" class="d-flex">
+                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
+                <button type="submit" class="btn btn-outline-success">Cerca</button>
+            </form>
+       </div>
     
     <div class="user-info">
                     <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 

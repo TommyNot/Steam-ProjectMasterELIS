@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="org.elis.model.Utente" %> 
+  <%@ page import="java.util.List" %>
+<%@ page import="org.elis.model.Gioco" %>
+<%@ page import="org.elis.model.Genere" %>
+<%@ page import="org.elis.model.Offerta" %> 
+<%@ page import="org.elis.model.Utente" %> 
+<%@page import="org.elis.businesslogic.BusinessLogic"%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -66,9 +71,25 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" >Giochi</a></li>
-                    <li><a href="#">Generi</a></li>
+						<li>
+						    <a href="#">Generi</a>
+						    <select id="genere" name="genere">
+						        <%
+						            List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
+						            Genere genereSelezionato = (Genere) request.getAttribute("genere");
+						            for (Genere genere : generi) {
+						        %>
+						            <option value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>>
+						                <%= genere.getNome() %>
+						            </option>
+						        <%
+						            }
+						        %>
+						    </select>
+						</li>
+
                     <li><a href="#">Offerte</a></li>
-                    <li><a href="#">Supporto</a></li>
+                    <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard Utenti</a></li>
             <li> 
             <%
                 
@@ -88,10 +109,7 @@
         </li>
                 </ul>
             </nav>
-                <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="post" class="d-flex">
-                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
-                <button type="submit" class="btn btn-outline-success">Cerca</button>
-            </form>
+                
                                                                                                                                 
 
         </div>

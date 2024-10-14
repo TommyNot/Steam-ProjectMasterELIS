@@ -44,11 +44,7 @@ nav ul li {
 
 /* Stile per la barra di ricerca */
 /* Stile per il contenitore della ricerca */
-.search-container {
-    display: flex; /* Utilizza il flexbox per allineare la barra di ricerca */
-    align-items: center; /* Allinea verticalmente al centro */
-    margin-left: auto; /* Sposta la barra di ricerca a destra */
-}
+
 
 /* Stile per il campo di input */
 input[type="text"] {

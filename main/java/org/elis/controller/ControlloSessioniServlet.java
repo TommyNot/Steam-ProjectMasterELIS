@@ -25,7 +25,7 @@ public class ControlloSessioniServlet extends HttpServlet {
 
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	Utente userInSession = (Utente)request.getSession().getAttribute("utenteLoggato");
 		
 		if(userInSession != null) {
@@ -33,7 +33,7 @@ public class ControlloSessioniServlet extends HttpServlet {
 			switch(userInSession.getRuolo()){
 				
 				case UTENTE_BASE:
-					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
+					request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
 					break;
 				case ADMIN:
 					
@@ -51,7 +51,7 @@ public class ControlloSessioniServlet extends HttpServlet {
 			}
 		}
 		
-		request.getRequestDispatcher("public-jsp/LoginPage.jsp").forward(request, response);
+		request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 	}
 
 }

@@ -82,6 +82,25 @@ body {
     margin-bottom: 20px;
 }
 
+.search-container {
+    display: flex; /* Utilizza il flexbox per allineare la barra di ricerca */
+    align-items: center; /* Allinea verticalmente al centro */
+    margin-left: auto; /* Sposta la barra di ricerca a destra */
+    margin-right: 15px;
+}
+input[type="text"] {
+    padding: 10px; /* Padding interno */
+    border: 1px solid #ced4da; /* Bordo del campo */
+    border-radius: 4px; /* Angoli arrotondati */
+    margin-right: 5px; /* Margine a destra */
+    width: 300px; /* Larghezza della barra di ricerca */
+}
+
+input[type="text"]:focus {
+    outline: none; /* Rimuove il bordo di focus */
+    box-shadow: 0 0 5px rgba(0, 150, 255, 0.5); /* Aggiunge un'ombra di focus */
+}
+
 /* Stile dei giochi */
 
 .games-container {
