@@ -58,7 +58,7 @@ public class UtenteFindByIDServlet extends HttpServlet {
 
 	    if (uCerca == null) {
 	        response.setContentType("text/html");
-	        response.getWriter().write("<p style=\"color:red;\">Nessun utente trovato con questo username</p>");
+	        response.getWriter().write("<p style=\"color:red;\">Nessun utente trovato con questo id</p>");
 	        return;
 	    }
 
