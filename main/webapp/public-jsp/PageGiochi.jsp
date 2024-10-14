@@ -20,7 +20,7 @@
   <!-- Barra di navigazione -->
   <div class="navbar">
     <div class="logo">
-             <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
+             <a href="<%= request.getContextPath() %>/public-jsp/PageGiochi.jsp">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                       width="180px" height="120px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
                       xml:space="preserve">
@@ -108,8 +108,7 @@
 <div class="content">
     <h2>Giochi in vetrina</h2>
     <%
-        
-        List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi"); 
+        List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi");
         
         if (giochi == null || giochi.isEmpty()) {
     %>
@@ -117,26 +116,36 @@
     <%
         } else {
             for (Gioco gioco : giochi) { 
+                Offerta offerta = gioco.getOffertaGioco(); 
     %>
     <div class="games-container">
         <div class="game">
-            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg';" />
-			
-			
-            <h3 class="product-title"><%= gioco.getNome() %></h3>
-           
-            <h4 class="product-price">€<%= gioco.getPrezzo() %></h4>
+            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" 
+                 onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg';" />
             
+            <h3 class="product-title"><%= gioco.getNome() %></h3>
+            
+            <div class="discount-container">
+                <% if (offerta != null) { %>
+                    <h4 class="product-discount"><%= offerta.getSconto() %>% off</h4>
+                    <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
+                    <h4 class="product-price">€<%= gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100) %></h4>
+                <% } else { %>
+                    <h4 class="product-price">€<%= gioco.getPrezzo() %></h4>
+                <% } %>
+            </div>
+
             <h5 class="product-desc"><%= gioco.getDescrzione() %></h5>
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
             <button class="btn">Visualizza dettagli</button>
         </div>
+    </div>
     <%
-            } 
+            } // Chiusura corretta del ciclo for
         } 
     %>
 </div>
-</div>
+
 
 
 

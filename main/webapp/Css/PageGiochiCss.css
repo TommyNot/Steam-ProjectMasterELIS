@@ -70,6 +70,8 @@ body {
 /* Contenuto principale */
 .content {
     padding: 20px;
+    display: flex;
+    
     max-width: 1200px;
     margin: auto;
     background-color: #2a475e;
@@ -104,9 +106,9 @@ input[type="text"]:focus {
 /* Stile dei giochi */
 
 .games-container {
-    display: flex;
-    flex-wrap: wrap; /* Permette alle card di andare su più righe se lo spazio non è sufficiente */
-    justify-content: center; /* Centra le card orizzontalmente */
+     display: flex;
+     flex-wrap: wrap;/* Permette alle card di andare su piu righe se lo spazio non è sufficiente */
+    justify-content: space-around; /* Distribuisce meglio le card */
     gap: 15px; /* Spaziatura tra le card */
 }
 .game {
@@ -144,8 +146,34 @@ input[type="text"]:focus {
      margin: 3px 0;
 }
 
-.product-price.discount {
-    color: #e74c3c; /* rosso per sconto */
+
+
+.discount-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px 0;
+}
+
+.product-discount {
+    color: #e74c3c; /* Rosso per evidenziare lo sconto */
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.product-old-price {
+    color: #7f8c8d; /* Grigio chiaro per il prezzo barrato */
+    text-decoration: line-through;
+    font-size: 1em;
+    margin: 5px 0 0;
+}
+
+.product-new-price {
+    color: #2ecc71; /* Verde per il nuovo prezzo */
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 0;
 }
 
 

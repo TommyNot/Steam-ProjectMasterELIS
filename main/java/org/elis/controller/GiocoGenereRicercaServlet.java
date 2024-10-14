@@ -20,7 +20,7 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String generiSelezionati = request.getParameter("genere");
+        String generiSelezionati = request.getParameter("genereId");
 
         if (generiSelezionati == null || generiSelezionati.isEmpty()) {
             request.setAttribute("Error", "Seleziona almeno un genere.");
@@ -52,10 +52,12 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
             request.setAttribute("Error", "Nessun gioco trovato per il genere selezionato.");
             request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             return;
+        }else {
+        	
+        	request.setAttribute("giochi", giochiTrovati);
         }
 
-        request.setAttribute("genere", genere);
-        request.setAttribute("giochi", giochiTrovati);
+        
         request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
     }
 }

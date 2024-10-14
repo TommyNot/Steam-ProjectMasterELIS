@@ -81,10 +81,9 @@
 						                for (Genere genere : generi) {
 						            %>
 						            <li>
-						                <a href="<%=request.getContextPath() %>/GiocoGenereRicercaServlet?genereId=<%= genere.getId() %>" class="dropdown-option" 
-						                   <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "style='font-weight:bold;'" : "" %>>
-						                    <%= genere.getNome() %>
-						                </a>
+						              <a href="<%=request.getContextPath() %>/GiocoGenereRicercaServlet?genereId=<%= genere.getId() %>" class="dropdown-option">
+				                            <%= genere.getNome() %>
+				                        </a>
 						            </li>
 						            <%
 						                }
