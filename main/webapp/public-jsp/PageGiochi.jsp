@@ -22,7 +22,7 @@
     <div class="logo">
              <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                      width="180px" height="100px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
+                      width="180px" height="120px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
                       xml:space="preserve">
                  <g>
                      <path fill="#C5C3C0" d="M44.238,0.601C21,0.601,1.963,18.519,0.154,41.29l23.71,9.803c2.009-1.374,4.436-2.179,7.047-2.179
@@ -59,25 +59,32 @@
                  </a>
     </div>
     <div class="menu">
-      <a href="#">Home</a>
-      <a href="#">Giochi</a>
+      <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">Homepage</a>
+      <a href="#">Genere</a>
       <a href="#">Offerte</a>
-                  <%
-                
-                Utente username = (Utente) session.getAttribute("utenteLoggato");
-                if (username != null) {
-            %>
-            	 <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
-                <p>Welcome, <%= username.getUsername() %></p>
-                <a href="<%= request.getContextPath() %>/LogoutServlet" class="btn btn-danger">Logout</a>
-            <%
-                } else {
-            %>
-                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Login</a>
-            <%
-                }
-            %>
+      <a href="#">Libreria</a>
     </div>
+    
+    <div class="user-info">
+                    <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
+                    <%
+                        Utente utente = (Utente) session.getAttribute("utenteLoggato");
+                    	long idUtente;
+                        if (utente != null) {
+                        	
+                        	idUtente = utente.getId();
+                    %>
+                    <div id = "user">
+                        <p>Benvenuto <%= utente.getUsername() %></p>
+                    </div>
+                    <%
+                        } else {
+                    %>
+                    <p>Utente non loggato</p>
+                    <%
+                        }
+                    %>
+                </div>
   </div>
 
    <% 
@@ -104,10 +111,16 @@
         } else {
             for (Gioco gioco : giochi) { 
     %>
+    <div class="games-container">
         <div class="game">
-            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" />
+            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg';" />
+			
+			
             <h3 class="product-title"><%= gioco.getNome() %></h3>
-            <h4 class="product-price">€<%= gioco.getPrezzo() %></h4> 
+           
+            <h4 class="product-price">€<%= gioco.getPrezzo() %></h4>
+            
+            <h5 class="product-desc"><%= gioco.getDescrzione() %></h5>
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
             <button class="btn">Visualizza dettagli</button>
         </div>
@@ -116,7 +129,7 @@
         } 
     %>
 </div>
-
+</div>
 
 
 
