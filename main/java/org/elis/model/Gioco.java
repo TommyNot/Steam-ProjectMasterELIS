@@ -63,8 +63,8 @@ public class Gioco implements Serializable{
  
 	    @ManyToMany(fetch=FetchType.LAZY)
 		@JoinTable(name="genere_gioco",
-					joinColumns= @JoinColumn(name="id_genere"),
-					inverseJoinColumns = @JoinColumn(name="id_gioco"))
+					joinColumns= @JoinColumn(name="id_gioco"),
+					inverseJoinColumns = @JoinColumn(name="id_genere"))
 	    private List<Genere> genereGiochi;
 
 	    @JoinColumn(name = "id_utente", nullable = false)
@@ -73,8 +73,8 @@ public class Gioco implements Serializable{
 	    
 	    @ManyToMany(fetch=FetchType.LAZY)
 	    @JoinTable(name = "libreria_gioco",
-	    			joinColumns=@JoinColumn(name="id_libreria"),
-	    			inverseJoinColumns=@JoinColumn(name="id_gioco"))
+	    			joinColumns=@JoinColumn(name="id_gioco"),
+	    			inverseJoinColumns=@JoinColumn(name="id_libreria"))
 	    private List<Libreria> libreriaGiochi;
 
     // Costruttore

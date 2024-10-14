@@ -24,7 +24,7 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
 
         if (generiSelezionati == null || generiSelezionati.isEmpty()) {
             request.setAttribute("Error", "Seleziona almeno un genere.");
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             return;
         }
 
@@ -34,7 +34,7 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace(); 
             request.setAttribute("Error", "Errore nel formato del genere selezionato.");
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             return;
         }
 
@@ -42,7 +42,7 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
         Genere genere = BusinessLogic.getGenereById(idGenere);
         if (genere == null) {
             request.setAttribute("Error", "Genere non trovato.");
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             return;
         }
 
@@ -50,7 +50,7 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
 
         if (giochiTrovati.isEmpty()) {
             request.setAttribute("Error", "Nessun gioco trovato per il genere selezionato.");
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             return;
         }
 
