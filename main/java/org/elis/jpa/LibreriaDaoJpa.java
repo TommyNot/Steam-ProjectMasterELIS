@@ -68,13 +68,14 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	}
 	
 	@Override
-	public void deleteById(long id) {
+	public Libreria deleteById(long id) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		EntityTransaction t = em.getTransaction();
 		Libreria l = em.find(Libreria.class, id);
 		t.begin();
 		em.remove(l);
 		t.commit();
+		return l;
 	}
 	
 	

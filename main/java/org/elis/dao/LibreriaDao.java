@@ -12,6 +12,6 @@ public interface LibreriaDao {
 	Libreria findByName(String nome);
 	List<Libreria> findByIdUtente(long id_utente);
 	Libreria updateNome(long id, String nome);
-	void deleteById(long id);
+	Libreria deleteById(long id);
 	
 }
