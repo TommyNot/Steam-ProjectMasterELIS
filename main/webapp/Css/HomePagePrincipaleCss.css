@@ -42,23 +42,65 @@ nav ul li {
     margin: 0 15px;
 }
 
-/* Stile per la barra di ricerca */
-/* Stile per il contenitore della ricerca */
 
 
-/* Stile per il campo di input */
-input[type="text"] {
-    padding: 10px; /* Padding interno */
-    border: 1px solid #ced4da; /* Bordo del campo */
-    border-radius: 4px; /* Angoli arrotondati */
-    margin-right: 5px; /* Margine a destra */
-    width: 300px; /* Larghezza della barra di ricerca */
+
+/* Stile per il contenitore del menu */
+
+
+/* Stile per il link dei generi */
+
+
+/* Stile per il contenitore del menu */
+li {
+    position: relative; /* Necessario per il posizionamento assoluto del dropdown */
+    display: inline-block; /* Consente di visualizzare il menu orizzontalmente */
 }
 
-input[type="text"]:focus {
-    outline: none; /* Rimuove il bordo di focus */
-    box-shadow: 0 0 5px rgba(0, 150, 255, 0.5); /* Aggiunge un'ombra di focus */
+/* Stile per il link dei generi */
+
+
+.generi-link:hover {
+    background-color: #0056b3; /* Colore di sfondo al passaggio del mouse */
 }
+
+/* Stile per il dropdown */
+.dropdown {
+    display: none; /* Nascondi il dropdown */
+    position: absolute; /* Posiziona il dropdown */
+    top: 100%; /* Posizionamento sotto il link */
+    left: 0; /* Allinea a sinistra */
+    background-color: #fff; /* Colore di sfondo del dropdown */
+    border: 1px solid #ccc; /* Bordo del dropdown */
+    border-radius: 5px; /* Angoli arrotondati */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra per effetto di profondità */
+    z-index: 1000; /* Assicurati che il dropdown sia sopra altri elementi */
+}
+
+/* Mostra il dropdown quando ha la classe show */
+.dropdown.show {
+    display: block; /* Mostra il dropdown */
+}
+
+/* Opzioni nel dropdown */
+.dropdown-option {
+    display: block; /* Le opzioni occupano l'intera larghezza */
+    padding: 10px; /* Padding per le opzioni */
+    color: #333; /* Colore del testo */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    transition: background-color 0.3s; /* Transizione per l'effetto hover */
+}
+
+.dropdown-option:hover {
+    background-color: #f0f0f0; /* Colore di sfondo al passaggio del mouse */
+}
+
+/* Aggiungi stile per l'opzione selezionata */
+.dropdown-option[style*='font-weight:bold;'] {
+    font-weight: bold; /* Stile per l'opzione selezionata */
+}
+
+
 
 /* Stile per il pulsante di ricerca */
 .btn-outline-success {

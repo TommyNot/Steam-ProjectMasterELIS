@@ -56,6 +56,6 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
 
         request.setAttribute("genere", genere);
         request.setAttribute("giochi", giochiTrovati);
-       request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+        request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
     }
 }

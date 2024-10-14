@@ -72,21 +72,28 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" >Giochi</a></li>
 						<li>
-						    <a href="#">Generi</a>
-						    <select id="genere" name="genere">
-						        <%
-						            List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
-						            Genere genereSelezionato = (Genere) request.getAttribute("genere");
-						            for (Genere genere : generi) {
-						        %>
-						            <option value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>>
-						                <%= genere.getNome() %>
-						            </option>
-						        <%
-						            }
-						        %>
-						    </select>
+						    <a href="#" class="generi-link">Generi</a>
+						    <div class="dropdown">
+						        <ul class="styled-select">
+						            <%
+						                List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
+						                Genere genereSelezionato = (Genere) request.getAttribute("genere");
+						                for (Genere genere : generi) {
+						            %>
+						            <li>
+						                <a href="<%=request.getContextPath() %>/GiocoGenereRicercaServlet?genereId=<%= genere.getId() %>" class="dropdown-option" 
+						                   <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "style='font-weight:bold;'" : "" %>>
+						                    <%= genere.getNome() %>
+						                </a>
+						            </li>
+						            <%
+						                }
+						            %>
+						        </ul>
+						    </div>
 						</li>
+
+
 
                     <li><a href="#">Offerte</a></li>
                     <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard Utenti</a></li>
@@ -176,7 +183,7 @@
 
     </footer>
 	
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
    <script src="<%=request.getContextPath()%>/Js/HomePagePrincipaleScript.js"></script>
 </body>
 </html>

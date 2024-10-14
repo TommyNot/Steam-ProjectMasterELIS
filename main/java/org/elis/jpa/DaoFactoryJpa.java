@@ -41,13 +41,13 @@ public class DaoFactoryJpa extends DaoFactory{
 	@Override
 	public GenereDao getGenereDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return GenereDaoJpa.getInstance();
 	}
 
 	@Override
 	public OffertaDao getOffertaDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return OffertaDaoJpa.getInstance();
 	}
 	
 }
