@@ -39,7 +39,7 @@ public class LogicaLoginServlet extends HttpServlet {
         
         if (email == null || email.isBlank() || password == null || password.isBlank()) {
         	
-        	 String failed = "errore o meail o password.";
+        	 String failed = "Errore email o password non sono corretti";
                
             request.setAttribute("Error", failed);
             request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
@@ -79,8 +79,9 @@ public class LogicaLoginServlet extends HttpServlet {
             }
         } else {
             
-            request.setAttribute("Error", "Email o password non validi.");
-            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+        	String failed = "Errore email o password non sono corretti";
+        	 request.setAttribute("Error", failed);
+             request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
         }
     }
 

@@ -67,7 +67,8 @@ public class Gioco implements Serializable{
 					inverseJoinColumns = @JoinColumn(name="id_gioco"))
 	    private List<Genere> genereGiochi;
 
-	    @Column(name = "id_utente", nullable = false)
+	    @JoinColumn(name = "id_utente", nullable = false)
+	    @ManyToOne
 	    private Utente idUtente;
 	    
 	    @ManyToMany(fetch=FetchType.LAZY)

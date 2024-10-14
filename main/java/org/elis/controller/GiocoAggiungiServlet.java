@@ -126,7 +126,8 @@ public class GiocoAggiungiServlet extends HttpServlet {
             response.sendRedirect("public-jsp/LoginPage.jsp");
             return;
         }
-
+        
+        
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 
         if (utente != null) {
@@ -150,8 +151,20 @@ public class GiocoAggiungiServlet extends HttpServlet {
                         byte[] byteImmagine = inputStream.readAllBytes(); // Leggi i byte dell'immagine
                         immagineBase64 = Base64.getEncoder().encodeToString(byteImmagine); // Convertila in Base64
                     }
-
-                    Gioco aggiunto = BusinessLogic.GiocoAdd(nome, data, descrizione, immagineBase64, prezzoDouble, genereSelezionato, offertaSelezionata, u);
+                    Gioco g = new Gioco(
+                    	    0, // id verrà generato automaticamente dal database
+                    	    LocalDateTime.now(), // data_creazione
+                    	    LocalDateTime.now(), // data_ultima_modifica
+                    	    nome, // nome
+                    	    data, // data_rilascio
+                    	    descrizione, // descrizione
+                    	    immagineBase64 != null ? Base64.getDecoder().decode(immagineBase64) : null, // byte_immagine
+                    	    false, // eliminato
+                    	    prezzoDouble, // prezzo
+                    	    offertaSelezionata, // offertaGioco
+                    	    u // idUtente
+                    	);
+                    Gioco aggiunto = BusinessLogic.GiocoAdd(g);
                     if (aggiunto != null) {
                         response.sendRedirect("successPage.jsp");
                     } else {

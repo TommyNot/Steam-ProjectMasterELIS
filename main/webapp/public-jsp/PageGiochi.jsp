@@ -105,7 +105,7 @@
             for (Gioco gioco : giochi) { 
     %>
         <div class="game">
-            <img src="<%= gioco.getImmagine() != null ? gioco.getImmagine() : "profilo.jpeg" %>" alt="<%= gioco.getNome() %>">
+            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" />
             <h3 class="product-title"><%= gioco.getNome() %></h3>
             <h4 class="product-price">€<%= gioco.getPrezzo() %></h4> 
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>

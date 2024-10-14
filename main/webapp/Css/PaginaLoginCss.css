@@ -257,3 +257,23 @@ footer a {
     color: #66C0F4;
     text-decoration: none;
 }
+
+.error-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.alert {
+    background-color: rgba(255, 0, 0, 0.1); /* Sfondo rosso chiaro */
+    color: #ff0000; /* Colore del testo rosso */
+    padding: 5px;
+    border: 1px solid #ff0000; /* Bordo rosso */
+    border-radius: 5px; /* Bordo arrotondato */
+    
+    margin: 2px;
+    text-align: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+

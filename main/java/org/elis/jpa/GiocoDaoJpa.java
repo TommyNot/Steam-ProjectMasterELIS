@@ -49,12 +49,9 @@ public class GiocoDaoJpa implements GiocoDao{
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
 	    Query q = em.createQuery("select a from Gioco a");
 
-	    List<Gioco> giochi = q.getResultList();
-	    for (Gioco gioco : giochi) {
-	        System.out.println("Gioco trovato: " + gioco.getNome());
-	    }
-
-	    return giochi;
+	    return q.getResultList();
+	
+	  
 	}
 
 

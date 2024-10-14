@@ -51,7 +51,16 @@
                  </a>
         </nav>
     </div>
-
+<%
+        String successMessage = (String) request.getAttribute("Success");
+        if (successMessage != null) {
+    %>
+        <div class="alert">
+            <%= successMessage %>
+        </div>
+    <%
+        }
+    %>
   
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
@@ -67,6 +76,18 @@
 			<label for="emailFromInput" style="font-weight: bold;">Email</label>
 			<input type="email"  id="emailFromInput" name="emailFromInput" required />
 			<label for="passwordFromInput" style="font-weight: bold;">Password</label>
+			 		<div class="error-container">
+		    <%
+		        String failedRegister = (String) request.getAttribute("Error");
+		        if (failedRegister  != null) {
+		    %>
+		        <div class="alert">
+		            <%= failedRegister  %>
+		        </div>
+		    <%
+		        }
+		    %>
+		</div>
 			<input type="password"  id="passwordFromInput" name="passwordFromInput" required />
 			<button type="submit">Registrati</button>
 		</form>
@@ -83,6 +104,19 @@
 			<input type="email" id="emailLogin" name="emailLogin" required />
 			<label for="passwordLogin" style="font-weight: bold;">Password</label>
 			<input type="password" id="passwordLogin" name="passwordLogin" required />
+	 		<div class="error-container">
+		    <%
+		        String failedLogin = (String) request.getAttribute("Error");
+		        if (failedLogin != null) {
+		    %>
+		        <div class="alert">
+		            <%= failedLogin %>
+		        </div>
+		    <%
+		        }
+		    %>
+		</div>
+
 			<div class="checkbox-container">
 				<input type="checkbox" value="ricordami" id="ricordami" name="ricordami">
 				<label for="ricordami" id="rcd">Ricordami</label>

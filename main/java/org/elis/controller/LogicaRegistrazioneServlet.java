@@ -42,14 +42,16 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
         }
 
         if (!isValidEmail(email)) {
-            request.setAttribute("Error", "Errore nell'inserimento dei dati: email non valida.");
-            request.getRequestDispatcher("public-jsp/RegisterPage.jsp").forward(request, response);
+        	String failed = "Errore nell'inserimento dei dati: password non valida.";
+            request.setAttribute("Error", failed );
+            request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
             return;
         }
 
         if (!isValidPassword(password)) {
-            request.setAttribute("Error", "Errore nell'inserimento dei dati: password non valida.");
-            request.getRequestDispatcher("public-jsp/RegisterPage.jsp").forward(request, response);
+        	String failed = "Errore nell'inserimento dei dati: password non valida.";
+            request.setAttribute("Error", failed );
+            request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
             return;
         }
         
@@ -65,8 +67,8 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
             return;
         }
         
-        request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username);
-        request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+        request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username + " esegui il login con le credenziali appena inserite");
+        request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
     }
 
     private boolean isValidEmail(String email) {
