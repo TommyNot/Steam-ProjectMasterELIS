@@ -106,7 +106,7 @@
 		%>
 		
 <div class="content">
-    <h2>Giochi in vetrina</h2>
+    
     <%
         List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi");
         
