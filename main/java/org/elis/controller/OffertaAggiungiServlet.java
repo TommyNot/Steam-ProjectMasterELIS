@@ -107,13 +107,11 @@ public class OffertaAggiungiServlet extends HttpServlet {
                 boolean isAdmin= u.getRuolo() == Ruolo.ADMIN;
                 if (isAdmin) {
                     System.out.println("L'utente è un Admin.");
-                    Offerta aggiunta = BusinessLogic.offertaAdd(nome, scontoDouble, inizio_offerta, fine_offerta);
+                    Offerta aggiunta = new Offerta(0, LocalDateTime.now(), LocalDateTime.now(), nome, scontoDouble, inizio_offerta, fine_offerta);
+                    BusinessLogic.offertaAdd(aggiunta);
                     if (aggiunta != null) {
-                        response.sendRedirect("successPage.jsp");
-                    } else {
-                        request.setAttribute("errore", "Errore nell'aggiunta dell'offerta.");
-                        request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
-                    }
+                        response.sendRedirect("DashboardAdmin.jsp");
+                    } 
                 } else {
                     System.out.println("L'utente non è un Admin.");
                 }
