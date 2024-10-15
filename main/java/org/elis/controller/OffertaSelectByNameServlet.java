@@ -30,16 +30,18 @@ public class OffertaSelectByNameServlet extends HttpServlet {
 		String ricerca = request.getParameter("nomeOfferta");
 		
 		if(ricerca == null || ricerca.isBlank()) {
-			String errore = "campo di ricerca errato o vuoto";
-			request.setAttribute("errore", errore);
-			return;
+			String error = "Il campo di ricerca è vuoto.";
+	        response.setContentType("text/html");
+	        response.getWriter().write("<p style=\"color:red;\">" + error + "</p>");
+	        return;
 		}
 		
 		Offerta o = BusinessLogic.findOffertaByNome(ricerca);
 		
 		if(o == null) {
-			String errore2 = "Non esiste nessuna offerta con questo nome.";
-			request.setAttribute("errore2", errore2);
+			response.setContentType("text/html");
+	        response.getWriter().write("<p style=\"color:red;\">Nessuna offerta trovata con questo nome</p>");
+	        return;
 		}
 	}
 

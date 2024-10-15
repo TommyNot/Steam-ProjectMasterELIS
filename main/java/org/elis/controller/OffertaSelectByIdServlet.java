@@ -39,19 +39,25 @@ public class OffertaSelectByIdServlet extends HttpServlet {
 			return;
 		}
         
+		long idOfferta = 0;
+		
 		try {
-		long idOfferta = Long.parseLong(idInput);
+		idOfferta = Long.parseLong(idInput);
+		}catch(NumberFormatException e) {
+			 String error = "ID Utente non valido. Deve essere un numero.";
+		        response.setContentType("text/html");
+		        response.getWriter().write("<p style=\"color:red;\">" + error + "</p>");
+		        return;
+		}
+		
 		Offerta o = BusinessLogic.findOffertaById(idOfferta);
 		
-		if(o != null) {
-			response.getWriter().println("Offerta trovata: " + o);
-		}else {
-			String errore2 = "Non esiste nessuna offerta con questo id.";
-			request.setAttribute("errore2", errore2);
-		}
-		}catch(NumberFormatException e){
-			response.getWriter().println("Errore: ID non valido.");
-		}
+	    if (o == null) {
+	        response.setContentType("text/html");
+	        response.getWriter().write("<p style=\"color:red;\">Nessuna offerta trovata con questo id</p>");
+	        return;
+	    }
+
         
         
 	}
