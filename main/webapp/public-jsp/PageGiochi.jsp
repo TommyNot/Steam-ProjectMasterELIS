@@ -66,31 +66,29 @@
  
     </div>
          <div class="search-container">
-      <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="post" class="d-flex">
+      <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="get" class="d-flex">
                 <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
                 <button type="submit" class="btn btn-outline-success">Cerca</button>
             </form>
        </div>
     
     <div class="user-info">
-                    <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
+                    
                     <%
-                        Utente utente = (Utente) session.getAttribute("utenteLoggato");
-                    	long idUtente;
-                        if (utente != null) {
-                        	
-                        	idUtente = utente.getId();
-                    %>
-                    <div id = "user">
-                        <p>Benvenuto <%= utente.getUsername() %></p>
-                    </div>
-                    <%
-                        } else {
-                    %>
-                    <p>Utente non loggato</p>
-                    <%
-                        }
-                    %>
+                
+                Utente username = (Utente) session.getAttribute("utenteLoggato");
+                if (username != null) {
+            %>
+            	 <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
+                <p>Welcome, <%= username.getUsername() %></p>
+                <a href="<%= request.getContextPath() %>/LogoutServlet" class="btn btn-danger">Logout</a>
+            <%
+                } else {
+            %>
+                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Login</a>
+            <%
+                }
+            %>
                 </div>
   </div>
 
@@ -104,6 +102,7 @@
 		<% 
 		} 
 		%>
+
 		
 <div class="content">
    
@@ -127,7 +126,7 @@
             
             <h3 class="product-title"><%= gioco.getNome() %></h3>
             
-            <div class="discount-container">
+            <div class="discount">
                 <% if (offerta != null) { %>
                     <h4 class="product-discount"><%= offerta.getSconto() %>% off</h4>
                     <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>

@@ -26,38 +26,34 @@ public class GiocoCercaServlet extends HttpServlet {
     }
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String ricerca = request.getParameter("barraRicerca");
-		
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            String ricerca = request.getParameter("barraRicerca");
 
-		if(ricerca.isBlank()) {
-			String error = "campo vuoto";
-			request.setAttribute("campo vuoto", error);
-			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
-			System.out.println("errore qui ricerca ");
-			return;
-		}
-		
-		List<Gioco> search = BusinessLogic.TrovaByName(ricerca);
-		
-		if(search == null) {
-	        String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
-	        request.setAttribute("errorMessage", errorMessage);
-			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
-			
-			return;
-		}else {
-			
-			request.setAttribute("gioco", search);
-			
-		}
-		
-		
-		request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
-		
-		
-		
-	}
+            // Controllo se il campo di ricerca è vuoto
+            if (ricerca == null || ricerca.isBlank()) {
+                String error = "Il campo di ricerca è vuoto";
+                request.setAttribute("errorMessage", error);
+                request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+                System.out.println("Errore: campo di ricerca vuoto");
+                return;
+            }
 
-}
+            // Trova i giochi corrispondenti al nome
+            List<Gioco> search = BusinessLogic.TrovaByName(ricerca);
+
+            // Controllo se la ricerca ha restituito risultati
+            if (search == null || search.isEmpty()) {
+                String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+                return;
+            }
+
+            // Imposta l'attributo della richiesta con i risultati della ricerca
+            request.setAttribute("giochi", search);
+            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
+        }
+    }
+
+

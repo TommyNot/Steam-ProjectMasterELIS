@@ -334,11 +334,15 @@ input[type="text"]:focus {
 
 
 
-.discount-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 10px 0;
+.discount {
+    
+    top: 10px;
+    right: 10px;
+    background-color:  #171a21; /* Colore di sfondo dello sconto */
+    color: #ffffff; /* Colore del testo dello sconto */
+    padding: 5px 10px;
+    border-radius: 5px; /* Angoli arrotondati per il badge di sconto */
+    font-weight: bold;
 }
 
 .product-discount {
@@ -363,6 +367,7 @@ input[type="text"]:focus {
 }
 
 
+
 .product-id {
     color: #8f98a0;
     font-size: 12px;
@@ -384,6 +389,11 @@ input[type="text"]:focus {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.btn-danger{
+	
+	background-color: #cc0000;
 }
 
 .btn:hover {

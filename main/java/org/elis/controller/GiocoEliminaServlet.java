@@ -46,7 +46,7 @@ public class GiocoEliminaServlet extends HttpServlet {
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
         
         System.out.println(utente.getRuolo());
-        if (utente.getRuolo() != Ruolo.PUBLISHER) {
+        if (utente.getRuolo() != Ruolo.PUBLISHER || utente.getRuolo() != Ruolo.ADMIN) {
             response.sendRedirect("public-jsp/AccessoNegato.jsp");
             return;
         }
