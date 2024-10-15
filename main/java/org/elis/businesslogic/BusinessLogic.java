@@ -108,8 +108,8 @@ public static List<Offerta> offertaVisualizzaTutto() {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().findAll();
 }
 
-public static Offerta updatePrezzoOfferta(long id,double prezzo) {
-	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().updateSconto(id, prezzo);
+public static Offerta updateScontoOfferta(long id,double sconto) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().updateSconto(id, sconto);
 }
 
 public static Offerta updateDataInizioOfferta(long id,LocalDateTime data_inizio) {
