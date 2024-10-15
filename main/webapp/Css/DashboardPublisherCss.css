@@ -147,6 +147,13 @@ main {
     padding: 20px;
 }
 
+.discount-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 section {
     margin-bottom: 20px;
     border: 1px solid #e0e0e0; /* Bordo leggero */
@@ -312,6 +319,7 @@ footer {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombra per un effetto sollevato */
     color: white; /* Colore del testo */
 }
+
 
 .btn-danger {
     background-color: #f44336; /* Rosso per il pulsante di eliminazione */

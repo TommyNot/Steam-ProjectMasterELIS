@@ -95,7 +95,7 @@
 
 
                     <li><a href="#">Offerte</a></li>
-                    <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard Utenti</a></li>
+                    <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a></li>
             <li> 
             <%
                 

@@ -166,7 +166,9 @@ public class GiocoAggiungiServlet extends HttpServlet {
                     	);
                     Gioco aggiunto = BusinessLogic.GiocoAdd(g);
                     if (aggiunto != null) {
-                        response.sendRedirect("successPage.jsp");
+                    	String success = "Gioco aggiunto con sucesso";
+                    	request.setAttribute("errore", "Errore nell'aggiunta del gioco.");
+                    	request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
                     } else {
                         request.setAttribute("errore", "Errore nell'aggiunta del gioco.");
                         request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);

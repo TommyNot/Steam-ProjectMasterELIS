@@ -231,7 +231,7 @@
 
 													    if (immagineBase64 != null && !immagineBase64.isEmpty()) { 
 													%>
-													   <img src="data:image/jpeg;base64,<%= immagineBase64 %>" />
+													   <img src="data:image/jpeg;base64,<%= immagineBase64 %>" style="width: 220px; height: 300px;" />
 													<% 
 													    } else { 
 													%>
@@ -255,14 +255,25 @@
 				                            
 				                        
 				                    </div>
-				                    <div class="part-2">
-				                        <h3 class="product-title"><%= gioco.getNome() %></h3>
-				                        <h4 class="product-price">€<%= gioco.getPrezzo() %></h4>
-				                        <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
-				                        <% if (offerta != null) { %>
-				                            <h4 class="product-old-price" style="text-decoration: line-through;">€<%= gioco.getPrezzo() + (gioco.getPrezzo() * offerta.getSconto() / 100) %></h4>
-				                        <% } %>
-				                    </div>
+				  <div class="part-2">
+            
+            
+            <h3 class="product-title">Nome Gioco :<%= gioco.getNome() %></h3>
+            
+            <div class="discount-container">
+                <% if (offerta != null) { %>
+                    
+                    <h4 class="product-old-price">Prezzo :€<%= gioco.getPrezzo() %></h4>
+                    <h4 class="product-price">Prezzo Scontato :€<%= gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100) %></h4>
+                <% } else { %>
+                    <h4 class="product-price">€<%= gioco.getPrezzo() %></h4>
+                <% } %>
+            </div>
+
+            <h6 class="product-desc">Descrizione gioco : <%= gioco.getDescrzione() %></h6>
+            <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
+            <button class="btn">Visualizza dettagli</button>
+        </div>
 				                </div>  
 				        <% 
 				            }

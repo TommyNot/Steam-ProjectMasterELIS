@@ -49,7 +49,7 @@ public class Gioco implements Serializable{
 	    private String descrizione;
 
 	    @Lob 
-	    @Column(name = "byte_immagine")
+	    @Column(name = "byte_immagine" , length=100000)
 	    private byte[] byteImmagine;
 
 	    @Column(name = "eliminato", nullable = false)
