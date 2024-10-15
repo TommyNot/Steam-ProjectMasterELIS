@@ -52,7 +52,8 @@ public class LibreriaAggiungiServlet extends HttpServlet {
 				boolean isUtenteBase = u.getRuolo() == Ruolo.UTENTE_BASE;
 				if(isUtenteBase) {
 					System.out.println("L'utente selezionato è un utente base.");
-					Libreria nuovaLibreria = BusinessLogic.LibreriaAdd(nome, idUtente);
+					Libreria l = new Libreria(nome, u);
+					Libreria nuovaLibreria = BusinessLogic.LibreriaAdd(l);
 					
 					if(nuovaLibreria != null) {
 						System.out.println("Libreria aggiunta con successo.");

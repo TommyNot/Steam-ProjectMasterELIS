@@ -41,12 +41,8 @@ public class Libreria {
 	@ManyToMany(mappedBy="libreriaGiochi")
 	private List<Gioco> giochiAcquistati;
 	
-	public Libreria(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			Utente libreriaUtente) {
+	public Libreria(String nome, Utente libreriaUtente) {
 		super();
-		this.id = id;
-		this.data_creazione = data_creazione;
-		this.data_ultima_modifica = data_ultima_modifica;
 		this.nome = nome;
 		this.libreriaUtente = libreriaUtente;
 	}
