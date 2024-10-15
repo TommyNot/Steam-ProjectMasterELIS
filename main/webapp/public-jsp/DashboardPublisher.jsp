@@ -299,7 +299,7 @@
                 <% } %>
             </div>
 
-            <h6 class="product-desc">Descrizione gioco : <%= gioco.getDescrzione() %></h6>
+            
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
             <button class="btn">Visualizza dettagli</button>
         </div>

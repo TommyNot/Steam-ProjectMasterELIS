@@ -104,7 +104,7 @@
             %>
             	 <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
                 <p>Welcome, <%= username.getUsername() %></p>
-                <a href="<%= request.getContextPath() %>/LogoutServlet" class="btn-danger">Logout</a>
+                <a href="<%= request.getContextPath() %>/LogoutServlet" class="btn btn-danger">Logout</a>
             <%
                 } else {
             %>

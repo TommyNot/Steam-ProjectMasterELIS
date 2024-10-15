@@ -107,6 +107,7 @@
 <div class="content">
    
     <%
+    	
         List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi");
         
         if (giochi == null || giochi.isEmpty()) {
@@ -137,7 +138,7 @@
                 <% } %>
             </div>
 
-            <h5 class="product-desc"><%= gioco.getDescrzione() %></h5>
+           
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
             <button class="btn">Visualizza dettagli</button>
         </div>
