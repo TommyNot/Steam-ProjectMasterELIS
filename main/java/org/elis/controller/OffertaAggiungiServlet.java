@@ -110,7 +110,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
                     Offerta aggiunta = new Offerta(0, LocalDateTime.now(), LocalDateTime.now(), nome, scontoDouble, inizio_offerta, fine_offerta);
                     BusinessLogic.offertaAdd(aggiunta);
                     if (aggiunta != null) {
-                        response.sendRedirect("DashboardAdmin.jsp");
+                        response.sendRedirect("public-jsp/DashboardAdmin.jsp");
                     } 
                 } else {
                     System.out.println("L'utente non è un Admin.");

@@ -9,21 +9,19 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 import org.elis.businesslogic.BusinessLogic;
-import org.elis.model.Libreria;
 import org.elis.model.Offerta;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 
-@WebServlet("/OffertaAggiornaDataInizioServlet")
-public class OffertaAggiornaDataInizioServlet extends HttpServlet {
+@WebServlet("/OffertaAggiornaDataFineServlet")
+public class OffertaAggiornaDataFineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
  
-    public OffertaAggiornaDataInizioServlet() {
+    public OffertaAggiornaDataFineServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,26 +41,25 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 			return;
 		}
 		
+
+		String dataFine = request.getParameter("nuovaDataFine");
+		String dataInizio = request.getParameter("dataInizio");
 		
-		
-		String nuovaDataInizio = request.getParameter("nuovaDataInizio");
-		
-		if(nuovaDataInizio == null || nuovaDataInizio.isEmpty()) {
+		if(dataFine == null || dataFine.isEmpty()) {
 			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 		}
 		
 
-		LocalDateTime nuovaData = LocalDateTime.parse(nuovaDataInizio);
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime dataFineFormatter = LocalDateTime.parse(dataFine);
+		LocalDateTime dataInizioFormatter= LocalDateTime.parse(dataInizio);
 		
-		if (nuovaData.isBefore(now)) {
-            // Se la data è nel passato, reindirizza alla pagina di errore
+		
+		if (dataFineFormatter.isBefore(dataInizioFormatter)) {
             response.sendRedirect("ErrorPage.jsp");
             return;
         }
 		
-
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 		if(utente != null) {
 			long idUtente = utente.getId();
@@ -71,10 +68,10 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 			if(u != null) {
 				boolean isAdmin = u.getRuolo() == Ruolo.ADMIN;
 				if(isAdmin) {
-					Offerta OffertaNuovaDataInizio = BusinessLogic.updateDataInizioOfferta(idUtente, nuovaData);
+					Offerta OffertaNuovaDataFine = BusinessLogic.updateDataInizioOfferta(idUtente, dataFineFormatter);
 					
-					if(OffertaNuovaDataInizio != null) {
-						System.out.println("L'inizio dell'offerta è stato aggiornato con successo.");
+					if(OffertaNuovaDataFine != null) {
+						System.out.println("La fine dell'offerta è stato aggiornato con successo.");
 					}else {
 						request.getRequestDispatcher("public-jsp/ErrorPage.jsp");
 						return;
@@ -88,7 +85,6 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 		}else {
 			System.out.println("Nessun utente trovato nella sessione.");
 		}
-		
 	}
 
 }
