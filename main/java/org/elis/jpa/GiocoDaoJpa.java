@@ -64,12 +64,14 @@ public class GiocoDaoJpa implements GiocoDao{
 	        EntityManager em = DaoFactoryJpa.getEntityManager();
 	        
 	        
-	        Query q = em.createQuery("SELECT g FROM Gioco g WHERE LOWER(g.nome) LIKE LOWER(CONCAT('%', :nome, '%'))");
-	        q.setParameter("nome", nome);
+	        Query q = em.createQuery("SELECT g FROM Gioco g WHERE g.nome like :pattern");
+	        q.setParameter("pattern", "%"+nome+"%");
+	        
 
 	        System.out.println("qua ci siamo arrivati ?");
-	        return q.getResultList();
-	        
+	        var list = q.getResultList();
+	        System.out.println(list);
+	        return list;
 	    } catch (NoResultException e) {
 	        e.printStackTrace();
 	        return null;
@@ -173,8 +175,31 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public Gioco deleteGioco(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    Gioco gioco = null;
+
+	    try {
+	        // Trova il gioco per ID
+	        gioco = em.find(Gioco.class, id);
+
+	        // Se il gioco esiste, lo eliminaoim 
+	        if (gioco != null) {
+	            em.getTransaction().begin();
+	            em.remove(gioco);
+	            em.getTransaction().commit();
+	        } else {
+	            System.out.println("Gioco non trovato con ID: " + id);
+	        }
+
+	    } catch (NoResultException e) {
+	        e.printStackTrace();
+	    } catch (Exception e) {
+	    
+	        e.printStackTrace();
+	    } 
+
+	    return gioco; 
 	}
+
 
 }

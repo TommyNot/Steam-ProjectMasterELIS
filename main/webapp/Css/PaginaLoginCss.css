@@ -277,3 +277,12 @@ footer a {
     margin-right: auto;
 }
 
+.success {
+    background-color: #d4edda; /* Azzurro chiaro per indicare l'aggiunta */
+    color: #d4edda; /* Azzurro scuro per il testo */
+    padding: 15px;
+    border: 1px solid #b8daff; /* Bordo azzurro chiaro */
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}

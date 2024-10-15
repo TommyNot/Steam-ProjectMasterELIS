@@ -381,3 +381,42 @@ footer {
     background-color: #333; /* Colore più scuro al passaggio del mouse */
 }
 
+
+
+/* Stile di base per il contenitore dei risultati */
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Stile per il messaggio di successo di eliminazione */
+.success-delete-gioco {
+    background-color: #d4edda; /* Verde chiaro per indicare il successo */
+    color: #155724; /* Verde scuro per il testo */
+    padding: 15px;
+    border: 1px solid #c3e6cb; /* Bordo verde chiaro */
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Stile per il messaggio di successo di aggiunta */
+.successGiocoAdd {
+    background-color: #d4edda; /* Azzurro chiaro per indicare l'aggiunta */
+    color: #004085; /* Azzurro scuro per il testo */
+    padding: 15px;
+    border: 1px solid #b8daff; /* Bordo azzurro chiaro */
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Aggiunta di un po' di stile al testo per renderlo più leggibile */
+.success-delete-gioco, .successGiocoAdd {
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra per un effetto leggermente in rilievo */
+}
+
+

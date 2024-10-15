@@ -62,6 +62,30 @@
                  </svg>
                  </a>
                 </div>
+                
+               <div class="result">
+			        	                     <% 
+					String success = (String) request.getAttribute("successo");
+					if (success != null) { 
+					%>
+					    <div class="success-delete-gioco">
+					        <%= success %>
+					    </div>
+					<% 
+					} 
+					%>
+					
+					                    <% 
+					String successGiocoAdd = (String) request.getAttribute("addGioco");
+					if (successGiocoAdd != null) { 
+					%>
+					    <div class="successGiocoAdd">
+					        <%= successGiocoAdd %>
+					    </div>
+					<% 
+					} 
+					%>
+			        </div>
 
                 <div class="user-info">
                     <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg" alt="User Profile Picture" id="imgUtente"> 
@@ -99,9 +123,14 @@
         </header>
         
         <main>
+        
+     
+ 
             <section id="home" class="active">
                 <h2>Benvenuto nella Dashboard</h2>
                 <p>Qui puoi gestire i tuoi giochi, visualizzare le vendite, le recensioni e controllare lo stock.</p>
+      				
+  
             </section>
                 <div id="add-product-form" class="edit-form-container" style="display: none;">
 				    <form action="<%= request.getContextPath()%>/GiocoAggiungiServlet" method="post" enctype="multipart/form-data">

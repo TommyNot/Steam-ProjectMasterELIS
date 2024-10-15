@@ -37,28 +37,26 @@ public class GiocoEliminaServlet extends HttpServlet {
         
         HttpSession sessione = request.getSession(false);
         if (sessione == null) {
-            response.sendRedirect("public-jsp/LoginPage.jsp");
+            response.sendRedirect("public-jsp/PaginaLogin.jsp");
             return;
         }
         
 
 
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-        if (utente == null || utente.getRuolo() != Ruolo.PUBLISHER ) {
+        
+        System.out.println(utente.getRuolo());
+        if (utente.getRuolo() != Ruolo.PUBLISHER) {
             response.sendRedirect("public-jsp/AccessoNegato.jsp");
             return;
         }
-        
-        if(utente.getRuolo()!=Ruolo.ADMIN) {
-        	
-        	  response.sendRedirect("public-jsp/AccessoNegato.jsp");
-              return;
-        }
+     
         
         
         if (eliminaGiocoNome == null || eliminaGiocoNome.isBlank()) {
             String errore = "Il nome del gioco non può essere vuoto.";
             request.setAttribute("errore", errore); 
+            
             request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return; 
         }
@@ -82,13 +80,15 @@ public class GiocoEliminaServlet extends HttpServlet {
         	
             String successo = "Il gioco '" + eliminaGiocoNome + "' è stato eliminato con successo.";
             request.setAttribute("successo", successo);
+            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
         } else {
             String errore = "Il gioco con nome '" + eliminaGiocoNome + "' non è stato trovato.";
             request.setAttribute("errore", errore);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
         }
 
        
-        request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+        request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
     }
 
 }

@@ -55,7 +55,7 @@
         String successMessage = (String) request.getAttribute("Success");
         if (successMessage != null) {
     %>
-        <div class="alert">
+        <div class="success">
             <%= successMessage %>
         </div>
     <%
