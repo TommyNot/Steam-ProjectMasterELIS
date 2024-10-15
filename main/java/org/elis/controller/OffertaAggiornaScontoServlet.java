@@ -41,6 +41,14 @@ public class OffertaAggiornaScontoServlet extends HttpServlet {
 		}
 		
 		String sconto = request.getParameter("sconto");
+		String id = request.getParameter("id");
+		
+		if (sconto == null || sconto.isBlank() || id == null || id.isBlank()) {
+            String errore = "L'id o lo sconto dell'offerta non può essere vuoto.";
+            request.setAttribute("errore", errore); 
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
+            return; 
+        }
 		
 		
 		double nuovoSconto;
@@ -56,6 +64,16 @@ public class OffertaAggiornaScontoServlet extends HttpServlet {
             return;
         }
 		
+	    long idOfferta = 0;
+		  
+		  try {
+	        	
+	        	idOfferta = Long.parseLong(id);
+	        	
+	        }catch(Exception e) {
+	        	
+	        	System.out.println("errore");
+	        }
 
         Utente utente = (Utente) session.getAttribute("utenteLoggato");
         
@@ -70,7 +88,7 @@ public class OffertaAggiornaScontoServlet extends HttpServlet {
                 boolean isAdmin= u.getRuolo() == Ruolo.ADMIN;
                 if (isAdmin) {
                     System.out.println("L'utente è un Admin.");
-                    Offerta aggiornata = BusinessLogic.updateScontoOfferta(idUtente, nuovoSconto);
+                    Offerta aggiornata = BusinessLogic.updateScontoOfferta(idOfferta, nuovoSconto);
                     if (aggiornata != null) {
                         response.sendRedirect("public-jsp/DashboardAdmin.jsp");
                     } 

@@ -35,19 +35,13 @@ public class OffertaEliminaServlet extends HttpServlet {
 		String eliminaOffertaNome = request.getParameter("nome");
 		String id = request.getParameter("id");
 		
-		  if (eliminaOffertaNome == null || eliminaOffertaNome.isBlank()) {
-	            String errore = "Il nome dell'offerta non può essere vuoto.";
+		  if (eliminaOffertaNome == null || eliminaOffertaNome.isBlank() || id == null || id.isBlank()) {
+	            String errore = "Il nome o l'id dell'offerta non può essere vuoto.";
 	            request.setAttribute("errore", errore); 
 	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
 	            return; 
 	        }
 		  
-		  if (id == null || id.isBlank()) {
-	            String errore = "L'id dell'offerta non può essere vuoto.";
-	            request.setAttribute("errore", errore); 
-	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
-	            return; 
-	        }
 		  
 		  long idOfferta = 0;
 		  

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import org.elis.businesslogic.BusinessLogic;
@@ -46,22 +47,39 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 		
 		
 		String nuovaDataInizio = request.getParameter("nuovaDataInizio");
-		
-		if(nuovaDataInizio == null || nuovaDataInizio.isEmpty()) {
-			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
-	        return;
-		}
+		String id = request.getParameter("id");
 		
 
-		LocalDateTime nuovaData = LocalDateTime.parse(nuovaDataInizio);
-		LocalDateTime now = LocalDateTime.now();
+	      LocalDateTime nuovaData = null;
+	        if (nuovaDataInizio != null && !nuovaDataInizio.isEmpty()) {
+	            try {
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	                nuovaData = LocalDateTime.parse(nuovaDataInizio, formatter); 
+	            } catch (DateTimeParseException e) {
+	                request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
+	                request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+	                System.out.println("Errore nella formattazione della data e ora");
+	                return; 
+	            }
+	        }
+	        
+	    	if (id == null || id.isBlank()) {
+	            String errore = "L'id  dell'offerta non può essere vuoto.";
+	            request.setAttribute("errore", errore); 
+	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
+	            return; 
+	        }
 		
-		if (nuovaData.isBefore(now)) {
-            // Se la data è nel passato, reindirizza alla pagina di errore
-            response.sendRedirect("ErrorPage.jsp");
-            return;
-        }
-		
+	    long idOfferta = 0;
+		  
+			  try {
+		        	
+		        	idOfferta = Long.parseLong(id);
+		        	
+		        }catch(Exception e) {
+		        	
+		        	System.out.println("errore");
+		        }
 
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 		if(utente != null) {
@@ -71,7 +89,7 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 			if(u != null) {
 				boolean isAdmin = u.getRuolo() == Ruolo.ADMIN;
 				if(isAdmin) {
-					Offerta OffertaNuovaDataInizio = BusinessLogic.updateDataInizioOfferta(idUtente, nuovaData);
+					Offerta OffertaNuovaDataInizio = BusinessLogic.updateDataInizioOfferta(idOfferta, nuovaData);
 					
 					if(OffertaNuovaDataInizio != null) {
 						System.out.println("L'inizio dell'offerta è stato aggiornato con successo.");
