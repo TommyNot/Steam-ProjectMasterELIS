@@ -126,12 +126,20 @@
         
         <div class="container " id="Elimina">
             <h2>Elimina gioco</h2>
+            
             <form id="cercaGioco">
-            <label for="id">Id gioco da cercare</label>
-            <input type="text" id="gioco1" name="gioco" required placeholder="id gioco">
-			    <button type="submit" class="btn-conf">Avvia ricerca</button>
-            </form>
-        </div>
+            	<label for="idGioco">ID del Gioco:</label>
+		        <input type="text" id="idGioco" name="idGioco">
+		        <button type="submit">Cerca Gioco</button>
+    			</form>
+
+
+		    <div id="resultId"></div>
+		
+		  
+		    <div id="deleteButton"></div>        
+		    
+		    </div>
 
         <div class="container " id="Gestisci">
             <h2>Gestisci offerta</h2>

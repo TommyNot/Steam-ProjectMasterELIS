@@ -252,4 +252,14 @@
     <servlet-name>UtenteFindByIDServlet</servlet-name>
     <url-pattern>/UtenteFindByIDServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminVisualizzaGiocoServlet</display-name>
+    <servlet-name>AdminVisualizzaGiocoServlet</servlet-name>
+    <servlet-class>org.elis.controller.AdminVisualizzaGiocoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminVisualizzaGiocoServlet</servlet-name>
+    <url-pattern>/AdminVisualizzaGiocoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
