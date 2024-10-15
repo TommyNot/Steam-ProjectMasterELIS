@@ -89,73 +89,103 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
       });
    }); 
    
-   document.getElementById('searchForm2').addEventListener('submit', function(event) {
-          event.preventDefault();
-   	   
-          const idUtente = document.getElementById('idUtente').value;  
-          fetch('/SteamProject/UtenteFindByIDServlet', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: 'idUtente=' + encodeURIComponent(idUtente)
-          })
-          .then(response => response.text())
-          .then(data => {
-              document.getElementById('resultId').innerHTML = data;
-          })
-          .catch(error => {
-              console.error('Errore:', error);
-              document.getElementById('resultId').innerHTML = '<p style="color:red;">Errore nella richiesta.</p>';
-         });
-      }); 
+   document.getElementById('searchForm2').addEventListener('submit', function(event) { 
+       event.preventDefault(); 
+       const idUtente = document.getElementById('idUtente').value; 
+       
+       fetch('/SteamProject/UtenteFindByIDServlet', { 
+           method: 'POST', 
+           headers: { 
+               'Content-Type': 'application/x-www-form-urlencoded' 
+           }, 
+           body: 'idUtente=' + encodeURIComponent(idUtente) 
+       }) 
+       .then(response => response.text()) 
+       .then(data => { 
+           document.getElementById('resultId').innerHTML = data; 
+       }) 
+       .catch(error => { 
+           console.error('Errore:', error); 
+           document.getElementById('resultId').innerHTML = '<p style="color:red;">Errore nella richiesta.</p>'; 
+       }); 
+   });
 	  
-	  document.getElementById('cercaGioco').addEventListener('submit', function(event) { 
-	      event.preventDefault(); 
-	      const gameName = document.getElementById('nomeGioco').value; 
-	      fetch('/SteamProject/searchGame?name=' + encodeURIComponent(gameName), { 
-	          method: 'GET' 
-	      }) 
-	      .then(response => { 
-	          if (response.ok) { 
-	              return response.blob();  // Riceviamo l'immagine come Blob
-	          } else { 
-	              throw new Error('Gioco non trovato'); 
-	          } 
-	      }) 
-	      .then(blob => { 
-	          // Creiamo un URL temporaneo per il Blob 
-	          const imgUrl = URL.createObjectURL(blob); 
-	          // Aggiungiamo l'immagine al DOM 
-	          document.getElementById('resultId').innerHTML = `<h3>Gioco trovato:</h3>
-	              <img src="${imgUrl}" alt="Immagine del Gioco" style="width: 200px; height: auto;">`;
-	          document.getElementById('deleteButton').innerHTML = `<button onclick="deleteGame('${gameName}')">Elimina Gioco</button>`;
-	      }) 
-	      .catch(error => { 
-	          console.error('Errore:', error); 
-	          document.getElementById('resultId').innerHTML = '<p style="color:red;">Gioco non trovato o errore nel caricamento dell\'immagine.</p>'; 
-	          document.getElementById('deleteButton').innerHTML = ''; 
-	      }); 
-	  });
+	
+	  
+   document.getElementById('cercaGioco').addEventListener('submit', function(event) {
+           event.preventDefault(); 
+           console.log("Event listener attivato");
 
-function deleteGame(idGioco) {
-		      fetch('/SteamProject/GiocoEliminaServlet', {
-		          method: 'DELETE',
-		          headers: {
-		              'Content-Type': 'application/x-www-form-urlencoded'
-		          },
-		          body: 'idGioco=' + encodeURIComponent(idGioco)
-		      })
-		      .then(response => {
-		          if (response.ok) {
-		              document.getElementById('resultId').innerHTML = '<p style="color:green;">Gioco eliminato con successo.</p>';
-		              document.getElementById('deleteButton').innerHTML = '';
-		          } else {
-		              document.getElementById('resultId').innerHTML = '<p style="color:red;">Errore durante l\'eliminazione del gioco.</p>';
-		          }
-		      })
-		      .catch(error => {
-		          console.error('Errore:', error);
-		          document.getElementById('resultId').innerHTML = '<p style="color:red;">Errore nella richiesta di eliminazione.</p>';
-		      });
-		  }
+           const gameName = document.getElementById('nomeGioco').value; 
+           console.log("Nome del gioco:", gameName);
+
+           fetch('/SteamProject/AdminVisualizzaGiocoServlet', { 
+               method: 'POST', 
+               headers: {
+                   'Content-Type': 'application/x-www-form-urlencoded'
+               },
+               body: 'name=' + encodeURIComponent(gameName)
+           }) 
+           .then(response => { 
+               if (response.ok) { 
+                   console.log("Risposta OK ricevuta");
+                   const idGioco = response.headers.get('Game-ID'); 
+                   localStorage.setItem('idGioco', idGioco); 
+                   return response.blob(); 
+               } else { 
+                   throw new Error('Gioco non trovato'); 
+               } 
+           }) 
+           .then(blob => { 
+               const imgUrl = URL.createObjectURL(blob); 
+               console.log("Immagine URL:", imgUrl);
+
+               document.getElementById('resultGioco').innerHTML = `<h3>Gioco trovato:</h3>
+                   <img src="${imgUrl}" alt="Immagine del Gioco" style="width: 200px; height: auto;">`;
+               document.getElementById('deleteButton').innerHTML = `<button name='productId' onclick="deleteGame()">Elimina Gioco</button>`;
+           }) 
+           .catch(error => { 
+               console.error('Errore:', error); 
+               document.getElementById('resultGioco').innerHTML = '<p style="color:red;">Gioco non trovato o errore nel caricamento dell\'immagine.</p>'; 
+               document.getElementById('deleteButton').innerHTML = ''; 
+           }); 
+       });
+
+	   function deleteGame() {
+	       const idGioco = localStorage.getItem('idGioco');
+	       if (!idGioco) {
+	           console.error('ID del gioco non trovato');
+	           document.getElementById('resultGioco').innerHTML = '<p style="color:red;">ID del gioco non trovato.</p>';
+	           return;
+	       }
+
+	       console.log("Eliminazione del gioco con ID:", idGioco);
+
+	       fetch('/SteamProject/GiocoEliminaServlet', {
+	           method: 'POST',
+	           headers: {
+	               'Content-Type': 'application/x-www-form-urlencoded'
+	           },
+	           body: 'productId=' + encodeURIComponent(idGioco)
+	       })
+	       .then(response => {
+	           if (response.ok) {
+	               return response.text().then(text => {
+	                   document.getElementById('resultGioco').innerHTML = '<p style="color:green;">' + text + '</p>';
+	                   document.getElementById('deleteButton').innerHTML = '';
+	               });
+	           } else {
+	               return response.text().then(text => {
+	                   document.getElementById('resultGioco').innerHTML = '<p style="color:red;">' + text + '</p>';
+	                   console.error('Errore durante l\'eliminazione del gioco:', text);
+	               });
+	           }
+	       })
+	       .catch(error => {
+	           console.error('Errore:', error);
+	           document.getElementById('resultGioco').innerHTML = '<p style="color:red;">Errore nella richiesta di eliminazione.</p>';
+	       });
+	   }
+
+
+

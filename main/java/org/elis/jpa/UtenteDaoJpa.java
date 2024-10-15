@@ -253,25 +253,14 @@ public class UtenteDaoJpa implements UtenteDao {
 	@Override
 	public Utente selectById(long id) {
 		 EntityManager em = DaoFactoryJpa.getEntityManager();
-	        Utente utente = null; 
-
-	        try {
-	            utente = em.find(Utente.class, id);
-	            
-	            if (utente != null) {
-	                System.out.println("Utente trovato: " + utente.getUsername());
-	            } else {
-	                System.out.println("Nessun utente trovato con ID: " + id);
-	                return null;
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace(); 
-	        } finally {
-	            em.close();
-	        }
-
-	        return utente; 
-   }
+		    Query q = em.createQuery("Select a from Utente a Where a.id = :id");
+		    q.setParameter("id", id);
+		    try {
+		        return (Utente) q.getSingleResult();
+		    } catch (NoResultException e) {
+		        return null;
+		    }
+		}
 
 	@Override
 	public Utente ripristinaPassword(String username, String email, String password) {

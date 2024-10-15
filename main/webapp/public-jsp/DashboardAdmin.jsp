@@ -127,14 +127,14 @@
         <div class="container " id="Elimina">
             <h2>Elimina gioco</h2>
             
-            <form id="cercaGioco">
-            	<label for="idGioco">ID del Gioco:</label>
-		        <input type="text" id="idGioco" name="idGioco">
-		        <button type="submit">Cerca Gioco</button>
-    			</form>
+           <form id="cercaGioco">
+	        	<label for="nomeGioco">Nome del Gioco:</label>
+	        	<input type="text" id="nomeGioco" name="nomeGioco">
+	        	<button type="submit" class="btn-conf">Cerca Gioco</button>
+	    	</form>
 
 
-		    <div id="resultId"></div>
+		    <div id="resultGioco"></div>
 		
 		  
 		    <div id="deleteButton"></div>        

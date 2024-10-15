@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Utente;
+import org.hibernate.internal.build.AllowSysOut;
 
 /**
  * Servlet implementation class UtenteFindByIDServlet
@@ -54,6 +55,7 @@ public class UtenteFindByIDServlet extends HttpServlet {
 	        response.getWriter().write("<p style=\"color:red;\">" + error + "</p>");
 	        return;
 	    }
+	    System.out.println("fin qui tutto ok");
 	    Utente uCerca = BusinessLogic.UtenteFindById(idUtente);
 
 	    if (uCerca == null) {
@@ -61,7 +63,8 @@ public class UtenteFindByIDServlet extends HttpServlet {
 	        response.getWriter().write("<p style=\"color:red;\">Nessun utente trovato con questo id</p>");
 	        return;
 	    }
-
+	    System.out.println("qui anche");
+	    
 	    response.setContentType("text/html");
 	    response.getWriter().write(
 	        "<h2>Dettagli Utente</h2>" +
@@ -74,6 +77,7 @@ public class UtenteFindByIDServlet extends HttpServlet {
 	        "<tr><th>Data Ultima Modifica</th><td>" + uCerca.getData_modifica() + "</td></tr>" +
 	        "</table>"
 	    );
+	    System.out.println("qui no");
 	}
 
 }
