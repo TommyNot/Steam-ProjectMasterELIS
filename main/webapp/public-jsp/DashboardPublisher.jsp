@@ -205,7 +205,7 @@
                  		long idUtenteGioco;
 			            
 			            if (utenteGioco != null) {
-			            	idUtenteGioco = utenteGioco.getId();
+			            	idUtenteGioco = (Long) utenteGioco.getId();
 			            	System.out.println(utenteGioco.getId());//visualizza id utente controllo da levare dopo 
 			                List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(idUtenteGioco);
 			                if (giochi.isEmpty()) {

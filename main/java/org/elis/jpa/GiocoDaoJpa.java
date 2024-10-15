@@ -56,20 +56,26 @@ public class GiocoDaoJpa implements GiocoDao{
 
 
 	@Override
-	public Gioco findByName(String nome) {
-		try{
-			
-			EntityManager em = DaoFactoryJpa.getEntityManager();
-			Query q=em.createQuery("Select a from Gioco a Where a.nome=:nome");
-			q.setParameter("nome", nome);
-			return (Gioco) q.getSingleResult();
-			
-		}catch(NoResultException e) {
-			e.printStackTrace();
-			return null;
-		}
-		
+	public List<Gioco> findByName(String nome) {
+	    try {
+	        
+	    	nome = nome.trim();
+
+	        EntityManager em = DaoFactoryJpa.getEntityManager();
+	        
+	        
+	        Query q = em.createQuery("SELECT g FROM Gioco g WHERE LOWER(g.nome) LIKE LOWER(CONCAT('%', :nome, '%'))");
+	        q.setParameter("nome", nome);
+
+	        System.out.println("qua ci siamo arrivati ?");
+	        return q.getResultList();
+	        
+	    } catch (NoResultException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
+
 
 	@Override
 	public Gioco findGiocoById(long id) {
@@ -108,9 +114,20 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public List<Gioco> VisualizzaGiochiPerUtente(long idUtente) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    
+	    try {
+	        Query q = em.createQuery("SELECT g FROM Gioco g WHERE g.idUtente.id = :idUtente");
+	        q.setParameter("idUtente", idUtente);
+	        return q.getResultList();
+	        
+	    } catch (NoResultException e) {
+	        e.printStackTrace();
+	        return null;  // Ritorna una lista vuota se non ci sono risultati
+	    }
+	    
 	}
+
 
 	@Override
 	public Gioco updateGiocoNome(long id, String nome) {

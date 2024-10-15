@@ -20,7 +20,7 @@
   <!-- Barra di navigazione -->
   <div class="navbar">
     <div class="logo">
-             <a href="<%= request.getContextPath() %>/public-jsp/PageGiochi.jsp">
+             <a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet"  target="_blank">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                       width="180px" height="120px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
                       xml:space="preserve">
@@ -106,7 +106,7 @@
 		%>
 		
 <div class="content">
-    
+   
     <%
         List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi");
         
@@ -118,7 +118,9 @@
             for (Gioco gioco : giochi) { 
                 Offerta offerta = gioco.getOffertaGioco(); 
     %>
+    
     <div class="games-container">
+    
         <div class="game">
             <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" 
                  onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg';" />
