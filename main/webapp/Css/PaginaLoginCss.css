@@ -279,7 +279,7 @@ footer a {
 
 .success {
     background-color: #d4edda; /* Azzurro chiaro per indicare l'aggiunta */
-    color: #d4edda; /* Azzurro scuro per il testo */
+    color: green; /* Azzurro scuro per il testo */
     padding: 15px;
     border: 1px solid #b8daff; /* Bordo azzurro chiaro */
     border-radius: 4px;

@@ -24,8 +24,8 @@ public abstract class DaoFactory {
 	
 	public static DaoFactory getDaoFactory(String s) {
 		
-		
-		
+		System.out.println(s);
+		System.out.println(instance);
 		if(instance == null) {
 			
 			switch(s) {
@@ -37,6 +37,7 @@ public abstract class DaoFactory {
 				instance = new DaoFactoryJpa();
 			}
 		}
+		System.out.println(instance);
 		return instance;
 	}
 }

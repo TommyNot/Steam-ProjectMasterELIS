@@ -34,8 +34,8 @@ public class DaoFactoryJpa extends DaoFactory{
 
 	@Override
 	public LibreriaDao getLibreriaDao() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return LibreriaDaoJpa.getInstance();
 	}
 
 	@Override

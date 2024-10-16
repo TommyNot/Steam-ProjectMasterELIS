@@ -57,6 +57,7 @@ public class LibreriaAggiungiServlet extends HttpServlet {
 					
 					if(nuovaLibreria != null) {
 						System.out.println("Libreria aggiunta con successo.");
+						response.sendRedirect("LibreriaFindByIdUtenteServlet");
 					}else {
 						request.getRequestDispatcher("public-jsp/ErrorPage.jsp");
 					}

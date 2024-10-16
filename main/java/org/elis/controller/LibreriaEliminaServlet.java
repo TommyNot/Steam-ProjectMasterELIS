@@ -41,7 +41,7 @@ public class LibreriaEliminaServlet extends HttpServlet {
         }
         
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-        if (utente == null || utente.getRuolo() != Ruolo.PUBLISHER) {
+        if (utente == null || utente.getRuolo() != Ruolo.UTENTE_BASE) {
             response.sendRedirect("public-jsp/ErrorPage.jsp");
             return;
         }
@@ -62,15 +62,14 @@ public class LibreriaEliminaServlet extends HttpServlet {
         
         Libreria libreriaTolta = BusinessLogic.eliminaLibreria(idLibreria);
         
-        if(libreriaTolta != null) {
-        	String messaggioSuccesso = "La libreria " + libreriaElimina + " è stata eliminata con successo.";
-        	request.setAttribute("messaggioSuccesso", messaggioSuccesso);
-        	return;
-        }else {
+        if(libreriaTolta == null) {
         	String messaggioErrore = "La libreria " + libreriaElimina + " non è stata trovata.";
         	request.setAttribute("messaggioErrore", messaggioErrore);
         	return;
         }
+        String messaggioSuccesso = "La libreria " + libreriaElimina + " è stata eliminata con successo.";
+    	request.setAttribute("messaggioSuccesso", messaggioSuccesso);
+    	response.sendRedirect("LibreriaFindByIdUtenteServlet");
 	}
 
 }
