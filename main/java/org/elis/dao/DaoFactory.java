@@ -21,6 +21,8 @@ public abstract class DaoFactory {
 	
 	public abstract OffertaDao getOffertaDao();
 	
+	public abstract RecensioneDao getRecensioneDao();
+	
 	
 	public static DaoFactory getDaoFactory(String s) {
 		

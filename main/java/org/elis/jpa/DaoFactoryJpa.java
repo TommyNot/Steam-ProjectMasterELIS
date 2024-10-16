@@ -5,6 +5,7 @@ import org.elis.dao.GenereDao;
 import org.elis.dao.GiocoDao;
 import org.elis.dao.LibreriaDao;
 import org.elis.dao.OffertaDao;
+import org.elis.dao.RecensioneDao;
 import org.elis.dao.UtenteDao;
 import org.elis.jdbc.UtenteDaoJDBC;
 
@@ -48,6 +49,13 @@ public class DaoFactoryJpa extends DaoFactory{
 	public OffertaDao getOffertaDao() {
 		// TODO Auto-generated method stub
 		return OffertaDaoJpa.getInstance();
+	}
+
+
+	@Override
+	public RecensioneDao getRecensioneDao() {
+		// TODO Auto-generated method stub
+		return RecensioneDaoJpa.getInstance();
 	}
 	
 }

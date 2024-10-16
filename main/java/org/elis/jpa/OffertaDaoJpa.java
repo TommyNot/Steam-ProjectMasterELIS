@@ -99,6 +99,6 @@ public class OffertaDaoJpa implements OffertaDao{
 		t.begin();
 		em.remove(o);
 		t.commit();
-		return o;
+		return null;
 	}
 }
