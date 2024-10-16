@@ -1,5 +1,6 @@
 package org.elis.jpa;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class OffertaDaoJpa implements OffertaDao{
 	}
 
 	@Override
-	public Offerta updateDataInizio(long id, LocalDateTime data_inizio) {
+	public Offerta updateDataInizio(long id, LocalDate data_inizio) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
@@ -80,7 +81,7 @@ public class OffertaDaoJpa implements OffertaDao{
 	}
 
 	@Override
-	public Offerta updateDataFine(long id, LocalDateTime data_fine) {
+	public Offerta updateDataFine(long id, LocalDate data_fine) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();

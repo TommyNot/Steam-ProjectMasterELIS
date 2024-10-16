@@ -118,11 +118,11 @@ public static Offerta updateScontoOfferta(long id,double sconto) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().updateSconto(id, sconto);
 }
 
-public static Offerta updateDataInizioOfferta(long id,LocalDateTime data_inizio) {
+public static Offerta updateDataInizioOfferta(long id,LocalDate data_inizio) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().updateDataInizio(id, data_inizio);
 }
 
-public static Offerta updateDataFineOfferta(long id,LocalDateTime data_fine) {
+public static Offerta updateDataFineOfferta(long id,LocalDate data_fine) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getOffertaDao().updateDataFine(id, data_fine);
 }
 

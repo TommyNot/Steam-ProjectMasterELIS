@@ -1,5 +1,6 @@
 package org.elis.dao;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface OffertaDao {
 	Offerta selectById(long id);
 	Offerta selectByName(String nome);
 	Offerta updateSconto(long id,double sconto);
-	Offerta updateDataInizio(long id,LocalDateTime data_inizio);
-	Offerta updateDataFine(long id,LocalDateTime data_fine);
+	Offerta updateDataInizio(long id,LocalDate data_inizio);
+	Offerta updateDataFine(long id,LocalDate data_fine);
 	Offerta deleteByNome(String nome,long id);
 }
