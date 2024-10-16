@@ -75,6 +75,7 @@ public class LibreriaGiocoAggiungiServlet extends HttpServlet {
 						return;
 					}else {
 						Gioco g = new Gioco();
+						BusinessLogic.aggiungiGiocoALibreria(idGioco, g);
 						request.setAttribute("librerieUtente", librerie);
 						System.out.println("Lista libreria trovata con successo dell'utente con id " + idUtente);
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
