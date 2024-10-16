@@ -72,6 +72,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
             
             BusinessLogic.updateGiocoNome(idGioco,nomeGioco);
             System.out.println("nome upodate with success");
+            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
             aggiornato = true;
         }
 
@@ -82,6 +83,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                 localDateTime = LocalDateTime.parse(dataRilascio, formatter);
                 BusinessLogic.updateGiocoDataRilascio(idGioco,localDateTime);
                 System.out.println("data update con success");
+                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
                 aggiornato = true;
             } catch (DateTimeParseException e) {
                 request.setAttribute("errorMessage", "Formato di data non valido.");
@@ -105,12 +107,13 @@ public class GiocoAggiornaServlet extends HttpServlet {
 
         if (filePart != null && filePart.getSize() > 0) {
             InputStream inputStream = filePart.getInputStream();
-            byteImmagine = inputStream.readAllBytes(); // Leggi i byte dell'immagine
-            immagineBase64 = Base64.getEncoder().encodeToString(byteImmagine); // Convertila in Base64
+            byteImmagine = inputStream.readAllBytes(); 
+            immagineBase64 = Base64.getEncoder().encodeToString(byteImmagine); 
         }
         if (immagineBase64 != null && !immagineBase64.isEmpty()) {
             BusinessLogic.updateGiocoImmagine(idGioco, byteImmagine);
             System.out.println("img update con success");
+            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
             aggiornato = true;
         }
 
@@ -136,6 +139,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                 long idOfferta = Long.parseLong(offerta[0]); 
                 offertaObj = BusinessLogic.findOffertaById(idOfferta);
                 System.out.println("offerta upodate with success");
+                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
             } catch (NumberFormatException e) {
                 System.out.println("Errore nel formato dell'ID dell'offerta: " + e.getMessage());
                 request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
@@ -153,6 +157,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                     if (genere != null) {
                         generiList.add(genere);
                     }
+                    request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
                 } catch (NumberFormatException e) {
                     System.out.println("Errore nel formato dell'ID del genere: " + e.getMessage());
                     request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);

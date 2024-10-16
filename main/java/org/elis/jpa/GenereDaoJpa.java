@@ -6,6 +6,7 @@ import org.elis.dao.GenereDao;
 import org.elis.model.Genere;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
 public class GenereDaoJpa implements GenereDao{
@@ -40,15 +41,33 @@ public class GenereDaoJpa implements GenereDao{
 
 	@Override
 	public Genere findByName(String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    try {
+	        
+	        Query query = em.createQuery("SELECT g FROM Genere g WHERE g.nome = :nome");
+	        query.setParameter("nome", nome);
+	        return (Genere) query.getSingleResult();
+	    } catch (NoResultException e) {
+	        e.printStackTrace();
+	        return null;
+	    } 
 	}
+
 
 	@Override
 	public Genere selectById(long id) {
-		// TODO Auto-generated method stub
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    try {
+	        
+	        return em.find(Genere.class, id);
+	    }catch(NoResultException e) {
+	    	
+	    	
+	    	e.printStackTrace();
+	    }
 		return null;
 	}
+
 
 	@Override
 	public Genere deleteByName(String nome) {

@@ -107,7 +107,9 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	    try {
 	        
-	        Query q = em.createQuery( "SELECT g FROM Gioco g JOIN g.genere ge WHERE ge.id = :idGenere");
+	    	Query q = em.createQuery("SELECT g FROM Gioco g JOIN g.genereGiochi ge WHERE ge.id = :idGenere");
+	    	
+
 	        
 	         q.setParameter("idGenere", idGenere);
 	          
@@ -116,7 +118,7 @@ public class GiocoDaoJpa implements GiocoDao{
 	        if (resu.isEmpty()) {
 	            System.out.println("Nessun gioco trovato per il genere con ID: " + idGenere);
 	        } else {
-	            System.out.println(resu.size() + " giochi trovati per il genere con ID: " + idGenere);
+	            System.out.println(" giochi trovati per il genere con ID: ");
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();

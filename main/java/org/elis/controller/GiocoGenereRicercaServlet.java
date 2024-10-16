@@ -24,8 +24,9 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
 
         if (generiSelezionati == null || generiSelezionati.isEmpty()) {
             request.setAttribute("Error", "Seleziona almeno un genere.");
-            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
-            return;
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+            System.out.println("Errore qui in genere");
+            return;               
         }
 
         long idGenere;
@@ -34,7 +35,8 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace(); 
             request.setAttribute("Error", "Errore nel formato del genere selezionato.");
-            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+            System.out.println("errore qui nel try");
             return;
         }
 
@@ -42,23 +44,21 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
         Genere genere = BusinessLogic.getGenereById(idGenere);
         if (genere == null) {
             request.setAttribute("Error", "Genere non trovato.");
-            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+            System.out.println("Errore qui in generre");
             return;
         }
 
         List<Gioco> giochiTrovati = BusinessLogic.GiocoCercaPerGenere(idGenere);
 
-        if (giochiTrovati.isEmpty()) {
+        if (giochiTrovati == null || giochiTrovati.isEmpty()) {
             request.setAttribute("Error", "Nessun gioco trovato per il genere selezionato.");
             request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             System.out.println("errore qui in giochi.trovati");
             return;
-        }else {
-        	
-        	request.setAttribute("giochi", giochiTrovati);
         }
-
         
+        request.setAttribute("giochi", giochiTrovati);
         request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
     }
 }
