@@ -39,18 +39,18 @@ public class GiocoAggiornaServlet extends HttpServlet {
         
         HttpSession sessione = request.getSession(false);
         if (sessione == null) {
-            response.sendRedirect("public-jsp/LoginPage.jsp");
+            response.sendRedirect("public-jsp/PaginaLogin.jsp");
             return;
         }
         
 
 
-        Utente utente = (Utente) sessione.getAttribute("utente");
-        if (utente == null || utente.getRuolo() != Ruolo.PUBLISHER) {
+        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+        if (utente.getRuolo() != Ruolo.PUBLISHER) {
             response.sendRedirect("public-jsp/AccessoNegato.jsp");
             return;
         }
-        boolean isPublisher = false;
+      
         
         long idGioco = Long.parseLong(request.getParameter("giocoId"));
         String nomeGioco = request.getParameter("nome");
@@ -68,6 +68,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
         if (nomeGioco != null && !nomeGioco.isEmpty()) {
             
             BusinessLogic.updateGiocoNome(idGioco,nomeGioco);
+            System.out.println("nome upodate with success");
             aggiornato = true;
         }
 
@@ -77,21 +78,24 @@ public class GiocoAggiornaServlet extends HttpServlet {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
                 localDateTime = LocalDateTime.parse(dataRilascio, formatter);
                 BusinessLogic.updateGiocoDataRilascio(idGioco,localDateTime);
+                System.out.println("data update con success");
                 aggiornato = true;
             } catch (DateTimeParseException e) {
                 request.setAttribute("errorMessage", "Formato di data non valido.");
-                request.getRequestDispatcher("WEB-INF/public-jsp/error.jsp").forward(request, response);
+                request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
                 return;
             }
         }
 
         if (descrzioneGioco != null && !descrzioneGioco.isEmpty()) {
             BusinessLogic.updateGiocoDescrzione(idGioco, descrzioneGioco);
+            System.out.println("descrzione update");
             aggiornato = true;
         }
 
         if (immagineGioco != null && !immagineGioco.isEmpty()) {
             BusinessLogic.updateGiocoImmagine(idGioco, immagineGioco);
+            System.out.println("img update con success");
             aggiornato = true;
         }
 
@@ -100,10 +104,12 @@ public class GiocoAggiornaServlet extends HttpServlet {
             try {
                 prezzoGioco = Double.parseDouble(prezzo);
                 BusinessLogic.updateGiocoPrezzo(idGioco,prezzoGioco);
+                System.out.println("prezzo update con successo");
+                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
                 aggiornato = true;
             } catch (NumberFormatException e) {
                 request.setAttribute("errorMessage", "Formato del prezzo non valido.");
-                request.getRequestDispatcher("WEB-INF/public-jsp/error.jsp").forward(request, response);
+                request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
                 return;
             }
         }
@@ -114,8 +120,10 @@ public class GiocoAggiornaServlet extends HttpServlet {
             try {
                 long idOfferta = Long.parseLong(offerta[0]); 
                 offertaObj = BusinessLogic.findOffertaById(idOfferta);
+                System.out.println("offerta upodate with success");
             } catch (NumberFormatException e) {
                 System.out.println("Errore nel formato dell'ID dell'offerta: " + e.getMessage());
+                request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
                 return;
             }
         }
@@ -132,6 +140,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Errore nel formato dell'ID del genere: " + e.getMessage());
+                    request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
                     return;
                 }
             }

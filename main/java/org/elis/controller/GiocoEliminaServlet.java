@@ -41,6 +41,7 @@ public class GiocoEliminaServlet extends HttpServlet {
             return;
         }
         
+        
 
 
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");

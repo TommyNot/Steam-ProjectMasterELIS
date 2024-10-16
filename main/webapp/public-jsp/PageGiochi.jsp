@@ -118,7 +118,7 @@
             for (Gioco gioco : giochi) { 
                 Offerta offerta = gioco.getOffertaGioco(); 
     %>
-    
+                  
     <div class="games-container">
     
         <div class="game">

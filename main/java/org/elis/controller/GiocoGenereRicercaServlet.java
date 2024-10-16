@@ -51,6 +51,7 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
         if (giochiTrovati.isEmpty()) {
             request.setAttribute("Error", "Nessun gioco trovato per il genere selezionato.");
             request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
+            System.out.println("errore qui in giochi.trovati");
             return;
         }else {
         	

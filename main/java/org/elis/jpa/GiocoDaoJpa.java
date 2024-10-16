@@ -95,8 +95,6 @@ public class GiocoDaoJpa implements GiocoDao{
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	        } finally {
-	            em.close();
 	        }
 
 	        return gioco;
@@ -104,9 +102,30 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public List<Gioco> findGiocoGenereByGenere(long idGenere) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    List<Gioco> resu = null;
+
+	    try {
+	        
+	        Query q = em.createQuery( "SELECT g FROM Gioco g JOIN g.genere ge WHERE ge.id = :idGenere");
+	        
+	         q.setParameter("idGenere", idGenere);
+	          
+	         resu = q.getResultList();
+	         
+	        if (resu.isEmpty()) {
+	            System.out.println("Nessun gioco trovato per il genere con ID: " + idGenere);
+	        } else {
+	            System.out.println(resu.size() + " giochi trovati per il genere con ID: " + idGenere);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		return resu; 
+
+	    
 	}
+
 
 	@Override
 	public List<Gioco> findGiocoOffertaByOfferta(Offerta offerta) {
@@ -133,9 +152,33 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public Gioco updateGiocoNome(long id, String nome) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    Gioco gioco = null;
+
+	    try {
+	        em.getTransaction().begin();
+
+	        
+	        gioco = em.find(Gioco.class, id);
+	        if (gioco != null) {
+	            gioco.setNome(nome); 
+	            em.merge(gioco); 
+	            System.out.println("Nome aggiornato per il gioco: " + gioco.getNome());
+	        } else {
+	            System.out.println("Nessun gioco trovato con ID: " + id);
+	        }
+
+	        em.getTransaction().commit(); 
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback(); 
+	        }
+	        e.printStackTrace();
+	    }
+
+	    return gioco;
 	}
+
 
 	@Override
 	public Gioco updateGiocoDataRilascio(long id, LocalDateTime data) {
@@ -145,21 +188,91 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public Gioco updateGiocoDescrzione(long id, String descrzione) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    Gioco gioco = null;
+
+	    try {
+	        em.getTransaction().begin(); 
+
+	        // Find the game by its ID
+	        gioco = em.find(Gioco.class, id);
+	        if (gioco != null) {
+	            gioco.setDescrzione(descrzione); 
+	            em.merge(gioco); 
+	            System.out.println("Descrizione aggiornata per il gioco: " + gioco.getNome());
+	        } else {
+	            System.out.println("Nessun gioco trovato con ID: " + id);
+	        }
+
+	        em.getTransaction().commit(); 
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback(); 
+	        }
+	        e.printStackTrace();
+	    } 
+
+	    return gioco; 
 	}
 
 	@Override
-	public Gioco updateGiocoImmagine(long id, String immagine) {
-		// TODO Auto-generated method stub
-		return null;
+	public Gioco updateGiocoImmagine(long id, byte[] immagine) {
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    Gioco gioco = null;
+
+	    try {
+	        em.getTransaction().begin(); 
+
+	        // Find the game by its ID
+	        gioco = em.find(Gioco.class, id);
+	        if (gioco != null) {
+	            gioco.setByteImmagine(immagine);
+	            em.merge(gioco); 
+	            System.out.println("Immagine aggiornata per il gioco: " + gioco.getNome());
+	        } else {
+	            System.out.println("Nessun gioco trovato con ID: " + id);
+	        }
+
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback(); 
+	        }
+	        e.printStackTrace();
+	    } 
+
+	    return gioco;
 	}
 
 	@Override
 	public Gioco updateGiocoPrezzo(long id, double prezzo) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    Gioco gioco = null;
+
+	    try {
+	        em.getTransaction().begin();
+
+	        
+	        gioco = em.find(Gioco.class, id);
+	        if (gioco != null) {
+	            gioco.setPrezzo(prezzo); 
+	            em.merge(gioco);
+	            System.out.println("Prezzo aggiornato per il gioco: " + gioco.getNome());
+	        } else {
+	            System.out.println("Nessun gioco trovato con ID: " + id);
+	        }
+
+	        em.getTransaction().commit(); 
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback(); 
+	        }
+	        e.printStackTrace();
+	    } 
+
+	    return gioco; 
 	}
+
 
 	@Override
 	public Gioco updateGiocoOfferta(long id, Offerta offerta) {
@@ -169,9 +282,33 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	@Override
 	public Gioco updateGiocoGenere(long id, Genere genere) {
-		// TODO Auto-generated method stub
-		return null;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    Gioco gioco = null;
+
+	    try {
+	        em.getTransaction().begin(); 
+
+	        
+	        gioco = em.find(Gioco.class, id);
+	        if (gioco != null) {
+	            gioco.setGenereGiochi((List<Genere>) genere); 
+	            em.merge(gioco); 
+	            System.out.println("Genere aggiornato per il gioco: " + gioco.getNome());
+	        } else {
+	            System.out.println("Nessun gioco trovato con ID: " + id);
+	        }
+
+	        em.getTransaction().commit(); 
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback(); 
+	        }
+	        e.printStackTrace();
+	    }
+
+	    return gioco; 
 	}
+
 
 	@Override
 	public Gioco deleteGioco(long id) {

@@ -22,7 +22,7 @@ public interface GiocoDao {
 	Gioco updateGiocoNome(long id,String nome);
 	Gioco updateGiocoDataRilascio(long id,LocalDateTime data);
 	Gioco updateGiocoDescrzione(long id,String descrzione);
-	Gioco updateGiocoImmagine(long id,String immagine);
+	Gioco updateGiocoImmagine(long id,byte[] immagine);
 	Gioco updateGiocoPrezzo(long id,double prezzo);
 	Gioco updateGiocoOfferta(long id,Offerta offerta);
 	Gioco updateGiocoGenere(long id,Genere genere);

@@ -39,38 +39,34 @@ document.getElementById('cancel-remove-product').addEventListener("click", funct
     toggleFormVisibility('remove-product-form', false);
 });
 
-console.log('${genere}');
-console.log('${giochi}')
+document.getElementById('btn-modifica-gioco').addEventListener("click", function() {
+    toggleFormVisibility('edit-product-form', true);
+});
+
+document.getElementById('cancel-edit-product').addEventListener("click", function() {
+    toggleFormVisibility('edit-product-form', false);
+});
 
 
-
-//Funzione per filtrare prodotti in base al genere
-
-//quando non è submit no hidden product 
-
-document.getElementById("filtra").addEventListener("submit", function(event){
-    
+// Funzione per filtrare prodotti in base al genere
+document.getElementById("filtra").addEventListener("submit", function(event) {
     event.preventDefault();
-    
+
     // Ottieni i dati dal form per filtrare i prodotti
-    let filterValue = document.getElementById("filterInput").value;
-    
+    let filterValue = document.getElementById("filterInput").value.toLowerCase(); // Case insensitive filter
+
     // Logica per filtrare i prodotti visibili sulla pagina
-    // Puoi implementare una funzione che mostra/nasconde gli elementi in base al filtro
     filtraProdotti(filterValue);
-    
-    // Mantiene la pagina visibile e aggiorna i risultati
 });
 
 function filtraProdotti(filterValue) {
-    let prodotti = document.getElementById("opt");
-    
-    for (let i = 0; i < prodotti.length; i++) {
-        let prodotto = prodotti[i];
-        if (prodotto.innerText.includes(filterValue)) {
-            prodotto.style.display = "block"; // Mostra il prodotto
+    const prodotti = document.querySelectorAll("#opt .prodotto"); // Assuming products have a class 'prodotto'
+
+    prodotti.forEach(prodotto => {
+        if (prodotto.innerText.toLowerCase().includes(filterValue)) {
+            prodotto.style.display = "block"; // Show the product
         } else {
-            prodotto.style.display = "none"; // Nasconde il prodotto
+            prodotto.style.display = "none"; // Hide the product
         }
-    }
+    });
 }

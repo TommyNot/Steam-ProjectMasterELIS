@@ -164,18 +164,7 @@
 							    %>
 							</select>
 							
-							<label for="offerta">Seleziona offerta:</label>	
-							<select id="offerta" name="offerta">
-							    <%
-							        List<Offerta> offerte = BusinessLogic.offertaVisualizzaTutto();
-							        Offerta offertaSelezionata = (Offerta) request.getAttribute("offertaSelezionata"); 
-							        for (Offerta offerta : offerte) {
-							    %>
-							        <option value="<%= offerta.getId() %>" <%= (offertaSelezionata != null && offertaSelezionata.getId() == offerta.getId()) ? "selected" : "" %>><%= offerta.getNome() %></option>
-							    <%
-							        }
-							    %>
-							</select>
+
 
 
 
@@ -186,6 +175,48 @@
 				        <button type="button" id="cancel-add-product" class="btn btn-secondary">Annulla</button>
 				    </form>
 				</div>
+				
+				
+			<div id="edit-product-form" class="edit-form-container"  style="display: none;">
+   
+					    <form action="<%= request.getContextPath() %>/GiocoAggiornaServlet" method="post" >
+					    	<label for="giocoId">ID Gioco da Modificare:</label>
+				       		 <input type="number" id="giocoId" name="giocoId" required placeholder="Inserisci l'ID del gioco da eliminare">
+					        <label for="nome">Nome Gioco:</label>
+					        <input type="text" id="nome" name="nome" >
+					
+					        <label for="dataRilascio">Data Rilascio:</label>
+					        <input type="date" id="dataRilascio" name="dataRilascio" >
+					
+					        <label for="descrizione">Descrizione:</label>
+					        <input type="text" id="descrizione" name="descrizione"  >
+					
+					        <label for="immagine">Carica Immagine (opzionale):</label>
+					        <input type="file" name="immagine" accept="image/jpeg,image/png"><br>
+					        <p>Lascia vuoto per mantenere l'immagine attuale.</p>
+					
+					        <label for="prezzo">Prezzo:</label>
+					        <input type="number" id="prezzo" name="prezzo"  >
+					
+					        <label for="genere">Seleziona genere:</label>
+					        <select id="genere" name="genere">
+					            <%
+					                List<Genere> generi1 = BusinessLogic.VisalizzaTuttiGeneri();
+					                Genere genereSelezionato1 = (Genere) request.getAttribute("genereSelezionato");
+					                for (Genere genere : generi1) {
+					            %>
+					                <option value="<%= genere.getId() %>" <%= (genereSelezionato1 != null && genereSelezionato1.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
+					            <%
+					                }
+					            %>
+					        </select>
+					
+					        <button type="submit" class="btn btn-success">Modifica Gioco</button>
+					        <button type="button" id="cancel-edit-product" class="btn btn-secondary">Annulla</button>
+					    </form>
+					</div>
+
+
 				
 				<div id="remove-product-form" class="edit-form-container" style="display: none;">
 				    <form action="<%= request.getContextPath()%>/GiocoEliminaServlet" method="post">
@@ -242,12 +273,12 @@
                     <p>Nessun gioco disponibile.</p>
         			<% 
                 			} else {
-                   					 for (Gioco gioco : giochi) { 
-                        				long id = gioco.getId(); 
-                        				System.out.println(gioco.getId());// controllo id gioco da levare dopo
-                       					 Offerta offerta = gioco.getOffertaGioco(); 
+                   					 for (Gioco gioco1 : giochi) { 
+                        				long id = gioco1.getId(); 
+                        				System.out.println(gioco1.getId());// controllo id gioco da levare dopo
+                       					 Offerta offerta = gioco1.getOffertaGioco(); 
        							 %>
-				                <div id="product-<%= gioco.getId() %>" class="single-product">
+				                <div id="product-<%= gioco1.getId() %>" class="single-product">
 				                    <div class="part-1">
 				                        <% if (offerta != null) { %>
 				                            <span class="discount"><%= offerta.getSconto() + "% off" %></span>
@@ -255,7 +286,7 @@
 				                        	
 				                        	<div class="product__image">
 				                        	 <% 
-													    String immagineBase64 = gioco.getImmagine(); 
+													    String immagineBase64 = gioco1.getImmagine(); 
 				                        	 System.out.println("Immagine Base64: " + immagineBase64);
 
 													    if (immagineBase64 != null && !immagineBase64.isEmpty()) { 
@@ -273,34 +304,32 @@
 											   
 
 
-				                        <ul>
-				                       		 <li>
-				                        		<a id="btn-modifica" href="<%= request.getContextPath() %>/modificaGioco?id=<%= gioco.getId() %>" style="text-decoration: none;">
+				                      
+				                        		<button class="button" type="button" id="btn-modifica-gioco"  >
 													   <i class="bi bi-pencil-square"></i> Modifica
-														</a>
-								                  </li>
+														</button>
+								                 
 				                        
-				                        </ul>
 				                            
 				                        
 				                    </div>
 				  <div class="part-2">
             
             
-            <h3 class="product-title">Nome Gioco :<%= gioco.getNome() %></h3>
+            <h3 class="product-title">Nome Gioco :<%= gioco1.getNome() %></h3>
             
             <div class="discount-container">
                 <% if (offerta != null) { %>
                     
-                    <h4 class="product-old-price">Prezzo :€<%= gioco.getPrezzo() %></h4>
-                    <h4 class="product-price">Prezzo Scontato :€<%= gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100) %></h4>
+                    <h4 class="product-old-price">Prezzo : €<%= gioco1.getPrezzo() %></h4>
+                    <h4 class="product-price">Prezzo Scontato :€<%= gioco1.getPrezzo() - (gioco1.getPrezzo() * offerta.getSconto() / 100) %></h4>
                 <% } else { %>
-                    <h4 class="product-price">€<%= gioco.getPrezzo() %></h4>
+                    <h4 class="product-price">Prezzo : €<%= gioco1.getPrezzo() %></h4>
                 <% } %>
             </div>
 
             
-            <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
+            <h6 class="product-id">ID GIOCO: <%= gioco1.getId() %></h6>
             <button class="btn">Visualizza dettagli</button>
         </div>
 				                </div>  
