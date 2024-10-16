@@ -262,4 +262,14 @@
     <servlet-name>AdminVisualizzaGiocoServlet</servlet-name>
     <url-pattern>/AdminVisualizzaGiocoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LibreriaGiocoAggiungiServlet</display-name>
+    <servlet-name>LibreriaGiocoAggiungiServlet</servlet-name>
+    <servlet-class>org.elis.controller.LibreriaGiocoAggiungiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LibreriaGiocoAggiungiServlet</servlet-name>
+    <url-pattern>/LibreriaGiocoAggiungiServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

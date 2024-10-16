@@ -93,6 +93,19 @@ public class Libreria {
 	}
 	
 	
-	
+	public List<Gioco> getGiochiAcquistati() {
+		return giochiAcquistati;
+	}
+
+	public void setGiochiAcquistati(List<Gioco> giochiAcquistati) {
+		this.giochiAcquistati = giochiAcquistati;
+	}
+
+	public void aggiungiGioco(Gioco gioco) {
+		if(giochiAcquistati.contains(gioco)) {
+			System.out.println("Il gioco è già presente nella libreria.");
+		}
+		giochiAcquistati.add(gioco);
+	}
 
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.dao.LibreriaDao;
+import org.elis.model.Gioco;
 import org.elis.model.Libreria;
 import org.elis.model.Utente;
 
@@ -118,4 +119,36 @@ public class LibreriaDaoJpa implements LibreriaDao {
 
 	    return l;
 		}
+
+	@Override
+	public List<Gioco> findGiochiByIdLibreria(long id_libreria) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		Query q = em.createQuery("select a from libreria_gioco a where a.id_libreria=:id_libreria");
+		q.setParameter("id_libreria", id_libreria);
+		try {
+			return q.getResultList();
+		}catch (NoResultException e) {
+	        e.printStackTrace();
+	        return null;  
+	    }
+	}
+
+	@Override
+	public List<Gioco> aggiungiGiocoALibreria(long id_libreria, Gioco gioco) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		List<Gioco> giochi = null;
+		em.getTransaction().begin();
+		Libreria l = em.find(Libreria.class, id_libreria);
+		if(l == null) {
+			System.out.println("Libreria non trovata.");
+		}
+		giochi.add(gioco);
+		l.setGiochiAcquistati(giochi);
+		em.persist(l);
+		em.getTransaction().commit();
+		return giochi;
+	}
+	
+	
+	
 }
