@@ -60,7 +60,25 @@
     </div>
     <div class="menu">
       <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">Homepage</a>
-      <a href="#">Genere</a>
+			 <a href="#" class="generi-link">Generi</a>
+					 <div class="dropdown">
+						     <ul class="styled-select">
+						            <%
+						                List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
+						                Genere genereSelezionato = (Genere) request.getAttribute("genere");
+						                for (Genere genere : generi) {
+						            %>
+						            <li>
+						              <a href="<%=request.getContextPath() %>/GiocoGenereRicercaServlet?genereId=<%= genere.getId() %>" class="dropdown-option" value="genereId">
+				                            <%= genere.getNome() %>
+				                        </a>
+						            </li>
+						            <%
+						                }
+						            %>
+						        </ul>
+						    </div>
+						
       <a href="#">Offerte</a>
       <a href="#">Libreria</a>
  
@@ -141,6 +159,11 @@
            
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
             <button class="btn">Visualizza dettagli</button>
+            <form action="<%= request.getContextPath() %>/LibreriaGiocoAggiungiServlet" method="post">
+            <input value="<%= gioco.getId() %>" style="display: none;"  type="text" id="idGioco" name="idGioco">
+            	<button type="submit" class="btn-addCart">Aggiungi alla libreria</button>
+            </form>
+            
         </div>
     </div>
     <%

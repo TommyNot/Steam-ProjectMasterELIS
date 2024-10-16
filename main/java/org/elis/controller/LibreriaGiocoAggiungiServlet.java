@@ -48,8 +48,10 @@ public class LibreriaGiocoAggiungiServlet extends HttpServlet {
 			return;
 		}
 		String idGiocoString = request.getParameter("idGioco");
+		
 		if(idGiocoString == null || idGiocoString.isEmpty()) {
 			response.sendRedirect("public-jsp/ErrorPage.jsp");
+			System.out.println("Errore idgioco parse");
 			return;
 		}
 		
@@ -68,14 +70,21 @@ public class LibreriaGiocoAggiungiServlet extends HttpServlet {
 				boolean isUtenteBase = u.getRuolo() == Ruolo.UTENTE_BASE;
 				
 				if(isUtenteBase) {
+					long idLibreria = 0;
 					List<Libreria> librerie = BusinessLogic.findLibreriaByIdUtente(idUtente);
+					for(Libreria librerie1 :librerie) {
+						
+						idLibreria = librerie1.getId();
+					}
 					System.out.println(librerie);
 					if(librerie == null || librerie.isEmpty()) {
+						System.out.println("Errore libreria");
 						response.sendRedirect("public-jsp/ErrorPage.jsp");
 						return;
 					}else {
 						Gioco g = new Gioco();
-						BusinessLogic.aggiungiGiocoALibreria(idGioco, g);
+						List<Gioco> giochi = BusinessLogic.aggiungiGiocoALibreria(idLibreria, g);
+						request.setAttribute("giochi", giochi);
 						request.setAttribute("librerieUtente", librerie);
 						System.out.println("Lista libreria trovata con successo dell'utente con id " + idUtente);
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);

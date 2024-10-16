@@ -391,6 +391,17 @@ input[type="text"]:focus {
     transition: background-color 0.3s;
 }
 
+.btn-addCart{
+    background-color: green;
+    color: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 .btn-danger{
 	
 	background-color: #cc0000;

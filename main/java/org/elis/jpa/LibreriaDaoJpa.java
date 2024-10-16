@@ -1,6 +1,7 @@
 package org.elis.jpa;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.dao.LibreriaDao;
@@ -132,22 +133,51 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	        return null;  
 	    }
 	}
-
+	
 	@Override
 	public List<Gioco> aggiungiGiocoALibreria(long id_libreria, Gioco gioco) {
-		EntityManager em = DaoFactoryJpa.getEntityManager();
-		List<Gioco> giochi = null;
-		em.getTransaction().begin();
-		Libreria l = em.find(Libreria.class, id_libreria);
-		if(l == null) {
-			System.out.println("Libreria non trovata.");
-		}
-		giochi.add(gioco);
-		l.setGiochiAcquistati(giochi);
-		em.persist(l);
-		em.getTransaction().commit();
-		return giochi;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    List<Gioco> giochi = null;
+
+	    try {
+	        em.getTransaction().begin();
+	        
+	        // Recupera la libreria esistente
+	        Libreria l = em.find(Libreria.class, id_libreria);
+	        
+	        if (l == null) {
+	            System.out.println("Libreria non trovata.");
+	            return null;
+	        }
+	        
+	        
+	        giochi = l.getGiochiAcquistati();
+	        giochi.size(); // Questo forza il caricamento lazy
+	        
+	    
+
+	        giochi.add(gioco);
+	        l.setGiochiAcquistati(giochi);
+	        
+	        if (gioco.getId() == 0) {
+	            em.persist(gioco); 
+	        } else {
+	            em.merge(gioco);
+	        }
+
+	        em.merge(l);
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback();
+	        }
+	        e.printStackTrace();
+	    } 
+
+	    return giochi;
 	}
+
+
 	
 	
 	
