@@ -99,7 +99,7 @@
                         	idUtente = utente.getId();
                     %>
                     <div id = "user">
-                        <p>Benvenuto <%= utente.getUsername()%> Admin di Steam pezzotto family!</p>
+                        <h2>Benvenuto <%= utente.getUsername()%> Admin di Steam pezzotto family!</h2>
                     </div>
                     <%
                         } else {
@@ -109,20 +109,36 @@
                         }
                     %>
         </div>
+        <div class="container active">
+        <h2>Attività recenti:</h2>
+        <% 
+        String successo = (String) request.getAttribute("successo");
+        String errore = (String) request.getAttribute("errore");
+        if (successo != null) {
+    %>
+        <p class="success"><%= successo %></p>
+    <% 
+        } else if (errore != null) {
+    %>
+        <p class="error"><%= errore %></p>
+    <% 
+        } 
+    %>
+        </div>
         
         <div class="container " id="Ban">
             <h2>Ban utente</h2>
             <h2>Elimina Account</h2>
-   		<form action="<%=request.getContextPath()%>/AdminEliminaServlet" method="post">
+   		<form id="eliminaUtente">
         
         <label for="id">ID:</label><br>
         <input type="text" id="id" name="id" required><br><br>
-
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br><br>
 
         <input type="submit" value="Elimina Account">
     	</form>
+    	<div id="utenteResult"></div>
         </div>
         
         <div class="container " id="Elimina">
@@ -149,7 +165,7 @@
         	<h2>Aggiorna offerta</h2>
         </div>
         <div class="container" id="Crea">
-            <h2>Crea offerta</h2>
+            <h2 id="creazioneOfferta">Crea offerta</h2>
             <form  action="<%=request.getContextPath()%>/OffertaAggiungiServlet" method="post">
         <label for="nome">Nome Offerta:</label>
         <input type="text" id="nome" name="nome" required>

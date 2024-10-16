@@ -91,7 +91,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
         
         // Controllo sulla sessione
         if (sessione == null) {
-            response.sendRedirect("public-jsp/LoginPage.jsp");
+            response.sendRedirect("public-jsp/PaginaLogin.jsp");
             return;
         }
 
@@ -112,6 +112,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
                     BusinessLogic.offertaAdd(aggiunta);
                     if (aggiunta != null) {
                     	 request.setAttribute("successo", "Offerta creata con successo.");
+                    	 request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
                     } 
                 } else {
                     System.out.println("L'utente non è un Admin.");

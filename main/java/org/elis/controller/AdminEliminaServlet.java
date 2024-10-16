@@ -54,13 +54,14 @@ public class AdminEliminaServlet extends HttpServlet {
 	    Utente eliminaUtente = BusinessLogic.UtenteDeletByNome(id, username);
 
 	    if (eliminaUtente != null) {
-	        response.getWriter().write("Account eliminato con successo.");
-	    } else {
-	        response.getWriter().write("Errore: Account non trovato o eliminazione fallita.");
-	    }
-	    
-	    request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
-	}
+	    	 response.getWriter().write("successo Account eliminato con successo.");
+        } else {
+        	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        	response.getWriter().write("Errore: Account non trovato o eliminazione fallita.");
+        }
+
+       
+    }
 
 
 }

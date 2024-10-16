@@ -188,5 +188,35 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 	       });
 	   }
 
+	   document.getElementById('eliminaUtente').addEventListener('submit', function(event) {
+	       event.preventDefault();
+
+	       const formData = new FormData(this);
+	       const data = new URLSearchParams(formData);
+
+	       fetch('/SteamProject/AdminEliminaServlet', {
+	           method: 'POST',
+	           headers: {
+	               'Content-Type': 'application/x-www-form-urlencoded'
+	           },
+	           body: data
+	       })
+		   .then(response => {
+		           if (response.ok) {
+		               return response.text().then(text => {
+		                   document.getElementById('utenteResult').innerHTML = '<p style="color:green;">' + text + '</p>';
+		               });
+		           } else {
+		               return response.text().then(text => {
+		                   document.getElementById('utenteResult').innerHTML = '<p style="color:red;">' + text + '</p>';
+		                   console.error('Errore durante l\'eliminazione dell\'account:', text);
+		               });
+		           }
+		       })
+		       .catch(error => {
+		           console.error('Errore:', error);
+		           document.getElementById('utenteResult').innerHTML = '<p style="color:red;">Errore nella richiesta di eliminazione.</p>';
+		       });
+	   });
 
 
