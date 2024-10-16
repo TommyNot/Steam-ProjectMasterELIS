@@ -42,12 +42,14 @@ public class AdminVisualizzaGiocoServlet extends HttpServlet {
         List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi();
         System.out.println("Numero di giochi trovati: " + giochi.size());
         
-        System.out.println("prima for");
+        System.out.println("prima del for");
+        boolean trovato=false;
         
         for (Gioco gioco : giochi) {
             if (gioco.getNome().equals(gameName)) {
                 System.out.println("Gioco trovato: " + gioco.getNome());
-
+                trovato=true;
+                
                 Long id = gioco.getId();
                 byte[] byteImmagine = gioco.getByteImmagine();
 
@@ -64,6 +66,11 @@ public class AdminVisualizzaGiocoServlet extends HttpServlet {
                 out.flush();
                 break;
             }
+        }
+        if (!trovato) {
+        	System.out.println("dentro non trovato");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().write("Gioco non trovato");
         }
     }
 }

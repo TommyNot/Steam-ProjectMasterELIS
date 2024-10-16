@@ -58,6 +58,7 @@
                 <ul class="sub-menu">
                     <div>
                         <li><a href="#Gestisci" onclick="showSection('Gestisci')">Gestisci offerte</a></li>
+                        <li><a href="#Aggiorna" onclick="showSection('Aggiorna')">Aggiorna offerta</a></li>
                         <li><a href="#Crea" onclick="showSection('Crea')">Crea offerta</a></li>
                     </div>
                 </ul>
@@ -142,10 +143,28 @@
 		    </div>
 
         <div class="container " id="Gestisci">
-            <h2>Gestisci offerta</h2>
+            <h2>Atiiva offerte</h2>
+        </div>
+        <div class="container" id="Aggiorna">
+        	<h2>Aggiorna offerta</h2>
         </div>
         <div class="container" id="Crea">
-            <h2>crea offerta</h2>
+            <h2>Crea offerta</h2>
+            <form  action="<%=request.getContextPath()%>/OffertaAggiungiServlet" method="post">
+        <label for="nome">Nome Offerta:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="sconto">Sconto (%):</label>
+        <input type="number" id="sconto" name="sconto" required>
+
+        <label for="data_inizio">Data Inizio:</label>
+        <input type="date" id="data_inizio" name="data_inizio" required>
+
+        <label for="data_fine">Data Fine:</label>
+        <input type="date" id="data_fine" name="data_fine" required>
+
+        <button type="submit">Crea Offerta</button>
+    </form>
         </div>
         <div class="container" id="Visualizza">
         </div>

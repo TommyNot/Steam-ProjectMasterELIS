@@ -42,16 +42,17 @@ public class OffertaAggiungiServlet extends HttpServlet {
 		
 		
         if (nome == null || nome.isEmpty() || sconto == null || data_inizio == null || data_fine == null ) {
+        	System.out.println("primo if");
             request.setAttribute("errore", "Tutti i campi sono obbligatori.");
-            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
             return;
         }
 		
-        LocalDateTime inizio_offerta = null;
+        LocalDate inizio_offerta = null;
         if (data_inizio != null && !data_inizio.isEmpty()) {
             try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                inizio_offerta = LocalDateTime.parse(data_inizio, formatter); 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                inizio_offerta = LocalDate.parse(data_inizio, formatter); 
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
                 request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
@@ -61,11 +62,11 @@ public class OffertaAggiungiServlet extends HttpServlet {
         }
 
 		
-        LocalDateTime fine_offerta = null;
+        LocalDate fine_offerta = null;
         if (data_fine != null && !data_fine.isEmpty()) {
             try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH: mm:ss");
-                fine_offerta = LocalDateTime.parse(data_fine, formatter); 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                fine_offerta = LocalDate.parse(data_fine, formatter); 
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data: " + e.getMessage());
                 request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
@@ -110,7 +111,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
                     Offerta aggiunta = new Offerta(0, LocalDateTime.now(), LocalDateTime.now(), nome, scontoDouble, inizio_offerta, fine_offerta);
                     BusinessLogic.offertaAdd(aggiunta);
                     if (aggiunta != null) {
-                        response.sendRedirect("public-jsp/DashboardAdmin.jsp");
+                    	 request.setAttribute("successo", "Offerta creata con successo.");
                     } 
                 } else {
                     System.out.println("L'utente non è un Admin.");

@@ -67,7 +67,8 @@ public class GiocoEliminaServlet extends HttpServlet {
         try {
         	
         	idGioco = Long.parseLong(eliminaGiocoNome);
-        	
+        	System.out.println(idGioco);
+       
         }catch(Exception e) {
         	
         	System.out.println("errore");
@@ -75,21 +76,42 @@ public class GiocoEliminaServlet extends HttpServlet {
 
         
         Gioco giocoEliminato = BusinessLogic.eliminaGioco(idGioco);
-
+        System.out.println("hai fatto il metodo");
         
-        if (giocoEliminato != null) {
+        
+        if(sessione != null) {
+			
+			switch(utente.getRuolo()){
+			
+			case PUBLISHER:
+				if (giocoEliminato != null ) {
         	
-            String successo = "Il gioco '" + eliminaGiocoNome + "' è stato eliminato con successo.";
-            request.setAttribute("successo", successo);
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
-        } else {
-            String errore = "Il gioco con nome '" + eliminaGiocoNome + "' non è stato trovato.";
-            request.setAttribute("errore", errore);
-            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+		            String successo = "Il gioco '" + eliminaGiocoNome + "' è stato eliminato con successo.";
+		            request.setAttribute("successo", successo);
+		            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+				} else {
+		            String errore = "Il gioco con nome '" + eliminaGiocoNome + "' non è stato trovato.";
+		            request.setAttribute("errore", errore);
+		            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+		        }
+				
+				request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+				break;
+				
+			case ADMIN:
+				if (giocoEliminato != null) {
+			        response.getWriter().write("Gioco eliminato con successo.");
+			    } else {
+			        response.getWriter().write("Errore: Gioco non trovato o eliminazione fallita.");
+			    }
+						
+				break;
+				
+			default:
+				request.getRequestDispatcher("WEB-INF/public-jsp/ErrorPage.jsp").forward(request, response);
+					break;
+			}
+     
         }
-
-       
-        request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
     }
-
 }

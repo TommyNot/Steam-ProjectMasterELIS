@@ -152,6 +152,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
        });
 
 	   function deleteGame() {
+		event.preventDefault();
 	       const idGioco = localStorage.getItem('idGioco');
 	       if (!idGioco) {
 	           console.error('ID del gioco non trovato');

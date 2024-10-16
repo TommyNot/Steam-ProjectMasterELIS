@@ -1,5 +1,6 @@
 package org.elis.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,10 +39,10 @@ public class Offerta {
 	private double sconto;
 	
 	@Column(name = "data_inizio", nullable = false)
-	private LocalDateTime data_inizio;
+	private LocalDate data_inizio;
 	
 	@Column(name = "data_fine", nullable = false)
-	private LocalDateTime data_fine;
+	private LocalDate data_fine;
 	
     
     @OneToMany(mappedBy = "offertaGioco")
@@ -52,7 +53,7 @@ public class Offerta {
 	
 	
 	public Offerta(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
-			double sconto, LocalDateTime data_inizio, LocalDateTime data_fine) {
+			double sconto, LocalDate data_inizio, LocalDate data_fine) {
 		super();
 		this.id = id;
 		this.data_creazione = data_creazione;
@@ -108,19 +109,19 @@ public class Offerta {
 		this.sconto = sconto;
 	}
 
-	public LocalDateTime getData_inizio() {
+	public LocalDate getData_inizio() {
 		return data_inizio;
 	}
 
-	public void setData_inizio(LocalDateTime data_inizio) {
+	public void setData_inizio(LocalDate data_inizio) {
 		this.data_inizio = data_inizio;
 	}
 
-	public LocalDateTime getData_fine() {
+	public LocalDate getData_fine() {
 		return data_fine;
 	}
 
-	public void setData_fine(LocalDateTime data_fine) {
+	public void setData_fine(LocalDate data_fine) {
 		this.data_fine = data_fine;
 	}
 	
