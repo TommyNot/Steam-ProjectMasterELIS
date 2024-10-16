@@ -175,7 +175,7 @@ public static Gioco updateGiocoDescrzione(long id,String descrzione) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().updateGiocoDescrzione(id,descrzione);
 }
 
-public static Gioco updateGiocoImmagine(long id,String immagine) {
+public static Gioco updateGiocoImmagine(long id,byte[] immagine) {
 	
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().updateGiocoImmagine(id,immagine);
 }

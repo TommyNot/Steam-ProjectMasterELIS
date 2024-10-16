@@ -6,12 +6,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
@@ -56,7 +59,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
         String nomeGioco = request.getParameter("nome");
         String dataRilascio = request.getParameter("dataRilascio");
         String descrzioneGioco = request.getParameter("descrzione");
-        String immagineGioco = request.getParameter("immagine");
+        
         String prezzo = request.getParameter("prezzo");
         String[] offerta = request.getParameterValues("offerta");
         String[] generi = request.getParameterValues("generi");
@@ -92,9 +95,21 @@ public class GiocoAggiornaServlet extends HttpServlet {
             System.out.println("descrzione update");
             aggiornato = true;
         }
+        
+        // Ricevi il file immagine
+        Part filePart = request.getPart("immagine"); // Assicurati di avere l'input appropriato nel tuo form
+     
+         
+        String immagineBase64 = null;
+        byte[] byteImmagine = null;
 
-        if (immagineGioco != null && !immagineGioco.isEmpty()) {
-            BusinessLogic.updateGiocoImmagine(idGioco, immagineGioco);
+        if (filePart != null && filePart.getSize() > 0) {
+            InputStream inputStream = filePart.getInputStream();
+            byteImmagine = inputStream.readAllBytes(); // Leggi i byte dell'immagine
+            immagineBase64 = Base64.getEncoder().encodeToString(byteImmagine); // Convertila in Base64
+        }
+        if (immagineBase64 != null && !immagineBase64.isEmpty()) {
+            BusinessLogic.updateGiocoImmagine(idGioco, byteImmagine);
             System.out.println("img update con success");
             aggiornato = true;
         }
