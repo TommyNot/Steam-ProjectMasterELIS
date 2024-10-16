@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -50,11 +51,11 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		
 
-	      LocalDateTime nuovaData = null;
+	      LocalDate nuovaData = null;
 	        if (nuovaDataInizio != null && !nuovaDataInizio.isEmpty()) {
 	            try {
-	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	                nuovaData = LocalDateTime.parse(nuovaDataInizio, formatter); 
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	                nuovaData = LocalDate.parse(nuovaDataInizio, formatter); 
 	            } catch (DateTimeParseException e) {
 	                request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
 	                request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
