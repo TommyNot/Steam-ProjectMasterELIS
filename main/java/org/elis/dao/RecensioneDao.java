@@ -11,7 +11,7 @@ public interface RecensioneDao {
     Recensione findRecensioneById(long id);
     List<Recensione> findRecensioneByIdUtente(long idUtente);
     List<Recensione> findRecensioneByIdGioco(long idGioco);
-    Recensione updateRecensioneVoto(long id, int voto);
-    Recensione updateRecensioneTesto(long id, String testo);
+    Recensione updateVoto(long id, int voto);
+    Recensione updateTesto(long id, String testo);
     Recensione deleteRecensioneById(long id);
 }

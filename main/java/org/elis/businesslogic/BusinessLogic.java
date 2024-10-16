@@ -11,6 +11,7 @@ import org.elis.model.Genere;
 import org.elis.model.Gioco;
 import org.elis.model.Libreria;
 import org.elis.model.Offerta;
+import org.elis.model.Recensione;
 import org.elis.model.Utente;
 
 public class BusinessLogic {
@@ -219,5 +220,37 @@ public static Libreria updateLibreriaNome(long id, String nome) {
 
 public static Libreria eliminaLibreria(long id) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().deleteById(id);
+}
+
+public static Recensione RecensioneAdd(Recensione r) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().add(r);
+}
+
+public static List<Recensione> VisualizzaTutteRecensioni(){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().findAll();
+}
+
+public static Recensione TrovaRecensioneById(long id) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().findRecensioneById(id);
+}
+
+public static List<Recensione> TrovaRecensioneByIdUtente(long idUtente){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().findRecensioneByIdUtente(idUtente);
+}
+
+public static List<Recensione> TrovaRecensioneByIdGioco(long idGioco){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().findRecensioneByIdGioco(idGioco);
+}
+
+public static Recensione updateRecensioneVoto(long id, int voto) {
+		return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().updateVoto(id, voto);
+	}
+
+public static Recensione updateRecensioneTesto(long id, String testo) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().updateTesto(id, testo);
+}
+
+public static Recensione eliminaRecensione(long id) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().deleteRecensioneById(id);
 }
 }

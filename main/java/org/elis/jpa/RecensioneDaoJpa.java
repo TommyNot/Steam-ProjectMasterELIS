@@ -3,8 +3,6 @@ package org.elis.jpa;
 import java.util.List;
 
 import org.elis.dao.RecensioneDao;
-import org.elis.model.Gioco;
-import org.elis.model.Offerta;
 import org.elis.model.Recensione;
 
 import jakarta.persistence.EntityManager;
@@ -101,7 +99,7 @@ public class RecensioneDaoJpa implements RecensioneDao {
 	}
 
 	@Override
-	public Recensione updateRecensioneVoto(long id, int voto) {
+	public Recensione updateVoto(long id, int voto) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
@@ -113,7 +111,7 @@ public class RecensioneDaoJpa implements RecensioneDao {
 	}
 
 	@Override
-	public Recensione updateRecensioneTesto(long id, String testo) {
+	public Recensione updateTesto(long id, String testo) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
