@@ -48,12 +48,14 @@ public class LibreriaGiocoAggiungiServlet extends HttpServlet {
 			return;
 		}
 		String idGiocoString = request.getParameter("idGioco");
+		String idLibreriaString = null;//TODO inizializzare nel modo giusto
 		
 		if(idGiocoString == null || idGiocoString.isEmpty()) {
 			response.sendRedirect("public-jsp/ErrorPage.jsp");
 			System.out.println("Errore idgioco parse");
 			return;
 		}
+		//controllo id libreria
 		
 		long idGioco = 0;
 		try {
@@ -82,7 +84,7 @@ public class LibreriaGiocoAggiungiServlet extends HttpServlet {
 						response.sendRedirect("public-jsp/ErrorPage.jsp");
 						return;
 					}else {
-						Gioco g = new Gioco();
+						Gioco g = new Gioco();//TODO cercare il gioco tramite l'id
 						List<Gioco> giochi = BusinessLogic.aggiungiGiocoALibreria(idLibreria, g);
 						request.setAttribute("giochi", giochi);
 						request.setAttribute("librerieUtente", librerie);

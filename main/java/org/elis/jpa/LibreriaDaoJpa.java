@@ -73,6 +73,7 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	@Override
 	public Libreria updateNome(long id, String nome) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
 		Libreria l = null;
 		LocalDateTime now = LocalDateTime.now();
 		try {
@@ -82,13 +83,13 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	             return null;
 	         }
 	    	 
-	    	 em.getTransaction().begin();
+	    	 t.begin();
 	    	 l.setNome(nome);
 	    	 l.setData_ultima_modifica(now);
-	    	 em.getTransaction().commit();
+	    	 t.commit();
 		}catch (Exception e) {
-	    	if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback();
+	    	if (t.isActive()) {
+	            t.rollback();
 	        }
 	        e.printStackTrace();
 	    } finally {
@@ -100,13 +101,14 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	@Override
 	public Libreria deleteById(long id) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
 		Libreria l = null;
 		try {
 			l = em.find(Libreria.class, id);
 			if (l != null) {
-	            em.getTransaction().begin();
+	            t.begin();
 	            em.remove(l);
-	            em.getTransaction().commit();
+	            t.commit();
 	        } else {
 	            System.out.println("Libreria non trovata con ID: " + id);
 	        }
@@ -137,11 +139,11 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	@Override
 	public List<Gioco> aggiungiGiocoALibreria(long id_libreria, Gioco gioco) {
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction et = em.getTransaction();
 	    List<Gioco> giochi = null;
 
 	    try {
-	        em.getTransaction().begin();
-	        
+	        et.begin();
 	        // Recupera la libreria esistente
 	        Libreria l = em.find(Libreria.class, id_libreria);
 	        
@@ -166,10 +168,10 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	        }
 
 	        em.merge(l);
-	        em.getTransaction().commit();
+	        et.commit();
 	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback();
+	        if (et.isActive()) {
+	            et.rollback();
 	        }
 	        e.printStackTrace();
 	    } 

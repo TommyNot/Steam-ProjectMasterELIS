@@ -22,8 +22,9 @@
 		        <div class="ui-row-1">
 		  
 		          <div class="logo-comp">
+		          <a href="<%=request.getContextPath()%>/public-jsp/HomePagePrincipale.jsp">
 		            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-		              width="90px" height="22px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
+		              width="200px" height="90px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
 		              xml:space="preserve">
 		             <g>
 		             <path fill="#C5C3C0" d="M44.238,0.601C21,0.601,1.963,18.519,0.154,41.29l23.71,9.803c2.009-1.374,4.436-2.179,7.047-2.179
@@ -57,6 +58,7 @@
 		                 H289.066z M288.207,32.142h0.814c0.527,0,0.838-0.331,0.838-0.747c0-0.42-0.223-0.69-0.84-0.69h-0.813V32.142z"/>
 		             </g>
 		             </svg>
+		             </a>
 		          </div>
 		  
 		          <div class="search">
@@ -73,24 +75,12 @@
 		            <ul class="dropdown-menu">
 		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaUsername.jsp">Modifica username</a></li>
 		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaEmail.jsp">Modifica email</a></li>
+		               <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaEmail.jsp">Elimina account</a></li>
 		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></li>
 		              <li><hr class="dropdown-divider"></li>
 		              <li><a class="dropdown-item" href="#">Separated link</a></li>
 		            </ul>
 		          </div>
-		  
-		<!--           <div class="profile">
-		            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-		              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-		            </svg>
-		            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
-		              <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
-		            </svg>
-		            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-		              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-		            </svg>
-		            
-		          </div> -->
 		  
 		          <div class="profile-small">
 		            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -104,52 +94,7 @@
 		        </div>
 		  
 		        <div class="ui-row-2">
-		          <!--
-		          <div class="left-sidebar">
-		  
-		            <div>
-		              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-		                <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-		                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-		              </svg>
-		            </div>
-		  
-		            <div>
-		              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-		                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-		              </svg>
-		            </div>
-		  
-		            <div>
-		              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
-		                <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z" />
-		                <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z" />
-		              </svg>
-		            </div>
-		  
-		            <div>
-		              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
-		                <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z" />
-		              </svg>
-		            </div>
-		  
-		            <div>
-		              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-		                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-		                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-		                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-		              </svg>
-		            </div>
-		  
-		            <div>
-		              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
-		                <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-		                <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z" />
-		              </svg>
-		            </div>
-		  
-		          </div>
-		          -->
+
 		          <div class="main-content">
 		  
 		            <div class="header">
@@ -174,20 +119,6 @@
                     	%>
 		              </div>
 		  
-		              <div class="clay-category">
-		                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
-		                  <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5M4 15h3v-5H4zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm3 0h-2v3h2z"/>
-		                </svg>
-		                <p><a href="<%= request.getContextPath()%>/public-jsp/PageGiochi.jsp">Negozio</a></p>
-		              </div>
-		  
-		              <div class="clay-category">
-		                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
-		                  <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
-		                </svg>
-		                <p><a href="<%= request.getContextPath()%>/LibreriaFindByIdUtenteServlet">Libreria</a></p>
-		              </div>
-		  
 		  
 		            </div>
 		  
@@ -209,9 +140,9 @@
 		                <div></div>
 		  
 		                <div>
-		                  <h3>I tuoi amici</h3>
-		                  <p>Visualizza la tua lista amici</p>
-		                  <a href="javascript:void(0);" title="featured clay">Let's Go</a>
+		                  <h3>Negozio</h3>
+		                  <p>Visualizza tutti i giochi disponibili da aggiungere alle tue librerie</p>
+		                  <a href="<%= request.getContextPath()%>/public-jsp/PageGiochi.jsp" title="featured clay">Let's Go</a>
 		                </div>
 		  
 		              </div>
@@ -221,9 +152,9 @@
 		                <div></div>
 		  
 		                <div>
-		                  <h3>Aggiungi un amico</h3>
-		                  <p>Cerca un amico con cui condividere il piacere del gaming!</p>
-		                  <a href="javascript:void(0);" title="featured clay">Let's Go</a>
+		                  <h3>Librerie</h3>
+		                  <p>Visualizza tutte le tue librerie e giochi</p>
+		                  <a href="<%= request.getContextPath()%>/LibreriaFindByIdUtenteServlet" title="featured clay">Let's Go</a>
 		                </div>
 		  
 		              </div>
@@ -239,43 +170,7 @@
 		                </div>
 		  
 		              </div>
-		              <!--
-		              <div>
-		  
-		                <div></div>
-		    
-		                <div>
-		                  <h3>Clay Every Day</h3>
-		                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-		                  <a href="javascript:void(0);" title="featured clay">Let's Go</a>
-		                </div>
-		  
-		              </div>
-		  
-		              <div>
-		  
-		                <div></div>
-		  
-		                <div>
-		                  <h3>Special Clay</h3>
-		                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-		                  <a href="javascript:void(0);" title="featured clay">Let's Go</a>
-		                </div>
-		  
-		              </div>
-		  
-		              <div>
-		  
-		                <div></div>
-		  
-		                <div>
-		                  <h3>Home Made Clay</h3>
-		                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-		                  <a href="javascript:void(0);" title="featured clay">Let's Go</a>
-		                </div>
-		  
-		              </div>
-		              -->
+		             
 		            </div>
 		  
 		            <hr>

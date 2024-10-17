@@ -202,7 +202,6 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 200px;
-  background: url("https://picsum.photos/id/440/60/60");
   background-position: center;
   background-size: cover;
 }
@@ -245,7 +244,6 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 200px;
-  background: url("https://picsum.photos/id/440/60/60");
   background-position: center;
   background-size: cover;
 }
@@ -331,8 +329,8 @@ body {
 .header {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: auto;
 }
@@ -616,7 +614,7 @@ body {
   all: unset;
   width: 40%;
   height: 250px;
-  background-image: url("https://i.pinimg.com/originals/73/44/0b/73440bae1f6435b360d9ff22d06fec4c.jpg");
+  background-image: url("https://i.pinimg.com/originals/2d/5d/f3/2d5df3d6508ec78c7b63450f21fb017c.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -624,7 +622,7 @@ body {
 }
 
 .featured-clay > div:nth-child(2) > div:nth-child(1) {
-  background-image: url("https://i.pinimg.com/originals/2d/5d/f3/2d5df3d6508ec78c7b63450f21fb017c.jpg");
+  background-image: url("https://i.pinimg.com/originals/73/44/0b/73440bae1f6435b360d9ff22d06fec4c.jpg");
 }
 
 .featured-clay > div:nth-child(3) > div:nth-child(1) {
