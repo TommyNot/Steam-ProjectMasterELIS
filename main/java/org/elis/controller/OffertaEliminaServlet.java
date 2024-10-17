@@ -33,7 +33,8 @@ public class OffertaEliminaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String eliminaOffertaNome = request.getParameter("nome");
-		String id = request.getParameter("id");
+        String id = request.getParameter("id");
+		
 		
 		  if (eliminaOffertaNome == null || eliminaOffertaNome.isBlank() || id == null || id.isBlank()) {
 	            String errore = "Il nome o l'id dell'offerta non può essere vuoto.";
@@ -78,13 +79,15 @@ public class OffertaEliminaServlet extends HttpServlet {
                     System.out.println("L'utente è un Admin.");
                     Offerta eliminata = BusinessLogic.deleteByNameOfferta( eliminaOffertaNome, idOfferta);
                     if (eliminata != null) {
-                        response.sendRedirect("public-jsp/DashboardAdmin.jsp");
+                    	response.getWriter().write("Offerta eliminata con successo.");
                     } 
                 } else {
-                    System.out.println("L'utente non è un Admin.");
+                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
                 }
             } else {
-                System.out.println("Errore: utente non trovato con ID: " + idUtente);
+            	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
             }
         } 
 	}

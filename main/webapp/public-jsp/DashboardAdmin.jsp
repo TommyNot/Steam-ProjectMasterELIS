@@ -173,10 +173,10 @@
         	<div >
         		<br><h3>Modifica data fine</h3>
         		<form id="aggiornaFine">
-        		<label for="offerta2">Seleziona offerta</label>
+        		<label for="offerta2">Seleziona offerta:</label>
         		<select id="offerta2" name="id">
         		 <% List<Offerta> offerte2 = BusinessLogic.offertaVisualizzaTutto(); 
-               Offerta offertaSelezionata2 = (Offerta) request.getAttribute("offertaSelezionata"); 
+               Offerta offertaSelezionata2 = (Offerta) request.getAttribute("offertaSelezionata2"); 
                for (Offerta offerta : offerte) { 
             %>
                 <option value="<%= offerta.getId() %>" <%= (offertaSelezionata2 != null && offertaSelezionata2.getId() == offerta.getId()) ? "selected" : "" %>>
@@ -195,10 +195,10 @@
         	<div>
         	<br><h3>modifica sconto</h3>
         	<form id="aggiornaSconto">
-        	<label for=offerta3>Seleziona offerta</label>
+        	<label for=offerta3>Seleziona offerta:</label>
         	<select id="offerta3" name="id">
         	 <% List<Offerta> offerte3 = BusinessLogic.offertaVisualizzaTutto(); 
-               Offerta offertaSelezionata3 = (Offerta) request.getAttribute("offertaSelezionata"); 
+               Offerta offertaSelezionata3 = (Offerta) request.getAttribute("offertaSelezionata3"); 
                for (Offerta offerta : offerte) { 
             %>
                 <option value="<%= offerta.getId() %>" <%= (offertaSelezionata3 != null && offertaSelezionata3.getId() == offerta.getId()) ? "selected" : "" %>>
@@ -213,6 +213,25 @@
         	</form>
 				<div id="resultSconto"></div>       	
         	</div>
+        	
+        	<div>
+        	<br><h3>Elimina offerta</h3>
+        	<form id="eliminaOfferta" name="id">
+        	<label for="offerta4">Seleziona offerta:</label>
+        	<select id="offerta4" name="id">
+        	 <% List<Offerta> offerte4 = BusinessLogic.offertaVisualizzaTutto(); 
+               Offerta offertaSelezionata4 = (Offerta) request.getAttribute("offertaSelezionata4"); 
+               for (Offerta offerta : offerte) { 
+            %>
+                <option value="<%= offerta.getId() %>" <%= (offertaSelezionata4 != null && offertaSelezionata4.getId() == offerta.getId()) ? "selected" : "" %>>
+                    <%= offerta.getNome() %>
+                </option>
+            <% } %>
+        	</select>
+        	<button type="submit">Elimina offerta</button>
+        	</form>
+        	<div id="resultEliminazione"></div>
+         	</div>
         </div>
 
         

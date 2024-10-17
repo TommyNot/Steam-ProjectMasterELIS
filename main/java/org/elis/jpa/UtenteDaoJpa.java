@@ -231,13 +231,11 @@ public class UtenteDaoJpa implements UtenteDao {
 	                System.out.println("Nome utente non corretto per l'utente ID: " + id);
 	                return null;
 	            }
-
 	            em.remove(utente);
 	            transaction.commit(); 
-
 	            System.out.println("Utente con ID " + id + " eliminato con successo.");
 	            return utente;
-
+	            
 	        } catch (Exception e) {
 	            if (transaction.isActive()) {
 	                transaction.rollback();

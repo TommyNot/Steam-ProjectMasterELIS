@@ -128,11 +128,26 @@ public class OffertaDaoJpa implements OffertaDao{
 	@Override
 	public Offerta deleteByNome(String nome, long id) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		Offerta o = em.find(Offerta.class, nome);
-		t.begin();
-		em.remove(o);
-		t.commit();
-		return null;
+	    EntityTransaction t = em.getTransaction();
+	    Offerta o = null;
+	    try {
+	        t.begin();
+	        o = em.find(Offerta.class, id);  
+	        if (o != null && o.getNome().equals(nome)) {
+	            em.remove(o);
+	            t.commit();
+	        } else {
+	            t.rollback();
+	            System.out.println("Offerta non trovata o nome non corrispondente.");
+	        }
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
+	    return o;
 	}
 }

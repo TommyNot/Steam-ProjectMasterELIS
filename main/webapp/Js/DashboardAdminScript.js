@@ -339,3 +339,42 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 			   		   	           document.getElementById('resultSconto').innerHTML = '<p class="error">Errore nell\'aggiornamento della data.</p>';
 			   		   	       });
 			   		   	   });
+						   document.getElementById('eliminaOfferta').addEventListener('submit', function(event) {
+						       event.preventDefault();
+
+						       const selectElement = document.getElementById('offerta3');
+						       const id = selectElement.value;
+						       const nome = selectElement.options[selectElement.selectedIndex].text;
+							
+							   console.log("Nome selezionato: " + nome);
+							   console.log("ID selezionato: " + id);
+							       
+							   
+						       const formData = new FormData();
+							   formData.append('nome', nome);
+						       formData.append('id', id);
+						       
+
+						       fetch('/SteamProject/OffertaEliminaServlet', {
+						           method: 'POST',
+						           headers: {
+						               'Content-Type': 'application/x-www-form-urlencoded'
+						           },
+						           body: new URLSearchParams(formData)
+						       })
+						       .then(response => {
+						           if (response.ok) {
+						               return response.text().then(text => {
+						                   document.getElementById('resultEliminazione').innerHTML = '<p class="success">' + text + '</p>';
+						               });
+						           } else {
+						               return response.text().then(text => {
+						                   document.getElementById('resultEliminazione').innerHTML = '<p class="error">' + text + '</p>';
+						               });
+						           }
+						       })
+						       .catch(error => {
+						           console.error('Errore:', error);
+						           document.getElementById('resultEliminazione').innerHTML = '<p class="error">Errore durante l\'eliminazione dell\'offerta.</p>';
+						       });
+						   });
