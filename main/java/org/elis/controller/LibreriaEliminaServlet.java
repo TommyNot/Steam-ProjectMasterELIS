@@ -42,7 +42,7 @@ public class LibreriaEliminaServlet extends HttpServlet {
         
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
         if (utente == null || utente.getRuolo() != Ruolo.UTENTE_BASE) {
-            response.sendRedirect("public-jsp/ErrorPage.jsp");
+            response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
             return;
         }
         

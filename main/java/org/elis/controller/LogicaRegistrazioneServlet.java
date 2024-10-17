@@ -63,7 +63,7 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
         
         if (uRestituito == null) {
            
-            request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
             return;
         }
         
