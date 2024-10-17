@@ -150,7 +150,7 @@
     <div class="games-container">
     
         <div class="game">
-            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" />
+            <img class="product__image"   src="data:image/jpeg;base64,<%= gioco.getImmagine() %> " style="width: 220px; height: 300px;" />
             
             <h3 class="product-title"><%= gioco.getNome() %></h3>
             
@@ -183,9 +183,37 @@
 
 
 
-  <footer>
-    <p>Copywrite Steam Family Pezzotto 2024</p>
-  </footer>
+       <footer class="footer">
+
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contatti</h3>
+                <p>Email: <a href="mailto:info@example.com">SteamPezzotto@example.com</a></p>
+                <p>Phone: +39 328-9998244</p>
+                
+            </div>
+
+            <div class="footer-section">
+                <h3>Seguici</h3>
+                
+                <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://www.instagram.com/curiosostore_official/" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Chi siamo?</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Steam Family Pezzotto. All rights reserved.</p>
+            <p>Developed by Steam Family Pezzotto</p>
+        </div>
+
+    </footer>
   
   <script src="<%= request.getContextPath() %>/Js/PageGiochi.js"></script>
 </body>

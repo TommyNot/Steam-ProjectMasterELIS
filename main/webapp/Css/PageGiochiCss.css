@@ -468,6 +468,56 @@ footer {
     background-color: #45a049;
 }
 
+.footer {
+    background-color: #171D25; /* Colore di sfondo scuro */
+    color: #c5c3c0; /* Colore del testo */
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-section {
+    flex: 1; /* Rende le sezioni del footer di dimensioni uguali */
+    margin: 0 15px; /* Spaziatura tra le sezioni */
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #c5c3c0; /* Sottolinea i titoli delle sezioni */
+    padding-bottom: 5px;
+}
+
+.footer-section p {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    color: #c5c3c0;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline; /* Effetto hover per i link */
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #c5c3c0; /* Linea superiore per separare il footer */
+    padding-top: 10px;
+}
+
+.footer-bottom p {
+    margin: 5px 0;
+}
 
 /* Responsività */
 @media (max-width: 768px) {

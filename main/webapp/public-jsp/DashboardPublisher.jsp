@@ -116,7 +116,7 @@
                     <li><a href="#" onclick="showSection('home')">Home</a></li>
                     <li><a href="#" onclick="showSection('prodotti')">Prodotti</a></li>
                     <li><a href="#" onclick="showSection('statistiche')">Statistiche</a></li>
-                    <li><a href="#" onclick="showSection('impostazioni')">Impostazioni</a></li>
+                    
                     <li><a href="<%= request.getContextPath()%>/LogoutServlet" >Logout</a></li>
                 </ul>
             </nav>
@@ -365,9 +365,38 @@
             </section>
         </main>
         
-        <footer>
-            <p> @2024 Copywrite SteamFamilyPezzotto</p>
-        </footer>
+              <footer class="footer">
+
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contatti</h3>
+                <p>Email: <a href="mailto:info@example.com">SteamPezzotto@example.com</a></p>
+                <p>Phone: +39 328-9998244</p>
+                
+            </div>
+
+            <div class="footer-section">
+                <h3>Seguici</h3>
+                
+                <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://www.instagram.com/curiosostore_official/" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Chi siamo?</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Steam Family Pezzotto. All rights reserved.</p>
+            <p>Developed by Steam Family Pezzotto</p>
+        </div>
+
+    </footer>
+	
     </div>
 
 
