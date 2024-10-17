@@ -11,12 +11,12 @@ import java.util.List;
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Recensione;
 
-@WebServlet("/RecensioneListaCompleta")
-public class RecensioneListaCompleta extends HttpServlet {
+@WebServlet("/RecensioneListaCompletaServlet")
+public class RecensioneListaCompletaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
  
-    public RecensioneListaCompleta() {
+    public RecensioneListaCompletaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
