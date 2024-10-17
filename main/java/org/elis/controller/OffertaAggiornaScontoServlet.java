@@ -90,16 +90,19 @@ public class OffertaAggiornaScontoServlet extends HttpServlet {
                     System.out.println("L'utente è un Admin.");
                     Offerta aggiornata = BusinessLogic.updateScontoOfferta(idOfferta, nuovoSconto);
                     if (aggiornata != null) {
-                        response.sendRedirect("public-jsp/DashboardAdmin.jsp");
+                    	response.getWriter().write("Sconto aggiornata con successo.");
                     } 
                 } else {
-                    System.out.println("L'utente non è un Admin.");
+                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
                 }
             } else {
-                System.out.println("Errore: utente non trovato con ID: " + idUtente);
+            	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
             }
         } else {
-            System.out.println("Nessun utente loggato trovato nella sessione.");
+        	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        	response.getWriter().write("Nessun utente loggato trovato nella sessione.");
         }
 	}
 

@@ -54,6 +54,7 @@ public class OffertaAggiornaDataFineServlet extends HttpServlet {
 	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	                nuovaData = LocalDate.parse(dataFine, formatter); 
 	            } catch (DateTimeParseException e) {
+	            	System.out.println("errore formattazione");
 	                request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
 	                request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
 	                System.out.println("Errore nella formattazione della data e ora");
@@ -92,19 +93,22 @@ public class OffertaAggiornaDataFineServlet extends HttpServlet {
 					Offerta OffertaNuovaDataFine = BusinessLogic.updateDataFineOfferta(idOfferta, nuovaData);
 					
 					if(OffertaNuovaDataFine != null) {
-						System.out.println("La fine dell'offerta è stato aggiornato con successo.");
+						response.getWriter().write("Data di fine aggiornata con successo.");
 					}else {
 						request.getRequestDispatcher("public-jsp/ErrorPage.jsp");
 						return;
 					}
 				}else {
-					System.out.println("L'utente non è un admin.");
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
 				}
 			}else {
-				System.out.println("Utente non trovato con id " + idUtente);
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
 			}
 		}else {
-			System.out.println("Nessun utente trovato nella sessione.");
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        	response.getWriter().write("Nessun utente loggato trovato nella sessione.");
 		}
 	}
 

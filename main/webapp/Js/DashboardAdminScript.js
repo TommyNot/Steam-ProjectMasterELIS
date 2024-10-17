@@ -276,6 +276,66 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 		       })
 		       .catch(error => {
 		           console.error('Errore:', error);
-		           document.getElementById('rresultInizio').innerHTML = '<p class="error">Errore nell\'aggiornamento della data.</p>';
+		           document.getElementById('resultInizio').innerHTML = '<p class="error">Errore nell\'aggiornamento della data.</p>';
 		       });
 		   });
+		   
+		   document.getElementById('aggiornaFine').addEventListener('submit', function(event) {
+		   	       event.preventDefault();
+
+		   	       const formData = new FormData(this);
+		   	       const data = new URLSearchParams(formData);
+
+		   	       fetch('/SteamProject/OffertaAggiornaDataFineServlet', {
+		   	           method: 'POST',
+		   	           headers: {
+		   	               'Content-Type': 'application/x-www-form-urlencoded'
+		   	           },
+		   	           body: data
+		   	       })
+		   	       .then(response => {
+		   	           if (response.ok) {
+		   	               return response.text().then(text => {
+		   	                   document.getElementById('resultFine').innerHTML = '<p class="success">' + text + '</p>';
+		   	               });
+		   	           } else {
+		   	               return response.text().then(text => {
+		   	                   document.getElementById('resultFine').innerHTML = '<p class="error">' + text + '</p>';
+		   	               });
+		   	           }
+		   	       })
+		   	       .catch(error => {
+		   	           console.error('Errore:', error);
+		   	           document.getElementById('resultFine').innerHTML = '<p class="error">Errore nell\'aggiornamento della data.</p>';
+		   	       });
+		   	   });
+			   
+			   document.getElementById('aggiornaSconto').addEventListener('submit', function(event) {
+			   		   	       event.preventDefault();
+
+			   		   	       const formData = new FormData(this);
+			   		   	       const data = new URLSearchParams(formData);
+
+			   		   	       fetch('/SteamProject/OffertaAggiornaScontoServlet', {
+			   		   	           method: 'POST',
+			   		   	           headers: {
+			   		   	               'Content-Type': 'application/x-www-form-urlencoded'
+			   		   	           },
+			   		   	           body: data
+			   		   	       })
+			   		   	       .then(response => {
+			   		   	           if (response.ok) {
+			   		   	               return response.text().then(text => {
+			   		   	                   document.getElementById('resultSconto').innerHTML = '<p class="success">' + text + '</p>';
+			   		   	               });
+			   		   	           } else {
+			   		   	               return response.text().then(text => {
+			   		   	                   document.getElementById('resultSconto').innerHTML = '<p class="error">' + text + '</p>';
+			   		   	               });
+			   		   	           }
+			   		   	       })
+			   		   	       .catch(error => {
+			   		   	           console.error('Errore:', error);
+			   		   	           document.getElementById('resultSconto').innerHTML = '<p class="error">Errore nell\'aggiornamento della data.</p>';
+			   		   	       });
+			   		   	   });

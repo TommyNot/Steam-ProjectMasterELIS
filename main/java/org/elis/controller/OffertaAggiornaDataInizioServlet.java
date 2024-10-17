@@ -45,7 +45,7 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 			return;
 		}
 		
-		
+		System.out.println("sono dentro la servlet");
 		
 		String nuovaDataInizio = request.getParameter("nuovaDataInizio");
 		String id = request.getParameter("id");
@@ -65,6 +65,7 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 	        }
 	        
 	    	if (id == null || id.isBlank()) {
+	    		System.out.println("sono dentro il controllo id");
 	            String errore = "L'id  dell'offerta non può essere vuoto.";
 	            request.setAttribute("errore", errore); 
 	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
@@ -93,19 +94,23 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 					Offerta OffertaNuovaDataInizio = BusinessLogic.updateDataInizioOfferta(idOfferta, nuovaData);
 					
 					if(OffertaNuovaDataInizio != null) {
-						System.out.println("L'inizio dell'offerta è stato aggiornato con successo.");
+						System.out.println("data aggiornata");
+						response.getWriter().write("Data aggiornata con successo.");
 					}else {
 						request.getRequestDispatcher("public-jsp/ErrorPage.jsp");
 						return;
 					}
 				}else {
-					System.out.println("L'utente non è un admin.");
+					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
 				}
 			}else {
-				System.out.println("Utente non trovato con id " + idUtente);
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
 			}
 		}else {
-			System.out.println("Nessun utente trovato nella sessione.");
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        	response.getWriter().write("Nessun utente loggato trovato nella sessione.");
 		}
 		
 	}
