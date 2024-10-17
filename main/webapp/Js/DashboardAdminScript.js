@@ -219,4 +219,63 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 		       });
 	   });
 
+	   document.getElementById('creaOfferta').addEventListener('submit', function(event) {
+	   	       event.preventDefault();
 
+	   	       const formData = new FormData(this);
+	   	       const data = new URLSearchParams(formData);
+
+	   	       fetch('/SteamProject/OffertaAggiungiServlet', {
+	   	           method: 'POST',
+	   	           headers: {
+	   	               'Content-Type': 'application/x-www-form-urlencoded'
+	   	           },
+	   	           body: data
+	   	       })
+	   		   .then(response => {
+	   		           if (response.ok) {
+	   		               return response.text().then(text => {
+	   		                   document.getElementById('resultCreaOfferta').innerHTML = '<p style="color:green;">' + text + '</p>';
+	   		               });
+	   		           } else {
+	   		               return response.text().then(text => {
+	   		                   document.getElementById('resultCreaOfferta').innerHTML = '<p style="color:red;">' + text + '</p>';
+	   		                   console.error('Errore durante la creazione dell\'offerta:', text);
+	   		               });
+	   		           }
+	   		       })
+	   		       .catch(error => {
+	   		           console.error('Errore:', error);
+	   		           document.getElementById('resultCreaOfferta').innerHTML = '<p style="color:red;">Errore nella richiesta di creazione.</p>';
+	   		       });
+	   	   });
+
+		   document.getElementById('aggiornaInizio').addEventListener('submit', function(event) {
+		       event.preventDefault();
+
+		       const formData = new FormData(this);
+		       const data = new URLSearchParams(formData);
+
+		       fetch('/SteamProject/OffertaAggiornaDataInizioServlet', {
+		           method: 'POST',
+		           headers: {
+		               'Content-Type': 'application/x-www-form-urlencoded'
+		           },
+		           body: data
+		       })
+		       .then(response => {
+		           if (response.ok) {
+		               return response.text().then(text => {
+		                   document.getElementById('resultInizio').innerHTML = '<p class="success">' + text + '</p>';
+		               });
+		           } else {
+		               return response.text().then(text => {
+		                   document.getElementById('resultInizio').innerHTML = '<p class="error">' + text + '</p>';
+		               });
+		           }
+		       })
+		       .catch(error => {
+		           console.error('Errore:', error);
+		           document.getElementById('rresultInizio').innerHTML = '<p class="error">Errore nell\'aggiornamento della data.</p>';
+		       });
+		   });

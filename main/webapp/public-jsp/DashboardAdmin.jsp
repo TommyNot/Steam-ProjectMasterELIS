@@ -109,22 +109,6 @@
                         }
                     %>
         </div>
-        <div class="container active">
-        <h2>Attività recenti:</h2>
-        <% 
-        String successo = (String) request.getAttribute("successo");
-        String errore = (String) request.getAttribute("errore");
-        if (successo != null) {
-    %>
-        <p class="success"><%= successo %></p>
-    <% 
-        } else if (errore != null) {
-    %>
-        <p class="error"><%= errore %></p>
-    <% 
-        } 
-    %>
-        </div>
         
         <div class="container " id="Ban">
             <h2>Ban utente</h2>
@@ -159,14 +143,15 @@
 		    </div>
 
         <div class="container " id="Gestisci">
-            <h2>Atiiva offerte</h2>
+            <h2>Attiva offerte</h2>
         </div>
         <div class="container" id="Aggiorna">
-        	<h2>Aggiorna offerta</h2>
+        	<h2>Aggiorna offerta</h2>      
         </div>
+        
         <div class="container" id="Crea">
             <h2 id="creazioneOfferta">Crea offerta</h2>
-            <form  action="<%=request.getContextPath()%>/OffertaAggiungiServlet" method="post">
+            <form id="creaOfferta">
         <label for="nome">Nome Offerta:</label>
         <input type="text" id="nome" name="nome" required>
 
@@ -181,9 +166,11 @@
 
         <button type="submit">Crea Offerta</button>
     </form>
+    <div id="resultCreaOfferta"></div>
         </div>
-        <div class="container" id="Visualizza">
-        </div>
+        
+        <div class="container" id="Visualizza"></div>
+        
         <div class="container" id="Cerca">
             <h2>Cerca utenti</h2><br>
             <form id="searchForm">

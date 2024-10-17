@@ -32,7 +32,7 @@ public class Offerta {
     @Column(name = "data_ultima_modifica")
 	private LocalDateTime data_ultima_modifica;
 	
-	@Column(name = "nome", nullable = false, length = 255)
+	@Column(name = "nome", nullable = false, unique = true,length = 255)
 	private String nome;
 	
 	@Column(name = "sconto", nullable = false)

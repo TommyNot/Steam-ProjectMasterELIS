@@ -38,7 +38,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
 		String data_inizio = request.getParameter("data_inizio");
 		String data_fine = request.getParameter("data_fine");
 		
-		
+		System.out.println("sono nella servlet");
 		
 		
         if (nome == null || nome.isEmpty() || sconto == null || data_inizio == null || data_fine == null ) {
@@ -111,17 +111,19 @@ public class OffertaAggiungiServlet extends HttpServlet {
                     Offerta aggiunta = new Offerta(0, LocalDateTime.now(), LocalDateTime.now(), nome, scontoDouble, inizio_offerta, fine_offerta);
                     BusinessLogic.offertaAdd(aggiunta);
                     if (aggiunta != null) {
-                    	 request.setAttribute("successo", "Offerta creata con successo.");
-                    	 request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
-                    } 
+                    	response.getWriter().write("Offerta creata con successo.");
+                    }
                 } else {
-                    System.out.println("L'utente non è un Admin.");
+                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
                 }
             } else {
-                System.out.println("Errore: utente non trovato con ID: " + idUtente);
+            	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
             }
         } else {
-            System.out.println("Nessun utente loggato trovato nella sessione.");
+        	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        	response.getWriter().write("Nessun utente loggato trovato nella sessione.");
         }
 
     
