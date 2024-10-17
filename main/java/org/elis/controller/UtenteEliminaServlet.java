@@ -53,7 +53,7 @@ public class UtenteEliminaServlet extends HttpServlet {
 
 	    String password = request.getParameter("password");
 	    if (password == null || password.isEmpty()) {
-	        request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	        request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -63,7 +63,7 @@ public class UtenteEliminaServlet extends HttpServlet {
 	        return; 
 	    } else {
 	        request.setAttribute("errorMessage", "Password non valida o errore durante l'eliminazione dell'account.");
-	        request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	        request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return; 
 	    }
 	}

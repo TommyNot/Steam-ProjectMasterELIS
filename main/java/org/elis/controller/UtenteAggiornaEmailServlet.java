@@ -50,7 +50,7 @@ public class UtenteAggiornaEmailServlet extends HttpServlet {
 	    String nuovaEmail = request.getParameter("nuovaEmail");
 
 	    if (nuovaEmail == null || nuovaEmail.isEmpty()) {
-	    	request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	    	request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -59,7 +59,7 @@ public class UtenteAggiornaEmailServlet extends HttpServlet {
 	    if (utenteAggiornato != null) {
 	        response.getWriter().write("Email aggiornata con successo! Nuova email: " + utenteAggiornato.getEmail());
 	    } else {
-	    	request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	    	request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	    }
 
 	    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);

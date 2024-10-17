@@ -33,14 +33,14 @@ public class UtenteRipristinaPasswordServlet extends HttpServlet {
         
         if (username == null || email == null || newPassword == null || newPassword.isEmpty() || !isValidPassword(newPassword)) {
             request.setAttribute("errorMessage", "Tutti i campi sono obbligatori.");
-            request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
             System.out.println("Errore qui nel orimo if");
             return;
         }
         
         if(!matchOldPass(newPassword, passwordConferma)) {
         	
-            request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
             System.out.println("Errore qui nel match password if");
         }
         
@@ -50,7 +50,7 @@ public class UtenteRipristinaPasswordServlet extends HttpServlet {
 			
 		} else {
 			System.out.println("Errrore qui 2 if");
-			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 		}
         
         

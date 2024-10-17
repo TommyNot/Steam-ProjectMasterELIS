@@ -50,7 +50,7 @@ public class UtenteAggiornaUsernameServlet extends HttpServlet {
 	    String nuovoUsername = request.getParameter("nuovoUsername");
 
 	    if (nuovoUsername == null || nuovoUsername.isEmpty()) {
-	    	request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	    	request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -59,7 +59,7 @@ public class UtenteAggiornaUsernameServlet extends HttpServlet {
 	    if (utenteAggiornato != null) {
 	        response.getWriter().write("Nome utente aggiornato con successo! Nuovo username: " + utenteAggiornato.getUsername());
 	    } else {
-	    	request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	    	request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	    }
 
 	    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);

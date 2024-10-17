@@ -33,7 +33,7 @@ public class UtenteAggiungServlet extends HttpServlet {
 	    String password = request.getParameter("password");
 
 	    if (username == null || email == null || password == null || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-	        request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	        request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 	    }
 	    Utente u=new Utente(Ruolo.UTENTE_BASE,username,email,password);
@@ -46,7 +46,7 @@ public class UtenteAggiungServlet extends HttpServlet {
 	        
 	    }
 
-	    request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+	    request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	}
 
 }
