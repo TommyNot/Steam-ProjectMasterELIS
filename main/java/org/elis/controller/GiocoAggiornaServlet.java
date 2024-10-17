@@ -50,7 +50,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
 
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
         if (utente.getRuolo() != Ruolo.PUBLISHER) {
-            response.sendRedirect("public-jsp/AccessoNegato.jsp");
+            response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
             return;
         }
       
@@ -94,7 +94,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
 
         if (descrzioneGioco != null && !descrzioneGioco.isEmpty()) {
             BusinessLogic.updateGiocoDescrzione(idGioco, descrzioneGioco);
-            System.out.println("descrzione update");
+            System.out.println("descrizione update");
             aggiornato = true;
         }
         
