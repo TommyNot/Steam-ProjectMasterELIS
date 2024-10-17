@@ -133,8 +133,8 @@
    
     <%
     	
-    List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi();
-    
+   
+    List<Gioco> giochi =  (List<Gioco>) request.getAttribute("giochi");
         
         if (giochi == null || giochi.isEmpty()) {
     %>
@@ -150,7 +150,7 @@
     <div class="games-container">
     
         <div class="game">
-            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" />
+            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" />
             
             <h3 class="product-title"><%= gioco.getNome() %></h3>
             
@@ -168,7 +168,7 @@
            
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
             <button  class="btn">Visualizza dettagli</button>
-       
+       		
 
             
             

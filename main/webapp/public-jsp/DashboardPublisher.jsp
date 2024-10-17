@@ -155,10 +155,10 @@
 							<select id="genere" name="genere">
 							    <%
 							        List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
-							        Genere genereSelezionato = (Genere) request.getAttribute("genereSelezionato"); 
+							        
 							        for (Genere genere : generi) {
 							    %>
-							        <option id="genere" value="<%= genere.getId() %>" <%= (genereSelezionato != null && genereSelezionato.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
+							        <option value="<%= genere.getId() %>" id="genereId" ><%= genere.getNome() %></option>
 							    <%
 							        }
 							    %>
@@ -202,10 +202,10 @@
 					        <select id="genere" name="genere">
 					            <%
 					                List<Genere> generi1 = BusinessLogic.VisalizzaTuttiGeneri();
-					                Genere genereSelezionato1 = (Genere) request.getAttribute("genereSelezionato");
+					                
 					                for (Genere genere : generi1) {
 					            %>
-					                <option value="<%= genere.getId() %>" <%= (genereSelezionato1 != null && genereSelezionato1.getId() == genere.getId()) ? "selected" : "" %>><%= genere.getNome() %></option>
+					                <option value="<%= genere.getId() %>" name="genereId" ><%= genere.getNome() %></option>
 					            <%
 					                }
 					            %>
