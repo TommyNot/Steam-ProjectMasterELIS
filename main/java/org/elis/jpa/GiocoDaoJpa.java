@@ -34,15 +34,34 @@ public class GiocoDaoJpa implements GiocoDao{
 	}
 
 
-	@Override
 	public Gioco add(Gioco g) {
-		EntityManager em = DaoFactoryJpa.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		em.persist(g);
-		t.commit();
-		return g;
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+
+	        // Aggiungi i generi associati
+	        for (Genere genere : g.getGenereGiochi()) {
+	            Genere existingGenere = em.find(Genere.class, genere.getId());
+	         
+	             em.persist(genere); // Persisti un nuovo genere se necessario
+	             g.setGenereGiochi((List<Genere>) genere); // Associa il nuovo genere
+	            
+	        }
+	        
+	        em.persist(g); // Persisti il Gioco
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) t.rollback(); // Rollback in caso di errore
+	        e.printStackTrace(); // Stampa l'eccezione per il debug
+	    } finally {
+	        em.close();
+	    }
+	    return g;
 	}
+
+
+
 
 	@Override
 	public List<Gioco> findAll() {
