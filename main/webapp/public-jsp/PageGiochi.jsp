@@ -89,6 +89,11 @@
                 <button type="submit" class="btn btn-outline-success">Cerca</button>
             </form>
        </div>
+       
+       
+
+       
+       
     
     <div class="user-info">
                     
@@ -120,13 +125,16 @@
 		<% 
 		} 
 		%>
+		
+
 
 		
 <div class="content">
    
     <%
     	
-        List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi");
+    List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi();
+    
         
         if (giochi == null || giochi.isEmpty()) {
     %>
@@ -136,12 +144,13 @@
             for (Gioco gioco : giochi) { 
                 Offerta offerta = gioco.getOffertaGioco(); 
     %>
+    
+    	
                   
     <div class="games-container">
     
         <div class="game">
-            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" 
-                 onerror="this.onerror=null; this.src='<%= request.getContextPath() %>/risorse-media/img_giochi/profilo.jpeg';" />
+            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getByteImmagine() %>" />
             
             <h3 class="product-title"><%= gioco.getNome() %></h3>
             
@@ -158,11 +167,10 @@
 
            
             <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
-            <button class="btn">Visualizza dettagli</button>
-            <form action="<%= request.getContextPath() %>/LibreriaGiocoAggiungiServlet" method="post">
-            <input value="<%= gioco.getId() %>" style="display: none;"  type="text" id="idGioco" name="idGioco">
-            	<button type="submit" class="btn-addCart">Aggiungi alla libreria</button>
-            </form>
+            <button  class="btn">Visualizza dettagli</button>
+       
+
+            
             
         </div>
     </div>
@@ -178,5 +186,7 @@
   <footer>
     <p>Copywrite Steam Family Pezzotto 2024</p>
   </footer>
+  
+  <script src="<%= request.getContextPath() %>/Js/PageGiochi.js"></script>
 </body>
 </html>

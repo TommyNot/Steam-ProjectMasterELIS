@@ -81,6 +81,7 @@ public class LogicaLoginServlet extends HttpServlet {
             
         	String failed = "Errore email o password non sono corretti";
         	 request.setAttribute("Error", failed);
+        	 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
              request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
         }
     }

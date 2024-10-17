@@ -3,6 +3,7 @@ package org.elis.jpa;
 import java.util.List;
 
 import org.elis.dao.RecensioneDao;
+import org.elis.model.Gioco;
 import org.elis.model.Recensione;
 
 import jakarta.persistence.EntityManager;
@@ -101,25 +102,61 @@ public class RecensioneDaoJpa implements RecensioneDao {
 	@Override
 	public Recensione updateVoto(long id, int voto) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		Recensione r = em.find(Recensione.class, id);
-		r.setVoto(voto);
-		t.commit();
-		return r;
-		
+	    Recensione recensione = null;
+	    try {
+	        em.getTransaction().begin();
+
+	        
+	        recensione = em.find(Recensione.class, id);
+	        if (recensione != null) {
+	            recensione.setVoto(voto); 
+	            em.merge(recensione); 
+	            System.out.println("Voto aggiornato per la recensione: "+recensione.getVoto());
+	        } else {
+	            System.out.println("Nessuna recensione trovata con ID: " + id);
+	        }
+
+	        em.getTransaction().commit(); 
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback(); 
+	        }
+	        e.printStackTrace();
+	    }
+
+	    return recensione;
 	}
+		
+	
 
 	@Override
 	public Recensione updateTesto(long id, String testo) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		Recensione r = em.find(Recensione.class, id);
-		r.setTesto(testo);
-		t.commit();
-		return r;
+	    Recensione recensione = null;
+	    try {
+	        em.getTransaction().begin();
+
+	        
+	        recensione = em.find(Recensione.class, id);
+	        if (recensione != null) {
+	            recensione.setTesto(testo); 
+	            em.merge(recensione); 
+	            System.out.println("Testo aggiornato per la recensione: "+recensione.getTesto());
+	        } else {
+	            System.out.println("Nessuna recensione trovata con ID: " + id);
+	        }
+
+	        em.getTransaction().commit(); 
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback(); 
+	        }
+	        e.printStackTrace();
+	    }
+
+	    return recensione;
 	}
+	
 
 	@Override
 	public Recensione deleteRecensioneById(long id) {
