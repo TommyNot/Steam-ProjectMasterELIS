@@ -35,7 +35,7 @@ public class LibreriaAggiornaNomeServlet extends HttpServlet {
 		String nomeNuovo = request.getParameter("nomeNuovoInput");
 		
 		if(nomeNuovo == null || nomeNuovo.isEmpty()) {
-			request.getRequestDispatcher("public-jsp/error.jsp").forward(request, response);
+			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 		}
 		
@@ -52,17 +52,20 @@ public class LibreriaAggiornaNomeServlet extends HttpServlet {
 					if(libreriaNuovoNome != null) {
 						System.out.println("Il nome della libreria è stato aggiornato con successo.");
 					}else {
-						request.getRequestDispatcher("public-jsp/ErrorPage.jsp");
+						request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 						return;
 					}
 				}else {
 					System.out.println("L'utente non è un utente base.");
+					request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 				}
 			}else {
 				System.out.println("Utente non trovato con id " + idUtente);
+				request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 			}
 		}else {
 			System.out.println("Nessun utente trovato nella sessione.");
+			request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
 		}
 	}
 
