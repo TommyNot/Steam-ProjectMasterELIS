@@ -519,6 +519,85 @@ footer {
     margin: 5px 0;
 }
 
+/* Stile di base per il menu */
+.menu {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.menu a {
+  color: #c7d5e0;
+  text-decoration: none;
+  padding: 10px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #66c0f4;
+}
+
+/* Stile per il dropdown */
+.dropdown {
+  display: none; /* Nascondi il menu dropdown per default */
+  position: absolute;
+  top: 100%; /* Allinea il dropdown sotto il link "Generi" */
+  left: 0;
+  background-color: #171A21;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 100;
+}
+
+.dropdown ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  margin: 5px 0;
+}
+
+.dropdown-option {
+  color: #c7d5e0;
+  text-decoration: none;
+  display: block;
+  padding: 8px;
+  background-color: #171a21;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-option:hover {
+  background-color: #66c0f4;
+  color: white;
+}
+
+/* Mostra il menu dropdown al passaggio del mouse sul link "Generi" */
+.generi-link:hover + .dropdown,
+.dropdown:hover {
+  display: block;
+}
+
+/* Layout responsivo */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dropdown {
+    top: auto;
+    left: auto;
+    position: static;
+  }
+}
+
+
+
 /* Responsività */
 @media (max-width: 768px) {
     .navbar {
