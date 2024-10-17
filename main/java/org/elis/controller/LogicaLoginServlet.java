@@ -75,7 +75,7 @@ public class LogicaLoginServlet extends HttpServlet {
                     break;
                 default:
                     request.setAttribute("Error", "Ruolo utente non riconosciuto.");
-                    request.getRequestDispatcher("public-jsp/LoginPage.jsp").forward(request, response);
+                    request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
             }
         } else {
             

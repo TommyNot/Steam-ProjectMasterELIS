@@ -69,7 +69,7 @@
   
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Homepage</a></li>
                     <li><a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" >Giochi</a></li>
 						<li>
 						    <a href="#" class="generi-link">Generi</a>
@@ -96,8 +96,21 @@
 
                     <li><a href="#">Offerte</a></li>
                     <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a></li>
+                     <div class="search-container">
+					      <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="get" class="d-flex">
+					                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
+					                <button type="submit" class="btn btn-outline-success">Cerca</button>
+					            </form>
+					  </div>
+       
             <li> 
-            <%
+
+        </li>
+                </ul>
+            </nav>
+                  <div class="user-info">
+                    
+                    <%
                 
                 Utente username = (Utente) session.getAttribute("utenteLoggato");
                 if (username != null) {
@@ -112,19 +125,19 @@
             <%
                 }
             %>
-        </li>
-                </ul>
-            </nav>
+                </div>
                 
                                                                                                                                 
 
         </div>
         
+        
  
     
     </header>
-    
+  
        <section class="featured-games">
+
         <div class="container">
             <h2>Giochi in evidenza</h2>
             <div class="slider">

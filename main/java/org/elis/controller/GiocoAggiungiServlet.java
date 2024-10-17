@@ -149,6 +149,9 @@ public class GiocoAggiungiServlet extends HttpServlet {
 
                 
                 
+            }else {
+            	
+            	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
             }
         }
     }

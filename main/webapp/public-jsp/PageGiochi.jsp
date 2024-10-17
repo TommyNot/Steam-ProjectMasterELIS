@@ -20,7 +20,7 @@
   <!-- Barra di navigazione -->
   <div class="navbar">
     <div class="logo">
-             <a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet"  target="_blank">
+             <a href="<%=request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp"  target="_blank">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                       width="180px" height="120px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
                       xml:space="preserve">
@@ -59,7 +59,7 @@
                  </a>
     </div>
     <div class="menu">
-      <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">Homepage</a>
+      <a href="<%= request.getContextPath() %>//GiocoListaCompletaServlet">Homepage</a>
 			 <a href="#" class="generi-link">Generi</a>
 					 <div class="dropdown">
 						     <ul class="styled-select">

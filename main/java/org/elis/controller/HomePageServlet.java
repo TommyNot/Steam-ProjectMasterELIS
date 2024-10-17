@@ -21,7 +21,7 @@ public class HomePageServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 System.out.println(request.getServletContext().getRealPath("/"));
+		 
 		request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
 	
 }

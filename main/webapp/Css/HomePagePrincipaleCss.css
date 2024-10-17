@@ -31,6 +31,13 @@ header {
     font-weight: bold;
 }
 
+nav {
+
+
+  gap: 20px;
+  align-items: center;
+  
+}
 nav ul {
     list-style: none;
     display: flex;
@@ -39,66 +46,127 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 15px;
+   margin: 0 15px;
+  color: #c7d5e0;
+  text-decoration: none;
+  padding: 10px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.user-info {
+    display: flex; /* Dispone l'immagine e il testo in linea orizzontale */
+    align-items: right; /* Allinea verticalmente l'immagine e il testo */
+ 
+    align-content: right;
+
+    background-color: #2c3e50; /* Sfondo scuro */
+    padding: 10px; /* Spaziatura interna */
+    border-radius: 8px; /* Angoli arrotondati */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra per dare profondità */
+    color: #ecf0f1; /* Colore del testo */
+    margin-bottom: 20px; /* Spaziatura inferiore */
+    
+   
+}
+
+.user-info img{
+	
+	border: 2px solid #fff; /* Bordo bianco intorno all'immagine */
 }
 
 
 
+#imgUtente {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 15px;
+}
 
-/* Stile per il contenitore del menu */
+#user p {
+    margin: 0;
+    font-size: 16px;
+      margin-right: 10px;
+    margin-left: 15px;
+}
+
 
 
 /* Stile per il link dei generi */
 
-
-/* Stile per il contenitore del menu */
-li {
-    position: relative; /* Necessario per il posizionamento assoluto del dropdown */
-    display: inline-block; /* Consente di visualizzare il menu orizzontalmente */
-}
-
-/* Stile per il link dei generi */
-
-
-.generi-link:hover {
-    background-color: #0056b3; /* Colore di sfondo al passaggio del mouse */
-}
 
 /* Stile per il dropdown */
 .dropdown {
-    display: none; /* Nascondi il dropdown */
-    position: absolute; /* Posiziona il dropdown */
-    top: 100%; /* Posizionamento sotto il link */
-    left: 0; /* Allinea a sinistra */
-    background-color: #fff; /* Colore di sfondo del dropdown */
-    border: 1px solid #ccc; /* Bordo del dropdown */
-    border-radius: 5px; /* Angoli arrotondati */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra per effetto di profondità */
-    z-index: 1000; /* Assicurati che il dropdown sia sopra altri elementi */
+  display: none; /* Nascondi il menu dropdown per default */
+  position: absolute;
+  top: 100%; /* Allinea il dropdown sotto il link "Generi" */
+  left: 0;
+  background-color: #171A21;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 100;
 }
 
-/* Mostra il dropdown quando ha la classe show */
-.dropdown.show {
-    display: block; /* Mostra il dropdown */
+.dropdown ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Opzioni nel dropdown */
+.dropdown li {
+  margin: 5px 0;
+}
+
 .dropdown-option {
-    display: block; /* Le opzioni occupano l'intera larghezza */
-    padding: 10px; /* Padding per le opzioni */
-    color: #333; /* Colore del testo */
-    text-decoration: none; /* Rimuove la sottolineatura */
-    transition: background-color 0.3s; /* Transizione per l'effetto hover */
+  color: #c7d5e0;
+  text-decoration: none;
+  display: block;
+  padding: 8px;
+  background-color: #171a21;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .dropdown-option:hover {
-    background-color: #f0f0f0; /* Colore di sfondo al passaggio del mouse */
+  background-color: #66c0f4;
+  color: white;
 }
 
-/* Aggiungi stile per l'opzione selezionata */
-.dropdown-option[style*='font-weight:bold;'] {
-    font-weight: bold; /* Stile per l'opzione selezionata */
+/* Mostra il menu dropdown al passaggio del mouse sul link "Generi" */
+.generi-link:hover + .dropdown,
+.dropdown:hover {
+  display: block;
 }
+
+/* Stile della barra di ricerca */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container input {
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-container button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  background-color: #66c0f4;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #c7d5e0;
+  color: black;
+}
+
 
 
 

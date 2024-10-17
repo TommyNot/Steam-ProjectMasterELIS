@@ -48,7 +48,7 @@ public class GiocoEliminaServlet extends HttpServlet {
         
         System.out.println(utente.getRuolo());
         if (utente.getRuolo() == Ruolo.UTENTE_BASE) {
-            response.sendRedirect("public-jsp/AccessoNegato.jsp");
+            response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
             return;
         }
      

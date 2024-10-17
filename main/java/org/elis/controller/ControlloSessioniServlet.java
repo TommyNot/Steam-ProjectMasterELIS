@@ -45,7 +45,7 @@ public class ControlloSessioniServlet extends HttpServlet {
 					break;
 					
 					default:
-						request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+						request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 							break;
 				
 			}

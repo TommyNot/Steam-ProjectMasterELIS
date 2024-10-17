@@ -35,7 +35,7 @@ public class LogoutServlet extends HttpServlet {
 		
 		
 		request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
-		return;
+		
 	}
 
 
