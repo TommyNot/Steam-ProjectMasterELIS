@@ -51,6 +51,7 @@ public class LibreriaAggiornaNomeServlet extends HttpServlet {
 					
 					if(libreriaNuovoNome != null) {
 						System.out.println("Il nome della libreria è stato aggiornato con successo.");
+						response.sendRedirect("LibreriaFindByIdUtenteServlet");
 					}else {
 						request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 						return;
