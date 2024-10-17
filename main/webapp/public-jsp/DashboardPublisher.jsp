@@ -24,7 +24,7 @@
     <div class="container">
         <header>
             <div class="logo">
-            <a href="<%= request.getContextPath() %>/public-jsp/DashboardPublisher.jsp">
+            <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                       width="150px" height="100px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
                       xml:space="preserve">
@@ -151,19 +151,16 @@
 				        
 				  
 				        
-						<label for="genere">Seleziona genere:</label>	
-							<select id="genere" name="genere">
-							    <%
-							        List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
-							        
-							        for (Genere genere : generi) {
-							    %>
-							        <option value="<%= genere.getId() %>" id="genereId" ><%= genere.getNome() %></option>
-							    <%
-							        }
-							    %>
-							</select>
-							
+							    <label for="genere">Seleziona genere/i:</label>
+								<% 
+								    List<Genere> generi1 = BusinessLogic.VisalizzaTuttiGeneri();
+								    for (Genere genere : generi1) {
+								%>
+								    <input type="checkbox" name="genere" value="<%= genere.getId() %>" id="genere_<%= genere.getId() %>">
+								    <label for="genere_<%= genere.getId() %>"><%= genere.getNome() %></label><br>
+								<% 
+								    }
+								%>
 
 
 
@@ -179,9 +176,9 @@
 				
 			<div id="edit-product-form" class="edit-form-container"  style="display: none;">
    
-					    <form action="<%= request.getContextPath() %>/GiocoAggiornaServlet" method="post" >
+					    <form action="<%= request.getContextPath() %>/GiocoAggiornaServlet" method="post" enctype="multipart/form-data">
 					    	<label for="giocoId">ID Gioco da Modificare:</label>
-				       		 <input type="number" id="giocoId" name="giocoId" required placeholder="Inserisci l'ID del gioco da eliminare">
+				       		 <input type="number" id="giocoId" name="giocoId"  placeholder="Inserisci l'ID del gioco da eliminare" required>
 					        <label for="nome">Nome Gioco:</label>
 					        <input type="text" id="nome" name="nome" >
 					
@@ -192,20 +189,33 @@
 					        <input type="text" id="descrizione" name="descrizione"  >
 					
 					        <label for="immagine">Carica Immagine (opzionale):</label>
-					        <input type="file" name="immagine" accept="image/jpeg,image/png"><br>
+					        <input type="file"  id="immagine" name="immagine" accept="image/jpeg,image/png"><br>
 					        <p>Lascia vuoto per mantenere l'immagine attuale.</p>
 					
 					        <label for="prezzo">Prezzo:</label>
 					        <input type="number" id="prezzo" name="prezzo"  >
 					
-					        <label for="genere">Seleziona genere:</label>
+					        
+					    <label for="genere">Seleziona genere/i:</label>
+								<% 
+								    List<Genere> AggiornaGenere = BusinessLogic.VisalizzaTuttiGeneri();
+								    for (Genere genere : AggiornaGenere) {
+								%>
+								    <input type="checkbox" name="genere" value="<%= genere.getId() %>" id="genere_<%= genere.getId() %>">
+								    <label for="genere_<%= genere.getId() %>"><%= genere.getNome() %></label><br>
+								<% 
+								    }
+								%>
+
+					        
+					      <label for="genere">Seleziona offerta:</label>
 					        <select id="genere" name="genere">
 					            <%
-					                List<Genere> generi1 = BusinessLogic.VisalizzaTuttiGeneri();
+					                List<Offerta> offerte = BusinessLogic.offertaVisualizzaTutto();
 					                
-					                for (Genere genere : generi1) {
+					                for (Offerta offerta : offerte) {
 					            %>
-					                <option value="<%= genere.getId() %>" name="genereId" ><%= genere.getNome() %></option>
+					                <option value="<%= offerta.getId() %>" id="genereId" ><%= offerta.getNome() %></option>
 					            <%
 					                }
 					            %>
@@ -240,21 +250,7 @@
     				<h2>Prodotti</h2>
     				<button class="button" type="button" id="add-product-btn">Aggiungi Prodotto</button>
     				<button class="button" type="button" id="remove-product-btn">Elimina Prodotto</button>
-						<label for="genere">Filtri:</label>
-					<form action="<%= request.getContextPath() %>/GiocoGenereRicercaServlet" method="get" id="filter-form">
-					    <select name="genere" id="genere" style="margin-right: 10px;">
-					        <option value="">Seleziona un genere</option>
-					        <%
-					            for (Genere genere : generi) {
-					        %>
-					            <option id="opt" value="<%= genere.getId()%>"><%= genere.getNome() %></option>
-					        <%
-					            }
-					        %>
-					    </select>
-					    <input type="submit" id="filtra" value="Filtra" style="margin-top: 10px; cursor: pointer;">
-					</form>
-
+						
 					<div id="result">
 					</div>
 

@@ -673,7 +673,7 @@ public class GiocoDaoJDBC implements GiocoDao{
 
 
 	@Override
-	public Gioco updateGiocoDataRilascio(long id, LocalDateTime data) {
+	public Gioco updateGiocoDataRilascio(long id, LocalDate data) {
 	    
 	    String query = "UPDATE gioco SET data_rilascio = ? WHERE id = ?";
 

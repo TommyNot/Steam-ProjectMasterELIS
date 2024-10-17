@@ -20,7 +20,7 @@ public interface GiocoDao {
 	List<Gioco> findGiocoOffertaByOfferta(Offerta offerta);
 	List<Gioco> VisualizzaGiochiPerUtente(long idUtente);
 	Gioco updateGiocoNome(long id,String nome);
-	Gioco updateGiocoDataRilascio(long id,LocalDateTime data);
+	Gioco updateGiocoDataRilascio(long id,LocalDate data);
 	Gioco updateGiocoDescrzione(long id,String descrzione);
 	Gioco updateGiocoImmagine(long id,byte[] immagine);
 	Gioco updateGiocoPrezzo(long id,double prezzo);

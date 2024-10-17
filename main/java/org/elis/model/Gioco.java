@@ -80,7 +80,7 @@ public class Gioco implements Serializable{
     // Costruttore
     public Gioco(long id, LocalDateTime data_creazione, LocalDateTime data_ultima_modifica, String nome,
                  LocalDate data_rilascio, String descrizione, byte[] byteImmagine, boolean eliminato, double prezzo,
-                 Offerta offertaGioco, Utente idUtente) {
+                  Utente idUtente) {
         this.id = id;
         this.data_creazione = data_creazione;
         this.data_ultima_modifica = data_ultima_modifica;

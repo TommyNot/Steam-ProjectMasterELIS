@@ -95,6 +95,10 @@ public static Genere SelectByName(String nome) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().findByName(nome);
 }
 
+public static Genere aggiungiGiocoaGnere(long idGenere,long idGioco) {
+	
+	return DaoFactoryJpa.getDaoFactory(IMPLEMENTATION).getGenereDao().aggiungiGiocoaGnere(idGenere, idGioco);
+}
 
 public static Genere getGenereById(long idGenere) {
 	
@@ -185,7 +189,7 @@ public static Gioco updateGiocoPrezzo(long id,double prezzo) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().updateGiocoPrezzo(id,prezzo);
 }
 
-public static Gioco updateGiocoDataRilascio(long id,LocalDateTime data) {
+public static Gioco updateGiocoDataRilascio(long id,LocalDate data) {
 	
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().updateGiocoDataRilascio(id, data);
 			}
@@ -266,4 +270,6 @@ public static Recensione updateRecensioneTesto(long id, String testo) {
 public static Recensione eliminaRecensione(long id) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().deleteRecensioneById(id);
 }
+
+
 }

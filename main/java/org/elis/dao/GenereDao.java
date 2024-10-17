@@ -10,4 +10,5 @@ public interface GenereDao {
 	Genere findByName(String nome);
 	Genere selectById(long id);
 	Genere deleteByName(String nome);
+	Genere aggiungiGiocoaGnere(long idGenere , long idGioco);
 }

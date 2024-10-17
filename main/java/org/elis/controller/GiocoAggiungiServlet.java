@@ -41,8 +41,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
         String dataRilascio = request.getParameter("dataRilascio");
         String descrizione = request.getParameter("descrizione");
         String prezzo = request.getParameter("prezzo");
-        String offerta = request.getParameter("offerta");
-        String generi = request.getParameter("genereId");
+        String[] generi = request.getParameterValues("genere");
 
         // Controllo campi obbligatori
         if (nome == null || nome.isEmpty() || dataRilascio == null || descrizione == null || prezzo == null) {
@@ -77,18 +76,6 @@ public class GiocoAggiungiServlet extends HttpServlet {
             return;
         }
 
-        Offerta offertaSelezionata = null;
-        if (offerta != null) {
-            try {
-                long offertaId = Long.parseLong(offerta);
-                offertaSelezionata = BusinessLogic.findOffertaById(offertaId);
-            } catch (NumberFormatException e) {
-                request.setAttribute("errore", "Errore nel formato dell'offerta: " + e.getMessage());
-                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
-                return;
-            }
-        }
-
         // Controllo sessione
         if (sessione == null) {
             response.sendRedirect("public-jsp/LoginPage.jsp");
@@ -103,7 +90,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
 
             if (u != null && u.getRuolo() == Ruolo.PUBLISHER) {
                 // Ricevi il file immagine
-                Part filePart = request.getPart("immagine"); // Assicurati di avere l'input appropriato nel tuo form
+                Part filePart = request.getPart("immagine"); 
                 String immagineBase64 = null;
 
                 if (filePart != null && filePart.getSize() > 0) {
@@ -112,47 +99,56 @@ public class GiocoAggiungiServlet extends HttpServlet {
                     immagineBase64 = Base64.getEncoder().encodeToString(byteImmagine); // Convertila in Base64
                 }
 
-                List<Genere> generiSelezionati = new ArrayList<>();
-                if (generi != null) {
-                    try {
-                        long genereId = Long.parseLong(generi);
-                        Genere genere = BusinessLogic.getGenereById(genereId);
-                        if (genere != null) {
-                            generiSelezionati.add(genere);
-                        }
-                    } catch (NumberFormatException e) {
-                        request.setAttribute("errore", "Errore nel formato del genere: " + e.getMessage());
-                        request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
-                        return;
-                    }
-                }
-
                 // Creazione del Gioco
                 Gioco g = new Gioco(
-                    0, // id verrà generato automaticamente
+                    0, // ID generato automaticamente come dice stackoverflow funziona
                     LocalDateTime.now(), // data_creazione
                     LocalDateTime.now(), // data_ultima_modifica
-                    nome, // nome
+                    nome, 
                     data, // data_rilascio
                     descrizione, // descrizione
                     immagineBase64 != null ? Base64.getDecoder().decode(immagineBase64) : null, // byte_immagine
                     false, // eliminato
-                    prezzoDouble, // prezzo
-                    offertaSelezionata, // offertaGioco
+                    prezzoDouble, 
                     u // utente
                 );
-                g.setGenereGiochi(generiSelezionati);
 
                 // Aggiungi il gioco al database
                 Gioco aggiunto = BusinessLogic.GiocoAdd(g);
+                List<Genere> generiList = new ArrayList<>();
+                boolean genereAssociato = false; // 
+
+                if (generi != null) {
+                    for (String genereId : generi) {
+                        try {
+                            long idGenere = Long.parseLong(genereId);
+                            Genere genere = BusinessLogic.getGenereById(idGenere);
+                            if (genere != null) {
+                                generiList.add(genere);
+                                // Associa il genere al gioco
+                                BusinessLogic.aggiungiGiocoaGnere(idGenere, g.getId());
+                                genereAssociato = true; // 
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Errore nel formato dell'ID del genere: " + e.getMessage());
+                            request.setAttribute("errore", "Errore nell'ID del genere.");
+                            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+                            return;
+                        }
+                    }
+                }
+
                 if (aggiunto != null) {
                     String successAddGioco = "Gioco aggiunto con successo";
                     request.setAttribute("addGioco", successAddGioco);
                     request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
                 } else {
                     request.setAttribute("errore", "Errore nell'aggiunta del gioco.");
-                    request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+                    request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
                 }
+
+                
+                
             }
         }
     }

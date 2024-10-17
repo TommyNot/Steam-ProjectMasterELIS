@@ -35,29 +35,13 @@ public class GiocoDaoJpa implements GiocoDao{
 
 
 	public Gioco add(Gioco g) {
-	    EntityManager em = DaoFactoryJpa.getEntityManager();
-	    EntityTransaction t = em.getTransaction();
-	    try {
-	        t.begin();
-
-	        // Aggiungi i generi associati
-	        for (Genere genere : g.getGenereGiochi()) {
-	            Genere existingGenere = em.find(Genere.class, genere.getId());
-	         
-	             em.persist(genere); // Persisti un nuovo genere se necessario
-	             g.setGenereGiochi((List<Genere>) genere); // Associa il nuovo genere
-	            
-	        }
-	        
-	        em.persist(g); // Persisti il Gioco
-	        t.commit();
-	    } catch (Exception e) {
-	        if (t.isActive()) t.rollback(); // Rollback in caso di errore
-	        e.printStackTrace(); // Stampa l'eccezione per il debug
-	    } finally {
-	        em.close();
-	    }
-	    return g;
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.persist(g);
+		t.commit();
+		return g;
+	
 	}
 
 
@@ -174,35 +158,29 @@ public class GiocoDaoJpa implements GiocoDao{
 	@Override
 	public Gioco updateGiocoNome(long id, String nome) {
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
 	    Gioco gioco = null;
 
-	    try {
-	        em.getTransaction().begin();
+	    t.begin();
 
 	        
-	        gioco = em.find(Gioco.class, id);
-	        if (gioco != null) {
-	            gioco.setNome(nome); 
-	            em.merge(gioco); 
-	            System.out.println("Nome aggiornato per il gioco: " + gioco.getNome());
-	        } else {
-	            System.out.println("Nessun gioco trovato con ID: " + id);
-	        }
+	    gioco = em.find(Gioco.class, id);
+	        
+	        
+	    gioco.setNome(nome); 
+	    
+	          
 
-	        em.getTransaction().commit(); 
-	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback(); 
-	        }
-	        e.printStackTrace();
-	    }
+	    t.commit(); 
+	    em.close();
+	   
 
 	    return gioco;
 	}
 
 
 	@Override
-	public Gioco updateGiocoDataRilascio(long id, LocalDateTime data) {
+	public Gioco updateGiocoDataRilascio(long id, LocalDate data) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -227,9 +205,7 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	        em.getTransaction().commit(); 
 	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback(); 
-	        }
+	        
 	        e.printStackTrace();
 	    } 
 
@@ -256,9 +232,7 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	        em.getTransaction().commit();
 	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback(); 
-	        }
+	     
 	        e.printStackTrace();
 	    } 
 
@@ -268,30 +242,27 @@ public class GiocoDaoJpa implements GiocoDao{
 	@Override
 	public Gioco updateGiocoPrezzo(long id, double prezzo) {
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    
+	    EntityTransaction t = em.getTransaction();
 	    Gioco gioco = null;
 
-	    try {
-	        em.getTransaction().begin();
+	    t.begin();
 
 	        
-	        gioco = em.find(Gioco.class, id);
-	        if (gioco != null) {
-	            gioco.setPrezzo(prezzo); 
-	            em.merge(gioco);
-	            System.out.println("Prezzo aggiornato per il gioco: " + gioco.getNome());
-	        } else {
-	            System.out.println("Nessun gioco trovato con ID: " + id);
-	        }
+	    gioco = em.find(Gioco.class, id);
+	        
+	        
+	    gioco.setPrezzo(prezzo); 
+	    
+	          
 
-	        em.getTransaction().commit(); 
-	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback(); 
-	        }
-	        e.printStackTrace();
-	    } 
+	    t.commit(); 
+	    em.close();
+	   
 
-	    return gioco; 
+	    return gioco;
+
+	   
 	}
 
 
@@ -321,9 +292,7 @@ public class GiocoDaoJpa implements GiocoDao{
 
 	        em.getTransaction().commit(); 
 	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback(); 
-	        }
+	       
 	        e.printStackTrace();
 	    }
 

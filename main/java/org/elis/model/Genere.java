@@ -96,7 +96,13 @@ public class Genere {
 		this.offertaGenere = offertaGenere;
 	}
 	
-	
+	public List<Gioco> getGiochi() {
+	    return giochi;
+	}
+
+	public void setGiochi(List<Gioco> giochi) {
+	    this.giochi = giochi;
+	}
 	
 	
 	
