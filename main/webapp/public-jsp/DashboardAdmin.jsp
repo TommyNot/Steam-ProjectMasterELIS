@@ -1,6 +1,9 @@
+<%@page import="org.elis.businesslogic.BusinessLogic"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="org.elis.model.Utente" %> 
+    <%@page import="org.elis.model.Offerta" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,8 +149,75 @@
             <h2>Attiva offerte</h2>
         </div>
         <div class="container" id="Aggiorna">
-        	<h2>Aggiorna offerta</h2>      
+        	<h2>Aggiorna offerta</h2><br><br>
+        	<h3>Modifica data inizio offerta</h3>
+        	<form id="aggiornaInizio">
+        <label for="offerta1">Seleziona offerta</label>
+        <select id="offerta1" name="id">
+            <% List<Offerta> offerte = BusinessLogic.offertaVisualizzaTutto(); 
+               Offerta offertaSelezionata = (Offerta) request.getAttribute("offertaSelezionata"); 
+               for (Offerta offerta : offerte) { 
+            %>
+                <option value="<%= offerta.getId() %>" <%= (offertaSelezionata != null && offertaSelezionata.getId() == offerta.getId()) ? "selected" : "" %>>
+                    <%= offerta.getNome() %>
+                </option>
+            <% } %>
+        </select>
+        
+        <label for="data_inizio">Data Inizio:</label>
+        <input type="date" id="data_inizio" name="data_inizio" required>
+
+        <button type="submit">Aggiorna data</button>
+    </form>
+        	<div id="resultInizio"></div>         
+        	<div >
+        		<br><h3>Modifica data fine</h3>
+        		<form id="aggiornaFine">
+        		<label for="offerta2">Seleziona offerta</label>
+        		<select id="offerta2" name="id">
+        		 <% List<Offerta> offerte2 = BusinessLogic.offertaVisualizzaTutto(); 
+               Offerta offertaSelezionata2 = (Offerta) request.getAttribute("offertaSelezionata"); 
+               for (Offerta offerta : offerte) { 
+            %>
+                <option value="<%= offerta.getId() %>" <%= (offertaSelezionata2 != null && offertaSelezionata2.getId() == offerta.getId()) ? "selected" : "" %>>
+                    <%= offerta.getNome() %>
+                </option>
+            <% } %>
+        		</select>
+        		<label for="data_inizio">Data Fine:</label>
+		        <input type="date" id="data_fine" name="data_fine" required>
+		
+		        <button type="submit">Aggiorna data</button>
+        		</form>
+        		<div id="resultFine"></div>
+        	</div> 
+        	
+        	<div>
+        	<br><h3>modifica sconto</h3>
+        	<form id="aggiornaSconto">
+        	<label for=offerta3>Seleziona offerta</label>
+        	<select id="offerta3" name="id">
+        	 <% List<Offerta> offerte3 = BusinessLogic.offertaVisualizzaTutto(); 
+               Offerta offertaSelezionata3 = (Offerta) request.getAttribute("offertaSelezionata"); 
+               for (Offerta offerta : offerte) { 
+            %>
+                <option value="<%= offerta.getId() %>" <%= (offertaSelezionata3 != null && offertaSelezionata3.getId() == offerta.getId()) ? "selected" : "" %>>
+                    <%= offerta.getNome() %>
+                </option>
+            <% } %>
+        	</select>
+        	 <label for="sconto">Sconto (%):</label>
+       		 <input type="number" id="sconto" name="sconto" required>
+       		 
+       		 <button type="submit">Aggiorna sconto</button>
+        	</form>
+				<div id="resultSconto"></div>       	
+        	</div>
         </div>
+
+        
+        
+        
         
         <div class="container" id="Crea">
             <h2 id="creazioneOfferta">Crea offerta</h2>

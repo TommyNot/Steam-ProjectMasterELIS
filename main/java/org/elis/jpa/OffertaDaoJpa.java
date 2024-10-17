@@ -71,25 +71,58 @@ public class OffertaDaoJpa implements OffertaDao{
 	@Override
 	public Offerta updateDataInizio(long id, LocalDate data_inizio) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		Offerta o = em.find(Offerta.class, id);
-		o.setData_inizio(data_inizio);
-		t.commit();
-		return o;
-		
+	    Offerta offerta = null;
+	    LocalDateTime now = LocalDateTime.now();
+
+	    try {
+	        offerta = em.find(Offerta.class, id);
+	        if (offerta == null) {
+	            System.out.println("Offerta non trovata per l'ID: " + id);
+	            return null;
+	        }
+
+	        em.getTransaction().begin();
+	        offerta.setData_inizio(data_inizio);
+	        offerta.setData_ultima_modifica(now);
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
+	    return offerta;
 	}
+		
 
 	@Override
 	public Offerta updateDataFine(long id, LocalDate data_fine) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		Offerta o = em.find(Offerta.class, id);
-		o.setData_fine(data_fine);
-		t.commit();
-		return o;
-		
+	    Offerta offerta = null;
+	    LocalDateTime now = LocalDateTime.now();
+
+	    try {
+	        offerta = em.find(Offerta.class, id);
+	        if (offerta == null) {
+	            System.out.println("Offerta non trovata per l'ID: " + id);
+	            return null;
+	        }
+
+	        em.getTransaction().begin();
+	        offerta.setData_inizio(data_fine);
+	        offerta.setData_ultima_modifica(now);
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
+	    return offerta;
 	}
 
 	@Override
