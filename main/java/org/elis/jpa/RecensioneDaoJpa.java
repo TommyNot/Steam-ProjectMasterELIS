@@ -89,7 +89,7 @@ public class RecensioneDaoJpa implements RecensioneDao {
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
 	    
 	    try {
-	        Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.idGioco.id = :idGioco");
+	        Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.gioco.id = :idGioco");
 	        q.setParameter("idGioco", idGioco);
 	        return q.getResultList();
 	        

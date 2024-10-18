@@ -40,7 +40,7 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        
 		String voto = request.getParameter("voto");
-		String testo = request.getParameter("testo");
+		String testo = request.getParameter("recensione");
 		String id = request.getParameter("idGioco");
 		
         if (voto == null || voto.isEmpty() || testo == null || testo.isEmpty() || id == null || id.isEmpty()) {
@@ -63,16 +63,10 @@ public class RecensioneAggiungiServlet extends HttpServlet {
             return;
         }
         
-        long idGioco = 0;
-		  
-		  try {
+     
 	        	
-	        	idGioco = Long.parseLong(id);
-	        	
-	        }catch(Exception e) {
-	        	
-	        	System.out.println("errore");
-	        }
+			  long idGioco = Long.parseLong(id);
+	    
 		  
 		  //trovo il gioco dall'id
 		  Gioco gioco = BusinessLogic.findGiocoById(idGioco);
@@ -97,6 +91,7 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 	                    System.out.println("L'utente è un utente base.");
 	                    Recensione aggiunta = new Recensione(0, LocalDateTime.now(), LocalDateTime.now(), votoRecensione, testo, gioco, utente );
 	                    BusinessLogic.RecensioneAdd(aggiunta);
+	                    request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
 	                    if (aggiunta != null) {
 	                    	 request.setAttribute("successo", "Recensione creata con successo.");
 	                    } 

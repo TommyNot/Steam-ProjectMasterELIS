@@ -131,55 +131,110 @@
 
 		
 <div class="game-details">
-  <% 
-    Gioco gioco = (Gioco) request.getAttribute("giochi");
-    Utente u = (Utente) session.getAttribute("utenteLoggato");
+    <% 
+        Gioco gioco = (Gioco) request.getAttribute("giochi");
+        Utente u = (Utente) session.getAttribute("utenteLoggato");
+        Offerta offerta = (Offerta) request.getAttribute("offerta");
 
-    if (gioco != null) {
-  %>
-    <h1><%= gioco.getNome() %></h1>
-    <p><%= gioco.getDescrzione() %></p>
-    <p>Prezzo: €<%= gioco.getPrezzo() %></p>
+        if (gioco != null) {
+    %>
+    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" style="width: 220px; height: 300px;" />
+  
+    <h1>Nome: <%= gioco.getNome() %></h1>
+    <p>Descrizione: <%= gioco.getDescrzione() %></p>
+
+    <div class="discount">
+        <% if (offerta != null) { %>
+            <h4 class="product-discount">Sconto: <%= offerta.getSconto() %>% off</h4>
+            <h4 class="product-old-price" style="text-decoration: line-through; color: #999;">€<%= gioco.getPrezzo() %></h4>
+            <h4 class="product-price" style="color: #f39c12; font-weight: bold;">
+                Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %>
+            </h4>
+        <% } else { %>
+            <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
+        <% } %>
+    </div>
+
     <p>Data di rilascio: <%= gioco.getData_rilascio() %></p>
-    
-    <!--  recensioni -->
+
+    <!-- Se l'utente è loggato, mostra il form per lasciare una recensione -->
+    <div class="review-section">
+        <% if (u != null) { %>
+            <button class="btn" id="showReviewFormBtn" style="display: inline;">Lascia una recensione</button>
+
+            <form action="<%=request.getContextPath() %>/RecensioneAggiungiServlet" class="review-form" id="reviewForm" style="display: none;" method="post">
+                <h2>Lascia una recensione</h2>
+                
+                <label for="voto">Valutazione:</label>
+                <select name="voto" id="voto" required>
+                    <option value="" disabled selected>Seleziona un voto</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <textarea name="recensione" placeholder="Scrivi la tua recensione qui..." required></textarea>
+                <input type="hidden" value="<%=gioco.getId()%>" name="idGioco" id="idGioco">
+                <button class="btn" type="submit">Invia</button>
+            </form>
+        <% } else { %>
+            <p>Accedi per lasciare una recensione.</p>
+        <% } %>
+    </div>
+
+    <form action="" >
+        <button class="btn">Aggiungi alla libreria</button>
+    </form>
+
+    <!-- Recensioni -->
     <div class="user-reviews">
-      <h2>Recensioni degli utenti</h2>
-      <%
-        // Se l'utente è loggato, recupera le sue recensioni
-        if (u != null) {
-          List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdUtente(u.getId());
-          if (recensioni != null && !recensioni.isEmpty()) {
-            for (Recensione recensione : recensioni) {
-      %>
-              <div class="recensione">
+        <h2>Recensioni degli utenti</h2>
+        <%
+            List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
+            if (recensioni != null && !recensioni.isEmpty()) {
+                for (Recensione recensione : recensioni) {
+        %>
+            <div class="recensione">
                 <h3><%= recensione.getRecensioneUtente().getUsername() %></h3>
                 <p><%= recensione.getTesto() %></p>
-                <p>Valutazione: <%= recensione.getVoto() %>/5</p>
-              </div>
-      <%
+                      <p>Valutazione: 
+                <%
+                    // Mostra le stelle in base al voto
+                    for (int i = 1; i <= 5; i++) {
+                        if (i <= recensione.getVoto()) {
+                %>
+                    <i class="bi bi-star-fill" style="color: #f39c12;"></i>
+                <%
+                        } else {
+                %>
+                    <i class="bi bi-star" style="color: #ddd;"></i>
+                <%
+                        }
+                    }
+                %>
+                /5
+            </p>
+            </div>
+        <%
+                }
+            } else {
+        %>
+            <p>Non ci sono recensioni per questo gioco.</p>
+        <%
             }
-          } else {
-      %>
-          <p>Non ci sono recensioni per questo gioco.</p>
-      <%
-          }
-        } else {
-          // Se l'utente non è loggato, mostra un messaggio o altre recensioni generali
-      %>
-        <p>Accedi per visualizzare le tue recensioni personali o lasciare una recensione.</p>
-      <%
-        }
-      %>
+        %>
     </div>
-  <%
-    } else {
-  %>
+<%
+        } else {
+%>
     <p>Gioco non trovato.</p>
-  <%
-    }
-  %>
+<%
+        }
+%>
 </div>
+
 
 
 
@@ -218,5 +273,7 @@
     </footer>
   
   <script src="<%= request.getContextPath() %>/Js/PageGiochi.js"></script>
+  <script src="<%= request.getContextPath() %>/Js/DettagliGiocoScript.js"></script>
+
 </body>
 </html>

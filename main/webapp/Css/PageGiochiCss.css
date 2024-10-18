@@ -389,6 +389,7 @@ input[type="text"]:focus {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    
 }
 
 .btn-addCart{
@@ -586,41 +587,47 @@ footer {
     max-width: 800px; /* Limita la larghezza massima del contenitore */
     margin: 20px auto; /* Centra il contenitore nella pagina */
     padding: 20px; /* Aggiunge spazio interno */
-    background-color: #f9f9f9; /* Colore di sfondo chiaro */
-    border: 1px solid #ddd; /* Bordo grigio chiaro */
-    border-radius: 8px; /* Angoli arrotondati */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    background-color: #1c1c1c; /* Colore di sfondo scuro */
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Ombra forte */
+    color: #ffffff; /* Colore del testo chiaro */
 }
 
 .game-details h1 {
-    font-size: 2em; /* Dimensione del font per il titolo principale */
-    margin-bottom: 10px; /* Spazio sotto il titolo */
-    color: #333; /* Colore del testo */
+    font-size: 2.0em; /* Dimensione del font per il titolo principale */
+    margin-bottom: 15px; /* Spazio sotto il titolo */
+    color: #4B89B7; /* Colore giallo per il titolo */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Ombra sul testo */
 }
 
 .game-details p {
-    font-size: 1.1em; /* Dimensione del font per i paragrafi */
-    margin: 5px 0; /* Spazio verticale tra i paragrafi */
-    color: #555; /* Colore del testo */
+    font-size: 1.2em; /* Dimensione del font per i paragrafi */
+    margin: 8px 0; /* Spazio verticale tra i paragrafi */
+    color: #e0e0e0; /* Colore del testo chiaro */
 }
 
 .user-reviews {
     margin-top: 20px; /* Spazio sopra la sezione delle recensioni */
     padding: 15px; /* Spazio interno per la sezione delle recensioni */
-    background-color: #fff; /* Colore di sfondo bianco per la sezione recensioni */
-    border: 1px solid #ccc; /* Bordo grigio chiaro */
+    background-color: #282828; /* Colore di sfondo scuro per la sezione recensioni */
+    border: 1px solid #444; /* Bordo grigio scuro */
     border-radius: 8px; /* Angoli arrotondati */
 }
 
 .user-reviews h2 {
-    font-size: 1.5em; /* Dimensione del font per il titolo delle recensioni */
+    font-size: 1.8em; /* Dimensione del font per il titolo delle recensioni */
     margin-bottom: 10px; /* Spazio sotto il titolo delle recensioni */
-    color: #333; /* Colore del testo */
+    color: #4B89B7; /* Colore giallo per il titolo */
 }
 
 .recensione {
     padding: 10px; /* Spazio interno per ogni recensione */
-    border-bottom: 1px solid #eee; /* Bordo inferiore grigio chiaro */
+    border-bottom: 1px solid #444; /* Bordo inferiore grigio scuro */
+    transition: background-color 0.3s; /* Transizione per il colore di sfondo */
+}
+
+.recensione:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Colore di sfondo al passaggio del mouse */
 }
 
 .recensione:last-child {
@@ -628,18 +635,72 @@ footer {
 }
 
 .recensione h3 {
-    font-size: 1.2em; /* Dimensione del font per il nome dell'utente */
-    color: #007BFF; /* Colore blu per il nome dell'utente */
+    font-size: 1.3em; /* Dimensione del font per il nome dell'utente */
+    color: #4B89B7; /* Colore giallo per il nome dell'utente */
+    margin-bottom: 5px; /* Spazio sotto il nome dell'utente */
 }
 
 .recensione p {
     margin: 5px 0; /* Spazio verticale tra i paragrafi delle recensioni */
-    color: #666; /* Colore del testo per il contenuto delle recensioni */
+    color: #cccccc; /* Colore del testo per il contenuto delle recensioni */
 }
 
 .recensione p:last-child {
     font-weight: bold; /* Valutazione in grassetto */
+    color: green; /* Colore arancione per la valutazione */
 }
+
+.review-form {
+    background-color: #1c1c1c; /* Sfondo scuro simile a Steam */
+    border-radius: 10px; /* Angoli arrotondati */
+    padding: 20px;
+    max-width: 400px; /* Larghezza massima del form */
+    margin: 20px auto; /* Centra il form */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Ombra per profondità */
+    color: #ffffff; /* Testo bianco */
+    display: none;
+}
+
+.review-form h2 {
+    margin-bottom: 10px;
+    font-size: 24px; /* Dimensione del titolo */
+    text-align: center; /* Allineamento del titolo al centro */
+}
+
+.review-form label {
+    display: block; /* Fa sì che il label occupi l'intera larghezza */
+    margin-bottom: 5px; /* Spaziatura inferiore */
+}
+
+.review-form select {
+    width: 100%; /* Larghezza totale del select */
+    padding: 10px;
+    border: none; /* Rimuove il bordo */
+    border-radius: 5px; /* Angoli arrotondati */
+    background-color: #444; /* Sfondo simile a Steam */
+    color: #fff; /* Testo bianco */
+    margin-bottom: 15px; /* Spaziatura inferiore */
+}
+
+.review-form textarea {
+    width: 100%; /* Larghezza totale del textarea */
+    height: 100px; /* Altezza del textarea */
+    padding: 10px;
+    border: none; /* Rimuove il bordo */
+    border-radius: 5px; /* Angoli arrotondati */
+    margin-bottom: 15px; /* Spaziatura inferiore */
+    resize: none; /* Disabilita il ridimensionamento */
+    background-color: #333; /* Sfondo del textarea */
+    color: #fff; /* Testo bianco */
+}
+
+.review-form textarea::placeholder {
+    color: #bbb; /* Colore del testo del segnaposto */
+}
+
+
+
+
 
 
 /* Layout responsivo */
