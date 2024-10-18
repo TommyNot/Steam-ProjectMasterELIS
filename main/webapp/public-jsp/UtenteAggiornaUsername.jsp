@@ -51,6 +51,18 @@
 			</a>
         </nav>
     </div>
+    
+     <%
+        String messaggioSuccesso = (String) request.getAttribute("messaggioSuccesso");
+        if (messaggioSuccesso != null) {
+    %>
+        <div class="success">
+            <%= messaggioSuccesso %>
+        </div>
+    <%
+        }
+    %>
+    
  
     <div class="container" id="container">
 		<form action="<%=request.getContextPath()%>/UtenteAggiornaUsernameServlet" method="post">
@@ -63,7 +75,7 @@
 			
 			<label for="username" style="font-weight: bold;">Nuovo username</label>
 			<input type="text"  id="username" name="nuovoUsername" required />
-			<button type="submit" id="Reset">Reset</button>
+			<button type="submit" id="Reset">Invia</button>
 		</form>
 	</div>
 

@@ -80,7 +80,6 @@ public class LibreriaDaoJpa implements LibreriaDao {
 			l = em.find(Libreria.class, id);
 	    	 if (l == null) {
 	             System.out.println("Libreria non trovata per l'ID: " + id);
-	             return null;
 	         }
 	    	 
 	    	 t.begin();

@@ -38,7 +38,7 @@ public class LibreriaFindByNameServlet extends HttpServlet {
 		Libreria nomeCercato = BusinessLogic.findLibreriaByNome(ricerca);
 		
 		if(nomeCercato == null){
-			String errore = "Nessuna libreria trovata con il nome " + ricerca;
+			String errore = "Nessuna libreria trovata con il nome " + ricerca);
 			request.setAttribute("errore", errore);
 			return;
 		}

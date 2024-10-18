@@ -38,6 +38,16 @@ public class LibreriaAggiornaNomeServlet extends HttpServlet {
 			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 		}
+		long idLibreria = 0;
+		String idLibreriaUtente = request.getParameter("idLibreria");
+		try {
+        	
+        	idLibreria = Long.parseLong(idLibreriaUtente);
+        	
+        }catch(Exception e) {
+        	
+        	System.out.println("errore");
+        }
 		
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 		if(utente != null) {
@@ -47,7 +57,7 @@ public class LibreriaAggiornaNomeServlet extends HttpServlet {
 			if(u != null) {
 				boolean isUtenteBase = u.getRuolo() == Ruolo.UTENTE_BASE;
 				if(isUtenteBase) {
-					Libreria libreriaNuovoNome = BusinessLogic.updateLibreriaNome(idUtente, nomeNuovo);
+					Libreria libreriaNuovoNome = BusinessLogic.updateLibreriaNome(idLibreria, nomeNuovo);
 					
 					if(libreriaNuovoNome != null) {
 						System.out.println("Il nome della libreria è stato aggiornato con successo.");

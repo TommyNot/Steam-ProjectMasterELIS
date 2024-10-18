@@ -1,17 +1,18 @@
+<%@page import="org.elis.model.Utente"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-     <meta charset="UTF-8" meta name="viewport" content="width=device-width, initial-scale=1">
-     <title>Update email Page </title>
-     <link rel="stylesheet" href="<%= request.getContextPath() %>/Css/ResetPasswordCss.css">
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" type="text/css">
+	<meta charset="UTF-8" meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Elimina account Page</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/Css/ResetPasswordCss.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" type="text/css">
 </head>
 <body>
     <div id="logo">
         <nav>
-        <a  href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp">
+        <a  href="<%=request.getContextPath()%>/public-jsp/HomePagePrincipale.jsp">
            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 				 width="300px" height="189px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
 				 xml:space="preserve">
@@ -50,8 +51,7 @@
 			</a>
         </nav>
     </div>
-    
-     <%
+    <%
         String messaggioSuccesso = (String) request.getAttribute("messaggioSuccesso");
         if (messaggioSuccesso != null) {
     %>
@@ -61,18 +61,18 @@
     <%
         }
     %>
-
  
     <div class="container" id="container">
-		<form action="<%=request.getContextPath()%>/UtenteAggiornaEmailServlet" method="post">
-			<h1>Modifica email</h1>
+		<form action="<%=request.getContextPath()%>/UtenteEliminaByUsernameServlet" method="post">
+			<h1>Elimina account</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
 				<a href="#" class="social"><i class="bi bi-google"></i></a>
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
-			<label for="email" style="font-weight: bold;">Email</label>
-			<input type="email"  id="email" name="nuovaEmail" required />
+			
+			<label for="username" style="font-weight: bold;">Username dell'account da rimuovere</label>
+			<input type="text"  id="username" name="usernameElimina" required />
 			<button type="submit" id="Reset">Invia</button>
 		</form>
 	</div>

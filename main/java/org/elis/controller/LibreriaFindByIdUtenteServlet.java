@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
@@ -43,16 +44,23 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 				
 				if(isUtenteBase) {
 					List<Libreria> librerie = BusinessLogic.findLibreriaByIdUtente(idUtente);
-					List<Gioco> giochiUtente = BusinessLogic.VisualizzaTuttiGiochi(idUtente);
+					//List<Gioco> giochiUtente = BusinessLogic.VisualizzaTuttiGiochi(idUtente);
+					List<Gioco> giochi;
+					if(librerie != null && librerie.size() > 0) {
+						giochi = BusinessLogic.findGiochiByIdLibreria(librerie.get(0).getId());
+					}
+					else {
+						giochi = new ArrayList<Gioco>();
+					}
 					System.out.println(librerie);
 					if(librerie == null || librerie.isEmpty()) {
-						request.setAttribute("giochi", giochiUtente);
+						request.setAttribute("giochi", giochi);
 						request.setAttribute("librerieUtente", librerie);
 						request.setAttribute("errorMessage", "Nessun gioco disponibile.");
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
 						return;
 					}else {
-						request.setAttribute("giochi", giochiUtente);
+						request.setAttribute("giochi", giochi);
 						request.setAttribute("librerieUtente", librerie);
 						System.out.println("Lista libreria trovata con successo dell'utente con id " + idUtente);
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);

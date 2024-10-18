@@ -165,7 +165,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: 70%;
   height: auto;
 }
 
@@ -198,7 +198,11 @@ body {
   border: none;
 }
 
-.profile-picture{
+.img-icon{
+	width: 5vw;
+}
+
+/*.profile-picture{
   width: 40px;
   height: 40px;
   border-radius: 200px;
@@ -250,7 +254,7 @@ body {
 
 .profile-small {
   display: none;
-}
+}*/
 
 .ui-row-2 {
   display: flex;
@@ -994,9 +998,6 @@ body {
     height: auto;
     fill: dimgray;
   }
-  .search {
-    display: none;
-  }
 }
 
 @media (max-width: 970px) {
@@ -1048,13 +1049,6 @@ body {
 }
 
 @media (max-width: 475px) {
-  .left-sidebar > div {
-    width: 35px;
-    height: 35px;
-  }
-  .left-sidebar > div > svg {
-    width: 20px;
-  }
   .ui-row-1 {
     padding: 30px 20px 20px 20px;
   }
