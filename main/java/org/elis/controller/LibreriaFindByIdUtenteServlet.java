@@ -33,12 +33,18 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 			request.getRequestDispatcher("public-jsp/LoginPage.jsp");
 			return;
 		}
-		
+		long idLibreria = 0;
+		String id = request.getParameter("id_libreria");
+		//Convert id to long
+		try {
+			idLibreria = Long.parseLong(id);
+		}catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
 		Utente utente = (Utente) session.getAttribute("utenteLoggato");
 		if(utente != null) {
 			long idUtente = utente.getId();
 			Utente u = BusinessLogic.UtenteFindById(idUtente);
-			System.out.println("PIPPO");
 			if(u != null) {
 				boolean isUtenteBase = u.getRuolo() == Ruolo.UTENTE_BASE;
 				
@@ -47,7 +53,11 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 					//List<Gioco> giochiUtente = BusinessLogic.VisualizzaTuttiGiochi(idUtente);
 					List<Gioco> giochi;
 					if(librerie != null && librerie.size() > 0) {
-						giochi = BusinessLogic.findGiochiByIdLibreria(librerie.get(0).getId());
+						if(idLibreria > 0) {
+							giochi = BusinessLogic.findGiochiByIdLibreria(idLibreria);
+						}else {
+							giochi = BusinessLogic.findGiochiByIdLibreria(librerie.get(0).getId());
+						}
 					}
 					else {
 						giochi = new ArrayList<Gioco>();

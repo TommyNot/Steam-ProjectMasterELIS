@@ -165,7 +165,7 @@
         				<p class="testo-lista-librerie">Nessuna libreria disponibile</p>
         		<% 	}else{
         			for(Libreria l: librerie){ %>
-        					<a href="#" class="list-group-item list-group-item-action list-group-item-dark">ID: <%=l.getId() + " " %> <br>Nome: <%= l.getNome() %></a>
+        					<a href="LibreriaFindByIdUtenteServlet?id_libreria=<%= l.getId() %>" class="list-group-item list-group-item-action list-group-item-dark">ID: <%=l.getId() + " " %> <br>Nome: <%= l.getNome() %></a>
         					
         		<%
 		        		}

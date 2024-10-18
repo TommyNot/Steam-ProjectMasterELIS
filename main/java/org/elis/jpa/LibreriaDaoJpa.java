@@ -125,7 +125,7 @@ public class LibreriaDaoJpa implements LibreriaDao {
 	@Override
 	public List<Gioco> findGiochiByIdLibreria(long id_libreria) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
-		Query q = em.createQuery("select a from libreria_gioco a where a.id_libreria=:id_libreria");
+		Query q = em.createQuery("select gioco from Gioco gioco join gioco.libreriaGiochi libreria where libreria.id=:id_libreria");
 		q.setParameter("id_libreria", id_libreria);
 		try {
 			return q.getResultList();
