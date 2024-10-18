@@ -119,7 +119,7 @@
         	List<Gioco> g=BusinessLogic.trovaTuttiGiochi();%>
         <h2>Numero di utenti registrati: <%=u.size() %></h2><br>
         <h2>Numero di giochi attualmente nel sito: <%=g.size() %></h2>
-        <canvas id="myChart" width="100" height="100"></canvas>
+        <canvas id="myChart"></canvas>
         </div>
         
         <div class="container " id="Ban">

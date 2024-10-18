@@ -391,16 +391,17 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 						           data: {
 						               labels: ['Utenti Registrati', 'Giochi Disponibili'],
 						               datasets: [{
-						                   label: 'Numero',
-						                   data: [utentiCount, giochiCount],
-						                   backgroundColor: [
-						                       'rgba(75, 192, 192, 0.2)',
-						                       'rgba(153, 102, 255, 0.2)'
-						                   ],
-						                   borderColor: [
-						                       'rgba(75, 192, 192, 1)',
-						                       'rgba(153, 102, 255, 1)'
-						                   ],
+						                   label: 'Utenti Registrati',
+						                   data: [utentiCount, 0],
+						                   backgroundColor: 'rgba(75, 192, 192, 0.2)',
+						                   borderColor: 'rgba(75, 192, 192, 1)',
+						                   borderWidth: 1
+						               },
+						               {
+						                   label: 'Giochi Disponibili',
+						                   data: [0, giochiCount],
+						                   backgroundColor: 'rgba(153, 102, 255, 0.2)',
+						                   borderColor: 'rgba(153, 102, 255, 1)',
 						                   borderWidth: 1
 						               }]
 						           },
@@ -410,7 +411,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 						                       beginAtZero: true
 						                   }
 						               },
-									   maintainAspectRatio: false
+						               maintainAspectRatio: false
 						           }
 						       });
 						   });
