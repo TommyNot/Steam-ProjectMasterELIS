@@ -20,7 +20,7 @@
 <body>
 	 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 		              width="90px" height="22px" viewBox="0 0 355.666 89.333" enable-background="new 0 0 355.666 89.333"
 		              xml:space="preserve">
@@ -79,7 +79,7 @@
                     <%
                         }
                     %>
-                        <img src=https://i.pinimg.com/originals/30/ca/8e/30ca8ed3c149dffe00475f1b96f18ab4.jpg alt="avatar utente" class="img-icon">
+                        <img id="avatar" alt="avatar utente" class="img-icon">
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/PageGiochi.jsp">Negozio</a></li>
@@ -101,6 +101,7 @@
         	<div class="container-2">
         		<h2 class="testo-lista-librerie">Le tue librerie</h2>
         		<button id="toggle-form-aggiungi-btn" class="testo-lista-librerie ancore">Aggiungi libreria</button>
+        		<button id="toggle-form-modifica-btn" class="testo-lista-librerie ancore">Modifica nome libreria</button>
         		<button id="toggle-form-elimina-btn" class="testo-lista-librerie ancore">Elimina libreria</button>
         	</div>
         	<div class="container-3" id="form-container-aggiungi" style="display: none;">
@@ -114,6 +115,32 @@
 			        </div>
 			    </form>
 			</div>
+			
+					<%
+				        String messaggioSuccesso = (String) request.getAttribute("messaggioSuccesso");
+				        if (messaggioSuccesso != null) {
+				    %>
+				        <div class="success">
+				            <%= messaggioSuccesso %>
+				        </div>
+				    <%
+				        }
+				    %>
+			<div class="container-3" id="form-container-modifica" style="display: none;">
+			    <form action="<%= request.getContextPath()%>/LibreriaAggiornaNomeServlet" method="post" class="form">
+			    	<label for="nome" class="etichetta">Inserisci l'ID della libreria da modificare:</label>
+			        <input type="text" id="nome" name="idLibreria" required>
+			        <label for="nome" class="etichetta">Nuovo nome libreria:</label>
+			        <input type="text" id="nome" name="nomeNuovoInput" required>
+			        
+			        <div class="button-group">
+			            <button type="submit">Modifica nome libreria</button>
+			            <button type="reset">Reset</button>
+			        </div>
+
+			    </form>
+			</div>
+			
 			
 			<div class="container-3" id="form-container-rimuovi" style="display: none;">
 			    <form action="<%= request.getContextPath()%>/LibreriaEliminaServlet" method="post" class="form">
@@ -134,18 +161,22 @@
         			List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi");
         			Utente utenteId = (Utente) session.getAttribute("utenteLoggato");
         			idUtente = utenteId.getId();
-        			List<Libreria> libreria = BusinessLogic.findLibreriaByIdUtente(idUtente);
-        			if(libreria == null || librerie.isEmpty()){ %>
+        			if(librerie == null || librerie.isEmpty()){ %>
         				<p class="testo-lista-librerie">Nessuna libreria disponibile</p>
         		<% 	}else{
         			for(Libreria l: librerie){ %>
-        					<a href="#" class="list-group-item list-group-item-action list-group-item-dark">ID: <%=l.getId() + " " %> <br>Nome: <%= l.getNome() %></a>	
-        				<% 	for(Gioco gioco: giochiUtente){%>
-        						<p style="color: white;">	<%= gioco.getNome()%> </p>
-        		<% 		}
-        		}
-        	}
+        					<a href="#" class="list-group-item list-group-item-action list-group-item-dark">ID: <%=l.getId() + " " %> <br>Nome: <%= l.getNome() %></a>
+        					
+        		<%
+		        		}
+		        	}
         		%>
+        			
+        		</div>
+        		<div class="lista-giochi">
+        		<% 	for(Gioco gioco: giochiUtente){%>
+        						<p style="color: white;">	<%= gioco.getNome()%> </p>
+        		<% 		} %>
         		</div>
         	</div>
         </div>
