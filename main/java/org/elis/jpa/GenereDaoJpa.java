@@ -100,4 +100,20 @@ public class GenereDaoJpa implements GenereDao{
 		return genere;
 	}
 
-}
+	@Override
+	public List<Genere> addGenereOfferta(long idOfferta) {
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    
+	    try {
+	        Query q = em.createQuery("SELECT g FROM Genere g WHERE g.genereOfferta.id = :idOfferta");
+	        q.setParameter("idOfferta", idOfferta);
+	        return q.getResultList();
+	        
+	    } catch (NoResultException e) {
+	        e.printStackTrace();
+	        return null;  
+	    }
+	}
+	}
+
+

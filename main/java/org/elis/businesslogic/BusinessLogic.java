@@ -271,5 +271,8 @@ public static Recensione eliminaRecensione(long id) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().deleteRecensioneById(id);
 }
 
+public static List<Genere> genereOffertaAdd(long idOfferta){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().addGenereOfferta(idOfferta);
+}
 
 }
