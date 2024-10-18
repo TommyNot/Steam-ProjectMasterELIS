@@ -274,5 +274,8 @@ public static Recensione eliminaRecensione(long id) {
 public static List<Genere> genereOffertaAdd(long idOfferta){
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().addGenereOfferta(idOfferta);
 }
+public static List<Gioco>trovaTuttiGiochi(){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().findAll();
+}
 
 }

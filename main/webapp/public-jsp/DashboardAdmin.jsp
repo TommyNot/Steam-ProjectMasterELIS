@@ -4,6 +4,8 @@
     pageEncoding="UTF-8"%>
     <%@ page import="org.elis.model.Utente" %> 
     <%@page import="org.elis.model.Offerta" %>
+    <%@page import="org.elis.model.Genere" %>
+    <%@page import="org.elis.model.Gioco" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,6 +114,12 @@
                         }
                     %>
         </div>
+        <div class="container active">
+        	<%List<Utente> u=BusinessLogic.UtenteFindAll(); 
+        	List<Gioco> g=BusinessLogic.trovaTuttiGiochi();%>
+        <h2>Numero di utenti registrati: <%=u.size() %></h2><br>
+        <h2>Numero di giochi attualmente nel sito: <%=g.size() %></h2>
+        </div>
         
         <div class="container " id="Ban">
             <h2>Ban utente</h2>
@@ -147,7 +155,33 @@
 
         <div class="container " id="Gestisci">
             <h2>Attiva offerte</h2>
+        	    <form id="associaGeneriOfferta" method="post" action="/SteamProject/AssociaGeneriOffertaServlet">
+       			 <label for=offerta5>Seleziona offerta:</label>
+        	<select id="offerta5" name="id">
+        	 <% List<Offerta> offerte5 = BusinessLogic.offertaVisualizzaTutto(); 
+               Offerta offertaSelezionata5 = (Offerta) request.getAttribute("offertaSelezionata3"); 
+               for (Offerta offerta : offerte5) { 
+            %>
+                <option value="<%= offerta.getId() %>" <%= (offertaSelezionata5 != null && offertaSelezionata5.getId() == offerta.getId()) ? "selected" : "" %>>
+                    <%= offerta.getNome() %>
+                </option>
+            <% } %>
+        	</select>
+        <br><label for="generi">Seleziona Generi</label>
+            <% List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri(); 
+        		Genere genereSelezionato=(Genere) request.getAttribute("genereSelezionato");
+               for (Genere genere : generi) { %>
+                 <div class="checkbox">
+                <input type="checkbox" id="genere_<%= genere.getId() %>" name="id" value="<%= genere.getId() %>">
+                <label for="genere_<%= genere.getId() %>"><%= genere.getNome() %></label>
+            </div>
+            <% } %>
+
+        <button type="submit">Associa</button>
+    </form>
+    <div id="resultAssociazione"></div>
         </div>
+        
         <div class="container" id="Aggiorna">
         	<h2>Aggiorna offerta</h2><br><br>
         	<h3>Modifica data inizio offerta</h3>
