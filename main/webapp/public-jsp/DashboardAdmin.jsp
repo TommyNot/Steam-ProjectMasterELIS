@@ -119,6 +119,7 @@
         	List<Gioco> g=BusinessLogic.trovaTuttiGiochi();%>
         <h2>Numero di utenti registrati: <%=u.size() %></h2><br>
         <h2>Numero di giochi attualmente nel sito: <%=g.size() %></h2>
+        <canvas id="myChart" width="100" height="100"></canvas>
         </div>
         
         <div class="container " id="Ban">
@@ -311,8 +312,12 @@
 				<div id="resultId"></div>
         </div>
     </main>
-
-
+    <script>const utentiCount = <%= u.size() %>;
+        	const giochiCount = <%= g.size() %>;
+        </script>
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+	</script>
     <script src="<%= request.getContextPath() %>/Js/DashboardAdminScript.js"></script>
 </body>
 </html>
