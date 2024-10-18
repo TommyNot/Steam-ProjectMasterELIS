@@ -138,7 +138,9 @@
 
         if (gioco != null) {
     %>
-    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" style="width: 220px; height: 300px;" />
+    <div class="image-container" >
+    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" />
+</div>
   
     <h1>Nome: <%= gioco.getNome() %></h1>
     <p>Descrizione: <%= gioco.getDescrzione() %></p>
@@ -183,59 +185,109 @@
             <p>Accedi per lasciare una recensione.</p>
         <% } %>
     </div>
+    
+<!-- Se l'utente è loggato, mostra il pulsante e il form nascosto per aggiungere alla libreria -->
+<div class="library-section">
+    <% if (u != null) { %>
+        <!-- Pulsante per mostrare il form per aggiungere alla libreria -->
+        <button class="btn" id="showAddFormBtn" style="display: inline;">Aggiungi alla libreria</button>
 
-    <form action="" >
-        <button class="btn">Aggiungi alla libreria</button>
-    </form>
-
-    <!-- Recensioni -->
-    <div class="user-reviews">
-        <h2>Recensioni degli utenti</h2>
-        <%
-            List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
-            if (recensioni != null && !recensioni.isEmpty()) {
-                for (Recensione recensione : recensioni) {
-        %>
-            <div class="recensione">
-                <h3><%= recensione.getRecensioneUtente().getUsername() %></h3>
-                <p><%= recensione.getTesto() %></p>
-                      <p>Valutazione: 
-                <%
-                    // Mostra le stelle in base al voto
-                    for (int i = 1; i <= 5; i++) {
-                        if (i <= recensione.getVoto()) {
-                %>
-                    <i class="bi bi-star-fill" style="color: #f39c12;"></i>
-                <%
-                        } else {
-                %>
-                    <i class="bi bi-star" style="color: #ddd;"></i>
-                <%
-                        }
-                    }
-                %>
-                /5
-            </p>
-            </div>
-        <%
-                }
-            } else {
-        %>
-            <p>Non ci sono recensioni per questo gioco.</p>
-        <%
-            }
-        %>
-    </div>
-<%
-        } else {
-%>
-    <p>Gioco non trovato.</p>
-<%
-        }
-%>
+        <!-- Form nascosto per aggiungere il gioco alla libreria -->
+        <form action="<%=request.getContextPath() %>/LibreriaAggiungiServlet" class="library-form" id="addForm" style="display: none;" method="post">
+            <h2>Aggiungi alla tua libreria</h2>
+            
+            <label for="nomeLibreria">Inserisci nome della libreria:</label>
+            <input type="text" name="nomeLibreria" id="nomeLibreria" placeholder="Nome della libreria" required>
+            
+            <!-- Campo nascosto per passare l'ID del gioco -->
+            <input type="hidden" value="<%= gioco.getId() %>" name="idGioco" id="idGioco">
+            
+            <!-- Pulsante per inviare il form -->
+            <button class="btn" type="submit">Aggiungi</button>
+        </form>
+    <% } else { %>
+        <!-- Messaggio che invita l'utente ad accedere -->
+        <p>Accedi per aggiungere il gioco alla tua libreria.</p>
+    <% } %>
 </div>
 
 
+   <!-- Recensioni -->
+
+<div class="user-reviews">
+    <h2>Recensioni degli utenti</h2>
+    <%
+        // Recupera le recensioni per il gioco
+        List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
+
+        // Calcola il numero totale di recensioni e la media delle valutazioni
+        double sommaVoti = 0;
+        int numeroRecensioni = 0;
+
+        if (recensioni != null) {
+            numeroRecensioni = recensioni.size();
+            for (Recensione recensione : recensioni) {
+                sommaVoti += recensione.getVoto();
+            }
+        }
+
+        // Calcola la media
+        double mediaVoti = (numeroRecensioni > 0) ? (sommaVoti / numeroRecensioni) : 0;
+    %>
+    
+    <h3>Numero totale di recensioni: <%= numeroRecensioni %></h3>
+    <h4>Media valutazione: 
+        <%
+            for (int i = 1; i <= 5; i++) {
+                if (i <= Math.round(mediaVoti)) {
+        %>
+                    <i class="bi bi-star-fill" style="color: #f39c12;"></i>
+        <%
+                } else {
+        %>
+                    <i class="bi bi-star" style="color: #ddd;"></i>
+        <%
+                }
+            }
+        %>
+        (<%= String.format("%.2f", mediaVoti) %>/5)
+    </h4>
+    
+    <%
+        if (numeroRecensioni > 0) {
+            for (Recensione recensione : recensioni) {
+    %>
+                <div class="recensione">
+                    <h3><%= recensione.getRecensioneUtente().getUsername() %></h3>
+                    <p><%= recensione.getTesto() %></p>
+                    <p>Valutazione: 
+                    <%
+                        for (int i = 1; i <= 5; i++) {
+                            if (i <= recensione.getVoto()) {
+                    %>
+                                <i class="bi bi-star-fill" style="color: #f39c12;"></i>
+                    <%
+                            } else {
+                    %>
+                                <i class="bi bi-star" style="color: #ddd;"></i>
+                    <%
+                            }
+                        }
+                    %>
+                    /5
+                    </p>
+                </div>
+    <%
+            }
+        } else {
+    %>
+            <p>Non ci sono recensioni per questo gioco.</p>
+    <%
+        }
+        }
+    %>
+</div>
+</div>
 
 
 

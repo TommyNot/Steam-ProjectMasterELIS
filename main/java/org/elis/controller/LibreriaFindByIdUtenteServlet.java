@@ -73,6 +73,7 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 			}
 		}else {
 			System.out.println("Nessun utente trovato nella sessione.");
+			request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 		}
 	}
 

@@ -79,8 +79,8 @@
 						        </ul>
 						    </div>
 						
-      <a href="#">Offerte</a>
-      <a href="#">Libreria</a>
+      <a href="#" >Offerte</a>
+      <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
  
     </div>
          <div class="search-container">

@@ -6,6 +6,7 @@
 <%@ page import="org.elis.model.Genere" %>
 <%@ page import="org.elis.model.Offerta" %> 
 <%@ page import="org.elis.model.Utente" %> 
+<%@ page import="org.elis.model.Recensione" %>
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
 <%@ page import="java.util.Base64" %>
 
@@ -258,7 +259,7 @@
 				    <div id="products-container">
 				     <% 
 				     Utente utenteGioco = (Utente) session.getAttribute("utenteLoggato");
-                 		long idUtenteGioco;
+                 		long idUtenteGioco = 0;
 			            
 			            if (utenteGioco != null) {
 			            	idUtenteGioco = (Long) utenteGioco.getId();
@@ -342,18 +343,23 @@
                 <h2>Statistiche</h2>
                 <div class="stats">
                     <div class="stat">
-                        <h3>Vendite</h3>
-                        <p>Visualizza le vendite dei tuoi giochi.</p>
-                        <!-- Grafico o elenco delle vendite -->
+                        <h3>Giochi che possiedi</h3>
+                        <p>Visualizza il numero totale di giochi che possiedi.</p>
+                        <%
+                        
+			        	List<Gioco> g=BusinessLogic.VisualizzaTuttiGiochi(idUtenteGioco);
+			        	%>
+			        
+			        <h4>Numero di giochi attualmente nel sito: <%=g.size() %></h4>
                     </div>
                     <div class="stat">
                         <h3>Recensioni</h3>
                         <p>Visualizza le recensioni ricevute dai tuoi giochi.</p>
-                        <!-- Grafico o elenco delle recensioni -->
+                    	
                     </div>
                     <div class="stat">
-                        <h3>Stock</h3>
-                        <p>Controlla lo stock disponibile dei tuoi giochi.</p>
+                        <h3>Vendite</h3>
+                        <p>Visualizza vendite dei tuoi giochi.</p>
                         <!-- Grafico o elenco dello stock -->
                     </div>
                 </div>

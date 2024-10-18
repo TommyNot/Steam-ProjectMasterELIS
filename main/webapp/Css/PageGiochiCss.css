@@ -135,11 +135,7 @@ a:hover {
   transform: scale(1.05);
 }
 
-.product__image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
+
 
 .product-title {
   color: #c7d5e0;
@@ -314,11 +310,18 @@ input[type="text"]:focus {
     transform: scale(1.02);
 }
 
+.image-container {
+    width: 420px; /* Larghezza del contenitore */
+    height: 400px; /* Altezza del contenitore */
+    overflow: hidden; /* Nasconde parte dell'immagine che esce dal contenitore */
+    align-items: center;
+}
+
 .product__image {
-    width: 100%;
-    max-width: 300px;
+    width: 60%; /* Riempi tutta la larghezza del contenitore */
+    
+   
     border-radius: 10px;
-    margin-bottom: 15px;
 }
 
 .product-title {
@@ -591,6 +594,7 @@ footer {
     border-radius: 10px; /* Angoli arrotondati */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Ombra forte */
     color: #ffffff; /* Colore del testo chiaro */
+
 }
 
 .game-details h1 {
@@ -601,7 +605,7 @@ footer {
 }
 
 .game-details p {
-    font-size: 1.2em; /* Dimensione del font per i paragrafi */
+    font-size: 1.1em; /* Dimensione del font per i paragrafi */
     margin: 8px 0; /* Spazio verticale tra i paragrafi */
     color: #e0e0e0; /* Colore del testo chiaro */
 }
