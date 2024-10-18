@@ -51,26 +51,14 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 				if(isUtenteBase) {
 					List<Libreria> librerie = BusinessLogic.findLibreriaByIdUtente(idUtente);
 					//List<Gioco> giochiUtente = BusinessLogic.VisualizzaTuttiGiochi(idUtente);
-					List<Gioco> giochi;
-					if(librerie != null && librerie.size() > 0) {
-						if(idLibreria > 0) {
-							giochi = BusinessLogic.findGiochiByIdLibreria(idLibreria);
-						}else {
-							giochi = BusinessLogic.findGiochiByIdLibreria(librerie.get(0).getId());
-						}
-					}
-					else {
-						giochi = new ArrayList<Gioco>();
-					}
+					List<Gioco> giochiLibreria = BusinessLogic.findGiochiByIdLibreria(idLibreria);
 					System.out.println(librerie);
 					if(librerie == null || librerie.isEmpty()) {
-						request.setAttribute("giochi", giochi);
-						request.setAttribute("librerieUtente", librerie);
 						request.setAttribute("errorMessage", "Nessun gioco disponibile.");
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
 						return;
 					}else {
-						request.setAttribute("giochi", giochi);
+						request.setAttribute("giochi", giochiLibreria);
 						request.setAttribute("librerieUtente", librerie);
 						System.out.println("Lista libreria trovata con successo dell'utente con id " + idUtente);
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);

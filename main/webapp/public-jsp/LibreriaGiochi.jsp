@@ -155,31 +155,53 @@
 			</div>
 
         	<div class="container-2">
-        		<div class="list-group">
-        		<%
-        			List<Libreria> librerie = (List<Libreria>) request.getAttribute("librerieUtente");
-        			List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi");
-        			Utente utenteId = (Utente) session.getAttribute("utenteLoggato");
-        			idUtente = utenteId.getId();
-        			if(librerie == null || librerie.isEmpty()){ %>
-        				<p class="testo-lista-librerie">Nessuna libreria disponibile</p>
-        		<% 	}else{
-        			for(Libreria l: librerie){ %>
-        					<a href="LibreriaFindByIdUtenteServlet?id_libreria=<%= l.getId() %>" class="list-group-item list-group-item-action list-group-item-dark">ID: <%=l.getId() + " " %> <br>Nome: <%= l.getNome() %></a>
-        					
-        		<%
-		        		}
-		        	}
-        		%>
-        			
-        		</div>
-        		<div class="lista-giochi">
-        		<% 	for(Gioco gioco: giochiUtente){%>
-        						<p style="color: white;">	<%= gioco.getNome()%> </p>
-        		<% 		} %>
-        		</div>
-        	</div>
-        </div>
+    <div class="list-group">
+        <%
+            // Ottieni la lista delle librerie associate all'utente
+            List<Libreria> librerie = (List<Libreria>) request.getAttribute("librerieUtente");
+            Utente utenteId = (Utente) session.getAttribute("utenteLoggato");
+            idUtente = utenteId.getId();
+
+            // Verifica se ci sono librerie disponibili
+            if (librerie == null || librerie.isEmpty()) { 
+        %>
+            <p class="testo-lista-librerie">Nessuna libreria disponibile</p>
+        <%
+            } else {
+                // Crea i link per ogni libreria
+                for (Libreria l : librerie) { 
+        %>
+            <a href="LibreriaFindByIdUtenteServlet?id_libreria=<%= l.getId() %>" 
+               class="list-group-item list-group-item-action list-group-item-dark">
+               ID: <%= l.getId() %> <br> Nome: <%= l.getNome() %>
+            </a>
+        <%
+                }
+            } 
+        %>
+    </div>
+
+    <!-- Visualizza i giochi associati alla libreria selezionata -->
+    <div class="lista-giochi">
+        <%
+            // Recupera i giochi dalla libreria selezionata
+            List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi");
+
+            if (giochiUtente != null && !giochiUtente.isEmpty()) {
+                for (Gioco gioco : giochiUtente) {
+        %>
+            <p style="color: white;">Nome Gioco: <%= gioco.getNome() %></p>
+        <%
+                }
+            } else if (giochiUtente != null) {
+        %>
+            <p class="testo-lista-giochi">Nessun gioco disponibile per questa libreria.</p>
+        <%
+            }
+        %>
+    </div>
+</div>
+
         
         <footer>
 		   <div class="footer-container">

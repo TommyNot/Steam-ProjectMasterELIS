@@ -199,4 +199,15 @@ public class Gioco implements Serializable{
     public void setByteImmagine(byte[] byteImmagine) {
         this.byteImmagine = byteImmagine;
     }
+
+
+	public List<Libreria> getLibreriaGiochi() {
+		return libreriaGiochi;
+	}
+
+	public void setLibreriaGiochi(List<Libreria> libreriaGiochi) {
+		this.libreriaGiochi = libreriaGiochi;
+	}
+    
+    
 }

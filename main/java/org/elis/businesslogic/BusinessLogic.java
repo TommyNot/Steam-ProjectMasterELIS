@@ -235,8 +235,8 @@ public static List<Gioco> findGiochiByIdLibreria(long id_libreria){
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().findGiochiByIdLibreria(id_libreria);
 }
 
-public static List<Gioco> aggiungiGiocoALibreria(long id_libreria, Gioco gioco) {
-	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().aggiungiGiocoALibreria(id_libreria, gioco);
+public static Libreria aggiungiGiocoALibreria(long id_libreria, long id_gioco) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().aggiungiGiocoALibreria(id_libreria, id_gioco);
 }
 
 public static Recensione RecensioneAdd(Recensione r) {
