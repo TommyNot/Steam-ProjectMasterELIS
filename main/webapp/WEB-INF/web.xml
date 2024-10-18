@@ -272,4 +272,14 @@
     <servlet-name>LibreriaGiocoAggiungiServlet</servlet-name>
     <url-pattern>/LibreriaGiocoAggiungiServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GiocoVediDettagli</display-name>
+    <servlet-name>GiocoVediDettagli</servlet-name>
+    <servlet-class>org.elis.controller.GiocoVediDettagli</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GiocoVediDettagli</servlet-name>
+    <url-pattern>/GiocoVediDettagli</url-pattern>
+  </servlet-mapping>
 </web-app>

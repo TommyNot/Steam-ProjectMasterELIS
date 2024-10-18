@@ -582,6 +582,66 @@ footer {
   display: block;
 }
 
+.game-details {
+    max-width: 800px; /* Limita la larghezza massima del contenitore */
+    margin: 20px auto; /* Centra il contenitore nella pagina */
+    padding: 20px; /* Aggiunge spazio interno */
+    background-color: #f9f9f9; /* Colore di sfondo chiaro */
+    border: 1px solid #ddd; /* Bordo grigio chiaro */
+    border-radius: 8px; /* Angoli arrotondati */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.game-details h1 {
+    font-size: 2em; /* Dimensione del font per il titolo principale */
+    margin-bottom: 10px; /* Spazio sotto il titolo */
+    color: #333; /* Colore del testo */
+}
+
+.game-details p {
+    font-size: 1.1em; /* Dimensione del font per i paragrafi */
+    margin: 5px 0; /* Spazio verticale tra i paragrafi */
+    color: #555; /* Colore del testo */
+}
+
+.user-reviews {
+    margin-top: 20px; /* Spazio sopra la sezione delle recensioni */
+    padding: 15px; /* Spazio interno per la sezione delle recensioni */
+    background-color: #fff; /* Colore di sfondo bianco per la sezione recensioni */
+    border: 1px solid #ccc; /* Bordo grigio chiaro */
+    border-radius: 8px; /* Angoli arrotondati */
+}
+
+.user-reviews h2 {
+    font-size: 1.5em; /* Dimensione del font per il titolo delle recensioni */
+    margin-bottom: 10px; /* Spazio sotto il titolo delle recensioni */
+    color: #333; /* Colore del testo */
+}
+
+.recensione {
+    padding: 10px; /* Spazio interno per ogni recensione */
+    border-bottom: 1px solid #eee; /* Bordo inferiore grigio chiaro */
+}
+
+.recensione:last-child {
+    border-bottom: none; /* Rimuove il bordo per l'ultima recensione */
+}
+
+.recensione h3 {
+    font-size: 1.2em; /* Dimensione del font per il nome dell'utente */
+    color: #007BFF; /* Colore blu per il nome dell'utente */
+}
+
+.recensione p {
+    margin: 5px 0; /* Spazio verticale tra i paragrafi delle recensioni */
+    color: #666; /* Colore del testo per il contenuto delle recensioni */
+}
+
+.recensione p:last-child {
+    font-weight: bold; /* Valutazione in grassetto */
+}
+
+
 /* Layout responsivo */
 @media (max-width: 768px) {
   .menu {

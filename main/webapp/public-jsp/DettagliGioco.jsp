@@ -6,6 +6,7 @@
 <%@ page import="org.elis.model.Genere" %>
 <%@ page import="org.elis.model.Offerta" %> 
 <%@ page import="org.elis.model.Utente" %> 
+<%@ page import="org.elis.model.Recensione" %> 
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
 <!DOCTYPE html>
 <html lang="it">
@@ -129,61 +130,57 @@
 
 
 		
-<div class="content">
-   
-    <%
-    	
-   
-    List<Gioco> giochi =  (List<Gioco>) request.getAttribute("giochi");
-        
-        if (giochi == null || giochi.isEmpty()) {
-    %>
-        <p>Nessun gioco disponibile.</p>
-    <%
+<div class="game-details">
+  <% 
+    Gioco gioco = (Gioco) request.getAttribute("giochi");
+    Utente u = (Utente) session.getAttribute("utenteLoggato");
+
+    if (gioco != null) {
+  %>
+    <h1><%= gioco.getNome() %></h1>
+    <p><%= gioco.getDescrzione() %></p>
+    <p>Prezzo: €<%= gioco.getPrezzo() %></p>
+    <p>Data di rilascio: <%= gioco.getData_rilascio() %></p>
+    
+    <!--  recensioni -->
+    <div class="user-reviews">
+      <h2>Recensioni degli utenti</h2>
+      <%
+        // Se l'utente è loggato, recupera le sue recensioni
+        if (u != null) {
+          List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdUtente(u.getId());
+          if (recensioni != null && !recensioni.isEmpty()) {
+            for (Recensione recensione : recensioni) {
+      %>
+              <div class="recensione">
+                <h3><%= recensione.getRecensioneUtente().getUsername() %></h3>
+                <p><%= recensione.getTesto() %></p>
+                <p>Valutazione: <%= recensione.getVoto() %>/5</p>
+              </div>
+      <%
+            }
+          } else {
+      %>
+          <p>Non ci sono recensioni per questo gioco.</p>
+      <%
+          }
         } else {
-            for (Gioco gioco : giochi) { 
-                Offerta offerta = gioco.getOffertaGioco(); 
-    %>
-    
-    	
-                  
-    <div class="games-container">
-    
-        <div class="game">
-            <img class="product__image"   src="data:image/jpeg;base64,<%= gioco.getImmagine() %> " style="width: 220px; height: 300px;" />
-            
-            <h3 class="product-title"><%= gioco.getNome() %></h3>
-            
-            <div class="discount">
-                <% if (offerta != null) { %>
-                    <h4 class="product-discount">Sconto :<%= offerta.getSconto() %>% off</h4>
-                    <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
-                    <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
-
-                <% } else { %>
-                    <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
-                <% } %>
-            </div>
-
-           
-            <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
-            <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
-            	 <input style="display: none;" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
-            	 <button class="btn">Visualizza dettagli</button>
-            
-            </form>
-           
-       		
-
-            
-            
-        </div>
+          // Se l'utente non è loggato, mostra un messaggio o altre recensioni generali
+      %>
+        <p>Accedi per visualizzare le tue recensioni personali o lasciare una recensione.</p>
+      <%
+        }
+      %>
     </div>
-    <%
-            } 
-        } 
-    %>
+  <%
+    } else {
+  %>
+    <p>Gioco non trovato.</p>
+  <%
+    }
+  %>
 </div>
+
 
 
 

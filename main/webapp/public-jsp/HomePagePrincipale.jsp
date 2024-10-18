@@ -140,11 +140,13 @@
 
         <div class="container">
             <h2>Giochi in evidenza</h2>
+            <a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet">
             <div class="slider">
-                <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Elden_Ring.jpg" alt="Gioco 1">
+                <img    src="<%=request.getContextPath() %>/risorse-media/img_giochi/Elden_Ring.jpg" alt="Gioco 1">
                 <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Doom_Eternal.jpg" alt="Gioco 2">
                 <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Cyberpunk_2077.jpg" alt="Gioco 3">
             </div>
+            </a>
         </div>
     </section>
     

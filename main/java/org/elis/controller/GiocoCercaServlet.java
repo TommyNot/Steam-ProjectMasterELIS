@@ -30,7 +30,7 @@ public class GiocoCercaServlet extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String ricerca = request.getParameter("barraRicerca");
 
-            // Controllo se il campo di ricerca è vuoto
+            
             if (ricerca == null || ricerca.isBlank()) {
                 String error = "Il campo di ricerca è vuoto";
                 request.setAttribute("errorMessage", error);
@@ -39,10 +39,10 @@ public class GiocoCercaServlet extends HttpServlet {
                 return;
             }
 
-            // Trova i giochi corrispondenti al nome
+          
             List<Gioco> search = BusinessLogic.TrovaByName(ricerca);
 
-            // Controllo se la ricerca ha restituito risultati
+            
             if (search == null || search.isEmpty()) {
                 String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
                 request.setAttribute("errorMessage", errorMessage);
@@ -50,7 +50,7 @@ public class GiocoCercaServlet extends HttpServlet {
                 return;
             }
 
-            // Imposta l'attributo della richiesta con i risultati della ricerca
+           
             request.setAttribute("giochi", search);
             request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
         }
