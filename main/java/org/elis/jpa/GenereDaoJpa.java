@@ -101,19 +101,49 @@ public class GenereDaoJpa implements GenereDao{
 	}
 
 	@Override
-	public List<Genere> addGenereOfferta(long idOfferta) {
+	public List<Genere> addGenereOfferta(long idGenere, long idOfferta) {
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
-	    
+	   
+		 
+		    try {
+		        em.getTransaction().begin();
+		        
+		        Query q = em.createQuery("UPDATE Genere g SET g.genereOfferta.id = :idOfferta WHERE g.id = :idGenere");
+		        q.setParameter("idOfferta", idOfferta);
+		        q.setParameter("idGenere", idGenere);
+		        q.executeUpdate();
+		        em.getTransaction().commit();
+		    } catch (Exception e) {
+		        if (em.getTransaction().isActive()) {
+		            em.getTransaction().rollback();
+		        }
+		        e.printStackTrace();
+		    } 
+		    return null;
+		}
+	
+
+	@Override
+	public List<Genere> removeGenereOfferta(long idGenere, long idOfferta) {
+		
+		 EntityManager em = DaoFactoryJpa.getEntityManager();
+		 
 	    try {
-	        Query q = em.createQuery("SELECT g FROM Genere g WHERE g.genereOfferta.id = :idOfferta");
-	        q.setParameter("idOfferta", idOfferta);
-	        return q.getResultList();
+	        em.getTransaction().begin();
 	        
-	    } catch (NoResultException e) {
+	        Query q = em.createQuery("UPDATE Genere g SET g.genereOfferta.id = :idOfferta WHERE g.id = :idGenere");
+	        q.setParameter("idOfferta", null);
+	        q.setParameter("idGenere", idGenere);
+	        q.executeUpdate();
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback();
+	        }
 	        e.printStackTrace();
-	        return null;  
-	    }
+	    } 
+	    return null;
 	}
-	}
+}
 
 

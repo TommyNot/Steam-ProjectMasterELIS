@@ -271,11 +271,15 @@ public static Recensione eliminaRecensione(long id) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().deleteRecensioneById(id);
 }
 
-public static List<Genere> genereOffertaAdd(long idOfferta){
-	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().addGenereOfferta(idOfferta);
+public static List<Genere> genereOffertaAdd(long idGenere, long idOfferta){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().addGenereOfferta(idGenere, idOfferta);
 }
 public static List<Gioco>trovaTuttiGiochi(){
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().findAll();
+}
+
+public static List<Genere> genereOffertaRemove(long idGenere, long idOfferta){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().removeGenereOfferta(idGenere, idOfferta);
 }
 
 }

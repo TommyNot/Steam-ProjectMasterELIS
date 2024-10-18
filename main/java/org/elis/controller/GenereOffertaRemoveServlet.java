@@ -10,17 +10,14 @@ import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Genere;
-import org.elis.model.Gioco;
 import org.elis.model.Offerta;
-import org.elis.model.Recensione;
 
 
-@WebServlet("/GenereOffertaAddServlet")
-public class GenereOffertaAddServlet extends HttpServlet {
+@WebServlet("/GenereOffertaRemoveServlet")
+public class GenereOffertaRemoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public GenereOffertaAddServlet() {
+    public GenereOffertaRemoveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +28,14 @@ public class GenereOffertaAddServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("idOfferta");
-		String idGenere = request.getParameter("idGioco");
+		String idGenere = request.getParameter("idGenere");
 		
 		  if (id == null || id.isEmpty() || idGenere == null || idGenere.isEmpty()) {
-	            request.setAttribute("Error", "Campi idOfferta e idGenere obbligatorio.");
+	            request.setAttribute("Error", "Campo idOfferta e idGenere obbligatorio.");
 	            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	            return;               
 	        }
@@ -70,15 +67,14 @@ public class GenereOffertaAddServlet extends HttpServlet {
 	            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	            return;
 	        }
-	        List<Genere> genereOfferta = BusinessLogic.genereOffertaAdd(idGenereLong, idOfferta);
+	        
+	        List<Genere> genereOfferta = BusinessLogic.genereOffertaRemove(idGenereLong, idOfferta);
 
-	        if (genereOfferta == null || genereOfferta.isEmpty()) {
-	            request.setAttribute("Error", "Nessun genere trovato per l'offerta selezionata.");
+	        if (genereOfferta != null || !genereOfferta.isEmpty()) {
+	            request.setAttribute("Error", "Errore, offerta ancora valida.");
 	            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
 	            return;
 	        }
-	       
-	}
 	}
 
-
+}
