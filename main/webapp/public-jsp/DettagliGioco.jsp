@@ -193,7 +193,7 @@
         <button class="btn" id="showAddFormBtn" style="display: inline;">Aggiungi alla libreria</button>
 
         <!-- Form nascosto per aggiungere il gioco alla libreria -->
-        <form action="<%=request.getContextPath() %>/LibreriaAggiungiServlet" class="library-form" id="addForm" style="display: none;" method="post">
+        <form action="<%=request.getContextPath() %>/LibreriaGiocoAggiungiServlet" class="library-form" id="addForm" style="display: none;" method="post">
             <h2>Aggiungi alla tua libreria</h2>
             
             <label for="nomeLibreria">Inserisci nome della libreria:</label>
