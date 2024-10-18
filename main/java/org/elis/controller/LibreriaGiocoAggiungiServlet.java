@@ -84,12 +84,11 @@ public class LibreriaGiocoAggiungiServlet extends HttpServlet {
 						response.sendRedirect("public-jsp/ErrorPage.jsp");
 						return;
 					}else {
-						Gioco g = new Gioco();//TODO cercare il gioco tramite l'id
-						Libreria giochi = BusinessLogic.aggiungiGiocoALibreria(l.getId(), g.getId());
+						Libreria giochi = BusinessLogic.aggiungiGiocoALibreria(l.getId(), idGioco);
 						request.setAttribute("giochi", giochi);
 						request.setAttribute("librerieUtente", librerie);
 						System.out.println("Lista libreria trovata con successo dell'utente con id " + idUtente);
-						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
+						response.sendRedirect("LibreriaFindByIdUtenteServlet");
 					}
 				}else {
 					System.out.println("L'utente non è un utente base.");

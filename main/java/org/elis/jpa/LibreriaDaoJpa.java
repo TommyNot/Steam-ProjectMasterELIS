@@ -148,7 +148,7 @@ public class LibreriaDaoJpa implements LibreriaDao {
 		Gioco g = em.find(Gioco.class, id_gioco);
 		
        
-		libreria.getGiochiAcquistati().add(g);        
+		g.getLibreriaGiochi().add(libreria);        
        
         t.commit();
         em.close();
