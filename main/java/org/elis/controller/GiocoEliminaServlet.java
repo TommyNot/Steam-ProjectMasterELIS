@@ -33,7 +33,7 @@ public class GiocoEliminaServlet extends HttpServlet {
         
         String eliminaGiocoNome = request.getParameter("productId");
         
-        long idGioco=0;
+        
         
         HttpSession sessione = request.getSession(false);
         if (sessione == null) {
@@ -62,24 +62,26 @@ public class GiocoEliminaServlet extends HttpServlet {
             return; 
         }
         
-       
-        
+        long idGioco = 0;
         try {
         	
         	idGioco = Long.parseLong(eliminaGiocoNome);
-        	System.out.println(idGioco);
-       
-        }catch(Exception e) {
         	
-        	System.out.println("errore");
+        }catch(NumberFormatException e) {
+        	
+        	e.printStackTrace();
         }
-
+       
+        	
+        	
+        	System.out.println(idGioco);
+    
         
-        Gioco giocoEliminato = BusinessLogic.eliminaGioco(idGioco);
-        System.out.println("hai fatto il metodo");
+        	Gioco giocoEliminato = BusinessLogic.eliminaGioco(idGioco);
+            
         
         
-        if(sessione != null) {
+        
 			
 			switch(utente.getRuolo()){
 			
@@ -94,10 +96,7 @@ public class GiocoEliminaServlet extends HttpServlet {
 		            request.setAttribute("errore", errore);
 		            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 		        }
-				
-				request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
 				break;
-				
 			case ADMIN:
 				if (giocoEliminato != null) {
 			        response.getWriter().write("Gioco eliminato con successo.");
@@ -112,6 +111,6 @@ public class GiocoEliminaServlet extends HttpServlet {
 					break;
 			}
      
-        }
+        
     }
 }

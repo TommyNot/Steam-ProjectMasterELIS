@@ -10,6 +10,7 @@ import org.elis.dao.GiocoDao;
 import org.elis.model.Genere;
 import org.elis.model.Gioco;
 import org.elis.model.Offerta;
+import org.elis.model.Recensione;
 import org.elis.model.Utente;
 
 import jakarta.persistence.EntityManager;
@@ -303,23 +304,35 @@ public class GiocoDaoJpa implements GiocoDao{
 	@Override
 	public Gioco deleteGioco(long id) {
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    
 	    Gioco gioco = null;
 
 	    try {
-	        // Trova il gioco per ID
+	    	t.begin();
 	        gioco = em.find(Gioco.class, id);
 
-	        // Se il gioco esiste, lo eliminaoim 
+	        
 	        if (gioco != null) {
-	            em.getTransaction().begin();
+	        	Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.gioco.id = :giocoId ");
+	        	q.setParameter("giocoId", id);
+	        	
+	        	List<Recensione> recensioni = q.getResultList();
+	        	
+	        	for(Recensione rec : recensioni) {
+	        		
+	        		em.remove(rec);
+	        	}
 	            em.remove(gioco);
-	            em.getTransaction().commit();
+	            t.commit();
+	            
 	        } else {
 	            System.out.println("Gioco non trovato con ID: " + id);
 	        }
 
 	    } catch (NoResultException e) {
 	        e.printStackTrace();
+	        
 	    } catch (Exception e) {
 	    
 	        e.printStackTrace();
