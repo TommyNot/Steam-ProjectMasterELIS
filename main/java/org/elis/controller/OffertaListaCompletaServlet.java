@@ -26,19 +26,16 @@ public class OffertaListaCompletaServlet extends HttpServlet {
 		
 		List<Offerta> listaOfferte = BusinessLogic.offertaVisualizzaTutto();
 		if(listaOfferte == null || listaOfferte.isEmpty()) {
-			request.setAttribute("errorMessage", "Nessuna Offerta disponibile.");
-			request.getRequestDispatcher("WEB-INF/private-jsp/error.jsp").forward(request, response);
+			request.setAttribute("error", "Nessuna Offerta disponibile.");
+			request.getRequestDispatcher("public-jsp/PageGiochiOfferta.jsp").forward(request, response);
 			return;
 		}
 		
 		request.setAttribute("offerte", listaOfferte);
-        request.getRequestDispatcher("public-jsp/PageOfferta.jsp").forward(request, response);
+        request.getRequestDispatcher("public-jsp/PageGiochiOfferta.jsp").forward(request, response);
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
 
 }

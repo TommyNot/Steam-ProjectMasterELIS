@@ -70,7 +70,27 @@
             <nav>
                 <ul>
                     <li><a href="#">Homepage</a></li>
-                    <li><a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" >Giochi</a></li>
+                    <li>
+                    
+                    	<a href="#" class="generi-link-giochi" >Novità e Tendenze</a>
+                    	    <div class="dropdown-giochi">
+						        <ul class="styled-select-giochi">
+						            
+						            <li>
+						            	<a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet">Giochi</a>
+						            </li>
+						          	
+						          	<li>
+						          		<a href="<%=request.getContextPath() %>/OffertaListaCompletaServlet">Offerte</a>
+						          	</li>
+						          	
+						          		<li>
+						          		<a href="#">Tendenza</a>
+						          	</li>
+						          	
+						        </ul>
+						    </div>
+                    </li>
 						<li>
 						    <a href="#" class="generi-link">Generi</a>
 						    <div class="dropdown">
@@ -94,13 +114,16 @@
 
 
 
-                    <li><a href="#">Offerte</a></li>
+                    
                     <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a></li>
                      <div class="search-container">
 					      <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="get" class="d-flex">
 					                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
 					                <button type="submit" class="btn btn-outline-success">Cerca</button>
 					            </form>
+					            
+					            
+					            
 					  </div>
        
             <li> 

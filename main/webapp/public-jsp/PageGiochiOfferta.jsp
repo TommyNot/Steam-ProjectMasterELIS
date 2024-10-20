@@ -6,7 +6,6 @@
 <%@ page import="org.elis.model.Genere" %>
 <%@ page import="org.elis.model.Offerta" %> 
 <%@ page import="org.elis.model.Utente" %> 
-<%@ page import="org.elis.model.Recensione" %> 
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
 <!DOCTYPE html>
 <html lang="it">
@@ -80,7 +79,7 @@
 						        </ul>
 						    </div>
 						
-      <a href="#">Offerte</a>
+      <a href="#" >Offerte</a>
       <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
  
     </div>
@@ -130,162 +129,60 @@
 
 
 		
-<div class="game-details">
-    <% 
-        Gioco gioco = (Gioco) request.getAttribute("giochi");
-        Utente u = (Utente) session.getAttribute("utenteLoggato");
-        Offerta offerta = (Offerta) request.getAttribute("offerta");
-
-        if (gioco != null) {
-    %>
-    <div class="image-container" >
-    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" />
-</div>
-  
-    <h1>Nome: <%= gioco.getNome() %></h1>
-    <p>Descrizione: <%= gioco.getDescrzione() %></p>
-
-    <div class="discount">
-        <% if (offerta != null) { %>
-            <h4 class="product-discount">Sconto: <%= offerta.getSconto() %>% off</h4>
-            <h4 class="product-old-price" style="text-decoration: line-through; color: #999;">€<%= gioco.getPrezzo() %></h4>
-            <h4 class="product-price" style="color: #f39c12; font-weight: bold;">
-                Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %>
-            </h4>
-        <% } else { %>
-            <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
-        <% } %>
-    </div>
-
-    <p>Data di rilascio: <%= gioco.getData_rilascio() %></p>
-
-    <!-- Se l'utente è loggato, mostra il form per lasciare una recensione -->
-    <div class="review-section">
-        <% if (u != null) { %>
-            <button class="btn" id="showReviewFormBtn" style="display: inline;">Lascia una recensione</button>
-
-            <form action="<%=request.getContextPath() %>/RecensioneAggiungiServlet" class="review-form" id="reviewForm" style="display: none;" method="post">
-                <h2>Lascia una recensione</h2>
-                
-                <label for="voto">Valutazione:</label>
-                <select name="voto" id="voto" required>
-                    <option value="" disabled selected>Seleziona un voto</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-
-                <textarea name="recensione" placeholder="Scrivi la tua recensione qui..." required></textarea>
-                <input type="hidden" value="<%=gioco.getId()%>" name="idGioco" id="idGioco">
-                <button class="btn" type="submit">Invia</button>
-            </form>
-        <% } else { %>
-            <p>Accedi per lasciare una recensione.</p>
-        <% } %>
-    </div>
-    
-<!-- Se l'utente è loggato, mostra il pulsante e il form nascosto per aggiungere alla libreria -->
-<div class="library-section">
-    <% if (u != null) { %>
-       
-        <button class="btn" id="showAddFormBtn" style="display: inline;">Aggiungi alla libreria</button>
-
-        
-        <form action="<%=request.getContextPath() %>/LibreriaGiocoAggiungiServlet" class="library-form" id="addForm" style="display: none;" method="post">
-            <h2>Aggiungi alla tua libreria</h2>
-            
-            <label for="nomeLibreria">Inserisci nome della libreria:</label>
-            <input type="text" name="nomeLibreria" id="nomeLibreria" placeholder="Nome della libreria" required>
-            
-            <input type="hidden" value="<%= gioco.getId() %>" name="idGioco" id="idGioco">
-            
-           
-            <button class="btn" type="submit">Aggiungi</button>
-        </form>
-    <% } else { %>
-        
-        <p>Accedi per aggiungere il gioco alla tua libreria.</p>
-    <% } %>
-</div>
-
-
-   <!-- Recensioni -->
-
-<div class="user-reviews">
-    <h2>Recensioni degli utenti</h2>
+<div class="content">
+   
     <%
-       
-        List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
-
-        
-        double sommaVoti = 0;
-        int numeroRecensioni = 0;
-
-        if (recensioni != null) {
-            numeroRecensioni = recensioni.size();
-            for (Recensione recensione : recensioni) {
-                sommaVoti += recensione.getVoto();
-            }
-        }
-
-        
-        double mediaVoti = (numeroRecensioni > 0) ? (sommaVoti / numeroRecensioni) : 0;
+    	
+   
+    List<Gioco> giochi =  (List<Gioco>) request.getAttribute("giochi");
+    List<Offerta> giochiOfferta = (List<Offerta>) request.getAttribute("offerte");
+        if (giochi == null || giochi.isEmpty()) {
     %>
-    
-    <h3>Numero totale di recensioni: <%= numeroRecensioni %></h3>
-    <h4>Media valutazione: 
-        <%
-            for (int i = 1; i <= 5; i++) {
-                if (i <= Math.round(mediaVoti)) {
-        %>
-                    <i class="bi bi-star-fill" style="color: #f39c12;"></i>
-        <%
-                } else {
-        %>
-                    <i class="bi bi-star" style="color: #ddd;"></i>
-        <%
-                }
-            }
-        %>
-        (<%= String.format("%.2f", mediaVoti) %>/5)
-    </h4>
-    
+        <p>Nessun gioco disponibile.</p>
     <%
-        if (numeroRecensioni > 0) {
-            for (Recensione recensione : recensioni) {
-    %>
-                <div class="recensione">
-                    <h3><%= recensione.getRecensioneUtente().getUsername() %></h3>
-                    <p><%= recensione.getTesto() %></p>
-                    <p>Valutazione: 
-                    <%
-                        for (int i = 1; i <= 5; i++) {
-                            if (i <= recensione.getVoto()) {
-                    %>
-                                <i class="bi bi-star-fill" style="color: #f39c12;"></i>
-                    <%
-                            } else {
-                    %>
-                                <i class="bi bi-star" style="color: #ddd;"></i>
-                    <%
-                            }
-                        }
-                    %>
-                    /5
-                    </p>
-                </div>
-    <%
-            }
         } else {
+            for (Gioco gioco : giochi) { 
+                Offerta offerta = gioco.getOffertaGioco(); 
     %>
-            <p>Non ci sono recensioni per questo gioco.</p>
+    
+    	
+                  
+    <div class="games-container">
+    
+        <div class="game">
+            <img class="product__image"   src="data:image/jpeg;base64,<%= gioco.getImmagine() %> " style="width: 220px; height: 300px;" />
+            
+            <h3 class="product-title"><%= gioco.getNome() %></h3>
+            
+            <div class="discount">
+                <% if (offerta != null) { %>
+                    <h4 class="product-discount">Sconto :<%= offerta.getSconto() %>% off</h4>
+                    <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
+                    <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
+
+                <% } else { %>
+                    <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
+                <% } %>
+            </div>
+
+           
+            <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
+            <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
+            	 <input style="display: none;" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
+            	 <button class="btn">Visualizza dettagli</button>
+            
+            </form>
+           
+       		
+
+            
+            
+        </div>
+    </div>
     <%
-        }
-        }
+            } 
+        } 
     %>
-</div>
 </div>
 
 
@@ -324,7 +221,5 @@
     </footer>
   
   <script src="<%= request.getContextPath() %>/Js/PageGiochi.js"></script>
-  <script src="<%= request.getContextPath() %>/Js/DettagliGiocoScript.js"></script>
-
 </body>
 </html>

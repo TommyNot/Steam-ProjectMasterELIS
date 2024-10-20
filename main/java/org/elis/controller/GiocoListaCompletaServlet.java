@@ -35,8 +35,8 @@ public class GiocoListaCompletaServlet extends HttpServlet {
         System.out.println(listaGiochi);
         
         if (listaGiochi == null || listaGiochi.isEmpty()) {
-            request.setAttribute("errorMessage", "Nessun gioco disponibile.");
-            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+            
+            request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             return;
         }
 
