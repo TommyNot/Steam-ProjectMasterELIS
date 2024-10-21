@@ -102,25 +102,19 @@ public class RecensioneDaoJpa implements RecensioneDao {
 	@Override
 	public Recensione updateVoto(long id, int voto) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
 	    Recensione recensione = null;
 	    try {
-	        em.getTransaction().begin();
+	        t.begin();
 
 	        
 	        recensione = em.find(Recensione.class, id);
 	        if (recensione != null) {
 	            recensione.setVoto(voto); 
-	            em.merge(recensione); 
-	            System.out.println("Voto aggiornato per la recensione: "+recensione.getVoto());
-	        } else {
-	            System.out.println("Nessuna recensione trovata con ID: " + id);
+	            t.commit(); 
 	        }
-
-	        em.getTransaction().commit(); 
 	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback(); 
-	        }
+	      
 	        e.printStackTrace();
 	    }
 
@@ -132,25 +126,23 @@ public class RecensioneDaoJpa implements RecensioneDao {
 	@Override
 	public Recensione updateTesto(long id, String testo) {
 		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
 	    Recensione recensione = null;
 	    try {
-	        em.getTransaction().begin();
+	        t.begin();
 
 	        
 	        recensione = em.find(Recensione.class, id);
+	        
 	        if (recensione != null) {
 	            recensione.setTesto(testo); 
-	            em.merge(recensione); 
-	            System.out.println("Testo aggiornato per la recensione: "+recensione.getTesto());
-	        } else {
-	            System.out.println("Nessuna recensione trovata con ID: " + id);
-	        }
 
-	        em.getTransaction().commit(); 
-	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback(); 
+	        t.commit(); 
+	        
 	        }
+	        
+	    } catch (Exception e) {
+	        
 	        e.printStackTrace();
 	    }
 

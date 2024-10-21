@@ -29,5 +29,6 @@ public interface GiocoDao {
 	Gioco deleteGioco(long id);
 	List<Gioco> VisualizzaGiochiInOfferta();
 	List<Gioco> addOffertaToGiochiByGenere(long idGenere, long idOfferta);
+	List<Gioco> addGiocoOfferta(long idGioco, long idOfferta);
 
 }

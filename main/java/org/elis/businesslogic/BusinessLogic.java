@@ -294,5 +294,7 @@ public static List<Genere> genereOffertaRemove(long idGenere, long idOfferta){
 public static List<Gioco> addOffertaToGiochiByGenere(long idGenere, long idOfferta){
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().addOffertaToGiochiByGenere(idGenere, idOfferta);
 }
-
+public static List<Gioco> giocoOffertaAdd(long idGioco, long idOfferta){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().addGiocoOfferta(idGioco, idOfferta);
+}
 }

@@ -21,3 +21,12 @@
 	        form.style.display = "none";
 	    }
 	});
+	
+	function toggleEditForm(recensioneId) {
+	    const form = document.getElementById('editForm_' + recensioneId);
+	    if (form.style.display === "none") {
+	        form.style.display = "block";
+	    } else {
+	        form.style.display = "none";
+	    }
+	}
