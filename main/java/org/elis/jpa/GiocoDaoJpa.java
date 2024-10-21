@@ -216,22 +216,23 @@ public class GiocoDaoJpa implements GiocoDao{
 	@Override
 	public Gioco updateGiocoImmagine(long id, byte[] immagine) {
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
 	    Gioco gioco = null;
 
 	    try {
-	        em.getTransaction().begin(); 
+	        t.begin(); 
 
-	        // Find the game by its ID
+	        
 	        gioco = em.find(Gioco.class, id);
 	        if (gioco != null) {
 	            gioco.setByteImmagine(immagine);
-	            em.merge(gioco); 
+	            
 	            System.out.println("Immagine aggiornata per il gioco: " + gioco.getNome());
 	        } else {
 	            System.out.println("Nessun gioco trovato con ID: " + id);
 	        }
 
-	        em.getTransaction().commit();
+	        t.commit();
 	    } catch (Exception e) {
 	     
 	        e.printStackTrace();
@@ -268,41 +269,49 @@ public class GiocoDaoJpa implements GiocoDao{
 
 
 	@Override
-	public Gioco updateGiocoOfferta(long idGioco, long idOfferta) {
+	public Gioco updateGiocoOfferta(long idGioco, Long idOfferta) {  // Long e non long per permettere null
 	    EntityManager em = DaoFactoryJpa.getEntityManager();
 	    EntityTransaction t = em.getTransaction();
 	    Gioco gioco = null;
 
 	    try {
-	        t.begin(); 
-
-	        
-	        Offerta offerta = em.find(Offerta.class, idOfferta);
-	        if (offerta == null) {
-	            System.out.println("Offerta non trovata con ID: " + idOfferta);
-	            return null; 
-	        }
+	        t.begin();  // Inizia la transazione
 
 	        
 	        gioco = em.find(Gioco.class, idGioco);
-	        if (gioco != null) {
+	        if (gioco == null) {
+	            System.out.println("Gioco non trovato con ID: " + idGioco);
+	            return null;  // Interrompi se il gioco non viene trovato
+	        }
+
+	        
+	        if (idOfferta == null) {
+	            
+	            gioco.setOffertaGioco(null);
+	            System.out.println("Offerta rimossa dal gioco");
+	        } else {
+	            
+	            Offerta offerta = em.find(Offerta.class, idOfferta);
+	            if (offerta == null) {
+	                System.out.println("Offerta non trovata con ID: " + idOfferta);
+	                return null; 
+	            }
+
 	            
 	            gioco.setOffertaGioco(offerta);
-	             
-	             System.out.println("Gioco non trovato");
-	        } else {
-	            System.out.println("Gioco non trovato con ID: " + idGioco);
-	            return null; 
+	            System.out.println("Offerta aggiornata con successo");
 	        }
-	        
-	        t.commit();
-	    } catch (Exception e) {
-	       
-	        e.printStackTrace();
-	    } 
 
-	    return gioco; 
+	        
+	        t.commit();  
+	    } catch (Exception e) {
+	      
+	        e.printStackTrace();
+	    }
+	    return gioco;  
 	}
+
+
 
 
 	@Override

@@ -24,7 +24,7 @@ public interface GiocoDao {
 	Gioco updateGiocoDescrzione(long id,String descrzione);
 	Gioco updateGiocoImmagine(long id,byte[] immagine);
 	Gioco updateGiocoPrezzo(long id,double prezzo);
-	Gioco updateGiocoOfferta(long id,long offerta);
+	Gioco updateGiocoOfferta(long id,Long offerta);
 	Gioco updateGiocoGenere(long id,Genere genere);
 	Gioco deleteGioco(long id);
 	List<Gioco> VisualizzaGiochiInOfferta();

@@ -65,9 +65,11 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 					}
 				}else {
 					System.out.println("L'utente non è un utente base.");
+					request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 				}
 			}else {
 				System.out.println("Utente non trovato con id " + idUtente);
+				request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 			}
 		}else {
 			System.out.println("Nessun utente trovato nella sessione.");

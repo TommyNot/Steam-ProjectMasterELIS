@@ -257,7 +257,7 @@
             for (Recensione recensione : recensioni) {
     %>
                 <div class="recensione">
-                    <h3><%= "Username : " +  recensione.getRecensioneUtente().getUsername() + " ( " +   utenteLoggato.getRuolo() + " )"%></h3>
+                    <h3><%= "Username : " +  recensione.getRecensioneUtente().getUsername() %></h3>
                     
                     <p><%= recensione.getTesto() %></p>
                     <p>Valutazione: 
@@ -289,9 +289,9 @@
                             
                         </form>
                      <div class="recensione">
-    <h4>Recensione di <%= recensione.getRecensioneUtente().getUsername() %></h4>
-    <p>Voto: <%= recensione.getVoto() %></p>
-    <p>Testo: <%= recensione.getTesto() %></p>
+				    <h4>Recensione di <%= recensione.getRecensioneUtente().getUsername() %></h4>
+				    <p>Voto: <%= recensione.getVoto() %></p>
+				    <p>Testo: <%= recensione.getTesto() %></p>
 
     <button class="btn btn-primary" onclick="toggleEditForm(<%= recensione.getId() %>)">Modifica</button>
 

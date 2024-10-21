@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Genere;
+import org.elis.model.Gioco;
 import org.elis.model.Offerta;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
@@ -112,7 +113,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                             BusinessLogic.updateGiocoOfferta(idGioco, offert.getId());
                             System.out.println("Offerta aggiornata con successo");
                         }else {
-                        	
+                        	BusinessLogic.updateGiocoOfferta(idGioco, (Long) null );
                         	System.out.println("Qui errore");
                         }
                         

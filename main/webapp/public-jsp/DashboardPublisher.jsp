@@ -211,11 +211,13 @@
 					        
 					      <label for="offerta">Seleziona offerta:</label>
 					        <select id="offerta" name="offerta">
+					        	<option value="null">Nessuna Offerta</option> 
 					            <%
 					                List<Offerta> offerte = BusinessLogic.offertaVisualizzaTutto();
 					                
 					                for (Offerta offerta : offerte) {
 					            %>
+					            	
 					                <option value="<%= offerta.getId() %>"  ><%= offerta.getNome() %></option>
 					            <%
 					                }
