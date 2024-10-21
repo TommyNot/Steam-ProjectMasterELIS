@@ -388,4 +388,10 @@ public class GiocoDaoJpa implements GiocoDao{
 	    }
 	    return giochiOfferta;
 	}
+
+	@Override
+	public List<Gioco> addGiocoOfferta(long idGioco, long idOfferta) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
