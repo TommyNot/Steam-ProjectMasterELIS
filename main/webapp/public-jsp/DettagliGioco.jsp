@@ -81,7 +81,7 @@
 						        </ul>
 						    </div>
 						
-      <a href="#">Offerte</a>
+      <a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a>
       <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
  
     </div>
@@ -218,7 +218,7 @@
     <h2>Recensioni degli utenti</h2>
     <%
         List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
-        Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); // Recupera l'utente loggato
+        Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); 
         
         double sommaVoti = 0;
         int numeroRecensioni = 0;
@@ -287,12 +287,26 @@
                             <button class="btn btn-danger" type="submit">Elimina</button>
                             
                         </form>
-                        <form action="<%= request.getContextPath() %>/RecensioneAggiornaVotoServlet" method="post">
-                            <input  name="idRecensioneModifica" value="<%= recensione.getVoto() %>">
-                            <input  name="idGiocoModifica" value="<%= recensione.getTesto() %>">
-                            <button class="btn btn-danger" type="submit">Modifica</button>
-                            
-                        </form>
+                     <div class="recensione">
+    <h4>Recensione di <%= recensione.getRecensioneUtente().getUsername() %></h4>
+    <p>Voto: <%= recensione.getVoto() %></p>
+    <p>Testo: <%= recensione.getTesto() %></p>
+
+    <button class="btn btn-primary" onclick="toggleEditForm(<%= recensione.getId() %>)">Modifica</button>
+
+    <!-- Form di modifica recensione -->
+    <div id="editForm_<%= recensione.getId() %>" style="display:none;">
+        <form action="<%= request.getContextPath() %>/RecensioneAggiornaServlet" method="post">
+            <input type="hidden" name="idRecensione" value="<%= recensione.getId() %>">
+            <input type="hidden" name="idGioco" value="<%= gioco.getId() %>">
+            <label for="voto">Voto:</label>
+            <input type="number" name="voto" value="<%= recensione.getVoto() %>" min="1" max="5">
+            <label for="testo">Testo:</label>
+            <textarea name="testo"><%= recensione.getTesto() %></textarea>
+            <button class="btn btn-danger" type="submit">Modifica Recensione</button>
+        </form>
+    </div>
+</div>
                     <% 
                         } 
                     %>

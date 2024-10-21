@@ -39,22 +39,28 @@ public class RecensioneAggiornaServlet extends HttpServlet {
 	            response.sendRedirect("public-jsp/PaginaLogin.jsp");
 	            return;
 	        }
-
 	        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-	        if (utente == null || utente.getRuolo() != Ruolo.UTENTE_BASE || utente.getRuolo() != Ruolo.ADMIN) {
+	        if (utente == null || (utente.getRuolo() != Ruolo.UTENTE_BASE && utente.getRuolo() != Ruolo.ADMIN)) {
 	            response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
 	            return;
 	        }
+
 	        
 	        try {
-	        	long idRecensione = Long.parseLong(request.getParameter("idRecensione"));
+	        	long idRecensione = 0;
+	        	long idGioco = 0;
+	        	String idGiocoString = request.getParameter("idGioco");
+	        	String idRecensioneString = request.getParameter("idRecensione");
 	        	String testo = request.getParameter("testo");
 	        	String voto = request.getParameter("voto");
-
+	        	
+	        	idRecensione = Long.parseLong(idRecensioneString);
+	        	idGioco = Long.parseLong(idGiocoString);
 	        	
 	        	 if (testo != null && !testo.isEmpty()) {
 	                 BusinessLogic.updateRecensioneTesto(idRecensione, testo);
 	                 System.out.println("Testo aggiornato con successo");
+	                 response.sendRedirect(request.getContextPath() + "/GiocoVediDettagli?barraRicerca=" + idGioco);
 	             }
 	        	 
 	        	  if (voto != null && !voto.isEmpty()) {
