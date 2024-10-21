@@ -80,8 +80,10 @@ public class GenereOffertaAddServlet extends HttpServlet {
         System.out.println("id offerta: " + idOfferta + ", id generi: " + idGeneri);
 
         List<Genere> genereOfferta = new ArrayList<>();
+        List<Gioco> giochiOfferta = new ArrayList<>();
         for (Long idGenere1 : idGeneri) {
-            genereOfferta.addAll(BusinessLogic.genereOffertaAdd(idGenere1, idOfferta)); 
+            genereOfferta.addAll(BusinessLogic.genereOffertaAdd(idGenere1, idOfferta));
+            giochiOfferta.addAll(BusinessLogic.addOffertaToGiochiByGenere(idGenere1, idOfferta));
         }
 
         if (genereOfferta == null || genereOfferta.isEmpty()) {

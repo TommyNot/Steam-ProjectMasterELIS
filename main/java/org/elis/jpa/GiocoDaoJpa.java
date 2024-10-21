@@ -351,6 +351,44 @@ public class GiocoDaoJpa implements GiocoDao{
 		
 		return q.getResultList();
 	}
+	
+	@Override
+	public List<Gioco> addOffertaToGiochiByGenere(long idGenere, long idOfferta) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    List<Gioco> giochiOfferta = new ArrayList<>();
+	    try {
+	        t.begin();
 
+	        // Find the Offerta instance by its ID
+	        Offerta offerta = em.find(Offerta.class, idOfferta);
+	        if (offerta == null) {
+	            System.out.println("Offerta non trovata con ID: " + idOfferta);
+	            return giochiOfferta; // Return empty list if offerta not found
+	        }
 
+	        // Find the games associated with the genre
+	        List<Gioco> giochi = em.createQuery(
+	            "SELECT g FROM Gioco g JOIN g.genereGiochi gg WHERE gg.id = :idGenere", Gioco.class)
+	            .setParameter("idGenere", idGenere)
+	            .getResultList();
+	        
+	        // Associate the offer to the games
+	        for (Gioco gioco : giochi) {
+	            gioco.setOffertaGioco(offerta);
+	            em.merge(gioco);
+	            giochiOfferta.add(gioco);
+	        }
+
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
+	    return giochiOfferta;
+	}
 }
