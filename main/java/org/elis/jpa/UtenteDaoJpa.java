@@ -235,7 +235,7 @@ public class UtenteDaoJpa implements UtenteDao {
 	            }
 	            if (utente != null) {
 		        	Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.gioco.id = :giocoId ");
-		        	q.setParameter("idUtente", id);
+		        	q.setParameter("recensioneUtente", id);
 		        	
 		        	List<Recensione> recensioni = q.getResultList();
 		        	
