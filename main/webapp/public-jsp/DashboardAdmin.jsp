@@ -156,11 +156,11 @@
 
         <div class="container " id="Gestisci">
             <h2>Attiva offerte</h2>
-        	    <form id="associaGeneriOfferta" method="post" action="/SteamProject/AssociaGeneriOffertaServlet">
+        	    <form id="associaGeneriOfferta">
        			 <label for=offerta5>Seleziona offerta:</label>
-        	<select id="offerta5" name="id">
+        	<select id="offerta5" name="idOfferta">
         	 <% List<Offerta> offerte5 = BusinessLogic.offertaVisualizzaTutto(); 
-               Offerta offertaSelezionata5 = (Offerta) request.getAttribute("offertaSelezionata3"); 
+               Offerta offertaSelezionata5 = (Offerta) request.getAttribute("offertaSelezionata5"); 
                for (Offerta offerta : offerte5) { 
             %>
                 <option value="<%= offerta.getId() %>" <%= (offertaSelezionata5 != null && offertaSelezionata5.getId() == offerta.getId()) ? "selected" : "" %>>
@@ -173,7 +173,7 @@
         		Genere genereSelezionato=(Genere) request.getAttribute("genereSelezionato");
                for (Genere genere : generi) { %>
                  <div class="checkbox">
-                <input type="checkbox" id="genere_<%= genere.getId() %>" name="id" value="<%= genere.getId() %>">
+                <input type="checkbox" id="genere_<%= genere.getId() %>" name="idGenere" value="<%= genere.getId() %>">
                 <label for="genere_<%= genere.getId() %>"><%= genere.getNome() %></label>
             </div>
             <% } %>

@@ -339,6 +339,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 			   		   	           document.getElementById('resultSconto').innerHTML = '<p class="error">Errore nell\'aggiornamento della data.</p>';
 			   		   	       });
 			   		   	   });
+						   
 						   document.getElementById('eliminaOfferta').addEventListener('submit', function(event) {
 						       event.preventDefault();
 
@@ -413,5 +414,51 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 						               },
 						               maintainAspectRatio: false
 						           }
+						       });
+						   });
+						   
+						   
+						   document.getElementById('associaGeneriOfferta').addEventListener('submit', function(event) {
+						       event.preventDefault();
+						       console.log("Entrato nel metodo");
+
+						       const offertaId = document.getElementById('offerta5').value;
+						       console.log("Offerta selezionata ID:", offertaId);
+
+						       const checkedGenres = document.querySelectorAll('input[name="idGenere"]:checked');
+						       console.log("Generi selezionati:", checkedGenres);
+
+						       const genereIds = Array.from(checkedGenres).map(checkbox => checkbox.value);
+						       console.log("ID dei generi selezionati:", genereIds);
+
+						       const formData = new URLSearchParams();
+						       formData.append('idOfferta', offertaId);
+						       genereIds.forEach(id => formData.append('idGenere', id));
+						       console.log("Dati del form:", formData.toString());
+
+						       fetch('/SteamProject/GenereOffertaAddServlet', {
+						           method: 'POST',
+						           headers: {
+						               'Content-Type': 'application/x-www-form-urlencoded'
+						           },
+						           body: formData
+						       })
+						       .then(response => {
+						           console.log("Risposta dal server:", response);
+						           if (response.ok) {
+						               return response.text().then(text => {
+						                   console.log("Messaggio di successo:", text);
+						                   document.getElementById('resultAssociazione').innerHTML = '<p class="success">' + text + '</p>';
+						               });
+						           } else {
+						               return response.text().then(text => {
+						                   console.error("Messaggio di errore:", text);
+						                   document.getElementById('resultAssociazione').innerHTML = '<p class="error">' + text + '</p>';
+						               });
+						           }
+						       })
+						       .catch(error => {
+						           console.error('Errore:', error);
+						           document.getElementById('resultAssociazione').innerHTML = '<p class="error">Errore durante l\'associazione dei generi all\'offerta.</p>';
 						       });
 						   });
