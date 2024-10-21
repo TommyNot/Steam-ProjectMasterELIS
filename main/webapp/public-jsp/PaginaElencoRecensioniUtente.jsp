@@ -1,5 +1,4 @@
-<%@page import="org.elis.model.Gioco"%>
-<%@page import="org.elis.model.Libreria"%>
+<%@page import="org.elis.model.Recensione"%>
 <%@page import="java.util.List"%>
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
 <%@page import="org.elis.model.Utente"%>
@@ -9,17 +8,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-	 <title>Libreria Page</title>
-  	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<title>Recensioni utente</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" type="text/css">
   	 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <link rel="stylesheet" href="<%= request.getContextPath() %>/Css/LibreriaGiochiCss.css">
-
+     <link rel="stylesheet" href="<%= request.getContextPath() %>/Css/PaginaElencoRecensioniUtenteCss.css">
 </head>
 <body>
-	 <nav class="navbar navbar-expand-lg colore" data-bs-theme="dark">
+	<nav class="navbar navbar-expand-lg colore" data-bs-theme="dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -90,155 +88,48 @@
                     </ul>
                   </li>
                 </ul>
-                <form action="<%= request.getContextPath() %>/GiocoCercaServlet" class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Cerca un gioco" name="barraRicerca" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
               </div>
             </div>
         </nav>
         
-       <div class="container">
+        <div class="container">
         	<div class="container-2">
-        		<h2 class="testo-lista-librerie">Le tue librerie</h2>
-        		<button id="toggle-form-aggiungi-btn" class="testo-lista-librerie ancore">Aggiungi libreria</button>
-        		<button id="toggle-form-modifica-btn" class="testo-lista-librerie ancore">Modifica nome libreria</button>
-        		<button id="toggle-form-elimina-btn" class="testo-lista-librerie ancore">Elimina libreria</button>
-        		<button id="toggle-form-rimuovi-gioco-btn" class="testo-lista-librerie ancore">Elimina gioco dalla libreria</button>
+        		<%
+        			List<Recensione> recensioniUtente = BusinessLogic.TrovaRecensioneByIdUtente(utente.getId());
+        			if(recensioniUtente == null || recensioniUtente.isEmpty()){%>
+        				<p style="color:white">Non hai ancora rilasciato una recensione.</p>
+        		<% 		}else{ %>
+        			<div>
+        				<h2 class="testo">Numero recensioni totali rilasciate: <%=recensioniUtente.size() %> </h2>
+        			</div>
+        		<% 	for(Recensione r: recensioniUtente){ %>
+        			<div class="recensione">
+        				<h3>Gioco recensito: <%=r.getGioco().getNome() %> </h3>
+        				<p>Valutazione: 
+                    <%
+                        for (int i = 1; i <= 5; i++) {
+                            if (i <= r.getVoto()) {
+                    %>
+                                <i class="bi bi-star-fill" style="color: #f39c12;"></i>
+                    <%
+                            } else {
+                    %>
+                                <i class="bi bi-star" style="color: #ddd;"></i>
+                    <%
+                            }
+                        }
+                    %>
+                    /5
+                    </p>
+        				<p>Testo: <%= r.getTesto() %> </p>
+        			</div>
+        		<%	}
+        		 
+        		}
+        		%>
+        		
         	</div>
-        	
-        	<div class="container-3" id="form-container-aggiungi" style="display: none;">
-        	<% 
-					String success = (String) request.getAttribute("successo");
-					if (success != null) { 
-					%>
-					<div class="success-delete-gioco">
-						<%=success %>
-					</div>
-					<%} %>
-			    <form action="<%= request.getContextPath()%>/LibreriaAggiungiServlet" method="post" class="form">
-			        <label for="nomeNuovaLibreria" class="etichetta">Nome nuova libreria:</label>
-			        <input type="text" id="nomeNuovaLibreria" name="nomeLibreriaInput" required>
-			        
-			        <div class="button-group">
-			            <button type="submit">Aggiungi libreria</button>
-			            <button type="reset">Reset</button>
-			        </div>
-			    </form>
-			</div>
-			
-					<%
-				        String messaggioSuccesso = (String) request.getAttribute("messaggioSuccesso");
-				        if (messaggioSuccesso != null) {
-				    %>
-				        <div class="success">
-				            <%= messaggioSuccesso %>
-				        </div>
-				    <%
-				        }
-				    %>
-			<div class="container-3" id="form-container-modifica" style="display: none;">
-			    <form action="<%= request.getContextPath()%>/LibreriaAggiornaNomeServlet" method="post" class="form">
-			    	<label for="nomeLibreriaModificare" class="etichetta">Inserisci l'ID della libreria da modificare:</label>
-			        <input type="text" id="nomeLibreriaModificare" name="idLibreria" required>
-			        
-			        <label for="nomeLibreriaNuovoModicato" class="etichetta">Nuovo nome libreria:</label>
-			        <input type="text" id="nomeLibreriaNuovoModicato" name="nomeNuovoInput" required>
-			        
-			        <div class="button-group">
-			            <button type="submit">Modifica nome libreria</button>
-			            <button type="reset">Reset</button>
-			        </div>
-
-			    </form>
-			</div>
-			
-			
-			<div class="container-3" id="form-container-rimuovi" style="display: none;">
-			    <form action="<%= request.getContextPath()%>/LibreriaEliminaServlet" method="post" class="form">
-			        <label for="nomeLibreriaRimuovere" class="etichetta">Inserisci l'ID della libreria da rimuovere:</label>
-			        <input type="text" id="nomeLibreriaRimuovere" name="libreriaId" required>
-			        
-			        <div class="button-group">
-			            <button type="submit">Elimina libreria</button>
-			            <button type="reset">Reset</button>
-			        </div>
-			    </form>
-			</div>
-			
-			<div class="container-3" id="form-container-elimina-gioco-libreria" style="display: none;">
-			  <% 
-					String successo = (String) request.getAttribute("successo");
-					if (successo != null) { 
-					%>
-					<div class="success-delete-gioco">
-						<%=successo %>
-					</div>
-					<%} %>
-			    <form action="<%= request.getContextPath()%>/LibreriaEliminaGiocoDaLibreriaServlet" method="post" class="form">
-			    	<label for="giocoInserito" class="etichetta">ID gioco da rimuovere:</label>
-			        <input type="text" id="giocoInserito" name="idGioco" required>
-			        
-			        <label for="libreriaDelGioco" class="etichetta">ID libreria dove si trova il gioco:</label>
-			        <input type="text" id="libreriaDelGioco" name="idLibreria" required>
-			        
-			        <div class="button-group">
-			            <button type="submit">Elimina gioco da libreria</button>
-			            <button type="reset">Reset</button>
-			        </div>
-			    </form>
-			</div>
-		<h3 class="testo-lista-librerie">I tuoi giochi</h3>
-      <div class="container-2">
-    	<div class="list-group">
-        <%
-            // Ottieni la lista delle librerie associate all'utente
-            List<Libreria> librerie = (List<Libreria>) request.getAttribute("librerieUtente");
-            Utente utenteId = (Utente) session.getAttribute("utenteLoggato");
-            idUtente = utenteId.getId();
-
-            // Verifica se ci sono librerie disponibili
-            if (librerie == null || librerie.isEmpty()) { 
-        %>
-            <p class="testo-lista-librerie">Nessuna libreria disponibile</p>
-        <%
-            } else {
-                // Crea i link per ogni libreria
-                for (Libreria l : librerie) { 
-        %>
-            <a href="LibreriaFindByIdUtenteServlet?id_libreria=<%= l.getId() %>" 
-               class="list-group-item list-group-item-action list-group-item-dark">
-               ID: <%= l.getId() %> <br> Nome: <%= l.getNome() %>
-            </a>
-        <%
-                }
-            } 
-        %>
-    </div>
-		
-    <!-- Visualizza i giochi associati alla libreria selezionata -->
-    
-        <%
-            // Recupera i giochi dalla libreria selezionata
-            List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi"); %>
-	<div class="games-cont">
-        <%   if (giochiUtente != null && !giochiUtente.isEmpty()) {
-                for (Gioco gioco : giochiUtente) {
-        %>
-        <div class="card mx-2 game">
-        	<img src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" class="card-img-top" alt="immagine gioco">
-        	<div class="card-body carta">
-    			<h5 class="card-title"><%= gioco.getNome() %></h5>
-    			<p class="card-text">ID gioco: <%= gioco.getId() %>
-  			</div>
         </div>
-        <% }
-         }
-         %>
-    </div>
-	</div>
-</div>
-
         
         <footer>
 		   <div class="footer-container">
@@ -272,7 +163,6 @@
 		          </div>
 		 </footer>                 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>                 
-	<script src="<%= request.getContextPath() %>/Js/LibreriaGiochiScript.js"></script>
-	                  
+	<script src="<%= request.getContextPath() %>/Js/DashboardUtenteJs.js"></script>
 </body>
 </html>

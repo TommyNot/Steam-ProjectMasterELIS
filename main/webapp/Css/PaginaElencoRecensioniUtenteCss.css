@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 body{
     background-color: #1b2838;
     margin: 0;
@@ -28,8 +29,8 @@ body{
     align-items: center;
 }
 
-.testo-lista-librerie{
-	color: #0056b3;
+.testo{
+	color: #4B89B7;
 }
 
 .container-2{
@@ -38,123 +39,40 @@ body{
     margin: 20px auto;
     background-color: #1b2838;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-}
-
-.ancore{
-	text-decoration: none;
-	font-size: 1em;
-	border-radius: 10px;
-	border: 2px solid #0056b3;
-	padding: 4px;
-	background-color: #2B3035;
-}
-
-
-
-
-.container-3 {
-    width: 100%;
-    max-width: 400px;
-    margin: 20px;
-    padding: 20px;
-    background-color: #1E415F;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form {
-    display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
-.etichetta {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: white;
-    display: flex;
-    justify-content: center;
+.recensione {
+    padding: 10px; 
+    border-bottom: 1px solid #444; 
+    transition: background-color 0.3s;
 }
 
-input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    width: 100%;
-    box-sizing: border-box;
+.recensione:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
 }
 
-.button-group {
-    display: flex;
-    justify-content: space-between;
+.recensione:last-child {
+    border-bottom: none; 
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.recensione h3 {
+    font-size: 1.3em;
+    color: #4B89B7; 
+    margin-bottom: 5px; 
 }
 
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+.recensione p {
+    margin: 5px 0; 
+    color: #cccccc; 
 }
 
-button[type="reset"] {
-    background-color: #f44336;
-    color: white;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .container-3 {
-        padding: 15px;
-    }
-    
-    .button-group {
-        flex-direction: column;
-    }
-
-    button {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}
-
-
-.games-cont{
-	display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
-    width: 80%;
-    justify-items: center;
-}
-
-.game {
-  background-color: #171a21;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  transition: transform 0.3s ease;
-  min-width: 10em;
-  color: white;
-  max-width: 200px;
-}
-
-.game:hover {
-  transform: scale(1.05);
-}
-
-.carta{
-	align-content: center;
+.recensione p:last-child {
+    font-weight: bold;
+    color: green; 
 }
 
 
@@ -164,45 +82,6 @@ button:hover {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Footer Styles */
 footer {
   background-color: #1E415F;
   color: #b8b8b8;
@@ -290,7 +169,3 @@ footer {
 .footer-copyright p {
   margin: 0;
 }
-
-
-
-

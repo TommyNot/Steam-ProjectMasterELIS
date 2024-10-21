@@ -165,9 +165,9 @@
 		                <div></div>
 		  
 		                <div>
-		                  <h3>Utenti bloccati</h3>
-		                  <p>Qui sono raggrupati gli utenti che hai bloccato.</p>
-		                  <a href="javascript:void(0);" title="featured clay">Let's Go</a>
+		                  <h3>Recensioni</h3>
+		                  <p>Qui sono raggrupate tutte le recensioni che hai rilasciato.</p>
+		                  <a href="<%= request.getContextPath()%>/public-jsp/PaginaElencoRecensioniUtente.jsp" title="featured clay">Let's Go</a>
 		                </div>
 		  
 		              </div>
