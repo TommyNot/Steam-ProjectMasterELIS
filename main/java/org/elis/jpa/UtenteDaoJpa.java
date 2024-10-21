@@ -234,20 +234,20 @@ public class UtenteDaoJpa implements UtenteDao {
 	                return null;
 	            }
 	            if (utente != null) {
-		        	Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.gioco.id = :giocoId ");
-		        	q.setParameter("recensioneUtente", id);
-		        	
-		        	List<Recensione> recensioni = q.getResultList();
-		        	
-		        	for(Recensione rec : recensioni) {
-		        		
-		        	em.remove(rec);
-		        	}
-		        	
-	            em.remove(utente);
-	            transaction.commit(); 
-	            System.out.println("Utente con ID " + id + " eliminato con successo.");
-		        	}
+	                Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.utente.id = :utenteId");
+	                q.setParameter("utenteId", id);
+	                
+	                List<Recensione> recensioni = q.getResultList();
+	                
+	                for (Recensione rec : recensioni) {
+	                    em.remove(rec);
+	                }
+	                
+	                em.remove(utente);
+	                
+	                transaction.commit(); 
+	                System.out.println("Utente con ID " + id + " eliminato con successo.");
+	            }
 	        } catch (Exception e) {
 	            if (transaction.isActive()) {
 	                transaction.rollback();
