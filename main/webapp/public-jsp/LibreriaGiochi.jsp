@@ -233,6 +233,9 @@
   			</div>
         </div>
         <% }
+         }else{ %>
+        	 <h5 class="testo-lista-librerie">Non ci sono giochi in questa libreria </h5>
+       	<% 
          }
          %>
     </div>
@@ -272,7 +275,7 @@
 		          </div>
 		 </footer>                 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>                 
-	<script src="<%= request.getContextPath() %>/Js/LibreriaGiochiScript.js"></script>
+	<script src="<%=request.getContextPath()%>/Js/LibreriaGiochiScript.js"></script>
 	                  
 </body>
 </html>

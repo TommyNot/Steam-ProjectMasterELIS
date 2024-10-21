@@ -199,62 +199,19 @@ body {
 }
 
 .img-icon{
-	width: 5vw;
+	width: 4vw;
+    border-radius: 30px;
 }
 
-/*.profile-picture{
-  width: 40px;
-  height: 40px;
-  border-radius: 200px;
-  background-position: center;
-  background-size: cover;
+.profile-picture{
+	display: flex;
+    align-items: center;
+    color: #3894EA
 }
 
-.profile {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
+#username{
+	margin-right: 3%;
 }
-
-.profile > svg {
-  fill: dimgray;
-  width: 25px;
-  height: auto;
-  margin-right: 20px;
-}
-
-.profile > svg:nth-child(3) {
-  margin-left: 5px;
-  order: 4;
-  fill: dimgray;
-  margin-right: unset;
-}
-
-.profile > svg:hover,
-.profile-small > svg:hover {
-  cursor: pointer;
-  fill: #161D25;
-}
-
-.profile > svg:active,
-.profile-small > svg:active {
-  transform: scale(0.92);
-}
-
-.profile > div {
-  width: 50px;
-  height: 50px;
-  border-radius: 200px;
-  background-position: center;
-  background-size: cover;
-}
-
-.profile-small {
-  display: none;
-}*/
 
 .ui-row-2 {
   display: flex;
@@ -264,60 +221,6 @@ body {
   width: 100%;
   height: auto;
   padding: 10px 30px;
-}
-
-.left-sidebar {
-  position: sticky;
-  top: 20px;
-  display: flex;
-  align-self: flex-start;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
-  background: #132C42;
-  padding: 15px 10px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-}
-
-.left-sidebar > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 45px;
-  height: 45px;
-  background: #015E80;
-  border-radius: 10px;
-  margin-bottom: 25px;
-  box-shadow: 0 7px 14px 0 #015E80, inset 0px -5px 7px 0px #015E80;
-}
-
-.left-sidebar > div:last-of-type {
-  margin-bottom: unset;
-}
-
-.left-sidebar > div:hover {
-  cursor: pointer;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 16px 0 #161D25, inset 0px -5px 9px 0px #161D25;
-  border: 1px solid #161D25;
-}
-
-.left-sidebar > div > svg {
-  fill: #132C42;
-  width: 25px;
-  height: auto;
-}
-
-.left-sidebar > div:active {
-  transform: scale(0.92);
-}
-
-.left-sidebar > div:hover > svg {
-  fill: black;
 }
 
 .main-content {

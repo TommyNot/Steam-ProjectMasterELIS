@@ -136,6 +136,7 @@ button:hover {
     gap: 10px;
     width: 80%;
     justify-items: center;
+    margin-left: 2%;
 }
 
 .game {
@@ -147,6 +148,7 @@ button:hover {
   min-width: 10em;
   color: white;
   max-width: 200px;
+  box-sizing: content-box;
 }
 
 .game:hover {
