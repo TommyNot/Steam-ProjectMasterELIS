@@ -244,6 +244,10 @@ public static Libreria aggiungiGiocoALibreria(long id_libreria, long id_gioco) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().aggiungiGiocoALibreria(id_libreria, id_gioco);
 }
 
+public static Gioco deleteGiocoLibrary(long id_gioco, long id_libreria) {
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getLibreriaDao().deleteGiocoLibrary(id_gioco, id_libreria);
+}
+
 public static Recensione RecensioneAdd(Recensione r) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getRecensioneDao().add(r);
 }
