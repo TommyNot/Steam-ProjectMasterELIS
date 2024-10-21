@@ -53,15 +53,14 @@ const profilePictures = ["https://i.pinimg.com/enabled/564x/ce/4d/71/ce4d7190e7f
 function getRandomAvatar() {
       const randomIndex = Math.floor(Math.random() * profilePictures.length);
       return profilePictures[randomIndex];
-    }
+}
 
     window.onload = function() {
       const avatarElement = document.getElementById('avatar');
       avatarElement.src = getRandomAvatar();
-	  }
+}
 
-	  
-	  
+	
 	  
 	  
 	  

@@ -158,6 +158,48 @@ public class LibreriaDaoJpa implements LibreriaDao {
 		return libreria;
 	}
 
+	@Override
+	public List<Libreria> searchGameInLibraryList(String nomeGioco) {
+		try {
+			nomeGioco = nomeGioco.trim();
+			EntityManager et = DaoFactoryJpa.getEntityManager();
+			
+			Query q = et.createQuery("SELECT l.nome FROM Libreria l JOIN libreria_gioco lg ON l.id = lg.id_libreria JOIN Gioco g ON g.id = lg.id_gioco WHERE g.nome like :pattern");
+			q.setParameter("pattern", "%"+nomeGioco+"%");
+			System.out.println("select fatta");
+			
+			List<Libreria> l = q.getResultList();
+			System.out.println(l);
+			return l;
+		} catch (NoResultException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+		
+	}
+
+	@Override
+	public Gioco deleteGiocoLibrary(long id_gioco, long id_libreria) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		
+		t.begin();
+		
+		Libreria libreria = em.find(Libreria.class,id_libreria);
+		
+		Gioco g = em.find(Gioco.class, id_gioco);
+		
+       
+		libreria.getGiochiAcquistati().remove(g);        
+       
+        t.commit();
+        em.close();
+        
+        
+       
+		return g;
+	}
+
 
 	
 	

@@ -302,4 +302,14 @@
     <servlet-name>OffertaVediTuttiGiochi</servlet-name>
     <url-pattern>/OffertaVediTuttiGiochi</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LibreriaEliminaGiocoDaLibreriaServlet</display-name>
+    <servlet-name>LibreriaEliminaGiocoDaLibreriaServlet</servlet-name>
+    <servlet-class>org.elis.controller.LibreriaEliminaGiocoDaLibreriaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LibreriaEliminaGiocoDaLibreriaServlet</servlet-name>
+    <url-pattern>/LibreriaEliminaGiocoDaLibreriaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

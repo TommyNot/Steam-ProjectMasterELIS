@@ -6,6 +6,10 @@ body{
     font-family: Arial, sans-serif;
 }
 
+.colore{
+	background-color: #171D25;
+}
+
 .img-icon{
     width: 4vw;
     height: auto;
@@ -35,7 +39,6 @@ body{
     background-color: #1b2838;
     display: flex;
     justify-content: space-between;
-    align-items: center; 
 }
 
 .ancore{
@@ -127,9 +130,32 @@ button:hover {
 }
 
 
+.games-cont{
+	display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    width: 80%;
+    justify-items: center;
+}
 
+.game {
+  background-color: #171a21;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  min-width: 10em;
+  color: white;
+  max-width: 200px;
+}
 
+.game:hover {
+  transform: scale(1.05);
+}
 
+.carta{
+	align-content: center;
+}
 
 
 

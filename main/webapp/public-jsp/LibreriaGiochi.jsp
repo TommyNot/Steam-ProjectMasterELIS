@@ -9,6 +9,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	 <title>Libreria Page</title>
   	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   	 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -18,7 +19,7 @@
 
 </head>
 <body>
-	 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+	 <nav class="navbar navbar-expand-lg colore" data-bs-theme="dark">
             <div class="container-fluid">
               <a class="navbar-brand" href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -89,21 +90,22 @@
                     </ul>
                   </li>
                 </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="<%= request.getContextPath() %>/GiocoCercaServlet" class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Cerca un gioco" name="barraRicerca" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
               </div>
             </div>
         </nav>
         
-        <div class="container">
+       <div class="container">
         	<div class="container-2">
         		<h2 class="testo-lista-librerie">Le tue librerie</h2>
         		<button id="toggle-form-aggiungi-btn" class="testo-lista-librerie ancore">Aggiungi libreria</button>
         		<button id="toggle-form-modifica-btn" class="testo-lista-librerie ancore">Modifica nome libreria</button>
         		<button id="toggle-form-elimina-btn" class="testo-lista-librerie ancore">Elimina libreria</button>
         	</div>
+        	
         	<div class="container-3" id="form-container-aggiungi" style="display: none;">
 			    <form action="<%= request.getContextPath()%>/LibreriaAggiungiServlet" method="post" class="form">
 			        <label for="nome" class="etichetta">Nome nuova libreria:</label>
@@ -153,9 +155,9 @@
 			        </div>
 			    </form>
 			</div>
-
-        	<div class="container-2">
-    <div class="list-group">
+		<h3 class="testo-lista-librerie">I tuoi giochi</h3>
+      <div class="container-2">
+    	<div class="list-group">
         <%
             // Ottieni la lista delle librerie associate all'utente
             List<Libreria> librerie = (List<Libreria>) request.getAttribute("librerieUtente");
@@ -180,26 +182,28 @@
             } 
         %>
     </div>
-
+		
     <!-- Visualizza i giochi associati alla libreria selezionata -->
-    <div class="lista-giochi">
+    
         <%
             // Recupera i giochi dalla libreria selezionata
-            List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi");
-
-            if (giochiUtente != null && !giochiUtente.isEmpty()) {
+            List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi"); %>
+	<div class="games-cont">
+        <%   if (giochiUtente != null && !giochiUtente.isEmpty()) {
                 for (Gioco gioco : giochiUtente) {
         %>
-            <p style="color: white;">Nome Gioco: <%= gioco.getNome() %></p>
-        <%
-                }
-            } else if (giochiUtente != null) {
-        %>
-            <p class="testo-lista-giochi">Nessun gioco disponibile per questa libreria.</p>
-        <%
-            }
-        %>
+        <div class="card mx-2 game">
+        	<img src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" class="card-img-top" alt="immagine gioco">
+        	<div class="card-body carta">
+    			<h5 class="card-title"><%= gioco.getNome() %></h5>
+    			<p class="card-text">ID gioco: <%= gioco.getId() %>
+  			</div>
+        </div>
+        <% }
+         }
+         %>
     </div>
+	</div>
 </div>
 
         
@@ -234,7 +238,7 @@
 		                </section>
 		          </div>
 		 </footer>                 
-		                  
-		<script src="<%= request.getContextPath() %>/Js/LibreriaGiochiScript.js"></script>                  
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>                 
+	<script src="<%= request.getContextPath() %>/Js/LibreriaGiochiScript.js"></script>                  
 </body>
 </html>
