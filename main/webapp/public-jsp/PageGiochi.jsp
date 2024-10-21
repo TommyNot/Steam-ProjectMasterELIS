@@ -82,7 +82,7 @@
 						        </ul>
 						    </div>
 						
-      <a href="#" >Offerte</a>
+      <a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a>
       <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
  
     </div>
@@ -124,17 +124,13 @@
 
 		
 <div class="content">
-   
     <%
-        
         List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi");
-        
-        
+
         if (giochi == null || giochi.isEmpty()) {
             giochi = BusinessLogic.VisualizzaTuttiGiochi(); 
         }
-        
-        
+
         String messaggioErrore = (String) request.getAttribute("errorMessage");
         if (messaggioErrore != null) { 
     %>
@@ -143,8 +139,7 @@
             </div>
     <%
         }
-        
-        
+
         if (giochi == null || giochi.isEmpty()) {
     %>
             <div class="errore">
@@ -152,39 +147,42 @@
             </div>
     <%
         } else {
-            
-            for (Gioco gioco : giochi) { 
-                Offerta offerta = gioco.getOffertaGioco(); 
     %>
-    
-    <div class="games-container">
-        <div class="game">
-            <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" style="width: 220px; height: 300px;" />
-            
-            <h3 class="product-title"><%= gioco.getNome() %></h3>
-            
-            <div class="discount">
-                <% if (offerta != null) { %>
-                    <h4 class="product-discount">Sconto : <%= offerta.getSconto() %>% off</h4>
-                    <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
-                    <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
-                <% } else { %>
-                    <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
-                <% } %>
-            </div>
-           
-            <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
-            <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
-                <input type="hidden" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
-                <button class="btn">Visualizza dettagli</button>
-            </form>
-        </div>
-    </div>
+            <div class="games-container"> 
+                <%
+                for (Gioco gioco : giochi) { 
+                    Offerta offerta = gioco.getOffertaGioco(); 
+                %>
+                    <div class="game">
+                        <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" style="width: 220px; height: 300px;" />
+                        
+                        <h3 class="product-title"><%= gioco.getNome() %></h3>
+                        
+                        <div class="discount">
+                            <% if (offerta != null) { %>
+                                <h4 class="product-discount">Sconto: <%= offerta.getSconto() %>% off</h4>
+                                <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
+                                <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
+                            <% } else { %>
+                                <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
+                            <% } %>
+                        </div>
+                       
+                        <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
+                        <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
+                            <input type="hidden" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
+                            <button class="btn">Visualizza dettagli</button>
+                        </form>
+                    </div>
+                <%
+                } 
+                %>
+            </div> 
     <%
-            } 
         } 
     %>
 </div>
+
 
 
 

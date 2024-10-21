@@ -79,7 +79,7 @@
 						        </ul>
 						    </div>
 						
-      <a href="#" >Offerte</a>
+      <a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi" >Offerte</a>
       <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
  
     </div>
@@ -142,7 +142,7 @@
                 
                 for (int i = 0; i < giochi.size(); i++) {
                     Gioco gioco = giochi.get(i);
-                    Offerta offerta = (offerte != null && i < offerte.size()) ? offerte.get(i) : null;
+                    Offerta offerta = gioco.getOffertaGioco();
             %>
                 <div class="game">
                     <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" style="width: 220px; height: 300px;" />

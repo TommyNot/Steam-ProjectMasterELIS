@@ -135,7 +135,7 @@
     <% 
         Gioco gioco = (Gioco) request.getAttribute("giochi");
         Utente u = (Utente) session.getAttribute("utenteLoggato");
-        Offerta offerta = (Offerta) request.getAttribute("offerta");
+        Offerta offerta = gioco.getOffertaGioco(); 
 
         if (gioco != null) {
     %>
@@ -186,6 +186,7 @@
             <p>Accedi per lasciare una recensione.</p>
         <% } %>
     </div>
+    
     
 <!-- Se l'utente è loggato, mostra il pulsante e il form nascosto per aggiungere alla libreria -->
 <div class="library-section">
@@ -307,7 +308,7 @@
         </form>
     </div>
 </div>
-                    <% 
+ </div>                   <% 
                         } 
                     %>
                 </div>
