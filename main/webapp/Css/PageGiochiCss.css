@@ -317,15 +317,18 @@ input[type="text"]:focus {
 }
 
 .image-container {
-    width: 420px; /* Larghezza del contenitore */
-    height: 400px; /* Altezza del contenitore */
+    width: 100%; /* Larghezza del contenitore */
+    height: auto; /* Altezza del contenitore */
     overflow: hidden; /* Nasconde parte dell'immagine che esce dal contenitore */
     align-items: center;
+    align-content: center;
+    
 }
 
 .product__image {
     width: 60%; /* Riempi tutta la larghezza del contenitore */
-    
+       align-items: center;
+    align-content: center;
    
     border-radius: 10px;
 }
@@ -393,6 +396,7 @@ input[type="text"]:focus {
 .btn {
     background-color: #66c0f4;
     color: #fff;
+    display: inline;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -415,8 +419,48 @@ input[type="text"]:focus {
 .btn-danger{
 	
 	background-color: #cc0000;
+	display: inline;
 }
 
+.btn-rece{
+	
+	background-color: #F39C12;
+	display: inline;
+	font-weight: bold;
+	   padding: 10px 26px;
+	   display: inline;
+	   margin-top: 5px;
+	   margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-recensione{
+	
+		background-color: #cc0000;
+	font-weight: bold;
+	display: inline;
+	   padding: 10px 20px;
+	   display: inline;
+	   margin-top: 5px;
+	   margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+	
+}
+
+.btn-recensione:hover{
+	
+	background-color:#5ba9da;
+}
+.btn-rece:hover{
+	
+	background-color:#5ba9da; 
+}
 .btn:hover {
     background-color: #5ba9da;
 }

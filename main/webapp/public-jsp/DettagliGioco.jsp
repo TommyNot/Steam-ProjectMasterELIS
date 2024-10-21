@@ -163,7 +163,7 @@
     <!-- Se l'utente è loggato, mostra il form per lasciare una recensione -->
     <div class="review-section">
         <% if (u != null) { %>
-            <button class="btn" id="showReviewFormBtn" style="display: inline;">Lascia una recensione</button>
+            <button class="btn-recensione" id="showReviewFormBtn" style="display: inline;">Lascia una recensione</button>
 
             <form action="<%=request.getContextPath() %>/RecensioneAggiungiServlet" class="review-form" id="reviewForm" style="display: none;" method="post">
                 <h2>Lascia una recensione</h2>
@@ -192,7 +192,7 @@
 <div class="library-section">
     <% if (u != null) { %>
        
-        <button class="btn" id="showAddFormBtn" style="display: inline;">Aggiungi alla libreria</button>
+        <button class="btn-rece" id="showAddFormBtn" style="display: inline;">Aggiungi alla libreria</button>
 
         
         <form action="<%=request.getContextPath() %>/LibreriaGiocoAggiungiServlet" class="library-form" id="addForm" style="display: none;" method="post">
@@ -235,7 +235,7 @@
     %>
     
     <h3>Numero totale di recensioni: <%= numeroRecensioni %></h3>
-    <h4>Media valutazione: 
+    <h4>Gioco Media valutazione: 
         <%
             for (int i = 1; i <= 5; i++) {
                 if (i <= Math.round(mediaVoti)) {
@@ -285,15 +285,13 @@
                         <form action="<%= request.getContextPath() %>/RecensioneEliminaServlet" method="post">
                             <input type="hidden" name="idRecensione" value="<%= recensione.getId() %>">
                             <input type="hidden" name="idGioco" value="<%= gioco.getId() %>">
-                            <button class="btn btn-danger" type="submit">Elimina</button>
+                            <button class="btn-rece" type="submit">Elimina</button>
                             
                         </form>
-                     <div class="recensione">
-				    <h4>Recensione di <%= recensione.getRecensioneUtente().getUsername() %></h4>
-				    <p>Voto: <%= recensione.getVoto() %></p>
-				    <p>Testo: <%= recensione.getTesto() %></p>
-
-    <button class="btn btn-primary" onclick="toggleEditForm(<%= recensione.getId() %>)">Modifica</button>
+                     
+				    
+				    
+    <button class="btn-recensione" onclick="toggleEditForm(<%= recensione.getId() %>)">Modifica</button>
 
     <!-- Form di modifica recensione -->
     <div id="editForm_<%= recensione.getId() %>" style="display:none;">
@@ -307,7 +305,7 @@
             <button class="btn btn-danger" type="submit">Modifica Recensione</button>
         </form>
     </div>
-</div>
+
  </div>                   <% 
                         } 
                     %>
