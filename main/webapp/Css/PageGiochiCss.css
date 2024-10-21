@@ -115,12 +115,18 @@ a:hover {
 /* Games Content */
 .content {
   padding: 20px;
+       display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px;
 }
 
 .games-container {
-  display: grid;
+ display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+   
 }
 
 .game {

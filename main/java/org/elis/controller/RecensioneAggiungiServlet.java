@@ -74,7 +74,7 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 		  //controllo la sessione e mi prendo l'oggetto utente per costruirmi quello recensione
 		  HttpSession sessione = request.getSession(false);
 		   if (sessione == null) {
-	            response.sendRedirect("public-jsp/LoginPage.jsp");
+	            response.sendRedirect("public-jsp/PaginaLogin.jsp");
 	            return;
 	        }
 
@@ -96,13 +96,13 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 	                    	 request.setAttribute("successo", "Recensione creata con successo.");
 	                    } 
 	                } else {
-	                    System.out.println("L'utente non è un utente base.");
+	                	response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
 	                }
 	            } else {
-	                System.out.println("Errore: utente non trovato con ID: " + idUtente);
+	            	response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
 	            }
 	        } else {
-	            System.out.println("Nessun utente loggato trovato nella sessione.");
+	        	response.sendRedirect("public-jsp/PaginaLogin.jsp");
 	        }
         
 	}

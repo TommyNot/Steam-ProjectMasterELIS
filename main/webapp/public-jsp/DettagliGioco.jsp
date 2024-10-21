@@ -1,3 +1,4 @@
+<%@page import="org.elis.model.Ruolo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="org.elis.model.Utente" %> 
@@ -255,7 +256,8 @@
             for (Recensione recensione : recensioni) {
     %>
                 <div class="recensione">
-                    <h3><%= recensione.getRecensioneUtente().getUsername() %></h3>
+                    <h3><%= "Username : " +  recensione.getRecensioneUtente().getUsername() + " ( " +   utenteLoggato.getRuolo() + " )"%></h3>
+                    
                     <p><%= recensione.getTesto() %></p>
                     <p>Valutazione: 
                     <%
@@ -276,7 +278,7 @@
                     
                     <% 
                         // Verifico se l'utente loggato ed sè l'autore della recensione , funzionaaaa lesgo
-                        if (utenteLoggato != null && utenteLoggato.getId() == recensione.getRecensioneUtente().getId()) { 
+                        if (utenteLoggato != null && utenteLoggato.getId() == recensione.getRecensioneUtente().getId() || utenteLoggato.getRuolo().equals(Ruolo.ADMIN)) { 
                     %>
                         
                         <form action="<%= request.getContextPath() %>/RecensioneEliminaServlet" method="post">
@@ -285,9 +287,9 @@
                             <button class="btn btn-danger" type="submit">Elimina</button>
                             
                         </form>
-                        <form action="<%= request.getContextPath() %>/RecensioneEliminaServlet" method="post">
-                            <input type="hidden" name="idRecensioneModifica" value="<%= recensione.getId() %>">
-                            <input type="hidden" name="idGiocoModifica" value="<%= gioco.getId() %>">
+                        <form action="<%= request.getContextPath() %>/RecensioneAggiornaVotoServlet" method="post">
+                            <input  name="idRecensioneModifica" value="<%= recensione.getVoto() %>">
+                            <input  name="idGiocoModifica" value="<%= recensione.getTesto() %>">
                             <button class="btn btn-danger" type="submit">Modifica</button>
                             
                         </form>

@@ -73,7 +73,7 @@ public class RecensioneEliminaServlet extends HttpServlet {
 	            
 	            Utente u = BusinessLogic.UtenteFindById(idUtente);
 	            if (u != null) {
-	                boolean isUtenteBase= u.getRuolo() == Ruolo.UTENTE_BASE;
+	                boolean isUtenteBase= u.getRuolo() == Ruolo.UTENTE_BASE || u.getRuolo() == Ruolo.ADMIN;
 	                if (isUtenteBase) {
 	                    System.out.println("L'utente è un Utente Base.");
 	                    Recensione eliminata = BusinessLogic.eliminaRecensione(idRecensione);
