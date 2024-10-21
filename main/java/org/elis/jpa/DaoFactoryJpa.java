@@ -10,14 +10,21 @@ import org.elis.dao.UtenteDao;
 import org.elis.jdbc.UtenteDaoJDBC;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class DaoFactoryJpa extends DaoFactory{
 	
+	private static EntityManagerFactory entityManagerFactory;
 
 	//creo connessione con db
 	protected static EntityManager getEntityManager() {
-		return Persistence.createEntityManagerFactory("SteamProject").createEntityManager();
+		if(entityManagerFactory == null)
+		{
+			entityManagerFactory = Persistence.createEntityManagerFactory("SteamProject");
+		}
+		
+		return entityManagerFactory.createEntityManager();
 	}
 	
 
