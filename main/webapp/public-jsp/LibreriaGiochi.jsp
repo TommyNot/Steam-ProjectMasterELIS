@@ -104,9 +104,18 @@
         		<button id="toggle-form-aggiungi-btn" class="testo-lista-librerie ancore">Aggiungi libreria</button>
         		<button id="toggle-form-modifica-btn" class="testo-lista-librerie ancore">Modifica nome libreria</button>
         		<button id="toggle-form-elimina-btn" class="testo-lista-librerie ancore">Elimina libreria</button>
+        		<button id="toggle-form-rimuovi-gioco-btn" class="testo-lista-librerie ancore">Elimina gioco dalla libreria</button>
         	</div>
         	
         	<div class="container-3" id="form-container-aggiungi" style="display: none;">
+        	<% 
+					String success = (String) request.getAttribute("successo");
+					if (success != null) { 
+					%>
+					<div class="success-delete-gioco">
+						<%=success %>
+					</div>
+					<%} %>
 			    <form action="<%= request.getContextPath()%>/LibreriaAggiungiServlet" method="post" class="form">
 			        <label for="nome" class="etichetta">Nome nuova libreria:</label>
 			        <input type="text" id="nome" name="nomeLibreriaInput" required>
@@ -151,6 +160,29 @@
 			        
 			        <div class="button-group">
 			            <button type="submit">Elimina libreria</button>
+			            <button type="reset">Reset</button>
+			        </div>
+			    </form>
+			</div>
+			
+			<div class="container-3" id="form-container-elimina-gioco-libreria" style="display: none;">
+			  <% 
+					String successo = (String) request.getAttribute("successo");
+					if (successo != null) { 
+					%>
+					<div class="success-delete-gioco">
+						<%=successo %>
+					</div>
+					<%} %>
+			    <form action="<%= request.getContextPath()%>/LibreriaEliminaGiocoDaLibreriaServlet" method="post" class="form">
+			    	<label for="nome" class="etichetta">ID gioco da rimuovere:</label>
+			        <input type="text" id="nome" name="idGioco" required>
+			        
+			        <label for="nome" class="etichetta">ID libreria dove si trova il gioco:</label>
+			        <input type="text" id="nome" name="idLibreria" required>
+			        
+			        <div class="button-group">
+			            <button type="submit">Elimina gioco da libreria</button>
 			            <button type="reset">Reset</button>
 			        </div>
 			    </form>
@@ -239,6 +271,7 @@
 		          </div>
 		 </footer>                 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>                 
-	<script src="<%= request.getContextPath() %>/Js/LibreriaGiochiScript.js"></script>                  
+	<script src="<%= request.getContextPath() %>/Js/LibreriaGiochiScript.js"></script>
+	                  
 </body>
 </html>

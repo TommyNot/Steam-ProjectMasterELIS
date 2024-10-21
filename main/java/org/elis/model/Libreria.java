@@ -2,6 +2,7 @@ package org.elis.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -108,4 +109,25 @@ public class Libreria {
 		giochiAcquistati.add(gioco);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(data_creazione, data_ultima_modifica, giochiAcquistati, id, libreriaUtente, nome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Libreria other = (Libreria) obj;
+		return Objects.equals(data_creazione, other.data_creazione)
+				&& Objects.equals(data_ultima_modifica, other.data_ultima_modifica)
+				&& Objects.equals(giochiAcquistati, other.giochiAcquistati) && id == other.id
+				&& Objects.equals(nome, other.nome);
+	}
+	
+	
 }

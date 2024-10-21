@@ -3,8 +3,10 @@ package org.elis.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -207,6 +209,33 @@ public class Gioco implements Serializable{
 
 	public void setLibreriaGiochi(List<Libreria> libreriaGiochi) {
 		this.libreriaGiochi = libreriaGiochi;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(byteImmagine);
+		result = prime * result + Objects.hash(data_creazione, data_rilascio, data_ultima_modifica, descrizione,
+				eliminato, id, libreriaGiochi, nome, prezzo);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Gioco other = (Gioco) obj;
+		return Arrays.equals(byteImmagine, other.byteImmagine) && Objects.equals(data_creazione, other.data_creazione)
+				&& Objects.equals(data_rilascio, other.data_rilascio)
+				&& Objects.equals(data_ultima_modifica, other.data_ultima_modifica)
+				&& Objects.equals(descrizione, other.descrizione) && eliminato == other.eliminato && id == other.id
+				&& Objects.equals(libreriaGiochi, other.libreriaGiochi) && Objects.equals(nome, other.nome)
+				&& Double.doubleToLongBits(prezzo) == Double.doubleToLongBits(other.prezzo);
 	}
     
     

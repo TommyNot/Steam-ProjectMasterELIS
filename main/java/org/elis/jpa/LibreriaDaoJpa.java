@@ -190,7 +190,7 @@ public class LibreriaDaoJpa implements LibreriaDao {
 		Gioco g = em.find(Gioco.class, id_gioco);
 		
        
-		libreria.getGiochiAcquistati().remove(g);        
+		g.getLibreriaGiochi().remove(libreria);        
        
         t.commit();
         em.close();
