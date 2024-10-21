@@ -297,4 +297,15 @@ public static List<Gioco> addOffertaToGiochiByGenere(long idGenere, long idOffer
 public static List<Gioco> giocoOffertaAdd(long idGioco, long idOfferta){
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().addGiocoOfferta(idGioco, idOfferta);
 }
+
+public static List<Gioco> addGiocoOfferta(long idGioco, long idOfferta){
+	
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().addGiocoOfferta(idGioco, idOfferta);
+}
+
+public static Gioco updateGiocoOfferta(long idGioco, long idOfferta) {
+	
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().updateGiocoOfferta(idGioco, idOfferta);
+			
+}
 }

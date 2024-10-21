@@ -268,10 +268,42 @@ public class GiocoDaoJpa implements GiocoDao{
 
 
 	@Override
-	public Gioco updateGiocoOfferta(long id, Offerta offerta) {
-		// TODO Auto-generated method stub
-		return null;
+	public Gioco updateGiocoOfferta(long idGioco, long idOfferta) {
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    Gioco gioco = null;
+
+	    try {
+	        t.begin(); 
+
+	        
+	        Offerta offerta = em.find(Offerta.class, idOfferta);
+	        if (offerta == null) {
+	            System.out.println("Offerta non trovata con ID: " + idOfferta);
+	            return null; 
+	        }
+
+	        
+	        gioco = em.find(Gioco.class, idGioco);
+	        if (gioco != null) {
+	            
+	            gioco.setOffertaGioco(offerta);
+	             
+	             System.out.println("Gioco non trovato");
+	        } else {
+	            System.out.println("Gioco non trovato con ID: " + idGioco);
+	            return null; 
+	        }
+	        
+	        t.commit();
+	    } catch (Exception e) {
+	       
+	        e.printStackTrace();
+	    } 
+
+	    return gioco; 
 	}
+
 
 	@Override
 	public Gioco updateGiocoGenere(long id, Genere genere) {
@@ -385,6 +417,7 @@ public class GiocoDaoJpa implements GiocoDao{
 	        e.printStackTrace();
 	    } finally {
 	        em.close();
+	        
 	    }
 	    return giochiOfferta;
 	}
@@ -407,24 +440,18 @@ public class GiocoDaoJpa implements GiocoDao{
             Gioco gioco = em.find(Gioco.class, idGioco);
             if (gioco != null) {
                 gioco.setOffertaGioco(offerta);
-                em.merge(gioco);
+                giochi.add(gioco);
             } else {
                 System.out.println("Gioco non trovato con ID: " + idGioco);
                 return giochi;
             }
+           
+             
             t.commit();
-
-            giochi = em.createQuery("SELECT g FROM Gioco g WHERE g.offertaGioco.id = :idOfferta", Gioco.class)
-                       .setParameter("idOfferta", idOfferta)
-                       .getResultList();
         } catch (Exception e) {
-            if (t.isActive()) {
-                t.rollback();
-            }
+           
             e.printStackTrace();
-        } finally {
-            em.close();
-        }
+        } 
         return giochi;
 	}
 }

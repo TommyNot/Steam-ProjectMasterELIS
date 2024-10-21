@@ -137,7 +137,9 @@
             }
         } else {
     %>
+    
         <div class="games-container">
+        
             <% 
                 
                 for (int i = 0; i < giochi.size(); i++) {

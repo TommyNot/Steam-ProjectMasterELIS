@@ -209,14 +209,14 @@
 								%>
 
 					        
-					      <label for="genere">Seleziona offerta:</label>
-					        <select id="genere" name="genere">
+					      <label for="offerta">Seleziona offerta:</label>
+					        <select id="offerta" name="offerta">
 					            <%
 					                List<Offerta> offerte = BusinessLogic.offertaVisualizzaTutto();
 					                
 					                for (Offerta offerta : offerte) {
 					            %>
-					                <option value="<%= offerta.getId() %>" id="genereId" ><%= offerta.getNome() %></option>
+					                <option value="<%= offerta.getId() %>"  ><%= offerta.getNome() %></option>
 					            <%
 					                }
 					            %>
@@ -251,6 +251,8 @@
     				<h2>Prodotti</h2>
     				<button class="button" type="button" id="add-product-btn">Aggiungi Prodotto</button>
     				<button class="button" type="button" id="remove-product-btn">Elimina Prodotto</button>
+    				<button class="button" type="button" id="btn-modifica-gioco"  > Modifica Gioco </button>
+														
 						
 					<div id="result">
 					</div>
@@ -298,16 +300,6 @@
 													%>
 				                        	</div>
 
-											   
-
-
-				                      
-				                        		<button class="button" type="button" id="btn-modifica-gioco"  >
-													   <i class="bi bi-pencil-square"></i> Modifica
-														</button>
-								                 
-				                        
-				                            
 				                        
 				                    </div>
 				  <div class="part-2">

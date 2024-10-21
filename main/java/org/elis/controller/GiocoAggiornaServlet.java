@@ -101,21 +101,27 @@ public class GiocoAggiornaServlet extends HttpServlet {
                 }
             }
 
-            // Gestione dell'offerta
-            if (offerta != null && offerta.length > 0) {
-                try {
-                    long idOfferta = Long.parseLong(offerta[0]);
-                    Offerta offertaId = BusinessLogic.findOffertaById(idOfferta);
-                    // Associa l'offerta al gioco
-                   // BusinessLogic.aggiungiOffertaAGioco(idGioco, offertaId);
-                    System.out.println("Offerta aggiornata con successo");
-                } catch (NumberFormatException e) {
-                    System.out.println("Errore nel formato dell'ID dell'offerta: " + e.getMessage());
-                    request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
-                    return;
+            if (offerta != null) {
+                for (String offertaId : offerta) {
+                    try {
+                    	System.out.println("Siamo qui ?");
+                        long idOfferta = Long.parseLong(offertaId);
+                        
+                        Offerta offert = BusinessLogic.findOffertaById(idOfferta);
+                        if(offert != null) {
+                            BusinessLogic.updateGiocoOfferta(idGioco, offert.getId());
+                            System.out.println("Offerta aggiornata con successo");
+                        }else {
+                        	
+                        	System.out.println("Qui errore");
+                        }
+                        
+                    } catch (NumberFormatException e) {
+                        System.out.println("Errore nel formato dell'ID dell'offerta: " + e.getMessage());
+                        request.setAttribute("errorMessage", "Formato dell'ID dell'offerta non valido.");
+                    }
                 }
             }
-
             // Gestione dei generi
             if (generi != null) {
                 for (String genereId : generi) {
