@@ -360,20 +360,17 @@ public class GiocoDaoJpa implements GiocoDao{
 	    try {
 	        t.begin();
 
-	        // Find the Offerta instance by its ID
 	        Offerta offerta = em.find(Offerta.class, idOfferta);
 	        if (offerta == null) {
 	            System.out.println("Offerta non trovata con ID: " + idOfferta);
-	            return giochiOfferta; // Return empty list if offerta not found
+	            return giochiOfferta;
 	        }
 
-	        // Find the games associated with the genre
 	        List<Gioco> giochi = em.createQuery(
 	            "SELECT g FROM Gioco g JOIN g.genereGiochi gg WHERE gg.id = :idGenere", Gioco.class)
 	            .setParameter("idGenere", idGenere)
 	            .getResultList();
 	        
-	        // Associate the offer to the games
 	        for (Gioco gioco : giochi) {
 	            gioco.setOffertaGioco(offerta);
 	            em.merge(gioco);
