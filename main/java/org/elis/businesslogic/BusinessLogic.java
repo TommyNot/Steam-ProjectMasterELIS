@@ -68,6 +68,11 @@ public static List<Gioco> VisualizzaTuttiGiochi() {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().findAll();
 }
 
+public static List<Gioco> VisualizzaGiochiInOfferta(){
+	
+	return DaoFactoryJpa.getDaoFactory(IMPLEMENTATION).getGiocoDao().VisualizzaGiochiInOfferta();
+}
+
 public static List<Gioco> VisualizzaTuttiGiochi(long id) {
 	
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().VisualizzaGiochiPerUtente(id);

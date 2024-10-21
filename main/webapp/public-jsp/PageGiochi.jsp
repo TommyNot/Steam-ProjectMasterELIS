@@ -115,16 +115,7 @@
                 </div>
   </div>
 
-   <% 
-		String messaggioErrore = (String) request.getAttribute("errorMessage");
-		if (messaggioErrore != null) { 
-		%>
-		    <div class="errore">
-		        <%= messaggioErrore %>
-		    </div>
-		<% 
-		} 
-		%>
+
 		
 
 
@@ -138,7 +129,16 @@
         
         if (giochi == null || giochi.isEmpty()) {
     %>
-        <p>Nessun gioco disponibile.</p>
+           <% 
+		String messaggioErrore = (String) request.getAttribute("errorMessage");
+		if (messaggioErrore != null) { 
+		%>
+		    <div class="errore">
+		        <%= messaggioErrore %>
+		    </div>
+		<% 
+		} 
+		%>
     <%
         } else {
             for (Gioco gioco : giochi) { 

@@ -341,5 +341,16 @@ public class GiocoDaoJpa implements GiocoDao{
 	    return gioco; 
 	}
 
+	@Override
+	public List<Gioco> VisualizzaGiochiInOfferta() {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+		
+		Gioco gioco = null;
+		
+		Query q = em.createQuery("SELECT g FROM Gioco g WHERE g.offertaGioco IS NOT NULL");
+		
+		return q.getResultList();
+	}
+
 
 }

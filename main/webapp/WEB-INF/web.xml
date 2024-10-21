@@ -292,4 +292,14 @@
     <servlet-name>UtenteEliminaByUsernameServlet</servlet-name>
     <url-pattern>/UtenteEliminaByUsernameServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OffertaVediTuttiGiochi</display-name>
+    <servlet-name>OffertaVediTuttiGiochi</servlet-name>
+    <servlet-class>org.elis.controller.OffertaVediTuttiGiochi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OffertaVediTuttiGiochi</servlet-name>
+    <url-pattern>/OffertaVediTuttiGiochi</url-pattern>
+  </servlet-mapping>
 </web-app>

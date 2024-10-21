@@ -81,7 +81,7 @@
 						            </li>
 						          	
 						          	<li>
-						          		<a href="<%=request.getContextPath() %>/OffertaListaCompletaServlet">Offerte</a>
+						          		<a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a>
 						          	</li>
 						          	
 						          		<li>

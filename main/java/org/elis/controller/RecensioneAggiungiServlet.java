@@ -91,7 +91,7 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 	                    System.out.println("L'utente è un utente base.");
 	                    Recensione aggiunta = new Recensione(0, LocalDateTime.now(), LocalDateTime.now(), votoRecensione, testo, gioco, utente );
 	                    BusinessLogic.RecensioneAdd(aggiunta);
-	                    request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+	                    response.sendRedirect(request.getContextPath() + "/GiocoVediDettagli?barraRicerca=" + idGioco);
 	                    if (aggiunta != null) {
 	                    	 request.setAttribute("successo", "Recensione creata con successo.");
 	                    } 

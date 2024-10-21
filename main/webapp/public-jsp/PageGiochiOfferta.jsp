@@ -115,75 +115,66 @@
                 </div>
   </div>
 
-   <% 
-		String messaggioErrore = (String) request.getAttribute("errorMessage");
-		if (messaggioErrore != null) { 
-		%>
-		    <div class="errore">
-		        <%= messaggioErrore %>
-		    </div>
-		<% 
-		} 
-		%>
-		
+   
 
 
 		
 <div class="content">
-   
     <%
-    	
-   
-    List<Gioco> giochi =  (List<Gioco>) request.getAttribute("giochi");
-    List<Offerta> giochiOfferta = (List<Offerta>) request.getAttribute("offerte");
+        // Recupero delle liste di giochi e offerte
+        List<Gioco> giochi = (List<Gioco>) request.getAttribute("giochi");
+        List<Offerta> offerte = (List<Offerta>) request.getAttribute("offerte");
+        
         if (giochi == null || giochi.isEmpty()) {
+            // Messaggio di errore se non ci sono giochi
+            String messaggioErrore = (String) request.getAttribute("errorNessunGioco");
+            if (messaggioErrore != null) {
     %>
-        <p>Nessun gioco disponibile.</p>
+                <div class="errore">
+                    <%= messaggioErrore %>
+                </div>
     <%
+            }
         } else {
-            for (Gioco gioco : giochi) { 
-                Offerta offerta = gioco.getOffertaGioco(); 
     %>
-    
-    	
-                  
-    <div class="games-container">
-    
-        <div class="game">
-            <img class="product__image"   src="data:image/jpeg;base64,<%= gioco.getImmagine() %> " style="width: 220px; height: 300px;" />
-            
-            <h3 class="product-title"><%= gioco.getNome() %></h3>
-            
-            <div class="discount">
-                <% if (offerta != null) { %>
-                    <h4 class="product-discount">Sconto :<%= offerta.getSconto() %>% off</h4>
-                    <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
-                    <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
+        <div class="games-container">
+            <% 
+                
+                for (int i = 0; i < giochi.size(); i++) {
+                    Gioco gioco = giochi.get(i);
+                    Offerta offerta = (offerte != null && i < offerte.size()) ? offerte.get(i) : null;
+            %>
+                <div class="game">
+                    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" style="width: 220px; height: 300px;" />
+                    
+                    <h3 class="product-title"><%= gioco.getNome() %></h3>
+                    
+                    <div class="discount">
+                        <% if (offerta != null) { %>
+                            <h4 class="product-discount">Sconto: <%= offerta.getSconto() %>% off</h4>
+                            <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
+                            <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
+                        <% } else { %>
+                            <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
+                        <% } %>
+                    </div>
 
-                <% } else { %>
-                    <h4 class="product-price">Prezzo: €<%= gioco.getPrezzo() %></h4>
-                <% } %>
-            </div>
-
-           
-            <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
-            <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
-            	 <input style="display: none;" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
-            	 <button class="btn">Visualizza dettagli</button>
-            
-            </form>
-           
-       		
-
-            
-            
+                    <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
+                    
+                    <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
+                        <input type="hidden" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
+                        <button class="btn">Visualizza dettagli</button>
+                    </form>
+                </div>
+            <% 
+                } 
+            %>
         </div>
-    </div>
     <%
-            } 
         } 
     %>
 </div>
+
 
 
 

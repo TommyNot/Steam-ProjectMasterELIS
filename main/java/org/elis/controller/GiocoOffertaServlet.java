@@ -51,7 +51,7 @@ public class GiocoOffertaServlet extends HttpServlet {
         }
         
         request.setAttribute("giochi", tuttiGiochi);
-        request.getRequestDispatcher("public-jsp/ListaGiochi.jsp").forward(request, response);
+        request.getRequestDispatcher("public-jsp/PageGiochiOfferta.jsp").forward(request, response);
     }
 
 

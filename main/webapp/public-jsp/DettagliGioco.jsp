@@ -216,9 +216,8 @@
 <div class="user-reviews">
     <h2>Recensioni degli utenti</h2>
     <%
-       
         List<Recensione> recensioni = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
-
+        Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato"); // Recupera l'utente loggato
         
         double sommaVoti = 0;
         int numeroRecensioni = 0;
@@ -229,7 +228,6 @@
                 sommaVoti += recensione.getVoto();
             }
         }
-
         
         double mediaVoti = (numeroRecensioni > 0) ? (sommaVoti / numeroRecensioni) : 0;
     %>
@@ -275,6 +273,27 @@
                     %>
                     /5
                     </p>
+                    
+                    <% 
+                        // Verifico se l'utente loggato ed sè l'autore della recensione , funzionaaaa lesgo
+                        if (utenteLoggato != null && utenteLoggato.getId() == recensione.getRecensioneUtente().getId()) { 
+                    %>
+                        
+                        <form action="<%= request.getContextPath() %>/RecensioneEliminaServlet" method="post">
+                            <input type="hidden" name="idRecensione" value="<%= recensione.getId() %>">
+                            <input type="hidden" name="idGioco" value="<%= gioco.getId() %>">
+                            <button class="btn btn-danger" type="submit">Elimina</button>
+                            
+                        </form>
+                        <form action="<%= request.getContextPath() %>/RecensioneEliminaServlet" method="post">
+                            <input type="hidden" name="idRecensioneModifica" value="<%= recensione.getId() %>">
+                            <input type="hidden" name="idGiocoModifica" value="<%= gioco.getId() %>">
+                            <button class="btn btn-danger" type="submit">Modifica</button>
+                            
+                        </form>
+                    <% 
+                        } 
+                    %>
                 </div>
     <%
             }
@@ -286,7 +305,7 @@
         }
     %>
 </div>
-</div>
+
 
 
 

@@ -36,6 +36,7 @@ public class RecensioneEliminaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("idRecensione");
+		String idGiocoString = request.getParameter("idGioco");
 		
 		  if (id == null || id.isBlank()) {
 	            String errore = "L'id della recensione non può essere vuoto.";
@@ -55,9 +56,11 @@ public class RecensioneEliminaServlet extends HttpServlet {
 	        	System.out.println("errore");
 	        }
 		  
+		  	Long idGioco = Long.parseLong(idGiocoString);
+		  
 			HttpSession sessione = request.getSession(false);
 	        if (sessione == null) {
-	            response.sendRedirect("public-jsp/LoginPage.jsp");
+	            response.sendRedirect("public-jsp/PaginaLogin.jsp");
 	            return;
 	        }
 	        
@@ -74,7 +77,8 @@ public class RecensioneEliminaServlet extends HttpServlet {
 	                if (isUtenteBase) {
 	                    System.out.println("L'utente è un Utente Base.");
 	                    Recensione eliminata = BusinessLogic.eliminaRecensione(idRecensione);
-	                    if (eliminata == null) {
+	                    response.sendRedirect(request.getContextPath() + "/GiocoVediDettagli?barraRicerca=" + idGioco);
+	                    if (eliminata != null) {
 	                    	response.getWriter().write("Recensione eliminata con successo.");
 	                    } 
 	                } else {
