@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.dao.UtenteDao;
+import org.elis.model.Recensione;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
@@ -217,11 +218,12 @@ public class UtenteDaoJpa implements UtenteDao {
 	public Utente deleteByNome(long id, String username) {
 		 EntityManager em = DaoFactoryJpa.getEntityManager();
 	        EntityTransaction transaction = em.getTransaction();
-
+	        Utente utente=null;
+	        
 	        try {
 	            transaction.begin();
 
-	            Utente utente = em.find(Utente.class, id);
+	            utente = em.find(Utente.class, id);
 	            if (utente == null) {
 	                System.out.println("Utente non trovato con ID: " + id);
 	                return null;
@@ -231,11 +233,21 @@ public class UtenteDaoJpa implements UtenteDao {
 	                System.out.println("Nome utente non corretto per l'utente ID: " + id);
 	                return null;
 	            }
+	            if (utente != null) {
+		        	Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.gioco.id = :giocoId ");
+		        	q.setParameter("giocoId", id);
+		        	
+		        	List<Recensione> recensioni = q.getResultList();
+		        	
+		        	for(Recensione rec : recensioni) {
+		        		
+		        	em.remove(rec);
+		        	}
+		        	
 	            em.remove(utente);
 	            transaction.commit(); 
 	            System.out.println("Utente con ID " + id + " eliminato con successo.");
-	            return utente;
-	            
+		        	}
 	        } catch (Exception e) {
 	            if (transaction.isActive()) {
 	                transaction.rollback();
@@ -246,6 +258,7 @@ public class UtenteDaoJpa implements UtenteDao {
 	        } finally {
 	            em.close();
 	        }
+			return utente;
    }
 
 	@Override
