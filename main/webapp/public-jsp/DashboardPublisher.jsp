@@ -321,7 +321,11 @@
 
             
             <h6 class="product-id">ID GIOCO: <%= gioco1.getId() %></h6>
-            <button class="btn">Visualizza dettagli</button>
+            <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get"  >  
+            	<input type="hidden" value="<%= gioco1.getId() %>" name="barraRicerca" id="barraRicerca">
+            	<button class="button" type="submit" >Visualizza dettagli</button>
+            </form>
+           
         </div>
 				                </div>  
 				        <% 

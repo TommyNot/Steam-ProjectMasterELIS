@@ -253,8 +253,6 @@
         
         double sommaVoti = 0;
         int numeroRecensioni = 0;
-        int maxRecensioni = 1;
-        boolean haRecensione = false;
 
         if (recensioni != null) {
             numeroRecensioni = recensioni.size();

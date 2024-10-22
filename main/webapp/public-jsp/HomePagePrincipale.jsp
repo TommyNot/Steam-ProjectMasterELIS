@@ -85,8 +85,11 @@
 						          	</li>
 						          	
 						          		<li>
-						          		<a href="#">Tendenza</a>
+						          		<a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Tendenza</a>
 						          	</li>
+						          	
+						        
+
 						          	
 						        </ul>
 						    </div>
@@ -113,9 +116,11 @@
 						</li>
 
 
-
-                    
-                    <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a></li>
+                        <li> 
+								<a href="<%=request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
+        				</li>
+        				
+        				<li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a></li>
                      <div class="search-container">
 					      <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="get" class="d-flex">
 					                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
@@ -126,9 +131,7 @@
 					            
 					  </div>
        
-            <li> 
-
-        </li>
+  
                 </ul>
             </nav>
                   <div class="user-info">
@@ -178,7 +181,7 @@
         <div class="container">
             <h1>Benvenuto su Steam</h1>
             <p>Trova i migliori giochi a prezzi incredibili!</p>
-            <a href="#" class="btn-primary">Scopri di più</a>
+            <a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" class="btn-primary">Scopri di più</a>
         </div>
     </section>
 
