@@ -58,7 +58,7 @@ function showSection(sectionId) {
         }
 		
  window.onload = function() {
-		   fetch('/steamproject/TrovaTuttiUtentiServlet')
+		   fetch('/SteamProject/TrovaTuttiUtentiServlet')
 		      .then(response => response.text())
 		      .then(data => {
 		        document.getElementById('Visualizza').innerHTML = data;
@@ -72,7 +72,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
        event.preventDefault();
 	   
        const username = document.getElementById('username1').value;  
-       fetch('/steamproject/UtenteFindByNameServlet', {
+       fetch('/SteamProject/UtenteFindByNameServlet', {
            method: 'POST',
            headers: {
                'Content-Type': 'application/x-www-form-urlencoded'

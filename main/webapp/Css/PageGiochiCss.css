@@ -424,7 +424,7 @@ input[type="text"]:focus {
 
 .btn-rece{
 	
-	background-color: #F39C12;
+	background-color: #7BD155;
 	display: inline;
 	font-weight: bold;
 	   padding: 10px 26px;
@@ -439,7 +439,7 @@ input[type="text"]:focus {
 
 .btn-recensione{
 	
-		background-color: #cc0000;
+		background-color: #F39C12;
 	font-weight: bold;
 	display: inline;
 	   padding: 10px 20px;
