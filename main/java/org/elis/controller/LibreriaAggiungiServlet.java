@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Libreria;
@@ -52,9 +53,9 @@ public class LibreriaAggiungiServlet extends HttpServlet {
 				boolean isUtenteBase = u.getRuolo() == Ruolo.UTENTE_BASE;
 				if(isUtenteBase) {
 					System.out.println("L'utente selezionato è un utente base.");
+					
 					Libreria l = new Libreria(nome, u);
 					Libreria nuovaLibreria = BusinessLogic.LibreriaAdd(l);
-					
 					if(nuovaLibreria != null) {
 						System.out.println("Libreria aggiunta con successo.");
 						response.sendRedirect("LibreriaFindByIdUtenteServlet");

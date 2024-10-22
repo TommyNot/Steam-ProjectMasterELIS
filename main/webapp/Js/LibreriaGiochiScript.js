@@ -6,9 +6,6 @@
 const toggleButtonAggiungi = document.getElementById('toggle-form-aggiungi-btn');
 const formContainerAggiungi = document.getElementById('form-container-aggiungi');
 
-const toggleButtonElimina = document.getElementById('toggle-form-elimina-btn');
-const formContainerElimina = document.getElementById('form-container-rimuovi');
-
 const toggleButtonModifica = document.getElementById('toggle-form-modifica-btn');
 const formContainerModifica = document.getElementById('form-container-modifica');
 
@@ -25,24 +22,13 @@ toggleButtonAggiungi.addEventListener('click', function() {
     }
 });
 
-toggleButtonElimina.addEventListener('click', function() {
-    if (formContainerElimina.style.display === "none") {
-        formContainerElimina.style.display = "block";
-        toggleButtonElimina.textContent = "Nascondi aggiungi libreria";
-    } else {
-        formContainerElimina.style.display = "none";
-        toggleButtonElimina.textContent = "Aggiungi libreria";
-    }
-});
-
-
 toggleButtonModifica.addEventListener('click', function() {
     if (formContainerModifica.style.display === "none") {
         formContainerModifica.style.display = "block";
-        toggleButtonModifica.textContent = "Nascondi aggiungi libreria";
+        toggleButtonModifica.textContent = "Nascondi modifica nome libreria";
     } else {
         formContainerModifica.style.display = "none";
-        toggleButtonModifica.textContent = "Aggiungi libreria";
+        toggleButtonModifica.textContent = "Modifica nome libreria";
     }
 });
 

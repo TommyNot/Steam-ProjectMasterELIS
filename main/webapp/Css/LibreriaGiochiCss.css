@@ -44,10 +44,12 @@ body{
 .ancore{
 	text-decoration: none;
 	font-size: 1em;
-	border-radius: 10px;
+	border-radius: 30px;
+	color: #3D92E0;
 	border: 2px solid #0056b3;
 	padding: 4px;
-	background-color: #2B3035;
+	background-color: #3D596E;
+	margin-right: 2%;
 }
 
 
@@ -91,6 +93,16 @@ input[type="text"] {
     justify-content: space-between;
 }
 
+.content-librerie{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.altezza{
+	min-height: 45vh;
+}
+
 button {
     padding: 10px 20px;
     font-size: 16px;
@@ -100,7 +112,7 @@ button {
 }
 
 button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #3D92E0;
     color: white;
 }
 

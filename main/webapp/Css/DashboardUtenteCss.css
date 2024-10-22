@@ -200,7 +200,8 @@ body {
 
 .img-icon{
 	width: 4vw;
-    border-radius: 30px;
+    border-radius: 100px;
+    height: 4vw;
 }
 
 .profile-picture{
@@ -209,8 +210,12 @@ body {
     color: #3894EA
 }
 
-#username{
+.username{
 	margin-right: 3%;
+}
+
+.colore{
+	background-color:#2664D1;
 }
 
 .ui-row-2 {

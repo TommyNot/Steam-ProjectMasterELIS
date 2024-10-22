@@ -52,7 +52,6 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 					List<Libreria> librerie = BusinessLogic.findLibreriaByIdUtente(idUtente);
 					//List<Gioco> giochiUtente = BusinessLogic.VisualizzaTuttiGiochi(idUtente);
 					List<Gioco> giochiLibreria = BusinessLogic.findGiochiByIdLibreria(idLibreria);
-					System.out.println(librerie);
 					if(librerie == null || librerie.isEmpty()) {
 						request.setAttribute("errorMessage", "Nessun gioco disponibile.");
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
