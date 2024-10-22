@@ -124,6 +124,9 @@
         <h2>Numero di giochi attualmente nel sito: <%=g.size() %></h2>
         <canvas id="myChart"></canvas>
         </div>
+        <div  class="container active" >
+        	<a href="https://www.youtube.com/watch?v=xvFZjo5PgG0&ab_channel=Duran">Elimina il sito</a>
+        </div>
         
         <div class="container " id="Ban">
             <h2>Ban utente</h2>

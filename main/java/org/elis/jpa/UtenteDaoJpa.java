@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.elis.dao.UtenteDao;
+import org.elis.model.Libreria;
 import org.elis.model.Recensione;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
@@ -243,8 +244,16 @@ public class UtenteDaoJpa implements UtenteDao {
 	                    em.remove(rec);
 	                }
 	                
-	                em.remove(utente);
+	                Query qu=em.createQuery("SELECT l FROM Libreria l WHERE l.libreriaUtente.id= :utenteId");                
+	                qu.setParameter("utenteId", id);
 	                
+	                List<Libreria>libreria=qu.getResultList();
+	                
+	                for(Libreria lib:libreria) {
+	                	em.remove(lib);
+	                }
+	                
+	                em.remove(utente);                
 	                transaction.commit(); 
 	                System.out.println("Utente con ID " + id + " eliminato con successo.");
 	            }
