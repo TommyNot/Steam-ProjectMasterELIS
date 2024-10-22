@@ -52,7 +52,8 @@ public class GiocoGenereRicercaServlet extends HttpServlet {
         List<Gioco> giochiTrovati = BusinessLogic.GiocoCercaPerGenere(idGenere);
 
         if (giochiTrovati == null || giochiTrovati.isEmpty()) {
-            request.setAttribute("Error", "Nessun gioco trovato per il genere selezionato.");
+        	String errore = "Nessun Gioco con questo genere è disponibili al momento";
+            request.setAttribute("Error", errore);
             request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
             System.out.println("errore qui in giochi.trovati");
             return;

@@ -12,7 +12,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steam Like - Games Page</title>
+  <title>SteamPezzotto Pagina Giochi</title>
      <link rel="stylesheet" href="<%= request.getContextPath() %>/Css/PageGiochiCss.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" type="text/css">
 </head>
@@ -131,7 +131,7 @@
             giochi = BusinessLogic.VisualizzaTuttiGiochi(); 
         }
 
-        String messaggioErrore = (String) request.getAttribute("errorMessage");
+        String messaggioErrore = (String) request.getAttribute("Error");
         if (messaggioErrore != null) { 
     %>
             <div class="errore">
@@ -168,7 +168,7 @@
                             <% } %>
                         </div>
                        
-                        <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
+                        
                         <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
                             <input type="hidden" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
                             <button class="btn">Visualizza dettagli</button>

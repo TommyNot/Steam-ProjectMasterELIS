@@ -439,14 +439,17 @@ public class GiocoDaoJpa implements GiocoDao{
         List<Gioco> giochi = new ArrayList<>();
         try {
             t.begin();
-
+            Gioco gioco = em.find(Gioco.class, idGioco);
+            
             Offerta offerta = em.find(Offerta.class, idOfferta);
             if (offerta == null) {
+            	gioco.setOffertaGioco(offerta);
                 System.out.println("Offerta non trovata con ID: " + idOfferta);
                 return giochi;
             }
 
-            Gioco gioco = em.find(Gioco.class, idGioco);
+           
+            
             if (gioco != null) {
                 gioco.setOffertaGioco(offerta);
                 giochi.add(gioco);
@@ -463,4 +466,38 @@ public class GiocoDaoJpa implements GiocoDao{
         } 
         return giochi;
 	}
+
+	@Override
+	public Gioco rimuoviGiocoOfferta(long idGioco) {
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    Gioco gioco = null;
+
+	    try {
+	        
+	        t.begin(); 
+
+	        
+	        gioco = em.find(Gioco.class, idGioco);
+
+	        if (gioco != null) {
+	            
+	            Offerta offerta = gioco.getOffertaGioco();
+	            if (offerta != null) {
+	                gioco.setOffertaGioco(null); 
+	                em.remove(offerta); 
+	            }
+
+	            em.merge(gioco); 
+	        }
+
+	        t.commit(); 
+	    } catch (Exception e) {
+	       
+	        e.printStackTrace(); // Stampa l'errore
+	    }
+
+	    return gioco; // Restituisci il gioco aggiornato o null se non trovato
+	}
+
 }

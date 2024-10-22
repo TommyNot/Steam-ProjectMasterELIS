@@ -30,5 +30,6 @@ public interface GiocoDao {
 	List<Gioco> VisualizzaGiochiInOfferta();
 	List<Gioco> addOffertaToGiochiByGenere(long idGenere, long idOfferta);
 	List<Gioco> addGiocoOfferta(long idGioco, long idOfferta);
+	Gioco rimuoviGiocoOfferta(long idGioco);
 
 }

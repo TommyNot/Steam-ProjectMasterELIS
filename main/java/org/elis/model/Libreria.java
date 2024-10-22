@@ -16,9 +16,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity()
-@Table(name="Libreria")
+@Table(name="Libreria", uniqueConstraints = @UniqueConstraint(columnNames = {"libreriaUtente_id","nome"}))
 public class Libreria {
 	
 	@Id
@@ -33,7 +34,7 @@ public class Libreria {
 	@Column(name="data_ultima_modifica", nullable=false)
 	private LocalDateTime data_ultima_modifica;
 	
-	@Column(name="nome", nullable=false, unique= true)
+	@Column(name="nome", nullable=false)
 	private String nome;
 	
 	@ManyToOne

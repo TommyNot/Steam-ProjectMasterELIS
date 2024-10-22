@@ -316,5 +316,9 @@ public static Genere rimuoviGeneriDaGioco(long idGioco) {
 	
 }
 
+public static Gioco  rimuoviGiocoOfferta(long idGioco) {
+	
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().rimuoviGiocoOfferta(idGioco);
+}
 
 }

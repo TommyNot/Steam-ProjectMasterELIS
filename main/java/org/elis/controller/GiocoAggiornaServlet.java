@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.apache.jasper.tagplugins.jstl.core.Catch;
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Genere;
 import org.elis.model.Gioco;
@@ -55,7 +56,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
             String descrzioneGioco = request.getParameter("descrzione");
             String prezzo = request.getParameter("prezzo");
             Part filePart = request.getPart("immagine");
-            String[] offerta = request.getParameterValues("offerta");
+            String offerta = request.getParameter("offerta");
             String[] generi = request.getParameterValues("genere");
 
             // Aggiornamento nome
@@ -109,28 +110,37 @@ public class GiocoAggiornaServlet extends HttpServlet {
                 }
             }
 
+            
+            
+            
+         // Gestione dell'offerta
             if (offerta != null) {
-                for (String offertaId : offerta) {
+                if (offerta.equals("null")) {
+                    // Se l'offerta è "null", rimuovi l'offerta associata al gioco
+                    BusinessLogic.rimuoviGiocoOfferta(idGioco);
+                    System.out.println("Offerta rimossa con successo");
+                    request.setAttribute("giocoModifica", successoModi);
+                } else {
                     try {
-                    	System.out.println("Siamo qui ?");
-                        long idOfferta = Long.parseLong(offertaId);
-                        
-                        Offerta offert = BusinessLogic.findOffertaById(idOfferta);
-                        if(offert != null) {
-                            BusinessLogic.updateGiocoOfferta(idGioco, offert.getId());
-                            request.setAttribute("giocoModifica", successoModi);
-                            System.out.println("Offerta aggiornata con successo");
-                        }else {
-                        	BusinessLogic.updateGiocoOfferta(idGioco, (Long) null );
-                        	System.out.println("Qui errore");
-                        }
-                        
+                        // Altrimenti, associa l'offerta al gioco
+                        long offertaId = Long.parseLong(offerta);
+                        Offerta offertaOg = BusinessLogic.findOffertaById(offertaId);
+                        BusinessLogic.addGiocoOfferta(idGioco, offertaId);
+                        System.out.println("Offerta aggiornata con successo");
+                        request.setAttribute("giocoModifica", successoModi);
                     } catch (NumberFormatException e) {
                         System.out.println("Errore nel formato dell'ID dell'offerta: " + e.getMessage());
-                        request.setAttribute("errorMessage", "Formato dell'ID dell'offerta non valido.");
+                        request.setAttribute("errorMessage", "Errore nel formato dell'ID dell'offerta.");
+                        request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+                        return;
                     }
                 }
-            }
+            } 
+
+            
+           
+            	
+            
             // Gestione dei generi
             if (generi != null) {
             	
