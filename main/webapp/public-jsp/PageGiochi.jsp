@@ -160,7 +160,7 @@
                         
                         <div class="discount">
                             <% if (offerta != null) { %>
-                                <h4 class="product-discount">Sconto: <%= offerta.getSconto() %>% off</h4>
+                                <h4 class="product-discount">Sconto: <%= Math.round(offerta.getSconto()) %>% off</h4>
                                 <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
                                 <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
                             <% } else { %>

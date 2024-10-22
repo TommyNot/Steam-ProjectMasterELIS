@@ -159,7 +159,7 @@
     					<input type="file" name="immagine" accept="image/jpeg,image/png" required><br>
 				
 				        <label for="prezzo">Prezzo:</label>
-				        <input type="number" id="prezzo" name="prezzo" required>
+				        <input type="number" id="prezzo" name="prezzo"  required step="0.01" min="0">
 				        
 				  
 				        
@@ -205,7 +205,7 @@
 					        <p>Lascia vuoto per mantenere l'immagine attuale.</p>
 					
 					        <label for="prezzo">Prezzo:</label>
-					        <input type="number" id="prezzo" name="prezzo"  >
+					        <input type="number" id="prezzo" name="prezzo" step="0.01" min="0" >
 					
 					        
 					    <label for="genere">Seleziona genere/i:</label>
@@ -324,7 +324,7 @@
                 <% if (offerta != null) { %>
                     
                     <h4 class="product-old-price">Prezzo : €<%= gioco1.getPrezzo() %></h4>
-                    <h4 class="product-price">Prezzo Scontato :€<%= gioco1.getPrezzo() - (gioco1.getPrezzo() * offerta.getSconto() / 100) %></h4>
+                    <h4 class="product-price">Prezzo Scontato :€<%= Math.round((gioco1.getPrezzo() - (gioco1.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
                 <% } else { %>
                     <h4 class="product-price">Prezzo : €<%= gioco1.getPrezzo() %></h4>
                 <% } %>

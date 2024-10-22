@@ -322,16 +322,32 @@ input[type="text"]:focus {
     overflow: hidden; /* Nasconde parte dell'immagine che esce dal contenitore */
     align-items: center;
     align-content: center;
+        display: flex;
+    justify-content: center;
     
 }
 
 .product__image {
-    width: 60%; /* Riempi tutta la larghezza del contenitore */
+    width: 40%; /* Riempi tutta la larghezza del contenitore */
        align-items: center;
     align-content: center;
    
     border-radius: 10px;
 }
+
+.product__image:hover{
+	
+	transition: transform 0.3s ease-in-out;
+	transform: scale(1.02); /* Effetto zoom immagini prodotti */
+    
+	
+}    
+
+
+
+
+  
+
 
 .product-title {
     color: #c5c3c0;
@@ -650,6 +666,7 @@ footer {
 .game-details h1 {
     font-size: 2.0em; /* Dimensione del font per il titolo principale */
     margin-bottom: 15px; /* Spazio sotto il titolo */
+    
     color: #4B89B7; /* Colore giallo per il titolo */
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Ombra sul testo */
 }
