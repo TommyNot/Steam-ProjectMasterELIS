@@ -9,6 +9,7 @@ import java.io.IOException;
 
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Libreria;
 import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
@@ -60,13 +61,17 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
         // Logica per l'aggiunta dell'utente
         Utente u = new Utente(Ruolo.UTENTE_BASE,username,email,password);
         Utente uRestituito = BusinessLogic.UtenteAdd(u);
-        
+
         if (uRestituito == null) {
            
             request.getRequestDispatcher("public-jsp/ErrorAccessoNeagtoPage.jsp").forward(request, response);
             return;
         }
-        
+        Libreria libreriaUtente = new Libreria();
+	    libreriaUtente.setNome("Giochi di " + uRestituito.getUsername());
+	    libreriaUtente.setLibreriaUtente(uRestituito);
+	    BusinessLogic.LibreriaAdd(libreriaUtente);
+	    
         request.setAttribute("Success", "Registrazione avvenuta con successo! Benvenuto, " + username + " esegui il login con le credenziali appena inserite");
         request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
     }

@@ -141,6 +141,14 @@ public class Utente implements Serializable{
 	public void setData_modifica(LocalDateTime data_ultima_modifica) {
 		this.data_ultima_modifica = data_ultima_modifica;
 	}
+
+	@Override
+	public String toString() {
+		return "Utente [id=" + id + ", ruolo=" + ruolo + ", username=" + username + ", email=" + email + ", password="
+				+ password + ", data_creazione=" + data_creazione + ", data_ultima_modifica=" + data_ultima_modifica
+				+ ", giochiPubblicati=" + giochiPubblicati + ", librerie=" + librerie + ", rencensioni=" + rencensioni
+				+ "]";
+	}
 	
 	
 	

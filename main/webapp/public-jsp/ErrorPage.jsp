@@ -25,7 +25,7 @@
         <p class="description">Sembra che la pagina che stai cercando non esista o sia stata spostata.</p>
         <a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp" class="home-button">Torna alla Home</a>
         <div class="steam-style">
-            <p class="steam-footer">Powered by FamilySteamPezzotto</p>
+            <p class="steam-footer">Powered by Steam Pezzotto Family</p>
         </div>
     </div>
 </body>

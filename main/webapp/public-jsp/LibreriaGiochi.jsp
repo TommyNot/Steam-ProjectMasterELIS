@@ -132,7 +132,7 @@
             } else {
                 for (Libreria l : librerie) { 
         %>
-        <div class="list-group">
+        <div class="list-group mb-2">
             <a href="LibreriaFindByIdUtenteServlet?id_libreria=<%= l.getId() %>" 
                class="list-group-item list-group-item-action list-group-item-dark">
                Nome: <%= l.getNome() %>
