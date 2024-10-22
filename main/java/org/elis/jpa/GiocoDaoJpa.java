@@ -485,7 +485,7 @@ public class GiocoDaoJpa implements GiocoDao{
 	            Offerta offerta = gioco.getOffertaGioco();
 	            if (offerta != null) {
 	                gioco.setOffertaGioco(null); 
-	                em.remove(offerta); 
+	                 
 	            }
 
 	            em.merge(gioco); 
