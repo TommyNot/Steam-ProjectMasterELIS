@@ -7,7 +7,11 @@
 <%@ page import="org.elis.model.Genere" %>
 <%@ page import="org.elis.model.Offerta" %> 
 <%@ page import="org.elis.model.Utente" %> 
+<%@ page import="java.time.format.DateTimeFormatter" %>
+
 <%@ page import="org.elis.model.Recensione" %> 
+<%@ page import="java.text.SimpleDateFormat" %>
+
 <%@page import="org.elis.businesslogic.BusinessLogic"%>
 <!DOCTYPE html>
 <html lang="it">
@@ -148,7 +152,7 @@
 
     <div class="discount">
         <% if (offerta != null) { %>
-            <h4 class="product-discount">Sconto: <%= offerta.getSconto() %>% off</h4>
+            <h4 class="product-discount">Sconto: <%= Math.round(offerta.getSconto()) %>% off</h4>
             <h4 class="product-old-price" style="text-decoration: line-through; color: #999;">€<%= gioco.getPrezzo() %></h4>
             <h4 class="product-price" style="color: #f39c12; font-weight: bold;">
                 Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %>
@@ -158,13 +162,31 @@
         <% } %>
     </div>
 
-    <p>Data di rilascio: <%= gioco.getData_rilascio() %></p>
+    <%
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+%>
+<p>Data di rilascio: <%= gioco.getData_rilascio().format(formatter) %></p>
+	<%
+    
+    List<Recensione> recensioniMax = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
+    
+   
+    boolean haRecensioni = false;
+    if (recensioniMax != null && u != null) {
+        for (Recensione recensione : recensioniMax) {
+            if (recensione.getRecensioneUtente().getId() == u.getId()) {
+            	haRecensioni = true;
+                break;
+            }
+        }
+    }
+%>
 
-    <!-- Se l'utente è loggato, mostra il form per lasciare una recensione -->
-    <div class="review-section">
-        <% if (u != null) { %>
+<div class="review-section">
+    <% if (u != null) {  %>
+        <% if (!haRecensioni) { %>
+            
             <button class="btn-recensione" id="showReviewFormBtn" style="display: inline;">Lascia una recensione</button>
-
             <form action="<%=request.getContextPath() %>/RecensioneAggiungiServlet" class="review-form" id="reviewForm" style="display: none;" method="post">
                 <h2>Lascia una recensione</h2>
                 
@@ -183,9 +205,17 @@
                 <button class="btn" type="submit">Invia</button>
             </form>
         <% } else { %>
-            <p>Accedi per lasciare una recensione.</p>
+            
+            <p>Hai già lasciato una recensione per questo gioco.</p>
         <% } %>
-    </div>
+    <% } else { %>
+        
+        <p>Accedi per lasciare una recensione.</p>
+    <% } %>
+</div>
+
+
+
     
     
 <!-- Se l'utente è loggato, mostra il pulsante e il form nascosto per aggiungere alla libreria -->
@@ -223,6 +253,8 @@
         
         double sommaVoti = 0;
         int numeroRecensioni = 0;
+        int maxRecensioni = 1;
+        boolean haRecensione = false;
 
         if (recensioni != null) {
             numeroRecensioni = recensioni.size();
@@ -249,7 +281,7 @@
                 }
             }
         %>
-        (<%= String.format("%.2f", mediaVoti) %>/5)
+        <%= Math.round(mediaVoti) %> / 5
     </h4>
     
     <%
