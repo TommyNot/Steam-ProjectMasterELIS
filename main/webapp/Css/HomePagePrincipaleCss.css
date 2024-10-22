@@ -320,7 +320,65 @@ nav ul li a:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra più grande durante l'hover */
 }
 
+.hero {
+    position: relative;
+    padding: 50px 0; /* Spaziatura interna */
+    background: #171D25; /* Sfondo grigio chiaro */
+    text-align: center; /* Centra il testo */
+}
 
+
+.slider-2 {
+    overflow: hidden; /* Nasconde eventuali parti sporgenti della slide */
+}
+
+.slides-2 {
+    display: flex; /* Usa il Flexbox per il layout delle slide */
+    transition: transform 0.5s ease; /* Animazione per il cambio di slide */
+}
+
+.slide-2 {
+    display: flex; /* Flexbox per allineare immagine e info del gioco */
+    align-items: center; /* Centra verticalmente */
+    padding: 20px; /* Aggiunge spazio interno */
+    min-width: 100%; /* Ogni slide occupa il 100% della larghezza */
+}
+.product__image {
+    width: 420px; /* Larghezza fissa per l'immagine */
+    height: 300px; /* Altezza fissa per l'immagine */
+    margin-right: 20px; /* Spazio tra immagine e testo */
+    border-radius: 10px; /* Arrotonda gli angoli dell'immagine */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra attorno all'immagine */
+    transition: transform 0.3s; /* Aggiunge un effetto di transizione */
+}
+
+.product__image:hover {
+    transform: scale(1.02); /* Effetto zoom quando si passa il mouse */
+}
+
+.product__image {
+    width: auto; /* Larghezza fissa per l'immagine */
+    height: 500px; /* Altezza fissa per l'immagine */
+    margin-right: 20px; /* Spazio tra immagine e testo */
+}
+
+.game-info {
+    display: flex; /* Usa Flexbox per gestire il layout del testo */
+    flex-direction: column; /* Imposta la direzione in colonna */
+    justify-content: center; /* Centra verticalmente */
+}
+
+.game-info h2 {
+    font-size: 1.5em; /* Dimensione del nome del gioco */
+    color: white; /* Colore del testo */
+    margin: 0; /* Rimuove margini predefiniti */
+}
+
+.game-info p {
+    font-size: 1em; /* Dimensione della descrizione del gioco */
+    color: white; /* Colore del testo */
+    margin: 0; /* Rimuove margini predefiniti */
+}
 .game-card h3 {
     margin: 15px 0;
 }

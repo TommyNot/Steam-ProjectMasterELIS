@@ -59,3 +59,27 @@
       }, 300); // Ritardo di 300 ms
     });
 
+	document.addEventListener('DOMContentLoaded', function() {
+	        const slides = document.querySelectorAll('.slide-2'); // Seleziona tutte le slide
+	        let currentIndex = 0; // Indice della slide corrente
+	        const totalSlides = slides.length; // Numero totale di slide
+
+	        // Funzione per mostrare la slide corrente
+	        function showSlide(index) {
+	            slides.forEach((slide, i) => {
+	                slide.style.display = (i === index) ? 'block' : 'none'; // Mostra solo la slide corrente
+	            });
+	        }
+
+	        // Funzione per cambiare slide
+	        function nextSlide() {
+	            currentIndex = (currentIndex + 1) % totalSlides; // Incrementa l'indice, torna all'inizio se raggiunge la fine
+	            showSlide(currentIndex); // Mostra la nuova slide
+	        }
+
+	        // Mostra la slide iniziale
+	        showSlide(currentIndex);
+
+	        // Cambia slide ogni 3 secondi (3000 ms)
+	        setInterval(nextSlide, 5000);
+	    });

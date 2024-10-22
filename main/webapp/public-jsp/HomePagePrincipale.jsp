@@ -147,7 +147,7 @@
             <%
                 } else {
             %>
-                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Login</a>
+                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Accedi o Registrati</a>
             <%
                 }
             %>
@@ -177,13 +177,32 @@
         </div>
     </section>
     
-        <section class="hero">
-        <div class="container">
-            <h1>Benvenuto su Steam</h1>
-            <p>Trova i migliori giochi a prezzi incredibili!</p>
-            <a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" class="btn-primary">Scopri di più</a>
+<section class="hero">
+    <div class="container">
+        <h1>Benvenuto su Steam</h1>
+        <p>Trova i migliori giochi a prezzi incredibili!</p>
+        <a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet" class="btn-primary">Scopri di più</a>
+    </div>
+
+    <div class="slider-2">
+        <div class="slides-2">
+            <% List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(); %>
+            <% for (Gioco gioco : giochi) { %>
+                <div class="slide-2">
+                    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" />
+                    
+                    <div class="game-info">
+                        <h2><%= gioco.getNome() %></h2>
+                        <p><%= gioco.getDescrzione() %></p>
+                    </div>
+                </div>
+            <% } %>
         </div>
-    </section>
+    </div>
+</section>
+
+
+
 
  
 	
