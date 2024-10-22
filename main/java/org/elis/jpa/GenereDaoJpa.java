@@ -162,6 +162,34 @@ public class GenereDaoJpa implements GenereDao{
 	    } 
 	    return null;
 	}
+
+	@Override
+	public Genere RimuoviGeneriDaGioco(long idGioco) {
+		EntityManager em = DaoFactoryJpa.getEntityManager(); 
+        EntityTransaction t = em.getTransaction();
+
+        try {
+            t.begin();
+            
+            
+            Gioco gioco = em.find(Gioco.class, idGioco);
+            if (gioco != null) {
+                
+                gioco.getGenereGiochi().clear(); 
+               
+            }
+            
+            t.commit();
+        } catch (Exception e) {
+          
+            System.out.println("Errore durante la rimozione dei generi: " + e.getMessage());
+        }
+		return null; 
+    
+	
+	
+	}
+	
 }
 
 

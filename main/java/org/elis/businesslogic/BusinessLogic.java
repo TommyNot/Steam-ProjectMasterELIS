@@ -308,4 +308,13 @@ public static Gioco updateGiocoOfferta(long idGioco, long idOfferta) {
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().updateGiocoOfferta(idGioco, idOfferta);
 			
 }
+
+public static Genere rimuoviGeneriDaGioco(long idGioco) {
+	
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().RimuoviGeneriDaGioco(idGioco);
+		
+	
+}
+
+
 }

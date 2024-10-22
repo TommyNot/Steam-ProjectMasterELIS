@@ -39,6 +39,8 @@ public class GiocoAggiornaServlet extends HttpServlet {
             response.sendRedirect("public-jsp/PaginaLogin.jsp");
             return;
         }
+        
+        String successoModi = "Gioco aggiornato con successo";
 
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
         if (utente == null || utente.getRuolo() != Ruolo.PUBLISHER) {
@@ -60,6 +62,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
             if (nomeGioco != null && !nomeGioco.isEmpty()) {
                 BusinessLogic.updateGiocoNome(idGioco, nomeGioco);
                 System.out.println("Nome aggiornato con successo");
+                request.setAttribute("giocoModifica", successoModi);
             }
 
             // Aggiornamento data di rilascio
@@ -69,6 +72,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                     LocalDate localDate = LocalDate.parse(dataRilascio, formatter);
                     BusinessLogic.updateGiocoDataRilascio(idGioco, localDate);
                     System.out.println("Data di rilascio aggiornata con successo");
+                    request.setAttribute("giocoModifica", successoModi);
                 } catch (DateTimeParseException e) {
                     request.setAttribute("errorMessage", "Formato di data non valido.");
                     request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
@@ -80,12 +84,14 @@ public class GiocoAggiornaServlet extends HttpServlet {
             if (descrzioneGioco != null && !descrzioneGioco.isEmpty()) {
                 BusinessLogic.updateGiocoDescrzione(idGioco, descrzioneGioco);
                 System.out.println("Descrizione aggiornata con successo");
+                request.setAttribute("giocoModifica", successoModi);
             }
 
             // Ricezione e aggiornamento immagine
             if (filePart != null && filePart.getSize() > 0) {
                 byte[] byteImmagine = filePart.getInputStream().readAllBytes();
                 BusinessLogic.updateGiocoImmagine(idGioco, byteImmagine);
+                request.setAttribute("giocoModifica", successoModi);
                 System.out.println("Immagine aggiornata con successo");
             }
 
@@ -95,6 +101,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                     double prezzoGioco = Double.parseDouble(prezzo);
                     BusinessLogic.updateGiocoPrezzo(idGioco, prezzoGioco);
                     System.out.println("Prezzo aggiornato con successo");
+                    request.setAttribute("giocoModifica", successoModi);
                 } catch (NumberFormatException e) {
                     request.setAttribute("errorMessage", "Formato del prezzo non valido.");
                     request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
@@ -111,6 +118,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
                         Offerta offert = BusinessLogic.findOffertaById(idOfferta);
                         if(offert != null) {
                             BusinessLogic.updateGiocoOfferta(idGioco, offert.getId());
+                            request.setAttribute("giocoModifica", successoModi);
                             System.out.println("Offerta aggiornata con successo");
                         }else {
                         	BusinessLogic.updateGiocoOfferta(idGioco, (Long) null );
@@ -125,6 +133,9 @@ public class GiocoAggiornaServlet extends HttpServlet {
             }
             // Gestione dei generi
             if (generi != null) {
+            	
+                // Prima rimuoviamo i generi già associati al gioco
+                BusinessLogic.rimuoviGeneriDaGioco(idGioco);
                 for (String genereId : generi) {
                     try {
                         long idGenere = Long.parseLong(genereId);
@@ -132,6 +143,8 @@ public class GiocoAggiornaServlet extends HttpServlet {
                         if (genere != null) {
                         	//associo il gioco genere , ora funziona
                             BusinessLogic.aggiungiGiocoaGnere(idGenere, idGioco);
+                            
+                            request.setAttribute("giocoModifica", successoModi);
                             System.out.println("Genere associato con successo");
                         }
                     } catch (NumberFormatException e) {
@@ -143,6 +156,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
             }
 
             // Dopo aver aggiornato tutti i campi, vediamo se funziona cosi
+            request.setAttribute("giocoModifica", successoModi);
             request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             System.out.println("Errore nel formato dell'ID del gioco: " + e.getMessage());

@@ -13,4 +13,5 @@ public interface GenereDao {
 	Genere aggiungiGiocoaGnere(long idGenere , long idGioco);
 	List<Genere> addGenereOfferta(long idGenere, long idOfferta);
 	List<Genere> removeGenereOfferta(long idGenere,long idOfferta);
+	Genere RimuoviGeneriDaGioco(long idGioco);
 }

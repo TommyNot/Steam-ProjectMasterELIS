@@ -86,6 +86,17 @@
 					<% 
 					} 
 					%>
+					
+								                    <% 
+					String successGiocoModificato = (String) request.getAttribute("giocoModifica");
+					if (successGiocoModificato != null) { 
+					%>
+					    <div class="successGiocoAdd">
+					        <%= successGiocoModificato %>
+					    </div>
+					<% 
+					} 
+					%>
 			        </div>
 
                 <div class="user-info">
@@ -307,7 +318,7 @@
 				  <div class="part-2">
             
             
-            <h3 class="product-title">Nome Gioco :<%= gioco1.getNome() %></h3>
+            <h3 class="product-title">Nome Gioco : <%= gioco1.getNome() %></h3>
             
             <div class="discount-container">
                 <% if (offerta != null) { %>
