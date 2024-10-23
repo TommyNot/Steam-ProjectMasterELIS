@@ -123,7 +123,6 @@
             List<Libreria> librerie = (List<Libreria>) request.getAttribute("librerieUtente");
             Utente utenteId = (Utente) session.getAttribute("utenteLoggato");
             idUtente = utenteId.getId();
-
             
             if (librerie == null || librerie.isEmpty()) { 
         %>
@@ -152,7 +151,10 @@
     
         <%
             // Recupera i giochi dalla libreria selezionata
-            List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi"); %>
+            List<Gioco> giochiUtente = (List<Gioco>) request.getAttribute("giochi"); 
+        	long idLibreriaUtente = (long) request.getAttribute("idLibreria");
+            %>
+            
 	<div class="games-cont">
         <%   if (giochiUtente != null && !giochiUtente.isEmpty()) {
                 for (Gioco gioco : giochiUtente) {
@@ -161,7 +163,12 @@
         	<img src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" class="card-img-top" alt="immagine gioco">
         	<div class="card-body carta">
     			<h5 class="card-title"><%= gioco.getNome() %></h5>
-    			<p class="card-text">ID gioco: <%= gioco.getId() %>
+    			<form action="<%= request.getContextPath()%>/LibreriaEliminaGiocoDaLibreriaServlet" method="post" class="form">
+			        <input type="hidden" id="giocoInserito" name="idGioco" value="<%=gioco.getId() %>" required>
+
+			        <input type="hidden" id="libreriaDelGioco" name="idLibreria" value="<%=idLibreriaUtente %>" required>
+			        <button type="submit">Elimina gioco da libreria</button>			      			        
+			    </form>
   			</div>
         </div>
         <% }

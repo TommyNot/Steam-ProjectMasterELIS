@@ -89,8 +89,6 @@ public class LibreriaEliminaGiocoDaLibreriaServlet extends HttpServlet {
 					Gioco g = BusinessLogic.deleteGiocoLibrary(idGioco, idLibreria); 
 					if(g != null) {
 						System.out.println("Gioco trovato con id " + g.getId());
-						String successo = "Il gioco è stato eliminato con successo dalla libreria.";
-						request.setAttribute("successo", successo);
 						response.sendRedirect("LibreriaFindByIdUtenteServlet");
 						return;
 					}

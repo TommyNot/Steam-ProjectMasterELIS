@@ -59,6 +59,7 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 					}else {
 						request.setAttribute("giochi", giochiLibreria);
 						request.setAttribute("librerieUtente", librerie);
+						request.setAttribute("idLibreria", idLibreria);
 						System.out.println("Lista libreria trovata con successo dell'utente con id " + idUtente);
 						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
 					}
