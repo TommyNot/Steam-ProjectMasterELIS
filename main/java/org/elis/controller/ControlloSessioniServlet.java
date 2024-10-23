@@ -34,19 +34,19 @@ public class ControlloSessioniServlet extends HttpServlet {
 				
 				case UTENTE_BASE:
 					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
-					break;
+					return;
 				case ADMIN:
 					
 					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
-					break;
+					return;
 				
 				case PUBLISHER:
 					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
-					break;
+					return;
 					
 					default:
 						request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
-							break;
+							return;
 				
 			}
 		}
