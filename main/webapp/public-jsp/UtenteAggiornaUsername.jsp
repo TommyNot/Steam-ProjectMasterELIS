@@ -12,7 +12,7 @@
 <body>
     <div id="logo">
         <nav class="riga-alta">
-        <a class="ancora" href="<%= request.getContextPath() %>/public-jsp/DashboardUtente.jsp">Torna alla dashboard</a>
+
         <span class="logo"><a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
                 	<img alt="logo" src="<%= request.getContextPath() %>/risorse-media/img_homepage/logo.png" width="250" style="margin: 10px;">
                 	</a>
@@ -44,6 +44,7 @@
 			<label for="username" style="font-weight: bold;">Nuovo username</label>
 			<input type="text"  id="username" name="nuovoUsername" required />
 			<button type="submit" id="Reset">Invia</button>
+			 <a id="Reset" href="<%= request.getContextPath() %>/public-jsp/DashboardUtente.jsp">Torna alla dashboard</a>
 		</form>
 	</div>
 

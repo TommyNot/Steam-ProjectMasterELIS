@@ -41,7 +41,7 @@ public class ControlloSessioniServlet extends HttpServlet {
 					break;
 				
 				case PUBLISHER:
-					request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+					request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
 					break;
 					
 					default:

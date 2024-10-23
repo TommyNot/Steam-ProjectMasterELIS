@@ -9,8 +9,8 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" type="text/css">
 </head>
 <body>
-    <div id="logo">
-         <span class="logo"><a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp">
+        <div id="logo">
+         <span class="logo"><a href="<%= request.getContextPath() %>/public-jsp/HomePagePrincipale.jsp">
           <img alt="logo" src="<%= request.getContextPath() %>/risorse-media/img_homepage/logo.png" style="width: 200px; height: auto; margin: 10px;">
           </a>
          </span>
@@ -20,9 +20,9 @@
 		<form action="<%=request.getContextPath()%>/UtenteRipristinaPasswordServlet" method="post">
 			<h1>Reset password</h1>
 			<div class="social-container">
-				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
-				<a href="#" class="social"><i class="bi bi-google"></i></a>
-				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
+				
+				
+				
 			</div>
 			<label for="username" style="font-weight: bold;">Username</label>
 			<input type="text"  id="username" name="username" required />
