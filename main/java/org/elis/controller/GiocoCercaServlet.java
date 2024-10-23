@@ -45,7 +45,7 @@ public class GiocoCercaServlet extends HttpServlet {
             
             if (search == null || search.isEmpty()) {
                 String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
-                request.setAttribute("errorMessage", errorMessage);
+                request.setAttribute("Error", errorMessage);
                 request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
                 return;
             }

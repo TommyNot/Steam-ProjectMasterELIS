@@ -13,14 +13,10 @@
         }
     });
 
-	document.getElementById('showAddFormBtn').addEventListener('click', function() {
-	    var form = document.getElementById('addForm');
-	    if (form.style.display === "none") {
-	        form.style.display = "block";
-	    } else {
-	        form.style.display = "none";
-	    }
+	showAddFormBtn.addEventListener("click", function() {
+	    addForm.classList.toggle("show");
 	});
+
 	
 	function toggleEditForm(recensioneId) {
 	    const form = document.getElementById('editForm_' + recensioneId);
