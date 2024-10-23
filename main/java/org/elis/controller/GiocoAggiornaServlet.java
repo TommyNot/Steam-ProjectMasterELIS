@@ -167,7 +167,7 @@ public class GiocoAggiornaServlet extends HttpServlet {
 
             // Dopo aver aggiornato tutti i campi, vediamo se funziona cosi
             request.setAttribute("giocoModifica", successoModi);
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             System.out.println("Errore nel formato dell'ID del gioco: " + e.getMessage());
             request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);

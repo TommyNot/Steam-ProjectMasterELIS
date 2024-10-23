@@ -141,7 +141,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
                 if (aggiunto != null) {
                     String successAddGioco = "Gioco aggiunto con successo";
                     request.setAttribute("addGioco", successAddGioco);
-                    request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
                 } else {
                     request.setAttribute("errore", "Errore nell'aggiunta del gioco.");
                     request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
