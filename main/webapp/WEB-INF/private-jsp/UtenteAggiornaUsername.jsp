@@ -1,3 +1,4 @@
+<%@page import="org.elis.businesslogic.BusinessLogic"%>
 <%@page import="org.elis.model.Utente"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -30,7 +31,15 @@
     <%
         }
     %>
-    
+    <%Utente utente = (Utente) session.getAttribute("utenteLoggato");
+	long idUtente; 
+	if (utente != null) {
+    	
+    	idUtente = utente.getId();
+    	Utente u = BusinessLogic.UtenteFindById(idUtente);
+    	if(u.getId() == utente.getId()){
+    		%>
+    	
  
     <div class="container" id="container">
 		<form action="<%=request.getContextPath()%>/UtenteAggiornaUsernameServlet" method="post">
@@ -47,6 +56,13 @@
 			 <a id="Reset" href="<%= request.getContextPath() %>/public-jsp/DashboardUtente.jsp">Torna alla dashboard</a>
 		</form>
 	</div>
+
+<% 	}else{
+		response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
+		return;
+	}
+}
+	%>
 
 	<footer>
 	<p>

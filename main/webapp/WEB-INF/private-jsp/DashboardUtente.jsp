@@ -55,9 +55,9 @@
 		              </div>
 		            </button>
 		            <ul class="dropdown-menu colore">
-		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaUsername.jsp">Modifica username</a></li>
-		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteAggiornaEmail.jsp">Modifica email</a></li>
-		               <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/UtenteEliminaByUsername.jsp">Elimina account</a></li>
+		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/WEB-INF/private-jsp/UtenteAggiornaUsername.jsp">Modifica username</a></li>
+		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/WEB-INF/private-jsp/UtenteAggiornaEmail.jsp">Modifica email</a></li>
+		               <li><a class="dropdown-item" href="<%= request.getContextPath()%>/WEB-INF/private-jsp/UtenteEliminaByUsername.jsp">Elimina account</a></li>
 		              <li><a class="dropdown-item" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></li>
 		            </ul>
 		          </div>
