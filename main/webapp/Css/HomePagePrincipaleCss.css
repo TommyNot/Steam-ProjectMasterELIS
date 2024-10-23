@@ -8,6 +8,7 @@
 
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
     background-color: #1b2838;
     color: #fff;
     line-height: 1.6;
@@ -281,7 +282,12 @@ nav ul li a:hover {
     background-color: #558cbf;
 }
 
+btn-danger{
+	
+	background-color: #f30000f7;
+}
 .featured-games {
+	background-color: #171D25;
     padding: 50px 0;
     text-align: center;
 }
@@ -321,15 +327,18 @@ nav ul li a:hover {
 }
 
 .hero {
+	 background-image: url(../risorse-media/img_giochi/sfondo.jpg);
+
     position: relative;
     padding: 50px 0; /* Spaziatura interna */
-    background: #171D25; /* Sfondo grigio chiaro */
+    background: #1B2838; /* Sfondo grigio chiaro */
     text-align: center; /* Centra il testo */
 }
 
 
 .slider-2 {
-    overflow: hidden; /* Nasconde eventuali parti sporgenti della slide */
+    overflow: hidden;
+     width: 100%; /* Nasconde eventuali parti sporgenti della slide */
 }
 
 .slides-2 {
@@ -342,7 +351,72 @@ nav ul li a:hover {
     align-items: center; /* Centra verticalmente */
     padding: 20px; /* Aggiunge spazio interno */
     min-width: 100%; /* Ogni slide occupa il 100% della larghezza */
+   flex: 0 0 33.33%; /* Mostra 3 immagini alla volta, quindi ogni slide occupa un terzo della larghezza */
+    box-sizing: border-box; /* Impedisce al padding di rompere il layout */
+    padding: 10px; 
+	
 }
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slides {
+    display: flex;
+    gap: 20px;
+}
+
+.slide {
+    min-width: 300px;
+    /* Regola la dimensione delle slide */
+}
+
+.product__image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.slide-offerta {
+    position: relative;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 0, 0, 0.8); /* Colore rosso semi-trasparente */
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+
+
+
+.slide-2 img {
+	margin-top: 20px;
+   width: 350px; /* Assicura che le immagini siano adattate alla dimensione del contenitore */
+    height: 500px; /* Mantiene il rapporto di aspetto delle immagini */
+}
+
+
+
+.product__image {
+    width: 100%; /* Assicura che l'immagine occupi tutta la larghezza della slide */
+    height: auto;
+}
+
 .product__image {
     width: 420px; /* Larghezza fissa per l'immagine */
     height: 300px; /* Altezza fissa per l'immagine */
@@ -521,7 +595,7 @@ footer p {
 /* immagini -- */
 
 .featured-games {
-    background-color: #1b2838; /* Colore di sfondo scuro */
+    background-color: #171D25; /* Colore di sfondo scuro */
     color: #c5c3c0; /* Colore del testo */
     padding: 40px 0; /* Spaziatura verticale */
 }

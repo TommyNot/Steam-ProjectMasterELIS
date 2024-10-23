@@ -33,8 +33,8 @@ public class GiocoCercaServlet extends HttpServlet {
             
             if (ricerca == null || ricerca.isBlank()) {
                 String error = "Il campo di ricerca è vuoto";
-                request.setAttribute("errorMessage", error);
-                request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+                request.setAttribute("Error", error);
+                request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
                 System.out.println("Errore: campo di ricerca vuoto");
                 return;
             }

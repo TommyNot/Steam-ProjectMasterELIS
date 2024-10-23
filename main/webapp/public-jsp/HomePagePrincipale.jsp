@@ -161,21 +161,7 @@
  
     
     </header>
-  
-       <section class="featured-games">
-
-        <div class="container">
-            <h2>Giochi in evidenza</h2>
-            <a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet">
-            <div class="slider">
-                <img    src="<%=request.getContextPath() %>/risorse-media/img_giochi/Elden_Ring.jpg" alt="Gioco 1">
-                <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Doom_Eternal.jpg" alt="Gioco 2">
-                <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Cyberpunk_2077.jpg" alt="Gioco 3">
-                 <img src="<%=request.getContextPath() %>/risorse-media/img_giochi/Red_Dead_Redemption_II.jpg" alt="Gioco 3">
-            </div>
-            </a>
-        </div>
-    </section>
+    
     
 <section class="hero">
     <div class="container">
@@ -187,19 +173,55 @@
     <div class="slider-2">
         <div class="slides-2">
             <% List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(); %>
-            <% for (Gioco gioco : giochi) { %>
+            <% for (int i = 0; i < giochi.size(); i += 3) { %>
                 <div class="slide-2">
-                    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" />
-                    
-                    <div class="game-info">
-                        <h2><%= gioco.getNome() %></h2>
-                        <p><%= gioco.getDescrzione() %></p>
-                    </div>
+                    <!-- Visualizza fino a 3 immagini diverse per ogni ciclo -->
+                    <% for (int j = 0; j < 3 && (i + j) < giochi.size(); j++) { %>
+                        <img class="product__image" src="data:image/jpeg;base64,<%= giochi.get(i + j).getImmagine() %>" alt="Immagine Gioco" />
+                    <% } %>
+
+    
                 </div>
             <% } %>
         </div>
     </div>
 </section>
+
+
+
+    
+  
+<section class="featured-games">
+    <div class="container">
+        <h2>Giochi in Offerta</h2>
+        <div class="slider-wrapper">
+             
+            <div class="slider">
+                <div class="slides">
+                    <% 
+                        List<Gioco> giochiInOfferta = BusinessLogic.VisualizzaGiochiInOfferta();
+                        for (Gioco gioco : giochiInOfferta) { 
+                        	Offerta offerta = gioco.getOffertaGioco(); 
+                    %>
+              <div class="slide-offerta">
+				    <div class="discount-badge">Offerta Speciale: -<%= Math.round(offerta.getSconto()) %>%</div>
+
+				    <img class="product__image_offerta" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" alt="Immagine Gioco" />
+				    <div class="game-info">
+				        <h4><%= gioco.getNome() %></h4>
+				        
+				    </div>
+				</div>
+
+                    <% } %>
+                </div>
+            </div>
+             
+        </div>
+    </div>
+</section>
+
+    
 
 
 
@@ -217,7 +239,7 @@
             <div class="footer-section">
                 <h3>Contatti</h3>
                 <p>Email: <a href="mailto:info@example.com">SteamPezzotto@example.com</a></p>
-                <p>Phone: +39 328-9998244</p>
+                <p>Phone: +39 3289998244</p>
                 
             </div>
 
@@ -225,7 +247,7 @@
                 <h3>Seguici</h3>
                 
                 <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
-                <a href="https://www.instagram.com/curiosostore_official/" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="#" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
                 <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
             </div>
 

@@ -208,15 +208,29 @@ a:hover {
     z-index: 100;
 }
 
+.btn-primary {
+    background-color: #66c0f4;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #558cbf;
+}
+
+
 .user-info {
     display: flex; /* Dispone l'immagine e il testo in linea orizzontale */
     align-items: center; /* Allinea verticalmente l'immagine e il testo */
-    background-color: #2c3e50; /* Sfondo scuro */
+    
     padding: 10px; /* Spaziatura interna */
     border-radius: 8px; /* Angoli arrotondati */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombra per dare profondità */
+    
     color: #ecf0f1; /* Colore del testo */
-    margin-bottom: 20px; /* Spaziatura inferiore */
+    margin-bottom: 8px; /* Spaziatura inferiore */
     
    
 }
@@ -435,6 +449,7 @@ input[type="text"]:focus {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
     transition: background-color 0.3s;
     
 }
@@ -452,7 +467,8 @@ input[type="text"]:focus {
 
 .btn-danger{
 	
-	background-color: #cc0000;
+	background-color: #f30000f7;
+	color: white;
 	display: inline;
 }
 

@@ -81,6 +81,7 @@
 						
       <a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi" >Offerte</a>
       <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
+      <a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a>
  
     </div>
          <div class="search-container">
@@ -108,7 +109,7 @@
             <%
                 } else {
             %>
-                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Login</a>
+                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Accedi o Registrati</a>
             <%
                 }
             %>

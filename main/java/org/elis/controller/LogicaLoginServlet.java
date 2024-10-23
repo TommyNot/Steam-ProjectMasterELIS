@@ -63,15 +63,15 @@ public class LogicaLoginServlet extends HttpServlet {
             switch (u1.getRuolo()) {
                 case ADMIN:
                 	request.setAttribute("utenteLoggato", u1);
-                    request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+                    request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
                     break;
                 case PUBLISHER:
                 	request.setAttribute("utenteLoggato", u1);
-                    request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+                    request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
                     break;
                 case UTENTE_BASE:
                 	request.setAttribute("utenteLoggato", u1);
-                    request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+                    request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
                     break;
                 default:
                     request.setAttribute("Error", "Ruolo utente non riconosciuto.");

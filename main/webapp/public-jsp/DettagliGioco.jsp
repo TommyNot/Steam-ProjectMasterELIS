@@ -87,6 +87,7 @@
 						
       <a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a>
       <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
+      <a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a>
  
     </div>
          <div class="search-container">

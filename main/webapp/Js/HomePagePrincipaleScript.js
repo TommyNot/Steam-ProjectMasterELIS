@@ -83,3 +83,7 @@
 	        // Cambia slide ogni 3 secondi (3000 ms)
 	        setInterval(nextSlide, 5000);
 	    });
+		
+	
+		
+	

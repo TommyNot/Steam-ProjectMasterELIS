@@ -84,6 +84,7 @@
 						
       <a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a>
       <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
+      <a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a>
  
     </div>
          <div class="search-container">
@@ -111,7 +112,7 @@
             <%
                 } else {
             %>
-                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Login</a>
+                <a href="<%= request.getContextPath() %>/public-jsp/PaginaLogin.jsp" class="btn btn-primary">Accedi o Registrati</a>
             <%
                 }
             %>
@@ -160,7 +161,7 @@
                         
                         <div class="discount">
                             <% if (offerta != null) { %>
-                                <h4 class="product-discount">Sconto: <%= Math.round(offerta.getSconto()) %>% off</h4>
+                                <h4 class="product-discount"><%= Math.round(offerta.getSconto()) %>% off</h4>
                                 <h4 class="product-old-price">€<%= gioco.getPrezzo() %></h4>
                                 <h4 class="product-price">Prezzo scontato: €<%= Math.round((gioco.getPrezzo() - (gioco.getPrezzo() * offerta.getSconto() / 100)) * 100.0) / 100.0 %></h4>
                             <% } else { %>
