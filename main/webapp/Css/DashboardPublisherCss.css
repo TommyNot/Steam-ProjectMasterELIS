@@ -159,7 +159,8 @@ section {
     border: 1px solid #e0e0e0; /* Bordo leggero */
     border-radius: 4px;
     padding: 15px;
-    background-color: #fafafa; /* Sfondo delle sezioni */
+    background-color: #1B2838; /* Sfondo delle sezioni */
+    color: white;
 }
 
 /* Statistiche */

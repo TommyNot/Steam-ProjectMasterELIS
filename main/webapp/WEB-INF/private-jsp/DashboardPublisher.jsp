@@ -109,7 +109,26 @@
                 <h2>Benvenuto nella Dashboard</h2>
                 <p>Qui puoi gestire i tuoi giochi, visualizzare le vendite, le recensioni e controllare lo stock.</p>
       				
-  
+  				<canvas id="myChart" width="400" height="200">
+  				</canvas>
+  				
+  				<div>
+  				<% 
+  				List<Gioco> giochiPub = BusinessLogic.VisualizzaTuttiGiochi(utente.getId());
+  				List<Gioco> tuttiGiochi = BusinessLogic.VisualizzaTuttiGiochi();
+  				
+  				int sommaRec = 0;
+  				for(Gioco giochi: tuttiGiochi){
+  					
+  					List<Recensione> recGiochi = BusinessLogic.TrovaRecensioneByIdGioco(giochi.getId());
+  					sommaRec += recGiochi.size();
+  				}
+  				
+  				
+  				%>
+  				</div>
+  				
+  				
             </section>
                 <div id="add-product-form" class="edit-form-container" style="display: none;">
 				    <form action="<%= request.getContextPath()%>/GiocoAggiungiServlet" method="post" enctype="multipart/form-data">
@@ -382,8 +401,46 @@
     </div>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    <script src="<%= request.getContextPath() %>/Js/DashboardPublisherScript.js"></script>
+	
 
+<script>
+const giochiCount = <%= giochiPub.size() %>
+const recCount = <%= sommaRec %>
+
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar', 
+        data: {
+            labels: ['Giochi', 'Recensioni Totali'],
+            datasets: [{
+                label: 'Statistiche Attuali',
+                data: [giochiCount,recCount], 
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html>

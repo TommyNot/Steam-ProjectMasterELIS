@@ -141,7 +141,7 @@
                         <% } %>
                     </div>
 
-                    <h6 class="product-id">ID GIOCO: <%= gioco.getId() %></h6>
+                    
                     
                     <form action="<%= request.getContextPath() %>/GiocoVediDettagli" method="get">
                         <input type="hidden" value="<%= gioco.getId() %>" name="barraRicerca" id="barraRicerca">
