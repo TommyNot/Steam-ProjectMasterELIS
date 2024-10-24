@@ -90,7 +90,7 @@ public class GiocoEliminaServlet extends HttpServlet {
         	
 		            String successo = "Il gioco '" + eliminaGiocoNome + "' è stato eliminato con successo.";
 		            request.setAttribute("successo", successo);
-		            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+		            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
 				} else {
 		            String errore = "Il gioco con nome '" + eliminaGiocoNome + "' non è stato trovato.";
 		            request.setAttribute("errore", errore);

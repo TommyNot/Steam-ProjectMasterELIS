@@ -189,32 +189,36 @@
     
     
 <div class="library-section">
-    <% if (u != null) { 
-        // Recupera le librerie dell'utente
+    <% 
+    if (u != null) { 
         List<Libreria> librerieUtente = BusinessLogic.findLibreriaByIdUtente(u.getId());
         boolean giocoPresente = false;
 
-        
-        for (Libreria libreria : librerieUtente) {
-            
-            List<Gioco> giochiNellaLibreria = BusinessLogic.findGiochiByIdLibreria(libreria.getId());
-            for (Gioco g : giochiNellaLibreria) {
-                if (g.getId() == gioco.getId()) {
-                    giocoPresente = true;  
-                    break;
-                } // credo di aver scritto conitrollo piu bello da quando so scrivere codice 
+        // Controlla se l'utente è un PUBLISHER
+        if (u.getRuolo() == Ruolo.PUBLISHER) {
+            giocoPresente = true; // I publisher non hanno bisogno di aggiungere il gioco
+        } else {
+            // Altrimenti, controlla se il gioco è già presente nella libreria
+            for (Libreria libreria : librerieUtente) {
+                List<Gioco> giochiNellaLibreria = BusinessLogic.findGiochiByIdLibreria(libreria.getId());
+                for (Gioco g : giochiNellaLibreria) {
+                    if (g.getId() == gioco.getId()) {
+                        giocoPresente = true;
+                        break;  // Esce dal ciclo appena trova il gioco
+                    }
+                }
+                if (giocoPresente) break;  // Ferma la ricerca se il gioco è trovato
             }
-            if (giocoPresente) break;  
         }
 
+        // Mostra il pulsante "Aggiungi alla libreria" se il gioco non è presente
         if (!giocoPresente) { %>
             <button class="btn-rece" id="showAddFormBtn" style="display: inline;">Aggiungi alla libreria</button>
-            
+
             <!-- Form per aggiungere il gioco alla libreria -->
             <form action="<%=request.getContextPath() %>/LibreriaGiocoAggiungiServlet" class="library-form" id="addForm" method="post">
                 <h2>Scegli la libreria in cui aggiungere il gioco</h2>
-                
-                
+
                 <label for="nomeLibreria">Seleziona una libreria:</label>
                 <select name="nomeLibreria" id="nomeLibreria" required>
                     <% for (Libreria libreria : librerieUtente) { %>
@@ -223,24 +227,19 @@
                         </option>
                     <% } %>
                 </select>
-                
-               
-                <input type="hidden" value="<%= gioco.getId() %>" name="idGioco">
-                
-               
-                <button class="btn" type="submit">Aggiungi alla libreria</button>
-            </form>
 
+                <!-- ID del gioco come campo nascosto -->
+                <input type="hidden" name="giocoId" value="<%= gioco.getId() %>">
+
+                <!-- Submit form -->
+                <button type="submit" class="btn-primary">Aggiungi</button>
+            </form>
         <% } else { %>
-           
-            <p>Il gioco è già presente nella tua libreria.</p>
-        <% } %>
-        
-    <% } else { %>
-        
-        <p>Accedi per aggiungere il gioco alla tua libreria.</p>
-    <% } %>
+            <p>Il gioco è già nella tua libreria.</p>
+        <% } 
+    } %>
 </div>
+
 
 
 
