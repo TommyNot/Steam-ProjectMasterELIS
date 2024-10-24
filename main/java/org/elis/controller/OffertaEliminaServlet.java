@@ -76,33 +76,39 @@ public class OffertaEliminaServlet extends HttpServlet {
             
             Utente u = BusinessLogic.UtenteFindById(idUtente);
             if (u != null) {
-                boolean isAdmin= u.getRuolo() == Ruolo.ADMIN;
+                boolean isAdmin = u.getRuolo() == Ruolo.ADMIN;
                 if (isAdmin) {
                     System.out.println("L'utente è un Admin.");
-                   List <Gioco> g=BusinessLogic.VisualizzaGiochiInOfferta();
-                   List<Genere>ge=BusinessLogic.VisalizzaTuttiGeneri();
-                   for(Gioco giochi:g) {
-                	   if(giochi.getOffertaGioco().getId()==idOfferta) {
-                		   BusinessLogic.rimuoviGiocoOfferta(giochi.getId());
-                	   }
-                   }
-                   for(Genere generi:ge) {
-                	   if(generi.getOffertaGenere().getId()==idOfferta) {
-                		   BusinessLogic.removeGenereOfferta(generi.getOffertaGenere().getId(), idOfferta);
-                	   }
-                   }
-                    Offerta eliminata = BusinessLogic.deleteByNameOfferta( eliminaOffertaNome, idOfferta);
+                    
+                    List<Gioco> giochiInOfferta = BusinessLogic.VisualizzaGiochiInOfferta();
+                    List<Genere> tuttiGeneri = BusinessLogic.VisalizzaTuttiGeneri();
+
+                    for (Gioco gioco : giochiInOfferta) {
+                        if (gioco.getOffertaGioco() != null && gioco.getOffertaGioco().getId() == idOfferta) {
+                            BusinessLogic.rimuoviGiocoOfferta(gioco.getId());
+                        }
+                    }
+
+                    for (Genere genere : tuttiGeneri) {
+                        if (genere.getOffertaGenere() != null && genere.getOffertaGenere().getId() == idOfferta) {
+                            BusinessLogic.removeGenereOfferta(genere.getId(), idOfferta);
+                        }
+                    }
+
+                    Offerta eliminata = BusinessLogic.deleteByNameOfferta(eliminaOffertaNome, idOfferta);
                     if (eliminata != null) {
-                    	response.getWriter().write("Offerta eliminata con successo.");
-                    } 
+                        response.getWriter().write("Offerta eliminata con successo.");
+                    } else {
+                        response.getWriter().write("Errore: Impossibile eliminare l'offerta.");
+                    }
                 } else {
-                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("Errore: Non hai i poteri per fare questa operazione.");
                 }
             } else {
-            	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
             }
-        } 
+	}
 	}
 }
