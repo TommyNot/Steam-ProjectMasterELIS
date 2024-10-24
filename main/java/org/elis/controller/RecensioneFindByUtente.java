@@ -28,13 +28,8 @@ public class RecensioneFindByUtente extends HttpServlet {
     }
 
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		HttpSession session = request.getSession(false);
 		if(session == null) {
@@ -54,11 +49,14 @@ public class RecensioneFindByUtente extends HttpServlet {
 	                if (isUtenteBase) {
 	                    System.out.println("L'utente è un Utente Base.");
 	                    List<Recensione> recensioniUtente = BusinessLogic.TrovaRecensioneByIdUtente(idUtente);
+	                    
 	                    if (recensioniUtente == null || recensioniUtente.isEmpty()) {
 	                        request.setAttribute("Error", "Nessuna recensione trovata per l'utente selezionato.");
 	                        request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
 	                        return;
-	                    }
+	                    }             
+	                    request.setAttribute("recensioniUtente", recensioniUtente);
+	                    request.getRequestDispatcher("WEB-INF/private-jsp/PaginaElencoRecensioniUtente.jsp").forward(request, response);
 	                }else {
 	                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	                	response.getWriter().write("Non sei un utente base.");

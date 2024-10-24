@@ -34,7 +34,7 @@ public class RecensioneListaCompletaServlet extends HttpServlet {
 		  }
 		  
 		  request.setAttribute("recensioni", listaRecensioni);
-	        request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
+	      request.getRequestDispatcher("public-jsp/PageGiochi.jsp").forward(request, response);
 	}
 
 	

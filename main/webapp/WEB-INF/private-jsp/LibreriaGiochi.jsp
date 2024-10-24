@@ -53,7 +53,7 @@
                       <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/PageGiochi.jsp">Negozio</a></li>
                       <li><a class="dropdown-item" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/DashboardUtente.jsp">Torna alla tua Dashboard</a></li>
+                      <li><a class="dropdown-item" href="<%= request.getContextPath()%>/ControlloSessioniServlet">Torna alla tua Dashboard</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -70,7 +70,6 @@
         		<h2 class="testo-lista-librerie">Le tue librerie</h2>
         		<button id="toggle-form-aggiungi-btn" class="ancore">Aggiungi libreria</button>
         		<button id="toggle-form-modifica-btn" class="ancore">Modifica nome libreria</button>
-        		<button id="toggle-form-rimuovi-gioco-btn" class="ancore">Elimina gioco dalla libreria</button>
         	</div>
         	
         	<div class="container-3" id="form-container-aggiungi" style="display: none;">
@@ -101,20 +100,6 @@
 			    </form>
 			</div>
 			
-			<div class="container-3" id="form-container-elimina-gioco-libreria" style="display: none;">
-			    <form action="<%= request.getContextPath()%>/LibreriaEliminaGiocoDaLibreriaServlet" method="post" class="form">
-			    	<label for="giocoInserito" class="etichetta">ID gioco da rimuovere:</label>
-			        <input type="text" id="giocoInserito" name="idGioco" required>
-			        
-			        <label for="libreriaDelGioco" class="etichetta">ID libreria dove si trova il gioco:</label>
-			        <input type="text" id="libreriaDelGioco" name="idLibreria" required>
-			        
-			        <div class="button-group">
-			            <button type="submit">Elimina gioco da libreria</button>
-			            <button type="reset">Reset</button>
-			        </div>
-			    </form>
-			</div>
 		<h3 class="testo-lista-librerie">I tuoi giochi</h3>
       <div class="container-2 altezza">
     	<div class="content-librerie">

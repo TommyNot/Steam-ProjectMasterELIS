@@ -54,14 +54,14 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 					List<Gioco> giochiLibreria = BusinessLogic.findGiochiByIdLibreria(idLibreria);
 					if(librerie == null || librerie.isEmpty()) {
 						request.setAttribute("errorMessage", "Nessun gioco disponibile.");
-						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
+						request.getRequestDispatcher("WEB-INF/private-jsp/LibreriaGiochi.jsp").forward(request, response);
 						return;
 					}else {
 						request.setAttribute("giochi", giochiLibreria);
 						request.setAttribute("librerieUtente", librerie);
 						request.setAttribute("idLibreria", idLibreria);
 						System.out.println("Lista libreria trovata con successo dell'utente con id " + idUtente);
-						request.getRequestDispatcher("public-jsp/LibreriaGiochi.jsp").forward(request, response);
+						request.getRequestDispatcher("WEB-INF/private-jsp/LibreriaGiochi.jsp").forward(request, response);
 					}
 				}else {
 					System.out.println("L'utente non è un utente base.");
@@ -69,7 +69,7 @@ public class LibreriaFindByIdUtenteServlet extends HttpServlet {
 				}
 			}else {
 				System.out.println("Utente non trovato con id " + idUtente);
-				request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+				request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 			}
 		}else {
 			System.out.println("Nessun utente trovato nella sessione.");

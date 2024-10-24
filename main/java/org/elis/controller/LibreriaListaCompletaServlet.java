@@ -26,7 +26,7 @@ public class LibreriaListaCompletaServlet extends HttpServlet {
 		List<Libreria> librerie = BusinessLogic.VisualizzaTutteLibrerie();
 		
 		if(librerie == null || librerie.isEmpty()) {
-			request.setAttribute("errorMessage", "Nessun gioco disponibile.");
+			request.setAttribute("errorMessage", "Nessuna libreria disponibile.");
 			request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
             return;
 		}
