@@ -6,8 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Gioco;
 import org.elis.model.Utente;
 
 /**
@@ -36,12 +38,21 @@ public class AdminEliminaServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    long id = 0;
+	    
+			
+		long id = 0;
 	    try {
 	        id = Long.parseLong(request.getParameter("id"));
 	    } catch (NumberFormatException e) {
 	        response.getWriter().write("Errore: ID non valido.");
 	        return;
+	    }
+	    String ruolo = request.getParameter("ruolo");
+	    if (ruolo != null && ruolo.equalsIgnoreCase("publisher")) {
+	        List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(id); 
+	        for (Gioco gioco : giochi) {
+	            BusinessLogic.eliminaGioco(gioco.getId());
+	        }
 	    }
 
 	    String username = request.getParameter("username");

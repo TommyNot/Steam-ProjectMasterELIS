@@ -217,58 +217,47 @@ public class UtenteDaoJpa implements UtenteDao {
 
 	@Override
 	public Utente deleteByNome(long id, String username) {
-		 EntityManager em = DaoFactoryJpa.getEntityManager();
-	        EntityTransaction transaction = em.getTransaction();
-	        Utente utente=null;
-	        
-	        try {
-	            transaction.begin();
+	    EntityManager em = DaoFactoryJpa.getEntityManager();
+	    EntityTransaction transaction = em.getTransaction();
+	    Utente utente = null;
+	    
+	    try {
+	        transaction.begin();
 
-	            utente = em.find(Utente.class, id);
-	            if (utente == null) {
-	                System.out.println("Utente non trovato con ID: " + id);
-	                return null;
-	            }
-
-	            if (!utente.getUsername().equals(username)) {
-	                System.out.println("Nome utente non corretto per l'utente ID: " + id);
-	                return null;
-	            }
-	            if (utente != null) {
-	                Query q = em.createQuery("SELECT r FROM Recensione r WHERE r.recensioneUtente.id = :utenteId");
-	                q.setParameter("utenteId", id);
-	                
-	                List<Recensione> recensioni = q.getResultList();
-	                
-	                for (Recensione rec : recensioni) {
-	                    em.remove(rec);
-	                }
-	                
-	                Query qu=em.createQuery("SELECT l FROM Libreria l WHERE l.libreriaUtente.id= :utenteId");                
-	                qu.setParameter("utenteId", id);
-	                
-	                List<Libreria>libreria=qu.getResultList();
-	                
-	                for(Libreria lib:libreria) {
-	                	em.remove(lib);
-	                }
-	                
-	                em.remove(utente);                
-	                transaction.commit(); 
-	                System.out.println("Utente con ID " + id + " eliminato con successo.");
-	            }
-	        } catch (Exception e) {
-	            if (transaction.isActive()) {
-	                transaction.rollback();
-	            }
-	            e.printStackTrace();
+	        utente = em.find(Utente.class, id);
+	        if (utente == null) {
+	            System.out.println("Utente non trovato con ID: " + id);
 	            return null;
-
-	        } finally {
-	            em.close();
 	        }
-			return utente;
-   }
+
+	        if (!utente.getUsername().equals(username)) {
+	            System.out.println("Nome utente non corretto per l'utente ID: " + id);
+	            return null;
+	        }
+
+	        Query q = em.createQuery("DELETE FROM Recensione r WHERE r.recensioneUtente.id = :utenteId");
+	        q.setParameter("utenteId", id);
+	        q.executeUpdate();
+
+	        Query qu = em.createQuery("DELETE FROM Libreria l WHERE l.libreriaUtente.id = :utenteId");
+	        qu.setParameter("utenteId", id);
+	        qu.executeUpdate();
+
+	        em.remove(utente);
+
+	        transaction.commit();
+	        System.out.println("Utente con ID " + id + " eliminato con successo.");
+	    } catch (Exception e) {
+	        if (transaction.isActive()) {
+	            transaction.rollback();
+	        }
+	        e.printStackTrace();
+	        return null;
+	    } finally {
+	        em.close();
+	    }
+	    return utente;
+	}
 
 	@Override
 	public Utente selectById(long id) {

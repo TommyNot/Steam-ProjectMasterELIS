@@ -465,6 +465,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 									              <form id="eliminaUtente${utente.id}" onsubmit="return deleteUser(${utente.id}, '${utente.username}')">
 									                   <input type="hidden" name="id" value="${utente.id}">
 									                         <input type="hidden" name="username" value="${utente.username}">
+															 <input type=hidden name="ruolo" value="${utente.ruolo}">
 									                              <button type="submit">Elimina</button>
 									                           </form>
 									                       </td>
