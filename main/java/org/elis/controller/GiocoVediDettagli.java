@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Gioco;
+import org.elis.model.Libreria;
 import org.elis.model.Utente;
 
 /**
@@ -35,8 +36,8 @@ public class GiocoVediDettagli extends HttpServlet {
         String ricerca = request.getParameter("barraRicerca");
         
         HttpSession sessione = request.getSession(false);
-        
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+        
         
         if (ricerca == null || ricerca.isBlank()) {
             String error = "Il campo di ricerca è vuoto";
@@ -45,24 +46,36 @@ public class GiocoVediDettagli extends HttpServlet {
             System.out.println("Errore: campo di ricerca vuoto");
             return;
         }
+
         
-        long idGioco= Long.parseLong(ricerca);
-      
-        Gioco search = BusinessLogic.findGiocoById(idGioco);
-        
-        
-        if (search == null) {
-            String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
+        long idGioco;
+        try {
+            idGioco = Long.parseLong(ricerca);
+        } catch (NumberFormatException e) {
+            String errorMessage = "L'ID del gioco non è valido.";
             request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
             return;
+        }
+        
+        
+        Gioco search = BusinessLogic.findGiocoById(idGioco);
+        
+        if (search == null) {
+            String errorMessage = "Nessun gioco trovato con l'ID: " + ricerca;
+            request.setAttribute("errorMessage", errorMessage);
+            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
+            return;
+        }
+        
+        
+        if (utente != null) {
+            List<Libreria> librerieUtente = BusinessLogic.findLibreriaByIdUtente(utente.getId());
+            request.setAttribute("libreriaUtente", librerieUtente);
         }
 
        
         request.setAttribute("giochi", search);
         request.getRequestDispatcher("public-jsp/DettagliGioco.jsp").forward(request, response);
     }
-
-
-	
 }

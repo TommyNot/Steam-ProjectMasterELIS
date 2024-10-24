@@ -210,7 +210,7 @@
 <div class="library-section">
     <% 
     if (u != null) { 
-        List<Libreria> librerieUtente = BusinessLogic.findLibreriaByIdUtente(u.getId());
+        List<Libreria> librerieUtente = ( List<Libreria>) request.getAttribute("libreriaUtente");
         boolean giocoPresente = false;
         boolean publisherAdmin = false;
 

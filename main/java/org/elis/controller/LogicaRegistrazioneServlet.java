@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
 import org.elis.model.Libreria;
@@ -56,11 +56,25 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
             return;
         }
         
+        // Controllo se lo username esiste già
+        List<Utente> utentiLista = BusinessLogic.UtenteFindAll();
+        for (Utente u1 : utentiLista) {
+            if (u1.getUsername().equals(username)) {
+                String failed = "Errore nell'inserimento del username: username già esistente";
+                request.setAttribute("Error", failed);
+                request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
+                return; 
+            }
+        }
+        
        
 
         // Logica per l'aggiunta dell'utente
         Utente u = new Utente(Ruolo.UTENTE_BASE,username,email,password);
         Utente uRestituito = BusinessLogic.UtenteAdd(u);
+        
+       
+        		
 
         if (uRestituito == null) {
            
