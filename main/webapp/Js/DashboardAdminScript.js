@@ -386,6 +386,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 						   
 						   
 						   document.addEventListener('DOMContentLoaded', function() {
+							console.log("Entrato nel metodo");
 						       var ctx = document.getElementById('myChart').getContext('2d');
 						       var myChart = new Chart(ctx, {
 						           type: 'bar',
