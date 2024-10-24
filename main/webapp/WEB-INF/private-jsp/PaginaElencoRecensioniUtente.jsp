@@ -51,7 +51,7 @@
                       <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/PageGiochi.jsp">Negozio</a></li>
                       <li><a class="dropdown-item" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/DashboardUtente.jsp">Torna alla tua Dashboard</a></li>
+                      <li><a class="dropdown-item" href="<%= request.getContextPath()%>/ControlloSessioniServlet">Torna alla tua Dashboard</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -62,7 +62,7 @@
         <div class="container">
         	<div class="container-2">
         		<%
-        			List<Recensione> recensioniUtente = BusinessLogic.TrovaRecensioneByIdUtente(utente.getId());
+        			List<Recensione> recensioniUtente = (List<Recensione>) request.getAttribute("recensioniUtente");
         			if(recensioniUtente == null || recensioniUtente.isEmpty()){%>
         				<p style="color:white">Non hai ancora rilasciato una recensione.</p>
         		<% 		}else{ %>

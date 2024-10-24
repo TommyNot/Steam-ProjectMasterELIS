@@ -76,7 +76,7 @@ public class LibreriaAggiornaNomeServlet extends HttpServlet {
 			}
 		}else {
 			System.out.println("Nessun utente trovato nella sessione.");
-			request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+			request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 		}
 	}
 

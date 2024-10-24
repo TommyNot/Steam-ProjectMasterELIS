@@ -9,8 +9,6 @@ const formContainerAggiungi = document.getElementById('form-container-aggiungi')
 const toggleButtonModifica = document.getElementById('toggle-form-modifica-btn');
 const formContainerModifica = document.getElementById('form-container-modifica');
 
-const toggleButtonEliminaGiocoLibreria = document.getElementById('toggle-form-rimuovi-gioco-btn');
-const formContainerEliminaGiocoLibreria = document.getElementById('form-container-elimina-gioco-libreria');
 
 toggleButtonAggiungi.addEventListener('click', function() {
     if (formContainerAggiungi.style.display === "none") {
@@ -29,16 +27,6 @@ toggleButtonModifica.addEventListener('click', function() {
     } else {
         formContainerModifica.style.display = "none";
         toggleButtonModifica.textContent = "Modifica nome libreria";
-    }
-});
-
-toggleButtonEliminaGiocoLibreria.addEventListener('click', function() {
-    if (formContainerEliminaGiocoLibreria.style.display === "none") {
-        formContainerEliminaGiocoLibreria.style.display = "block";
-        toggleButtonEliminaGiocoLibreria.textContent = "Nascondi elimina gioco dalla libreria";
-    } else {
-        formContainerEliminaGiocoLibreria.style.display = "none";
-        toggleButtonEliminaGiocoLibreria.textContent = "Elimina gioco dalla libreria";
     }
 });
 

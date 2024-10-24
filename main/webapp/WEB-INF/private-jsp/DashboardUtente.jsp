@@ -134,7 +134,7 @@
 		                <div>
 		                  <h3>Recensioni</h3>
 		                  <p>Qui sono raggrupate tutte le recensioni che hai rilasciato.</p>
-		                  <a href="<%= request.getContextPath()%>/public-jsp/PaginaElencoRecensioniUtente.jsp" title="featured clay">Let's Go</a>
+		                  <a href="<%= request.getContextPath()%>/RecensioneFindByUtente" title="featured clay">Let's Go</a>
 		                </div>
 		  
 		              </div>
