@@ -64,7 +64,7 @@ public class UtenteEliminaByUsernameServlet extends HttpServlet {
         }
         String messaggioSuccesso = "L'utente con username " + eliminaUtenteUsername + " è stata eliminata con successo.";
     	request.setAttribute("messaggioSuccesso", messaggioSuccesso);
-    	request.getRequestDispatcher("public-jsp/HomePagePrincipale.jsp").forward(request, response);
+    	request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 	}
 
 }
