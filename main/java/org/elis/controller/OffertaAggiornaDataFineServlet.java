@@ -56,7 +56,7 @@ public class OffertaAggiornaDataFineServlet extends HttpServlet {
 	            } catch (DateTimeParseException e) {
 	            	System.out.println("errore formattazione");
 	                request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
-	                request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+	                request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
 	                System.out.println("Errore nella formattazione della data e ora");
 	                return; 
 	            }

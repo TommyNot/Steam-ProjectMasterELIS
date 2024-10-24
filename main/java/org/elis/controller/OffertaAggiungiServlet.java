@@ -44,7 +44,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
         if (nome == null || nome.isEmpty() || sconto == null || data_inizio == null || data_fine == null ) {
         	System.out.println("primo if");
             request.setAttribute("errore", "Tutti i campi sono obbligatori.");
-            request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
             return;
         }
 		
@@ -55,7 +55,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
                 inizio_offerta = LocalDate.parse(data_inizio, formatter); 
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
-                request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
                 System.out.println("Errore nella formattazione della data e ora");
                 return; 
             }
@@ -69,7 +69,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
                 fine_offerta = LocalDate.parse(data_fine, formatter); 
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data: " + e.getMessage());
-                request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
                 System.out.println("errore nella data");
                 return; 
             }
@@ -83,7 +83,7 @@ public class OffertaAggiungiServlet extends HttpServlet {
             }
         } catch (NumberFormatException e) {
             request.setAttribute("errore", "Errore nel formato dello sconto: " + e.getMessage());
-            request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
             System.out.println("Errore nello sconto");
             return;
         }

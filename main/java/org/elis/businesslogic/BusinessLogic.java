@@ -324,5 +324,7 @@ public static Gioco  rimuoviGiocoOfferta(long idGioco) {
 public static List<Utente> findByRuolo(Ruolo ruolo) {
     return DaoFactory.getDaoFactory(IMPLEMENTATION).getUtenteDao().findByRuolo(ruolo);
 }
-
+public static List<Genere> removeGenereOfferta(long idGenere,long idOfferta){
+	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGenereDao().removeGenereOfferta(idGenere, idOfferta);
+}
 }

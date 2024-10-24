@@ -50,6 +50,7 @@ public class AdminEliminaServlet extends HttpServlet {
 	        response.getWriter().write("Errore: Username non valido o mancante.");
 	        return;
 	    }
+	    
 
 	    Utente eliminaUtente = BusinessLogic.UtenteDeletByNome(id, username);
 

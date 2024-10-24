@@ -145,23 +145,24 @@ public class GenereDaoJpa implements GenereDao{
 	public List<Genere> removeGenereOfferta(long idGenere, long idOfferta) {
 		
 		 EntityManager em = DaoFactoryJpa.getEntityManager();
-		 
-	    try {
-	        em.getTransaction().begin();
-	        
-	        Query q = em.createQuery("UPDATE Genere g SET g.genereOfferta.id = :idOfferta WHERE g.id = :idGenere");
-	        q.setParameter("idOfferta", null);
-	        q.setParameter("idGenere", idGenere);
-	        q.executeUpdate();
-	        em.getTransaction().commit();
-	    } catch (Exception e) {
-	        if (em.getTransaction().isActive()) {
-	            em.getTransaction().rollback();
-	        }
-	        e.printStackTrace();
-	    } 
-	    return null;
-	}
+		    
+		    try {
+		        em.getTransaction().begin();
+		        
+		        Query q = em.createQuery("UPDATE Genere g SET g.offertaGenere = null WHERE g.id = :idGenere");
+		        q.setParameter("idGenere", idGenere);
+		        q.executeUpdate();
+		        
+		        em.getTransaction().commit();
+		    } catch (Exception e) {
+		        if (em.getTransaction().isActive()) {
+		            em.getTransaction().rollback();
+		        }
+		        e.printStackTrace();
+		    } 
+		    
+		    return null;
+		}
 
 	@Override
 	public Genere RimuoviGeneriDaGioco(long idGioco) {

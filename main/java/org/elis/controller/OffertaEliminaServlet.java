@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.elis.businesslogic.BusinessLogic;
+import org.elis.model.Genere;
 import org.elis.model.Gioco;
 import org.elis.model.Offerta;
 import org.elis.model.Ruolo;
@@ -77,6 +79,18 @@ public class OffertaEliminaServlet extends HttpServlet {
                 boolean isAdmin= u.getRuolo() == Ruolo.ADMIN;
                 if (isAdmin) {
                     System.out.println("L'utente è un Admin.");
+                   List <Gioco> g=BusinessLogic.VisualizzaGiochiInOfferta();
+                   List<Genere>ge=BusinessLogic.VisalizzaTuttiGeneri();
+                   for(Gioco giochi:g) {
+                	   if(giochi.getOffertaGioco().getId()==idOfferta) {
+                		   BusinessLogic.rimuoviGiocoOfferta(giochi.getId());
+                	   }
+                   }
+                   for(Genere generi:ge) {
+                	   if(generi.getOffertaGenere().getId()==idOfferta) {
+                		   BusinessLogic.removeGenereOfferta(generi.getOffertaGenere().getId(), idOfferta);
+                	   }
+                   }
                     Offerta eliminata = BusinessLogic.deleteByNameOfferta( eliminaOffertaNome, idOfferta);
                     if (eliminata != null) {
                     	response.getWriter().write("Offerta eliminata con successo.");

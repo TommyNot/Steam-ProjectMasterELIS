@@ -136,6 +136,7 @@ public class OffertaDaoJpa implements OffertaDao{
 	        if (o != null && o.getNome().equals(nome)) {
 	            em.remove(o);
 	            t.commit();
+	            System.out.println("offerta rimossa");
 	        } else {
 	            t.rollback();
 	            System.out.println("Offerta non trovata o nome non corrispondente.");
