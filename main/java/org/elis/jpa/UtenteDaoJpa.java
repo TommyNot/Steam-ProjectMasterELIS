@@ -320,5 +320,13 @@ public class UtenteDaoJpa implements UtenteDao {
 
         return utente;
     }
+
+	@Override
+	public List<Utente> findByRuolo(Ruolo ruolo) {
+		EntityManager em = DaoFactoryJpa.getEntityManager();
+        Query q = em.createQuery("select a from Utente a where a.ruolo = :ruolo");
+        q.setParameter("ruolo", ruolo);
+        return q.getResultList();
+	}
 		
 }

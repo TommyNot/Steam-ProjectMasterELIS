@@ -12,6 +12,7 @@ import org.elis.model.Gioco;
 import org.elis.model.Libreria;
 import org.elis.model.Offerta;
 import org.elis.model.Recensione;
+import org.elis.model.Ruolo;
 import org.elis.model.Utente;
 
 public class BusinessLogic {
@@ -319,6 +320,9 @@ public static Genere rimuoviGeneriDaGioco(long idGioco) {
 public static Gioco  rimuoviGiocoOfferta(long idGioco) {
 	
 	return DaoFactory.getDaoFactory(IMPLEMENTATION).getGiocoDao().rimuoviGiocoOfferta(idGioco);
+}
+public static List<Utente> findByRuolo(Ruolo ruolo) {
+    return DaoFactory.getDaoFactory(IMPLEMENTATION).getUtenteDao().findByRuolo(ruolo);
 }
 
 }

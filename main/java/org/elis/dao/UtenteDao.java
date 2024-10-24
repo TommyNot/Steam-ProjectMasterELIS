@@ -19,6 +19,6 @@ public interface UtenteDao {
 	Utente deleteByNome(long id,String username);
 	Utente selectById(long id);
 	Utente ripristinaPassword(String username,String email,String password);
-	
+	List<Utente> findByRuolo(Ruolo ruolo);
 
 }

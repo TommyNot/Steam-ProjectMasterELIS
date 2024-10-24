@@ -342,4 +342,14 @@
     <servlet-name>EliminaByUsernameServlet</servlet-name>
     <url-pattern>/EliminaByUsernameServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminCercaRuoloServlet</display-name>
+    <servlet-name>AdminCercaRuoloServlet</servlet-name>
+    <servlet-class>org.elis.controller.AdminCercaRuoloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminCercaRuoloServlet</servlet-name>
+    <url-pattern>/AdminCercaRuoloServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

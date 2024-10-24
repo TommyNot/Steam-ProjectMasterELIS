@@ -6,6 +6,7 @@
     <%@page import="org.elis.model.Offerta" %>
     <%@page import="org.elis.model.Genere" %>
     <%@page import="org.elis.model.Gioco" %>
+    <%@page import="org.elis.model.Ruolo" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,15 +132,25 @@
         <div class="container " id="Ban">
             <h2>Ban utente</h2>
             <h2>Elimina Account</h2>
-   		<form id="eliminaUtente">
-        
-        <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id" required><br><br>
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-
-        <input type="submit" value="Elimina Account">
-    	</form>
+   		<label for="ruoloSelect">Seleziona ruolo:</label>
+   <select id="ruoloSelect" onchange="filtraPerRuolo()">
+    <option value="">Tutti</option>
+    <% for (Ruolo ruolo : Ruolo.values()) { %>
+        <option value="<%= ruolo.name() %>"><%= ruolo.name() %></option>
+    <% } %>
+</select>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Ruolo</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody id="utenteTableBody">
+        </tbody>
+    </table>
     	<div id="utenteResult"></div>
         </div>
         

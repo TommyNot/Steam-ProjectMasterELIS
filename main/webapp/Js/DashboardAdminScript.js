@@ -188,36 +188,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 	       });
 	   }
 
-	   document.getElementById('eliminaUtente').addEventListener('submit', function(event) {
-	       event.preventDefault();
-
-	       const formData = new FormData(this);
-	       const data = new URLSearchParams(formData);
-
-	       fetch('/SteamProject/AdminEliminaServlet', {
-	           method: 'POST',
-	           headers: {
-	               'Content-Type': 'application/x-www-form-urlencoded'
-	           },
-	           body: data
-	       })
-		   .then(response => {
-		           if (response.ok) {
-		               return response.text().then(text => {
-		                   document.getElementById('utenteResult').innerHTML = '<p style="color:green;">' + text + '</p>';
-		               });
-		           } else {
-		               return response.text().then(text => {
-		                   document.getElementById('utenteResult').innerHTML = '<p style="color:red;">' + text + '</p>';
-		                   console.error('Errore durante l\'eliminazione dell\'account:', text);
-		               });
-		           }
-		       })
-		       .catch(error => {
-		           console.error('Errore:', error);
-		           document.getElementById('utenteResult').innerHTML = '<p style="color:red;">Errore nella richiesta di eliminazione.</p>';
-		       });
-	   });
+	   
 
 	   document.getElementById('creaOfferta').addEventListener('submit', function(event) {
 	   	       event.preventDefault();
@@ -463,3 +434,67 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 						           document.getElementById('resultAssociazione').innerHTML = '<p class="error">Errore durante l\'associazione dei generi all\'offerta.</p>';
 						       });
 						   });
+						   
+						   async function filtraPerRuolo() {
+						           const role = document.getElementById('ruoloSelect').value;
+
+								   const response = await fetch(`/SteamProject/AdminCercaRuoloServlet?ruoloSelezionato=${encodeURIComponent(role)}`);
+								       if (!response.ok) {
+								           console.error(`Errore nella richiesta: ${response.statusText}`);
+								           return;
+								       }
+						           const responseText = await response.text();
+						           const users = responseText.trim().split("\n").map(line => {
+						               const [id, username, ruolo] = line.split(",");
+						               return { id, username, ruolo };
+						           });
+						           const userTableBody = document.getElementById('userTableBody');
+
+						           users.forEach(user => {
+						               userTableBody.innerHTML += `
+									   <tr>
+										    <td>${utente.id}</td>
+									         <td>${utente.username}</td>
+									          <td>${utente.ruolo}</td>
+									           <td>
+									              <form id="eliminaUtente${utente.id}" onsubmit="return deleteUser(${utente.id}, '${utente.username}')">
+									                   <input type="hidden" name="id" value="${utente.id}">
+									                         <input type="hidden" name="username" value="${utente.username}">
+									                              <button type="submit">Elimina</button>
+									                           </form>
+									                       </td>
+									                   </tr>
+						               `;
+						           });
+						       }
+							   	
+							   async function deleteUser() {
+							          const form = document.getElementById(`eliminaUtente${userId}`);
+							          const formData = new FormData(form);
+							          const data = new URLSearchParams(formData);
+
+							          try {
+							              const response = await fetch('/SteamProject/AdminEliminaServlet', {
+							                  method: 'POST',
+							                  headers: {
+							                      'Content-Type': 'application/x-www-form-urlencoded'
+							                  },
+							                  body: data
+							              });
+
+							              const text = await response.text();
+
+							              if (response.ok) {
+							                  document.getElementById('utenteResult').innerHTML = '<p style="color:green;">' + text + '</p>';
+							                  filterUsersByRole();
+							              } else {
+							                  document.getElementById('utenteResult').innerHTML = '<p style="color:red;">' + text + '</p>';
+							                  console.error('Errore durante l\'eliminazione dell\'utente:', text);
+							              }
+							          } catch (error) {
+							              console.error('Errore:', error);
+							              document.getElementById('utenteResult').innerHTML = '<p style="color:red;">Errore nella richiesta di eliminazione.</p>';
+							          }
+
+							          return false;
+							      }
