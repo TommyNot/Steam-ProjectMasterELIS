@@ -153,6 +153,8 @@
     
     List<Recensione> recensioniMax = BusinessLogic.TrovaRecensioneByIdGioco(gioco.getId());
     
+    
+   
    
     boolean haRecensioni = false;
     if (recensioniMax != null && u != null) {
@@ -166,9 +168,13 @@
 %>
 
 <div class="review-section">
-    <% if (u != null) {  %>
+
+		
+<% if (u != null) {  %>
+    <% if (u.getRuolo() == Ruolo.ADMIN || u.getRuolo() == Ruolo.PUBLISHER) { %>
+        <p></p>
+    <% } else { %>
         <% if (!haRecensioni) { %>
-            
             <button class="btn-recensione" id="showReviewFormBtn" style="display: inline;">Lascia una recensione</button>
             <form action="<%=request.getContextPath() %>/RecensioneAggiungiServlet" class="review-form" id="reviewForm" style="display: none;" method="post">
                 <h2>Lascia una recensione</h2>
@@ -188,13 +194,13 @@
                 <button class="btn" type="submit">Invia</button>
             </form>
         <% } else { %>
-            
             <p>Hai già lasciato una recensione per questo gioco.</p>
         <% } %>
-    <% } else { %>
-        
-        <p>Accedi per lasciare una recensione.</p>
     <% } %>
+<% } else { %>
+    <p>Accedi per lasciare una recensione.</p>
+<% } %>
+
 </div>
 
 
@@ -251,7 +257,7 @@
         <% } else if (giocoPresente) { %>
             <p>Il gioco è già nella tua libreria.</p>
         <% } else if (publisherAdmin) { %>
-            <p>I Publisher e Admin non possono aggiungere giochi alla libreria.</p>
+            <p></p>
         <% } 
     } %>
 </div>

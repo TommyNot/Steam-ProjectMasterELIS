@@ -38,73 +38,63 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
-		String voto = request.getParameter("voto");
-		String testo = request.getParameter("recensione");
-		String id = request.getParameter("idGioco");
-		
-        if (voto == null || voto.isEmpty() || testo == null || testo.isEmpty() || id == null || id.isEmpty()) {
-        	System.out.println("primo if");
-            request.setAttribute("errore", "Tutti i campi sono obbligatori.");
-            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
-            return;
-        }
-        
-        int votoRecensione;
-        try {
-            votoRecensione = Integer.parseInt(voto);
-            if (votoRecensione <= 0) {
-                System.out.println("errore voto minore di 0");
-            }
-        } catch (NumberFormatException e) {
-            request.setAttribute("errore", "Errore nel formato del voto: " + e.getMessage());
-            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
-            System.out.println("Errore nel voto.");
-            return;
-        }
-        
-     
-	        	
-			  long idGioco = Long.parseLong(id);
 	    
-		  
-		  //trovo il gioco dall'id
-		  Gioco gioco = BusinessLogic.findGiocoById(idGioco);
-		  
-		  //controllo la sessione e mi prendo l'oggetto utente per costruirmi quello recensione
-		  HttpSession sessione = request.getSession(false);
-		   if (sessione == null) {
-	            response.sendRedirect("public-jsp/PaginaLogin.jsp");
+	    String voto = request.getParameter("voto");
+	    String testo = request.getParameter("recensione");
+	    String id = request.getParameter("idGioco");
+
+	  
+	    if (voto == null || voto.isEmpty() || testo == null || testo.isEmpty() || id == null || id.isEmpty()) {
+	        request.setAttribute("errore", "Tutti i campi sono obbligatori.");
+	        request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+	        return;
+	    }
+
+	    int votoRecensione;
+	    try {
+	        votoRecensione = Integer.parseInt(voto);
+	        if (votoRecensione <= 0) {
+	            request.setAttribute("errore", "Il voto deve essere maggiore di zero.");
+	            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
 	            return;
 	        }
+	    } catch (NumberFormatException e) {
+	        request.setAttribute("errore", "Errore nel formato del voto: " + e.getMessage());
+	        request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+	        return;
+	    }
 
-	        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-	        
-	        if (utente != null) {
-	            long idUtente =  utente.getId();
-	            System.out.println("ID Utente loggato: " + idUtente);
-	            
-	            Utente u = BusinessLogic.UtenteFindById(idUtente);
-	            if (u != null) {
-	                boolean isUtenteBase= u.getRuolo() == Ruolo.UTENTE_BASE;
-	                if (isUtenteBase) {
-	                    System.out.println("L'utente è un utente base.");
-	                    Recensione aggiunta = new Recensione(0, LocalDateTime.now(), LocalDateTime.now(), votoRecensione, testo, gioco, utente );
-	                    BusinessLogic.RecensioneAdd(aggiunta);
-	                    response.sendRedirect(request.getContextPath() + "/GiocoVediDettagli?barraRicerca=" + idGioco);
-	                    if (aggiunta != null) {
-	                    	 request.setAttribute("successo", "Recensione creata con successo.");
-	                    } 
-	                } else {
-	                	response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
-	                }
-	            } else {
-	            	response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
+	    long idGioco = Long.parseLong(id);
+	    Gioco gioco = BusinessLogic.findGiocoById(idGioco);
+	    
+	    
+	    HttpSession sessione = request.getSession(false);
+	    if (sessione == null) {
+	        response.sendRedirect("public-jsp/PaginaLogin.jsp");
+	        return;
+	    }
+
+	    Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+	    
+	    if (utente != null) {
+	        long idUtente = utente.getId();
+	        Utente u = BusinessLogic.UtenteFindById(idUtente);
+
+	        if (u != null) {
+	            if (u.getRuolo() == Ruolo.UTENTE_BASE) {
+	                Recensione aggiunta = new Recensione(0, LocalDateTime.now(), LocalDateTime.now(), votoRecensione, testo, gioco, utente);
+	                BusinessLogic.RecensioneAdd(aggiunta);
+	                request.setAttribute("successo", "Recensione creata con successo.");
+	                response.sendRedirect(request.getContextPath() + "/GiocoVediDettagli?barraRicerca=" + idGioco);
+	            } else if (u.getRuolo() == Ruolo.PUBLISHER || u.getRuolo() == Ruolo.ADMIN) {
+	              
+	                response.sendRedirect(request.getContextPath() + "/GiocoVediDettagli?barraRicerca=" + idGioco);
 	            }
 	        } else {
-	        	response.sendRedirect("public-jsp/PaginaLogin.jsp");
+	            response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
 	        }
-        
+	    } else {
+	        response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
+	    }
 	}
-
 }
