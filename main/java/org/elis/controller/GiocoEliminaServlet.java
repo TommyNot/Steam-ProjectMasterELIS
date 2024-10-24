@@ -30,87 +30,83 @@ public class GiocoEliminaServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        // Recupera l'ID del gioco da eliminare
         String eliminaGiocoNome = request.getParameter("productId");
-        
-        
-        
+
+        // Verifica se la sessione esiste
         HttpSession sessione = request.getSession(false);
         if (sessione == null) {
             response.sendRedirect("public-jsp/PaginaLogin.jsp");
             return;
         }
-        
-        
 
-
+        // Recupera l'utente loggato dalla sessione
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
         
-        System.out.println(utente.getRuolo());
+        // Verifica se l'utente ha un ruolo appropriato (deve essere almeno un PUBLISHER)
         if (utente.getRuolo() == Ruolo.UTENTE_BASE) {
             response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
             return;
         }
-     
-        
-        
+
+        // Controlla se l'ID del gioco è valido
         if (eliminaGiocoNome == null || eliminaGiocoNome.isBlank()) {
             String errore = "Il nome del gioco non può essere vuoto.";
             request.setAttribute("errore", errore); 
-            
             request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
-            return; 
+            return;
         }
-        
+
         long idGioco = 0;
         try {
-        	
-        	idGioco = Long.parseLong(eliminaGiocoNome);
-        	
-        }catch(NumberFormatException e) {
-        	
-        	e.printStackTrace();
+            idGioco = Long.parseLong(eliminaGiocoNome);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            String errore = "Formato ID gioco non valido.";
+            request.setAttribute("errore", errore);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+            return;
         }
+
+        // Recupera il gioco dal database
+        Gioco giocoEliminato = BusinessLogic.findGiocoById(idGioco);
+
+        if (giocoEliminato == null) {
+            String errore = "Il gioco con ID '" + eliminaGiocoNome + "' non è stato trovato.";
+            request.setAttribute("errore", errore);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+            return;
+        }
+
        
-        	
-        	
-        	System.out.println(idGioco);
-    
-        
-        	Gioco giocoEliminato = BusinessLogic.eliminaGioco(idGioco);
-            
-        
-        
-        
-			
-			switch(utente.getRuolo()){
-			
-			case PUBLISHER:
-				if (giocoEliminato != null ) {
-        	
-		            String successo = "Il gioco '" + eliminaGiocoNome + "' è stato eliminato con successo.";
-		            request.setAttribute("successo", successo);
-		            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
-				} else {
-		            String errore = "Il gioco con nome '" + eliminaGiocoNome + "' non è stato trovato.";
-		            request.setAttribute("errore", errore);
-		            request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
-		        }
-				break;
-			case ADMIN:
-				if (giocoEliminato != null) {
-			        response.getWriter().write("Gioco eliminato con successo.");
-			    } else {
-			        response.getWriter().write("Errore: Gioco non trovato o eliminazione fallita.");
-			    }
-						
-				break;
-				
-			default:
-				request.getRequestDispatcher("WEB-INF/public-jsp/ErrorPage.jsp").forward(request, response);
-					break;
-			}
-     
-        
+        switch (utente.getRuolo()) {
+            case PUBLISHER:
+               
+                if (giocoEliminato.getIdUtente().getId() == utente.getId()) {
+                    
+                    BusinessLogic.eliminaGioco(idGioco);
+                    String successo = "Il gioco '" + eliminaGiocoNome + "' è stato eliminato con successo.";
+                    request.setAttribute("successo", successo);
+                    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+                } else {
+                    
+                    String errore = "Non hai i permessi per eliminare questo gioco.";
+                    request.setAttribute("errore", errore);
+                    request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
+                }
+                break;
+
+            case ADMIN:
+                
+                BusinessLogic.eliminaGioco(idGioco);
+                response.getWriter().write("Gioco eliminato con successo.");
+                break;
+
+            default:
+                // Ruolo non autorizzato
+                request.getRequestDispatcher("WEB-INF/public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
+                break;
+        }
     }
+
 }

@@ -1,3 +1,4 @@
+<%@page import="org.elis.model.Ruolo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ page import="java.util.List" %>
@@ -30,73 +31,63 @@
             
             
   
-            <nav>
-                <ul>
-                    <li><a href="#">Homepage</a></li>
-                    <li>
-                    
-                    	<a href="#" class="generi-link-giochi" >Novità e Tendenze</a>
-                    	    <div class="dropdown-giochi">
-						        <ul class="styled-select-giochi">
-						            
-						            <li>
-						            	<a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet">Giochi</a>
-						            </li>
-						          	
-						          	<li>
-						          		<a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a>
-						          	</li>
-						          	
-						          		<li>
-						          		<a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Tendenza</a>
-						          	</li>
-						          	
-						        
-
-						          	
-						        </ul>
-						    </div>
-                    </li>
-						<li>
-						    <a href="#" class="generi-link">Generi</a>
-						    <div class="dropdown">
-						        <ul class="styled-select">
-						            <%
-						                List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
-						                Genere genereSelezionato = (Genere) request.getAttribute("genere");
-						                for (Genere genere : generi) {
-						            %>
-						            <li>
-						              <a href="<%=request.getContextPath() %>/GiocoGenereRicercaServlet?genereId=<%= genere.getId() %>" class="dropdown-option" value="genereId">
-				                            <%= genere.getNome() %>
-				                        </a>
-						            </li>
-						            <%
-						                }
-						            %>
-						        </ul>
-						    </div>
-						</li>
-
-
-                        <li> 
-								<a href="<%=request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
-        				</li>
-        				
-        				<li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a></li>
-                     <div class="search-container">
-					      <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="get" class="d-flex">
-					                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
-					                <button type="submit" class="btn btn-outline-success">Cerca</button>
-					            </form>
-					            
-					            
-					            
-					  </div>
-       
-  
+  <nav>
+    <ul>
+        <li><a href="#">Homepage</a></li>
+        <li>
+            <a href="#" class="generi-link-giochi">Novità e Tendenze</a>
+            <div class="dropdown-giochi">
+                <ul class="styled-select-giochi">
+                    <li><a href="<%=request.getContextPath() %>/GiocoListaCompletaServlet">Giochi</a></li>
+                    <li><a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a></li>
+                    <li><a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Tendenza</a></li>
                 </ul>
-            </nav>
+            </div>
+        </li>
+        <li>
+            <a href="#" class="generi-link">Generi</a>
+            <div class="dropdown">
+                <ul class="styled-select">
+                    <%
+                        List<Genere> generi = BusinessLogic.VisalizzaTuttiGeneri();
+                        Genere genereSelezionato = (Genere) request.getAttribute("genere");
+                        for (Genere genere : generi) {
+                    %>
+                    <li>
+                        <a href="<%=request.getContextPath() %>/GiocoGenereRicercaServlet?genereId=<%= genere.getId() %>" class="dropdown-option" value="genereId">
+                            <%= genere.getNome() %>
+                        </a>
+                    </li>
+                    <%
+                        }
+                    %>
+                </ul>
+            </div>
+        </li>
+
+        <!-- Mostra Libreria solo se l'utente NON è Publisher o Admin -->
+        <%
+            Utente utenteLoggato = (Utente) session.getAttribute("utenteLoggato");
+            if (utenteLoggato != null && utenteLoggato.getRuolo() == Ruolo.UTENTE_BASE) {
+        %>
+        <li>
+            <a href="<%=request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
+        </li>
+        <%
+            }
+        %>
+
+        <li><a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard</a></li>
+
+        <div class="search-container">
+            <form action="<%= request.getContextPath() %>/GiocoCercaServlet" method="get" class="d-flex">
+                <input type="text" id="barraRicerca" name="barraRicerca" placeholder="Cerca gioco..." class="form-control me-2" aria-label="Search">
+                <button type="submit" class="btn btn-outline-success">Cerca</button>
+            </form>
+        </div>
+    </ul>
+</nav>
+
                   <div class="user-info">
                     
                     <%

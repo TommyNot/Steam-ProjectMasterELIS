@@ -1,3 +1,4 @@
+<%@page import="org.elis.model.Ruolo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="org.elis.model.Utente" %> 
@@ -46,11 +47,22 @@
 								        out.println("Nessun genere trovato");
 								    }
 								%>
+						
 						        </ul>
 						    </div>
 						
       <a href="<%=request.getContextPath() %>/OffertaVediTuttiGiochi">Offerte</a>
-      <a href="<%= request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
+      		<!-- Mostra Libreria solo se l'utente NON è Publisher o Admin -->
+								        <%
+								            Utente utenteLoggatoLibre = (Utente) session.getAttribute("utenteLoggato");
+								            if (utenteLoggatoLibre != null && utenteLoggatoLibre.getRuolo() == Ruolo.UTENTE_BASE) {
+								        %>
+								       
+								            <a href="<%=request.getContextPath() %>/LibreriaFindByIdUtenteServlet">Libreria</a>
+								        
+								        <%
+								            }
+								        %>
       <a href="<%=request.getContextPath() %>/ControlloSessioniServlet">Dashboard </a>
  
     </div>

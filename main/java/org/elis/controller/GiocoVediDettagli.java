@@ -49,7 +49,7 @@ public class GiocoVediDettagli extends HttpServlet {
         long idGioco= Long.parseLong(ricerca);
       
         Gioco search = BusinessLogic.findGiocoById(idGioco);
-
+        
         
         if (search == null) {
             String errorMessage = "Nessun gioco trovato con il nome: " + ricerca;
