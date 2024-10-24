@@ -125,7 +125,7 @@
         <canvas id="myChart"></canvas>
         </div>
         <div  class="container active" >
-        	<a href="https://www.youtube.com/watch?v=xvFZjo5PgG0&ab_channel=Duran">Elimina il sito</a>
+        	<a href="https://www.youtube.com/watch?v=xvFZjo5PgG0&ab_channel=Duran" style="font-weight: bold; color: red;">Elimina il sito</a>
         </div>
         
         <div class="container " id="Ban">
