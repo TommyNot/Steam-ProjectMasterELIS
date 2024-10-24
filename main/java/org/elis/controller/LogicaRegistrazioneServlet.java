@@ -67,6 +67,14 @@ public class LogicaRegistrazioneServlet extends HttpServlet {
             }
         }
         
+        for (Utente u1 : utentiLista) {
+            if (u1.getEmail().equals(email)) {
+                String failed = "Errore nell'inserimento del email: email già registrata";
+                request.setAttribute("Error", failed);
+                request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
+                return; 
+            }
+        }
        
 
         // Logica per l'aggiunta dell'utente
