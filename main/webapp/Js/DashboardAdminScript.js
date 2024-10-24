@@ -448,10 +448,15 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 						               const [id, username, ruolo] = line.split(",");
 						               return { id, username, ruolo };
 						           });
-						           const userTableBody = document.getElementById('userTableBody');
+						           const utenteTableBody = document.getElementById('utenteTableBody');
+								   if (!utenteTableBody) {
+								           console.error('Elemento "utenteTableBody" non trovato.');
+								           return;
+								       }
+								       utenteTableBody.innerHTML = '';
 
-						           users.forEach(user => {
-						               userTableBody.innerHTML += `
+						           users.forEach(utente => {
+						               utenteTableBody.innerHTML += `
 									   <tr>
 										    <td>${utente.id}</td>
 									         <td>${utente.username}</td>
@@ -469,9 +474,10 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 						       }
 							   	
 							   async function deleteUser() {
-							          const form = document.getElementById(`eliminaUtente${userId}`);
-							          const formData = new FormData(form);
-							          const data = new URLSearchParams(formData);
+									event.preventDefault();
+								    const form = event.target;
+								    const formData = new FormData(form);
+								    const data = new URLSearchParams(formData);
 
 							          try {
 							              const response = await fetch('/SteamProject/AdminEliminaServlet', {
@@ -486,7 +492,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
 
 							              if (response.ok) {
 							                  document.getElementById('utenteResult').innerHTML = '<p style="color:green;">' + text + '</p>';
-							                  filterUsersByRole();
+							                  filtraPerRuolo();
 							              } else {
 							                  document.getElementById('utenteResult').innerHTML = '<p style="color:red;">' + text + '</p>';
 							                  console.error('Errore durante l\'eliminazione dell\'utente:', text);

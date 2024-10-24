@@ -149,7 +149,7 @@
             </tr>
         </thead>
         <tbody id="utenteTableBody">
-        </tbody>
+    </tbody>
     </table>
     	<div id="utenteResult"></div>
         </div>

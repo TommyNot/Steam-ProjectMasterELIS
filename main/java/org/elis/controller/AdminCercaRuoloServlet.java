@@ -34,7 +34,8 @@ public class AdminCercaRuoloServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         String ruoloSelezionato = request.getParameter("ruoloSelezionato");
-        System.out.println("sono dentro al filtro");
+        System.out.println(ruoloSelezionato);
+        
         List<Utente> utentiFiltrati;
         if (ruoloSelezionato == null || ruoloSelezionato.isEmpty()) {
             utentiFiltrati = BusinessLogic.UtenteFindAll();
