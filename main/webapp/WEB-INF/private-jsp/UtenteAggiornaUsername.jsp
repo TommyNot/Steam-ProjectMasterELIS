@@ -53,7 +53,7 @@
 			<label for="username" style="font-weight: bold;">Nuovo username</label>
 			<input type="text"  id="username" name="nuovoUsername" required />
 			<button type="submit" id="Reset">Invia</button>
-			 <a id="Reset" href="<%= request.getContextPath() %>/public-jsp/DashboardUtente.jsp">Torna alla dashboard</a>
+			 <a id="Reset" href="<%= request.getContextPath() %>/ControlloSessioniServlet">Torna alla dashboard</a>
 		</form>
 	</div>
 

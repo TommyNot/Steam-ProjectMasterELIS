@@ -312,4 +312,34 @@
     <servlet-name>LibreriaEliminaGiocoDaLibreriaServlet</servlet-name>
     <url-pattern>/LibreriaEliminaGiocoDaLibreriaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AggiornaUsernameServlet</display-name>
+    <servlet-name>AggiornaUsernameServlet</servlet-name>
+    <servlet-class>org.elis.controller.AggiornaUsernameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiornaUsernameServlet</servlet-name>
+    <url-pattern>/AggiornaUsernameServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AggiornaEmailServlet</display-name>
+    <servlet-name>AggiornaEmailServlet</servlet-name>
+    <servlet-class>org.elis.controller.AggiornaEmailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AggiornaEmailServlet</servlet-name>
+    <url-pattern>/AggiornaEmailServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EliminaByUsernameServlet</display-name>
+    <servlet-name>EliminaByUsernameServlet</servlet-name>
+    <servlet-class>org.elis.controller.EliminaByUsernameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EliminaByUsernameServlet</servlet-name>
+    <url-pattern>/EliminaByUsernameServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

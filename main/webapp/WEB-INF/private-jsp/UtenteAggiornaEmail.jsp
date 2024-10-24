@@ -42,7 +42,7 @@
 			<label for="email" style="font-weight: bold;">Email</label>
 			<input type="email"  id="email" name="nuovaEmail" required />
 			<button type="submit" id="Reset">Invia</button>
-			<a class="Reset" href="<%= request.getContextPath() %>/public-jsp/DashboardUtente.jsp">Torna alla dashboard</a>
+			<a class="Reset" href="<%= request.getContextPath() %>/ControlloSessioniServlet">Torna alla dashboard</a>
 		</form>
 	</div>
 
