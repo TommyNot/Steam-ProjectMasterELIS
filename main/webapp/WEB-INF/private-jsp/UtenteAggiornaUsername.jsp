@@ -50,8 +50,8 @@
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
 			
-			<label for="username" style="font-weight: bold;">Nuovo username</label>
-			<input type="text"  id="username" name="nuovoUsername" required />
+			<label for="nuovoUsername" style="font-weight: bold;">Nuovo username</label>
+			<input type="text"  id="nuovoUsername" name="nuovoUsername" required />
 			<button type="submit" id="Reset">Invia</button>
 			 <a id="Reset" href="<%= request.getContextPath() %>/ControlloSessioniServlet">Torna alla dashboard</a>
 		</form>

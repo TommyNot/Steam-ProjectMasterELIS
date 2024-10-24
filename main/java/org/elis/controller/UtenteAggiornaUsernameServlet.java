@@ -32,8 +32,9 @@ public class UtenteAggiornaUsernameServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session = request.getSession(false);
-	    if (session == null || session.getAttribute("utenteLoggato") == null) {
-	        response.getWriter().write("Errore: Utente non autenticato.");
+	    
+	    if (session == null) {
+	        request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 	        return;
 	    }
 	    
@@ -50,7 +51,12 @@ public class UtenteAggiornaUsernameServlet extends HttpServlet {
 	    Utente utenteAggiornato = BusinessLogic.UpdateUsername(idUtente, nuovoUsername);
 
 	    if (utenteAggiornato != null) {
-	        response.getWriter().write("Nome utente aggiornato con successo! Nuovo username: " + utenteAggiornato.getUsername());
+	         String success = "Modifica username avvenuta con successo , rifai il login";
+	        session.invalidate();
+	        request.setAttribute("Success", success);
+	    	 request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
+	    	 
+	    	
 	    } else {
 	    	request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	    }

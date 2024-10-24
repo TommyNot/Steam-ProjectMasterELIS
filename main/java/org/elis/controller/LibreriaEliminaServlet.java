@@ -50,6 +50,7 @@ public class LibreriaEliminaServlet extends HttpServlet {
         	request.setAttribute("errore", "errore");
         	response.sendRedirect("public-jsp/LoginPage.jsp");
         }
+       
         
         try {
         	
