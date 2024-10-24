@@ -193,29 +193,30 @@
     if (u != null) { 
         List<Libreria> librerieUtente = BusinessLogic.findLibreriaByIdUtente(u.getId());
         boolean giocoPresente = false;
+        boolean publisherAdmin = false;
 
-        // Controlla se l'utente è un PUBLISHER
-        if (u.getRuolo() == Ruolo.PUBLISHER) {
-            giocoPresente = true; // I publisher non hanno bisogno di aggiungere il gioco
+        // Verifica se l'utente è PUBLISHER o ADMIN
+        if (u.getRuolo() == Ruolo.PUBLISHER || u.getRuolo() == Ruolo.ADMIN) {
+        	publisherAdmin = true; 
         } else {
-            // Altrimenti, controlla se il gioco è già presente nella libreria
+            
             for (Libreria libreria : librerieUtente) {
                 List<Gioco> giochiNellaLibreria = BusinessLogic.findGiochiByIdLibreria(libreria.getId());
                 for (Gioco g : giochiNellaLibreria) {
                     if (g.getId() == gioco.getId()) {
                         giocoPresente = true;
-                        break;  // Esce dal ciclo appena trova il gioco
+                        break;  
                     }
                 }
-                if (giocoPresente) break;  // Ferma la ricerca se il gioco è trovato
+                if (giocoPresente) break;  
             }
         }
 
-        // Mostra il pulsante "Aggiungi alla libreria" se il gioco non è presente
-        if (!giocoPresente) { %>
-            <button class="btn-rece" id="showAddFormBtn" style="display: inline;">Aggiungi alla libreria</button>
+        // Se il gioco non è presente e l'utente non è un publisher o admin, mostra il form
+        if (!giocoPresente && !publisherAdmin) { %>
+            
 
-            <!-- Form per aggiungere il gioco alla libreria -->
+            
             <form action="<%=request.getContextPath() %>/LibreriaGiocoAggiungiServlet" class="library-form" id="addForm" method="post">
                 <h2>Scegli la libreria in cui aggiungere il gioco</h2>
 
@@ -228,17 +229,20 @@
                     <% } %>
                 </select>
 
-                <!-- ID del gioco come campo nascosto -->
-                <input type="hidden" name="giocoId" value="<%= gioco.getId() %>">
+                
+                <input type="hidden" name="idGioco" value="<%= gioco.getId() %>">
 
-                <!-- Submit form -->
+               
                 <button type="submit" class="btn-primary">Aggiungi</button>
             </form>
-        <% } else { %>
+        <% } else if (giocoPresente) { %>
             <p>Il gioco è già nella tua libreria.</p>
+        <% } else if (publisherAdmin) { %>
+            <p>I Publisher e Admin non possono aggiungere giochi alla libreria.</p>
         <% } 
     } %>
 </div>
+
 
 
 
