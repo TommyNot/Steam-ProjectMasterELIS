@@ -88,7 +88,7 @@ public class GenereOffertaAddServlet extends HttpServlet {
 
         if (genereOfferta == null || genereOfferta.isEmpty()) {
             request.setAttribute("Error", "Nessun genere trovato per l'offerta selezionata.");
-            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
         } else {
             response.getWriter().write("Offerta associata con successo.");
         }

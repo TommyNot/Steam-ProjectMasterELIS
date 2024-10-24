@@ -46,7 +46,7 @@ public class RecensioneAggiornaVotoServlet extends HttpServlet {
 		if (voto == null || voto.isBlank() || id == null || id.isBlank()) {
             String errore = "L'id o il voto della recensione non può essere vuoto.";
             request.setAttribute("errore", errore); 
-            request.getRequestDispatcher("WEB-INF/public-jsp/DashboardUtente.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
             return; 
         }
 		
@@ -58,7 +58,7 @@ public class RecensioneAggiornaVotoServlet extends HttpServlet {
             }
         } catch (NumberFormatException e) {
             request.setAttribute("errore", "Errore nel formato del voto: " + e.getMessage());
-            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
             System.out.println("Errore nel voto");
             return;
         }
@@ -87,16 +87,19 @@ public class RecensioneAggiornaVotoServlet extends HttpServlet {
                   System.out.println("L'utente è un utente base.");
                   Recensione aggiornata = BusinessLogic.updateRecensioneVoto(idRecensione, nuovoVoto);
                   if (aggiornata != null) {
-                      response.sendRedirect("public-jsp/DashboardUtente.jsp");
+                      response.sendRedirect("WEB-INF/private-jsp/DashboardUtente.jsp");
                   } 
               } else {
                   System.out.println("L'utente non è un Utente base.");
+                  request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
               }
           } else {
               System.out.println("Errore: utente non trovato con ID: " + idUtente);
+              request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
           }
       } else {
           System.out.println("Nessun utente loggato trovato nella sessione.");
+          request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
       }
 	}
 

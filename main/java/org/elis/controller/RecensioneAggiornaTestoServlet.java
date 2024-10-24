@@ -73,16 +73,19 @@ public class RecensioneAggiornaTestoServlet extends HttpServlet {
 		                  System.out.println("L'utente è un utente base.");
 		                  Recensione aggiornata = BusinessLogic.updateRecensioneTesto(idRecensione, testo);
 		                  if (aggiornata != null) {
-		                      response.sendRedirect("public-jsp/DashboardUtente.jsp");
+		                      response.sendRedirect("WEB-INF/private-jsp/DashboardUtente.jsp");
 		                  } 
 		              } else {
 		                  System.out.println("L'utente non è un Utente base.");
+		                  request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 		              }
 		          } else {
 		              System.out.println("Errore: utente non trovato con ID: " + idUtente);
+		              request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 		          }
 		      } else {
 		          System.out.println("Nessun utente loggato trovato nella sessione.");
+		          request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 		      }
 	}
 

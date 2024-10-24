@@ -42,7 +42,7 @@ public class UtenteAggiungServlet extends HttpServlet {
 
 	    if (nuovoUtente != null) {
 	        response.getWriter().write("Utente aggiunto con successo! ID: " + nuovoUtente.getId());
-	        request.getRequestDispatcher("private-jsp/DashboardUtente.jsp").forward(request, response);
+	        request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	        
 	    }
 

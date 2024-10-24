@@ -46,7 +46,7 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 	  
 	    if (voto == null || voto.isEmpty() || testo == null || testo.isEmpty() || id == null || id.isEmpty()) {
 	        request.setAttribute("errore", "Tutti i campi sono obbligatori.");
-	        request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+	        request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -55,12 +55,12 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 	        votoRecensione = Integer.parseInt(voto);
 	        if (votoRecensione <= 0) {
 	            request.setAttribute("errore", "Il voto deve essere maggiore di zero.");
-	            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	            return;
 	        }
 	    } catch (NumberFormatException e) {
 	        request.setAttribute("errore", "Errore nel formato del voto: " + e.getMessage());
-	        request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+	        request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -91,10 +91,10 @@ public class RecensioneAggiungiServlet extends HttpServlet {
 	                response.sendRedirect(request.getContextPath() + "/GiocoVediDettagli?barraRicerca=" + idGioco);
 	            }
 	        } else {
-	            response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
+	        	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 	        }
 	    } else {
-	        response.sendRedirect("public-jsp/ErrorAccessoNegatoPage.jsp");
+	    	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 	    }
 	}
 }

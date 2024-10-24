@@ -101,14 +101,17 @@ public class OffertaAggiornaDataFineServlet extends HttpServlet {
 				}else {
 					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
+                	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 				}
 			}else {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
+            	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 			}
 		}else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         	response.getWriter().write("Nessun utente loggato trovato nella sessione.");
+        	request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 		}
 	}
 

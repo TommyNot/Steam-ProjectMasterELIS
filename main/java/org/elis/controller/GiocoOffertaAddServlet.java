@@ -84,7 +84,7 @@ public class GiocoOffertaAddServlet extends HttpServlet {
 
         if (giocoOfferta == null || giocoOfferta.isEmpty()) {
             request.setAttribute("Error", "Nessun gioco trovato per l'offerta selezionata.");
-            request.getRequestDispatcher("public-jsp/DashboardAdmin.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
         } else {
             response.getWriter().write("Offerta associata con successo.");
         }

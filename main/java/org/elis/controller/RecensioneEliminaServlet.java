@@ -41,7 +41,7 @@ public class RecensioneEliminaServlet extends HttpServlet {
 		  if (id == null || id.isBlank()) {
 	            String errore = "L'id della recensione non può essere vuoto.";
 	            request.setAttribute("errore", errore); 
-	            request.getRequestDispatcher("WEB-INF/public-jsp/DashboardUtente.jsp").forward(request, response);
+	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	            return; 
 	        }
 		  
@@ -84,14 +84,17 @@ public class RecensioneEliminaServlet extends HttpServlet {
 	                } else {
 	                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	                	response.getWriter().write("Errore:Non hai i poteri per fare questa operazione .");
+	                	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 	                }
 	            } else {
 	            	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	            	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
+	            	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 	            }
 	        } else {
 	        	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	        	response.getWriter().write("Nessun utente loggato trovato nella sessione.");
+	        	request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 	        }
 	}
 

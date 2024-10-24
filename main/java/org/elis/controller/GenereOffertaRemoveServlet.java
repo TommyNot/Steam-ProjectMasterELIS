@@ -72,7 +72,7 @@ public class GenereOffertaRemoveServlet extends HttpServlet {
 
 	        if (genereOfferta != null || !genereOfferta.isEmpty()) {
 	            request.setAttribute("Error", "Errore, offerta ancora valida.");
-	            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	            return;
 	        }
 	}

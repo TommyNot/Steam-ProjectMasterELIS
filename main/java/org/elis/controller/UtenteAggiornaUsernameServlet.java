@@ -51,10 +51,10 @@ public class UtenteAggiornaUsernameServlet extends HttpServlet {
 	    Utente utenteAggiornato = BusinessLogic.UpdateUsername(idUtente, nuovoUsername);
 
 	    if (utenteAggiornato != null) {
-	         String success = "Modifica username avvenuta con successo , rifai il login";
+	        String success = "Modifica username avvenuta con successo , rifai il login";
 	        session.invalidate();
 	        request.setAttribute("Success", success);
-	    	 request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
+	    	request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 	    	 
 	    	
 	    } else {

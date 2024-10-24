@@ -61,7 +61,7 @@ public class RecensioneFindByGiocoServlet extends HttpServlet {
 
 	        if (recensioniGioco == null || recensioniGioco.isEmpty()) {
 	            request.setAttribute("Error", "Nessuna recensione trovata per il gioco selezionato.");
-	            request.getRequestDispatcher("public-jsp/DashboardUtente.jsp").forward(request, response);
+	            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardUtente.jsp").forward(request, response);
 	            return;
 	        }
 	       

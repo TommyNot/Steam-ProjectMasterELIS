@@ -53,9 +53,18 @@ public class LibreriaAggiungiServlet extends HttpServlet {
 				boolean isUtenteBase = u.getRuolo() == Ruolo.UTENTE_BASE;
 				if(isUtenteBase) {
 					System.out.println("L'utente selezionato è un utente base.");
-					
+					List<Libreria> librerieTotali = BusinessLogic.VisualizzaTutteLibrerie();
 					Libreria l = new Libreria(nome, u);
+					
+					for(Libreria libreria: librerieTotali){
+						if(libreria.getNome().equals(l.getNome())){
+							request.getRequestDispatcher("public-jsp/ErrorDuplicazionePage.jsp").forward(request, response);
+							return;
+						}
+					}
+					
 					Libreria nuovaLibreria = BusinessLogic.LibreriaAdd(l);
+					
 					if(nuovaLibreria != null) {
 						System.out.println("Libreria aggiunta con successo.");
 						response.sendRedirect("LibreriaFindByIdUtenteServlet");

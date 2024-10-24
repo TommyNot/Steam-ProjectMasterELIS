@@ -60,15 +60,18 @@ public class RecensioneFindByUtente extends HttpServlet {
 	                }else {
 	                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 	                	response.getWriter().write("Non sei un utente base.");
+	                	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
 	                }
 	                
 			}else {
             	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             	response.getWriter().write("Errore: utente non trovato con ID: " + idUtente);
+            	request.getRequestDispatcher("public-jsp/ErrorAccessoNegatoPage.jsp").forward(request, response);
             }
 		}else {
         	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         	response.getWriter().write("Nessun utente loggato trovato nella sessione.");
+        	request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
         }
 	       
 	  

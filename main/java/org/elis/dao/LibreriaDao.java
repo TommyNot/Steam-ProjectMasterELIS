@@ -16,6 +16,5 @@ public interface LibreriaDao {
 	Libreria deleteById(long id);
 	List<Gioco> findGiochiByIdLibreria(long id_libreria);
 	Libreria aggiungiGiocoALibreria(long id_libreria, long id_gioco);
-	List<Libreria> searchGameInLibraryList(String nomeGioco);
 	Gioco deleteGiocoLibrary(long id_gioco, long id_libreria);
 }

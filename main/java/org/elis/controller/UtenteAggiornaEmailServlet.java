@@ -57,7 +57,10 @@ public class UtenteAggiornaEmailServlet extends HttpServlet {
 	    Utente utenteAggiornato = BusinessLogic.updateEmail(idUtente, nuovaEmail);
 
 	    if (utenteAggiornato != null) {
-	        response.getWriter().write("Email aggiornata con successo! Nuova email: " + utenteAggiornato.getEmail());
+	    	 String success = "Modifica email avvenuta con successo , rifai il login";
+		     session.invalidate();
+		     request.setAttribute("Success", success);
+		     request.getRequestDispatcher("public-jsp/PaginaLogin.jsp").forward(request, response);
 	    } else {
 	    	request.getRequestDispatcher("public-jsp/ErrorPage.jsp").forward(request, response);
 	    }

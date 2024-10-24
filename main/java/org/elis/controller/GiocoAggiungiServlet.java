@@ -57,7 +57,7 @@ public class GiocoAggiungiServlet extends HttpServlet {
                 data = LocalDate.parse(dataRilascio, formatter);
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data: " + e.getMessage());
-                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
                 return;
             }
         }
@@ -67,12 +67,12 @@ public class GiocoAggiungiServlet extends HttpServlet {
             prezzoDouble = Double.parseDouble(prezzo);
             if (prezzoDouble <= 0) {
                 request.setAttribute("errore", "Il prezzo deve essere maggiore di zero.");
-                request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
                 return;
             }
         } catch (NumberFormatException e) {
             request.setAttribute("errore", "Errore nel formato del prezzo: " + e.getMessage());
-            request.getRequestDispatcher("public-jsp/DashboardPublisher.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/private-jsp/DashboardPublisher.jsp").forward(request, response);
             return;
         }
 
