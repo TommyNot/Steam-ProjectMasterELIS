@@ -106,7 +106,7 @@
             } else {
                 for (Libreria l : librerie) { 
         %>
-        <div class="list-group mb-4">
+        <div class="list-group mb-4" style="margin-right: 10px">
             <a href="LibreriaFindByIdUtenteServlet?id_libreria=<%= l.getId() %>" 
                class="list-group-item list-group-item-action list-group-item-dark" style="border-radius:50px; display: flex; justify-content: center;">
                Nome: <%= l.getNome() %>
@@ -116,7 +116,7 @@
 			            <button type="submit" class="ancore">Elimina libreria</button>
 			</form>
 			<button class="toggle-form-modifica-btn ancore">Modifica nome</button>
-			<div class="container-3 form-container-modifica" style="display: none;">
+			<div class="container-3 form-container-modifica my-3" style="display: none;">
 				<form action="<%= request.getContextPath()%>/LibreriaAggiornaNomeServlet" method="post" class="form">
 				        <input type="hidden" id="nomeLibreriaModificare" name="idLibreria" value="<%=l.getId() %>">
 				        

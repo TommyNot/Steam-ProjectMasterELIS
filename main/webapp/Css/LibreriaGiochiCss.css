@@ -55,7 +55,6 @@ body{
 .container-3 {
     width: 100%;
     max-width: 400px;
-    margin: 20px;
     padding: 20px;
     background-color: #1E415F;
     border-radius: 8px;
@@ -109,12 +108,14 @@ input[type="text"] {
 }
 
 .content-librerie{
-	display: flex;
+    display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 .altezza{
 	min-height: 45vh;
+    max-height: 70vh;;
 }
 
 button {
@@ -164,6 +165,20 @@ button:hover {
     width: 80%;
     justify-items: center;
     margin-left: 2%;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  margin-left: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #404752;
+}
+	
+::-webkit-scrollbar-thumb {
+    background: #2664D1;
 }
 
 .game {

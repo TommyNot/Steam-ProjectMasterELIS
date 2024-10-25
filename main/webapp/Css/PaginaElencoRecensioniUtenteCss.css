@@ -12,9 +12,23 @@ body{
 }
 
 .img-icon{
-    width: 4vw;
-    height: auto;
-    border-radius: 33px;
+    width: 3vw;
+    height: 3vw;
+    border: 2px solid white;
+    border-radius: 100px;
+    margin-right: 30px;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: #404752;
+}
+	
+::-webkit-scrollbar-thumb {
+    background: #2664D1;
 }
 
 .container {
