@@ -128,6 +128,7 @@
     %>
     <div class="image-container" >
     <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" />
+    <!-- <iframe width="560" height="315"  src="https://www.youtube.com/embed/8X2kIfS6fb8?si=LSKF12jdeXRg9Vwz?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
 </div>
   
     <h1>Nome: <%= gioco.getNome() %></h1>
