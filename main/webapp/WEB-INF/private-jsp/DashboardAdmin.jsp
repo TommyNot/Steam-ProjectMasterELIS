@@ -216,8 +216,8 @@
             <% } %>
         </select>
         
-        <label for="data_inizio">Data Inizio:</label>
-        <input type="date" id="data_inizio" name="data_inizio" required>
+        <label for="nuovaDataInizio">Data Inizio:</label>
+        <input type="date" id="nuovaDataInizio" name="nuovaDataInizio" required>
 
         <button type="submit">Aggiorna data</button>
     </form>
@@ -236,8 +236,8 @@
                 </option>
             <% } %>
         		</select>
-        		<label for="data_inizio">Data Fine:</label>
-		        <input type="date" id="data_fine" name="data_fine" required>
+        		<label for="nuovaDataFine">Data Fine:</label>
+		        <input type="date" id="nuovaDataFine" name="nuovaDataFine" required>
 		
 		        <button type="submit">Aggiorna data</button>
         		</form>

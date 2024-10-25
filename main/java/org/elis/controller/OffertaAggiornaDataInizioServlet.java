@@ -56,6 +56,12 @@ public class OffertaAggiornaDataInizioServlet extends HttpServlet {
 	            try {
 	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	                nuovaData = LocalDate.parse(nuovaDataInizio, formatter); 
+	                if(nuovaData.isBefore(LocalDate.now())) {
+	                	System.out.println("la data inserita non puo' essere prima di oggi");
+	                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+	                	response.getWriter().write("data non valida");
+	                	return;
+	                }
 	            } catch (DateTimeParseException e) {
 	                request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
 	                request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);

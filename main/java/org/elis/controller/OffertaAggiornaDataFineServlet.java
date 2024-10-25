@@ -55,6 +55,15 @@ public class OffertaAggiornaDataFineServlet extends HttpServlet {
 	            try {
 	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	                nuovaData = LocalDate.parse(dataFine, formatter); 
+	                System.out.println(nuovaData);
+	                if(nuovaData.isBefore(LocalDate.now())) {
+	                	System.out.println("la data inserita non puo' essere prima di oggi");
+	                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+	                	response.getWriter().write("data non valida");
+	                	return;
+	                }else {
+	                	System.out.println("sono dentro l'else");
+	                }
 	            } catch (DateTimeParseException e) {
 	            	System.out.println("errore formattazione");
 	                request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());

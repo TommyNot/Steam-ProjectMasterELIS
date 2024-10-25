@@ -53,6 +53,12 @@ public class OffertaAggiungiServlet extends HttpServlet {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 inizio_offerta = LocalDate.parse(data_inizio, formatter); 
+                if(inizio_offerta.isBefore(LocalDate.now())) {
+                	System.out.println("la data inserita non puo' essere prima di oggi");
+                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                	response.getWriter().write("data non valida");
+                	return;
+                }
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data e ora: " + e.getMessage());
                 request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
@@ -67,6 +73,12 @@ public class OffertaAggiungiServlet extends HttpServlet {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 fine_offerta = LocalDate.parse(data_fine, formatter); 
+                if(inizio_offerta.isBefore(LocalDate.now())) {
+                	System.out.println("la data inserita non puo' essere prima di oggi");
+                	response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                	response.getWriter().write("data non valida");
+                	return;
+                }
             } catch (DateTimeParseException e) {
                 request.setAttribute("errore", "Errore nella formattazione della data: " + e.getMessage());
                 request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp").forward(request, response);
@@ -80,6 +92,9 @@ public class OffertaAggiungiServlet extends HttpServlet {
             scontoDouble = Double.parseDouble(sconto);
             if (scontoDouble <= 0) {
                 System.out.println("errore sconto minore di 0");
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            	response.getWriter().write("lo sconto non puo' essere 0 o negativo");
+                return;
             }
         } catch (NumberFormatException e) {
             request.setAttribute("errore", "Errore nel formato dello sconto: " + e.getMessage());

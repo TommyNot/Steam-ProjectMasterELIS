@@ -56,6 +56,9 @@ public class OffertaAggiornaScontoServlet extends HttpServlet {
             nuovoSconto = Double.parseDouble(sconto);
             if (nuovoSconto <= 0) {
                 System.out.println("errore sconto minore di 0");
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            	response.getWriter().write("lo sconto non puo' essere 0 o negativo");
+                return;
             }
         } catch (NumberFormatException e) {
             request.setAttribute("errore", "Errore nel formato dello sconto: " + e.getMessage());
