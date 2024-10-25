@@ -134,8 +134,9 @@
                     Offerta offerta = gioco.getOffertaGioco(); 
                 %>
                     <div class="game">
+                      <a href="GiocoVediDettagli?barraRicerca=<%= gioco.getId() %>">
                         <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" style="width: 220px; height: 300px;" />
-                        
+                      </a>  
                         <h3 class="product-title"><%= gioco.getNome() %></h3>
                         
                         <div class="discount">

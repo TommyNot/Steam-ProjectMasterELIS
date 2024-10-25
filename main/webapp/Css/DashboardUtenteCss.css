@@ -199,9 +199,10 @@ body {
 }
 
 .img-icon{
-	width: 4vw;
+	width: 3vw;
+    height: 3vw;
+    border: 2px solid white;
     border-radius: 100px;
-    height: 4vw;
 }
 
 .profile-picture{

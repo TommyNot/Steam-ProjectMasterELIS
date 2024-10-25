@@ -6,8 +6,8 @@
 const toggleButtonAggiungi = document.getElementById('toggle-form-aggiungi-btn');
 const formContainerAggiungi = document.getElementById('form-container-aggiungi');
 
-const toggleButtonModifica = document.getElementById('toggle-form-modifica-btn');
-const formContainerModifica = document.getElementById('form-container-modifica');
+const toggleButtonModifica = document.getElementsByClassName('toggle-form-modifica-btn');
+const formContainerModifica = document.getElementsByClassName('form-container-modifica');
 
 
 toggleButtonAggiungi.addEventListener('click', function() {
@@ -20,15 +20,17 @@ toggleButtonAggiungi.addEventListener('click', function() {
     }
 });
 
-toggleButtonModifica.addEventListener('click', function() {
-    if (formContainerModifica.style.display === "none") {
-        formContainerModifica.style.display = "block";
-        toggleButtonModifica.textContent = "Nascondi modifica nome libreria";
-    } else {
-        formContainerModifica.style.display = "none";
-        toggleButtonModifica.textContent = "Modifica nome libreria";
-    }
-});
+for (let i = 0; i < toggleButtonModifica.length; i++) {
+    toggleButtonModifica[i].addEventListener('click', function() {
+        if (formContainerModifica[i].style.display === "none" || formContainerModifica[i].style.display === "") {
+            formContainerModifica[i].style.display = "block";
+            toggleButtonModifica[i].textContent = "Nascondi form";
+        } else {
+            formContainerModifica[i].style.display = "none";
+            toggleButtonModifica[i].textContent = "Modifica nome";
+        }
+    });
+}
 
 
 const profilePictures = ["https://i.pinimg.com/enabled/564x/ce/4d/71/ce4d7190e7f159852de3fa2965a1a4b3.jpg", "https://i.pinimg.com/enabled/564x/15/ac/eb/15aceb5eee4e67f81a155bed0f6d09ad.jpg",

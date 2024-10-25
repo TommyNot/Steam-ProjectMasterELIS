@@ -11,9 +11,11 @@ body{
 }
 
 .img-icon{
-    width: 4vw;
-    height: auto;
-    border-radius: 33px;
+    width: 3vw;
+    height: 3vw;
+    border: 2px solid white;
+    border-radius: 100px;
+    margin-right: 30px;
 }
 
 .container {
@@ -45,14 +47,9 @@ body{
 	text-decoration: none;
 	font-size: 1em;
 	border-radius: 30px;
-	color: #3D92E0;
-	border: 2px solid #0056b3;
-	padding: 4px;
 	background-color: #3D596E;
-	margin-right: 2%;
+	color: white;
 }
-
-
 
 
 .container-3 {
@@ -63,6 +60,24 @@ body{
     background-color: #1E415F;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container-4{
+	width: 100%;
+    max-width: 400px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #1E415F;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#modifica-nome{
+    border: 2px solid #171D25;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #1E415F;
+    padding: 10px;
 }
 
 .form {
@@ -118,6 +133,7 @@ button[type="submit"] {
 button[type="reset"] {
     background-color: #f44336;
     color: white;
+    margin-left: 10px;
 }
 
 button:hover {

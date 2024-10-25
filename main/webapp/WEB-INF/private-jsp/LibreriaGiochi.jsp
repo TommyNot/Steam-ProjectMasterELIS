@@ -25,13 +25,13 @@
                 	<img alt="logo" src="<%= request.getContextPath() %>/risorse-media/img_homepage/logo.png" width="150" style="margin: 10px;">
                 	</a>
                </span>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      				<span class="navbar-toggler-icon"></span>
+    		  </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">
                     <%
                         Utente utente = (Utente) session.getAttribute("utenteLoggato");
                     	long idUtente;
@@ -46,17 +46,22 @@
                    	 Utente non loggato
                     <%
                         }
-                    %>
-                        <img id="avatar" alt="avatar utente" class="img-icon">
+                    %>           
                     </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="<%= request.getContextPath()%>/public-jsp/PageGiochi.jsp">Negozio</a></li>
-                      <li><a class="dropdown-item" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="<%= request.getContextPath()%>/ControlloSessioniServlet">Torna alla tua Dashboard</a></li>
-                    </ul>
-                  </li>
+                    <li class="nav-item">
+                        <img id="avatar" alt="avatar utente" class="img-icon">
+                    </li>
+                    <li class="nav-item">
+          				<a class="nav-link" aria-current="page" href="<%= request.getContextPath()%>/public-jsp/PageGiochi.jsp">Negozio</a>
+        			</li>
+        			<li class="nav-item">
+          				<a class="nav-link" aria-current="page" href="<%= request.getContextPath()%>/LogoutServlet">Logout</a>
+        			</li>
+        			<li class="nav-item">
+          				<a class="nav-link" aria-current="page" href="<%= request.getContextPath()%>/ControlloSessioniServlet">Torna alla tua Dashboard</a>
+        			</li>                  
                 </ul>
+                	
                 <form action="<%= request.getContextPath() %>/GiocoCercaServlet" class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Cerca un gioco" name="barraRicerca" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
@@ -69,7 +74,6 @@
         	<div class="container-2">
         		<h2 class="testo-lista-librerie">Le tue librerie</h2>
         		<button id="toggle-form-aggiungi-btn" class="ancore">Aggiungi libreria</button>
-        		<button id="toggle-form-modifica-btn" class="ancore">Modifica nome libreria</button>
         	</div>
         	
         	<div class="container-3" id="form-container-aggiungi" style="display: none;">
@@ -84,21 +88,7 @@
 			    </form>
 			</div>
 			
-			<div class="container-3" id="form-container-modifica" style="display: none;">
-			    <form action="<%= request.getContextPath()%>/LibreriaAggiornaNomeServlet" method="post" class="form">
-			    	<label for="nomeLibreriaModificare" class="etichetta">Inserisci l'ID della libreria da modificare:</label>
-			        <input type="text" id="nomeLibreriaModificare" name="idLibreria" required>
-			        
-			        <label for="nomeLibreriaNuovoModicato" class="etichetta">Nuovo nome libreria:</label>
-			        <input type="text" id="nomeLibreriaNuovoModicato" name="nomeNuovoInput" required>
-			        
-			        <div class="button-group">
-			            <button type="submit">Modifica nome libreria</button>
-			            <button type="reset">Reset</button>
-			        </div>
 
-			    </form>
-			</div>
 			
 		<h3 class="testo-lista-librerie">I tuoi giochi</h3>
       <div class="container-2 altezza">
@@ -116,15 +106,30 @@
             } else {
                 for (Libreria l : librerie) { 
         %>
-        <div class="list-group mb-2">
+        <div class="list-group mb-4">
             <a href="LibreriaFindByIdUtenteServlet?id_libreria=<%= l.getId() %>" 
-               class="list-group-item list-group-item-action list-group-item-dark">
+               class="list-group-item list-group-item-action list-group-item-dark" style="border-radius:50px; display: flex; justify-content: center;">
                Nome: <%= l.getNome() %>
             </a>
             <form action="<%= request.getContextPath()%>/LibreriaEliminaServlet" method="post" class="form">
 			        <input type="hidden" id="nomeLibreriaRimuovere" name="libreriaId" value="<%= l.getId() %>">
-			            <button type="submit">Elimina libreria</button>
+			            <button type="submit" class="ancore">Elimina libreria</button>
 			</form>
+			<button class="toggle-form-modifica-btn ancore">Modifica nome</button>
+			<div class="container-3 form-container-modifica" style="display: none;">
+				<form action="<%= request.getContextPath()%>/LibreriaAggiornaNomeServlet" method="post" class="form">
+				        <input type="hidden" id="nomeLibreriaModificare" name="idLibreria" value="<%=l.getId() %>">
+				        
+				        <label for="nomeLibreriaNuovoModicato" class="etichetta">Nuovo nome libreria:</label>
+				        <input type="text" id="nomeLibreriaNuovoModicato" name="nomeNuovoInput" required>
+				        
+				        <div class="button-group">
+				            <button type="submit">Modifica nome libreria</button>
+				            <button type="reset">Reset</button>
+				        </div>
+					
+				 </form>
+			</div>
 		</div>
         <%
                 }
@@ -145,7 +150,9 @@
                 for (Gioco gioco : giochiUtente) {
         %>
         <div class="card mx-2 game">
-        	<img src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" class="card-img-top" alt="immagine gioco">
+           <a href="GiocoVediDettagli?barraRicerca=<%= gioco.getId() %>">
+        		<img src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" class="card-img-top" alt="immagine gioco">
+        	</a>
         	<div class="card-body carta">
     			<h5 class="card-title"><%= gioco.getNome() %></h5>
     			<form action="<%= request.getContextPath()%>/LibreriaEliminaGiocoDaLibreriaServlet" method="post" class="form">

@@ -125,6 +125,7 @@
     </div>
 
     <div class="slider-2">
+<<<<<<< Updated upstream
         <div class="slides-2">
             <% List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(); %>
             <% for (int i = 0; i < giochi.size(); i += 3) { %>
@@ -136,8 +137,23 @@
 
     
                 </div>
+=======
+      <div class="slides-2">
+    <% List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(); %>
+    <% for (int i = 0; i < giochi.size(); i += 3) { %>
+        <div class="slide-2">
+            <!-- Display up to 3 different images per cycle -->
+            <% for (int j = 0; j < 3 && (i + j) < giochi.size(); j++) { 
+                Gioco gioco = giochi.get(i + j); %>
+                <a href="<%=request.getContextPath() %>/GiocoVediDettagli?barraRicerca=<%= gioco.getId() %>">
+                    <img class="product__image" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" alt="Immagine Gioco" />
+                </a>
+>>>>>>> Stashed changes
             <% } %>
         </div>
+    <% } %>
+</div>
+
     </div>
 </section>
 
@@ -157,14 +173,15 @@
                         for (Gioco gioco : giochiInOfferta) { 
                         	Offerta offerta = gioco.getOffertaGioco(); 
                     %>
-              <div class="slide-offerta">
+              <div class="slide-offerta">                 
 				    <div class="discount-badge">Offerta Speciale: -<%= Math.round(offerta.getSconto()) %>%</div>
-
+				<a href="<%=request.getContextPath() %>/GiocoVediDettagli?barraRicerca=<%= gioco.getId() %>">
 				    <img class="product__image_offerta" src="data:image/jpeg;base64,<%= gioco.getImmagine() %>" alt="Immagine Gioco" />
+				</a>
 				    <div class="game-info">
-				        <h4><%= gioco.getNome() %></h4>
-				        
+				        <h4><%= gioco.getNome() %></h4>				        
 				    </div>
+				    
 				</div>
 
                     <% } %>
