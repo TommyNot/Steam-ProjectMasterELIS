@@ -267,10 +267,11 @@
         	</div>
         	
         	<div>
+        	
         	<br><h3>Elimina offerta</h3>
-        	<form id="eliminaOfferta" name="id">
+        	<form id="eliminaOfferta">
         	<label for="offerta4">Seleziona offerta:</label>
-        	<select id="offerta4" name="id">
+        	<select id="offerta4" name="id" >
         	 <% List<Offerta> offerte4 = BusinessLogic.offertaVisualizzaTutto(); 
                Offerta offertaSelezionata4 = (Offerta) request.getAttribute("offertaSelezionata4"); 
                for (Offerta offerta : offerte) { 

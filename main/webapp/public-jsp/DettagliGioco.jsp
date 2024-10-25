@@ -292,7 +292,7 @@
     <h4>Gioco Media valutazione: 
         <%
             for (int i = 1; i <= 5; i++) {
-                if (i <= Math.round(mediaVoti)) {
+            	if (i <= Math.round(mediaVoti)) {
         %>
                     <i class="bi bi-star-fill" style="color: #f39c12;"></i>
         <%
@@ -302,8 +302,9 @@
         <%
                 }
             }
+    		double mediaVotiRounded=Math.round(mediaVoti);
         %>
-        <%= Math.round(mediaVoti) %> / 5
+        <%= (int)mediaVotiRounded %> / 5
     </h4>
     
     <%
@@ -317,11 +318,11 @@
                     <p>Valutazione: 
                     <%
                         for (int i = 1; i <= 5; i++) {
-                            if (i <= recensione.getVoto()) {
+                        	if (i <= recensione.getVoto()) {
                     %>
                                 <i class="bi bi-star-fill" style="color: #f39c12;"></i>
                     <%
-                            } else {
+                            } else if(i>recensione.getVoto()) {
                     %>
                                 <i class="bi bi-star" style="color: #ddd;"></i>
                     <%
@@ -333,7 +334,8 @@
                     
                     <% 
                         // Verifico se l'utente loggato ed sè l'autore della recensione , funzionaaaa lesgo
-                        if (utenteLoggato != null && utenteLoggato.getId() == recensione.getRecensioneUtente().getId() || utenteLoggato.getRuolo().equals(Ruolo.ADMIN)) { 
+                        if(utenteLoggato!=null)
+                        if (utenteLoggato.getId() == recensione.getRecensioneUtente().getId() || utenteLoggato.getRuolo().equals(Ruolo.ADMIN)) { 
                     %>
                         
                         <form action="<%= request.getContextPath() %>/RecensioneEliminaServlet" method="post">

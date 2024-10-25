@@ -98,6 +98,7 @@ public class OffertaEliminaServlet extends HttpServlet {
                     Offerta eliminata = BusinessLogic.deleteByNameOfferta(eliminaOffertaNome, idOfferta);
                     if (eliminata != null) {
                         response.getWriter().write("Offerta eliminata con successo.");
+                        request.getRequestDispatcher("WEB-INF/private-jsp/DashboardAdmin.jsp");
                     } else {
                         response.getWriter().write("Errore: Impossibile eliminare l'offerta.");
                     }

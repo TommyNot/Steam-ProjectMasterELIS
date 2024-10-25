@@ -48,6 +48,8 @@ public class OffertaAggiornaDataFineServlet extends HttpServlet {
 		String dataFine = request.getParameter("nuovaDataFine");
 		String id = request.getParameter("id");
 		
+		
+		
 	      LocalDate nuovaData = null;
 	        if (dataFine != null && !dataFine.isEmpty()) {
 	            try {
@@ -93,6 +95,7 @@ public class OffertaAggiornaDataFineServlet extends HttpServlet {
 					Offerta OffertaNuovaDataFine = BusinessLogic.updateDataFineOfferta(idOfferta, nuovaData);
 					
 					if(OffertaNuovaDataFine != null) {
+						System.out.println("data aggiornata");
 						response.getWriter().write("Data di fine aggiornata con successo.");
 					}else {
 						request.getRequestDispatcher("public-jsp/ErrorPage.jsp");

@@ -129,7 +129,7 @@
             <% List<Gioco> giochi = BusinessLogic.VisualizzaTuttiGiochi(); %>
             <% for (int i = 0; i < giochi.size(); i += 3) { %>
                 <div class="slide-2">
-                    <!-- Visualizza fino a 3 immagini diverse per ogni ciclo -->
+                   
                     <% for (int j = 0; j < 3 && (i + j) < giochi.size(); j++) { %>
                         <img class="product__image" src="data:image/jpeg;base64,<%= giochi.get(i + j).getImmagine() %>" alt="Immagine Gioco" />
                     <% } %>

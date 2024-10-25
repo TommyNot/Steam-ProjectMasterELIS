@@ -94,7 +94,7 @@
                 <ul>
                     <li><a href="#" onclick="showSection('home')">Home</a></li>
                     <li><a href="#" onclick="showSection('prodotti')">Prodotti</a></li>
-                    <li><a href="#" onclick="showSection('statistiche')">Statistiche</a></li>
+                    
                     
                     <li><a href="<%= request.getContextPath()%>/LogoutServlet" >Logout</a></li>
                 </ul>
@@ -334,32 +334,7 @@
 			</section>
 
 
-            <section id="statistiche" class="hidden">
-                <h2>Statistiche</h2>
-                <div class="stats">
-                    <div class="stat">
-                        <h3>Giochi che possiedi</h3>
-                        <p>Visualizza il numero totale di giochi che possiedi.</p>
-                        <%
-                        
-			        	List<Gioco> g=BusinessLogic.VisualizzaTuttiGiochi(idUtenteGioco);
-			        	%>
-			        
-			        <h4>Numero di giochi attualmente nel sito: <%=g.size() %></h4>
-                    </div>
-                    <div class="stat">
-                        <h3>Recensioni</h3>
-                        <p>Visualizza le recensioni ricevute dai tuoi giochi.</p>
-                    	
-                    </div>
-                    <div class="stat">
-                        <h3>Vendite</h3>
-                        <p>Visualizza vendite dei tuoi giochi.</p>
-                        <!-- Grafico o elenco dello stock -->
-                    </div>
-                </div>
-            </section>
-
+        
             <section id="impostazioni" class="hidden">
                 <h2>Impostazioni</h2>
                 <p>Configura le tue preferenze e le impostazioni del profilo.</p>
