@@ -355,7 +355,7 @@
                 <h3>Seguici</h3>
                 
                 <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
-                <a href="https://www.instagram.com/curiosostore_official/" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.instagram.com/steampezzottofamily/profilecard/?igsh=dXNha3Q5NWZtOHV1" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
                 <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
             </div>
 
