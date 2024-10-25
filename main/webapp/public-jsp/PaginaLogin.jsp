@@ -33,7 +33,7 @@
 			<h1>Crea Account</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
-				<a href="#" class="social"><i class="bi bi-google"></i></a>
+				<a href="https://www.instagram.com/steampezzottofamily/profilecard/?igsh=dXNha3Q5NWZtOHV1" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
 			<label for="usernameFromInput" style="font-weight: bold;">Username</label>
@@ -62,7 +62,7 @@
 			<h1>Accedi</h1>
 			<div class="social-container">
 				<a href="#" class="social"><i class="bi bi-facebook"></i></a>
-				<a href="#" class="social"><i class="bi bi-google"></i></a>
+				<a href="https://www.instagram.com/steampezzottofamily/profilecard/?igsh=dXNha3Q5NWZtOHV1" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
 				<a href="#" class="social"><i class="bi bi-linkedin"></i></a>
 			</div>
 			<label for="emailLogin" style="font-weight: bold;">Email</label>
